@@ -16,5 +16,5 @@ test_that("download_rba() downloads file(s)", {
 
   files <- purrr::map(filenames, readxl::read_excel)
 
-  purrr::map(files, ~expect_is(.x, "tbl_df"))
+  purrr::map(files, ~ expect_is(.x, "tbl_df"))
 })

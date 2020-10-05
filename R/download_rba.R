@@ -8,7 +8,6 @@
 #' download_rba("d01hist")
 #' }
 #'
-#'
 #' @export
 download_rba <- function(tables, path = tempdir()) {
   base_url <- "https://www.rba.gov.au/statistics/tables/xls/"

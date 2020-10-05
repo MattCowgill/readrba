@@ -21,4 +21,5 @@ Download, import, and tidy statistical tables from the RBA
 \dontrun{
 read_rba(tables = c("g01hist", "g03hist"))
 }
+
 }

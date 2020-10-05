@@ -23,5 +23,4 @@ Download statistical table(s) from the RBA
 download_rba("d01hist")
 }
 
-
 }
