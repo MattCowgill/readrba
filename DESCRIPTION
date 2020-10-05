@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mattcowgill@gmail.com",
            comment = c(ORCID = "0000-0003-0422-3300"))
-Description: RBA data, but tidy
+Description: Get RBA data, tidy RBA data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -16,4 +16,11 @@ RoxygenNote: 7.1.1
 URL: https://github.com/MattCowgill/readrba
 BugReports: https://github.com/MattCowgill/readrba/issues
 Suggests: 
-    covr
+    covr,
+    testthat
+Imports: 
+    readxl,
+    magrittr,
+    tidyr,
+    dplyr,
+    purrr
