@@ -16,39 +16,15 @@ knitr::opts_chunk$set(
 # readrba
 
 <!-- badges: start -->
+[![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions)
+[![Travis build status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba)
+[![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of readrba is to ...
+Get data from the RBA in a form you can work with
 
 ## Installation
 
-You can install the released version of readrba from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("readrba")
-```
 
 ## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(readrba)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
