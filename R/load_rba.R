@@ -1,5 +1,5 @@
 #' Load an Excel sheet containing an RBA statistical table
-#' @name load_rba()
+#' @name load_rba
 #' @param filename Filename, including path, of an RBA Excel spreadsheet
 #' @export
 

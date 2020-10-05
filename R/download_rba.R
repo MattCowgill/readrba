@@ -1,6 +1,6 @@
 #' Download statistical table(s) from the RBA
-#' @name download_rba()
-#' @param table Table filename(s) without extension (eg. "d01hist")
+#' @name download_rba
+#' @param tables Table filename(s) without extension (eg. "d01hist")
 #' @param path Directory in which to save the downloaded file(s)
 #' @return Invisibly returns path to downloaded file(s)
 #' @examples
