@@ -1,17 +1,17 @@
 #' Download statistical table(s) from the RBA
 #' @name download_rba
-#' @param tables Table filename(s) without extension (eg. "d01hist")
+#' @param table_filenames Table filename(s) without extension (eg. "d01hist")
 #' @param path Directory in which to save the downloaded file(s)
 #' @return Invisibly returns path to downloaded file(s)
 #' @examples
 #' \dontrun{
-#' download_rba("d01hist")
+#' download_rba(table_filenames = "d01hist")
 #' }
 #'
 #' @export
-download_rba <- function(tables, path = tempdir()) {
+download_rba <- function(table_filenames, path = tempdir()) {
   base_url <- "https://www.rba.gov.au/statistics/tables/xls/"
-  filenames <- paste0(tables, ".xls")
+  filenames <- paste0(table_filenames, ".xls")
   urls <- paste0(base_url, filenames)
   filenames_with_path <- file.path(path, filenames)
 

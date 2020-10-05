@@ -2,6 +2,7 @@
 #' @name tidy_rba
 #' @param excel_sheet Dataframe of RBA spreadsheet, loaded using \code{load_rba()}
 #' @return Tidy tibble
+#' @importFrom rlang .data
 #' @export
 #'
 
@@ -13,26 +14,26 @@ tidy_rba <- function(excel_sheet) {
   excel_sheet <- excel_sheet[-1, ]
 
   excel_sheet <- excel_sheet %>%
-    dplyr::rename(title = Title) %>%
-    dplyr::filter(!is.na(title))
+    dplyr::rename(title = .data$Title) %>%
+    dplyr::filter(!is.na(.data$title))
 
   excel_sheet <- excel_sheet %>%
     tidyr::gather(
-      key = "series", value = value,
-      -title
+      key = "series", value = "value",
+      -.data$title
     ) %>%
-    dplyr::group_by(series) %>%
+    dplyr::group_by(.data$series) %>%
     dplyr::mutate(
-      description = value[title == "Description"],
-      frequency = value[title == "Frequency"],
-      type = value[title == "Type"],
-      units = value[title == "Units"],
-      source = value[title == "Source"],
-      pub_date = value[title == "Publication date"],
-      series_d = value[title == "Series ID"]
+      description = .data$value[.data$title == "Description"],
+      frequency = .data$value[.data$title == "Frequency"],
+      type = .data$value[.data$title == "Type"],
+      units = .data$value[.data$title == "Units"],
+      source = .data$value[.data$title == "Source"],
+      pub_date = .data$value[.data$title == "Publication date"],
+      series_d = .data$value[.data$title == "Series ID"]
     ) %>%
     dplyr::ungroup() %>%
-    dplyr::filter(!title %in% c(
+    dplyr::filter(!.data$title %in% c(
       "Description",
       "Frequency",
       "Type",
@@ -41,14 +42,14 @@ tidy_rba <- function(excel_sheet) {
       "Publication date",
       "Series ID"
     )) %>%
-    dplyr::rename(date = title)
+    dplyr::rename(date = .data$title)
 
   excel_sheet <- excel_sheet %>%
     dplyr::mutate(dplyr::across(
-      c(date, pub_date),
+      c(.data$date, .data$pub_date),
       ~ as.Date(as.numeric(.), origin = "1899-12-30")
     ),
-    value = suppressWarnings(as.numeric(value)),
+    value = suppressWarnings(as.numeric(.data$value)),
     table_title = .table_title
     )
 

@@ -4,10 +4,10 @@
 \alias{download_rba}
 \title{Download statistical table(s) from the RBA}
 \usage{
-download_rba(tables, path = tempdir())
+download_rba(table_filenames, path = tempdir())
 }
 \arguments{
-\item{tables}{Table filename(s) without extension (eg. "d01hist")}
+\item{table_filenames}{Table filename(s) without extension (eg. "d01hist")}
 
 \item{path}{Directory in which to save the downloaded file(s)}
 }
@@ -19,7 +19,7 @@ Download statistical table(s) from the RBA
 }
 \examples{
 \dontrun{
-download_rba("d01hist")
+download_rba(table_filenames = "d01hist")
 }
 
 }
