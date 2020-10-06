@@ -26,6 +26,7 @@ download_rba <- function(table_filenames, path = tempdir()) {
       cacheOK = FALSE
     )
   } else {
+    # nocov start
     purrr::walk2(
       .x = urls,
       .y = filenames,
@@ -33,6 +34,7 @@ download_rba <- function(table_filenames, path = tempdir()) {
       mode = "wb",
       cacheOK = FALSE
     )
+    # nocov end
   }
 
 
