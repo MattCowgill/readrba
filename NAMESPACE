@@ -3,6 +3,7 @@
 export("%>%")
 export(download_rba)
 export(load_rba)
+export(read_rba)
 export(tidy_rba)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)

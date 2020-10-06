@@ -16,15 +16,25 @@ knitr::opts_chunk$set(
 # readrba
 
 <!-- badges: start -->
-[![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions)
-[![Travis build status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba)
-[![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions) [![Travis build status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba) [![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
+
 <!-- badges: end -->
 
-Get data from the RBA in a form you can work with
+Get data from the RBA in a tidy tibble. Note that this package is in an initial stage of development. Function arguments are very likely to change.
 
 ## Installation
 
+```{r eval=FALSE}
+remotes::install_github("mattcowgill/readrba")
+```
 
 ## Example
+
+```{r}
+rba_data <- readrba::read_rba(table_filenames = c("g01hist", "g03hist"))
+
+dplyr::glimpse(rba_data)
+
+unique(rba_data$table_title)
+```

@@ -8,6 +8,7 @@
 #' \dontrun{
 #' read_rba(table_filenames = c("g01hist", "g03hist"))
 #' }
+#' @export
 #'
 read_rba <- function(table_filenames, path = tempdir()) {
   filenames <- download_rba(table_filenames, path)
