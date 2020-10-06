@@ -20,8 +20,12 @@ Suggests:
     testthat
 Imports: 
     readxl,
-    magrittr,
     tidyr,
     dplyr,
     purrr,
-    rlang
+    rlang,
+    xml2,
+    rvest,
+    tibble
+Depends: 
+    R (>= 2.10)
