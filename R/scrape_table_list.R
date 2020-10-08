@@ -15,8 +15,21 @@ scrape_table_list <- function(table_url = "https://www.rba.gov.au/statistics/tab
 
   stopifnot(identical(length(excel_links), length(excel_text)))
 
-  tibble::tibble(title = excel_text,
-                 url = paste0("https://rba.gov.au", excel_links))
-}
+  table_list <- tibble::tibble(title = excel_text,
+                               url = paste0("https://rba.gov.au", excel_links))
 
+  # regex_string <- "–(?![^–]*–)"
+  emdash <- "\u2013"
+  regex_string <- paste0(emdash, "(?![^", emdash, "]*", emdash, ")")
+
+  table_list <- table_list %>%
+    tidyr::separate(.data$title,
+                    into = c("title", "no"),
+                    sep = regex_string) %>%
+    dplyr::mutate(dplyr::across(c("title", "no"),
+                                stringr::str_trim))
+
+  table_list
+
+}
 

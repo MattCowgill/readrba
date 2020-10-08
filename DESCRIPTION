@@ -26,6 +26,7 @@ Imports:
     rlang,
     xml2,
     rvest,
-    tibble
+    tibble,
+    stringr
 Depends: 
     R (>= 2.10)

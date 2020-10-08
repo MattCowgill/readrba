@@ -6,13 +6,14 @@ test_that("download_rba() downloads file(s)", {
 
   # Single file
 
-  filename1 <- download_rba(table_filenames = "d01hist")
+  urls <- get_rba_urls("d1")
+  filename1 <- download_rba(urls)
 
   expect_is(readxl::read_excel(filename1), "tbl_df")
 
   # Multiple files
 
-  filenames <- download_rba(table_filenames = c("d01hist", "d02hist"))
+  filenames <- download_rba(get_rba_urls(c("d1", "d2")))
 
   files <- purrr::map(filenames, readxl::read_excel)
 

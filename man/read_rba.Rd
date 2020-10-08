@@ -4,11 +4,12 @@
 \alias{read_rba}
 \title{Download, import, and tidy statistical tables from the RBA}
 \usage{
-read_rba(table_filenames, path = tempdir())
+read_rba(table_no = NULL, cur_hist = "current", path = tempdir())
 }
 \arguments{
-\item{table_filenames}{character vector of table filename(s) without extension,
-such as "g01hist"}
+\item{table_no}{Table number(s) as character vector, such as "A1" or c("a1.1", "g1").}
+
+\item{cur_hist}{Character; either "current" or "historical".}
 
 \item{path}{directory in which to save file(s); default is \code{tempdir()}}
 }
@@ -20,6 +21,6 @@ Download, import, and tidy statistical tables from the RBA
 }
 \examples{
 \dontrun{
-read_rba(table_filenames = c("g01hist", "g03hist"))
+read_rba(table_no = c("a1.1", "g1"))
 }
 }
