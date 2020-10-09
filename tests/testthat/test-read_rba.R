@@ -52,3 +52,12 @@ test_that("read_rba() works", {
     sort(expected_series)
   )
 })
+
+#
+# test_that("all tables work",{
+#   mydf <- map2(.x = table_list$no,
+#                .y = table_list$current_or_historical,
+#                .f = read_rba)
+#
+#
+# })

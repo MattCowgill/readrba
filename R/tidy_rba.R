@@ -46,7 +46,7 @@ tidy_rba <- function(excel_sheet) {
       "Source",
       "Series ID"
     ) &
-    !grepl("Publi.* date", .data$title)) %>%
+      !grepl("Publi.* date", .data$title)) %>%
     dplyr::rename(date = .data$title)
 
   date_fix_function <- function(string) {

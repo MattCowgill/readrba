@@ -20,7 +20,13 @@ read_rba <- function(table_no = NULL,
 
   filenames <- download_rba(urls, path)
 
-  raw_dfs <- purrr::map(filenames, load_rba)
+  sheets <- purrr::map(filenames, readxl::excel_sheets)
+
+  sheets <- purrr::map(sheets, .f = ~ .x[.x != "Notes"])
+
+  raw_dfs <- purrr::map2(filenames, sheets, load_rba_sheet)
+
+  raw_dfs <- purrr::flatten(raw_dfs)
 
   tidy_dfs <- purrr::map(raw_dfs, tidy_rba)
 
