@@ -7,6 +7,10 @@ test_that("read_rba() works", {
   expect_is(tables, "tbl_df")
   expect_equal(length(tables), 11)
   expect_gt(nrow(tables), 8000)
+  expect_is(tables$date, "Date")
+  expect_true(!all(is.na(tables$date)))
+  expect_equal(min(tables$date), as.Date("1922-06-01"))
+  expect_lt(Sys.Date() - max(tables$date), 180)
 
   expected_series <- c(
     "Capital and Reserve Bank Reserve Fund",
@@ -54,13 +58,31 @@ test_that("read_rba() works", {
 })
 
 
-# test_that("all tables work",{
-#   tab <- table_list %>%
-#     dplyr::filter(no != "A5")
-#
-#   mydf <- map2(.x = tab$no,
-#                .y = tab$current_or_historical,
-#                .f = read_rba)
-#
-#
-# })
+test_that("all tables work", {
+  skip_if_offline()
+  skip_on_cran()
+
+  tab <- table_list %>%
+    dplyr::filter(no != "A5")
+
+  tab <- tab %>%
+    # Tables E3-E7 are 'balance sheets', not formatted like a time series
+    dplyr::filter(!no %in% c("E3", "E4", "E5", "E6", "E7"))
+
+  check_df <- function(df) {
+    a <- inherits(df, "tbl_df")
+    b <- length(df) == 11
+    c <- nrow(df) > 1
+    d <- inherits(df$date, "Date")
+    e <- inherits(df$pub_date, "Date")
+    all(a, b, c, d, e)
+  }
+
+  purrr::map2(
+    .x = tab$no,
+    .y = tab$current_or_historical,
+    .f = ~expect_true(check_df(
+      read_rba(table_no = .x , cur_hist = .y)
+      ))
+  )
+})
