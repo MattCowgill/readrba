@@ -9,14 +9,22 @@
 tidy_rba <- function(excel_sheet) {
   .table_title <- names(excel_sheet)[1]
 
+  # Some tables (eg. d3) have a hidden second Excel row that we want to remove
+  if (isFALSE(tolower(excel_sheet[1, 1]) == "title")) {
+    excel_sheet <- excel_sheet[-1, ]
+  }
+
   # Create unique column names combining title + series_id
-  new_colnames <- paste(as.character(excel_sheet[1, ]),
-                         as.character(excel_sheet[10, ]),
+  title_row <- as.character(excel_sheet[1, ])
+  num_seriesid_row <- which(grepl("Series ID", excel_sheet[[1]], ignore.case = T))
+  seriesid_row <- as.character(excel_sheet[num_seriesid_row, ])
+
+  new_colnames <- paste(title_row, seriesid_row,
                         sep = "___")
 
   names(excel_sheet) <- new_colnames
 
-  excel_sheet <- excel_sheet[-c(1, 10), ]
+  excel_sheet <- excel_sheet[-c(1, num_seriesid_row), ]
 
   names(excel_sheet)[1] <- "title"
 
@@ -54,7 +62,7 @@ tidy_rba <- function(excel_sheet) {
     dplyr::rename(date = .data$title)
 
   excel_sheet <- excel_sheet %>%
-    tidyr::separate(series,
+    tidyr::separate(.data$series,
              into = c("series", "series_id"),
              sep = "___",
              extra = "warn",
