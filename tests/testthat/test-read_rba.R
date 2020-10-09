@@ -75,7 +75,8 @@ test_that("all tables work", {
     c <- nrow(df) > 1
     d <- inherits(df$date, "Date")
     e <- inherits(df$pub_date, "Date")
-    all(a, b, c, d, e)
+    f <- inherits(df$value, "numeric")
+    all(a, b, c, d, e, f)
   }
 
   purrr::map2(

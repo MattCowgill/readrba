@@ -78,13 +78,11 @@ tidy_rba <- function(excel_sheet) {
       !grepl("Publi.* date", .data$title)) %>%
     dplyr::rename(date = .data$title)
 
-  excel_sheet <- excel_sheet %>%
-    tidyr::separate(.data$series,
-      into = c("series", "series_id"),
-      sep = "___",
-      extra = "warn",
-      fill = "warn"
-    )
+  # Split the combined series-seriesid col into two
+  # Note that this is substantially faster than using tidyr::separate()
+  split_series <- stringr::str_split_fixed(excel_sheet$series, "___", n = 2)
+  excel_sheet$series  <- as.character(split_series[ , 1])
+  excel_sheet$series_id <- as.character(split_series[ , 2])
 
   fix_date <- function(string) {
     # Sometimes dates are recognised as a string that looks like a date "09-Oct-2020"
@@ -123,10 +121,15 @@ tidy_rba <- function(excel_sheet) {
       table_title = .table_title
     )
 
-  excel_sheet <- dplyr::arrange(
-    excel_sheet,
-    .data$series, .data$date
-  )
+  # excel_sheet <- dplyr::arrange(
+  #   excel_sheet,
+  #   .data$series, .data$date
+  # )
+
+  excel_sheet <- excel_sheet[order(excel_sheet$series,
+                                   excel_sheet$date),
+                             ,
+                             drop = FALSE]
 
   excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
 
