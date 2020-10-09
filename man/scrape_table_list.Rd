@@ -4,10 +4,7 @@
 \alias{scrape_table_list}
 \title{Scrape the RBA site to obtain links to tables}
 \usage{
-scrape_table_list(table_url = "https://www.rba.gov.au/statistics/tables/")
-}
-\arguments{
-\item{table_url}{URL containing links to RBA tables}
+scrape_table_list()
 }
 \value{
 A tibble containing the text and URL of XLS/XLSX links

@@ -27,6 +27,7 @@ Imports:
     xml2,
     rvest,
     tibble,
-    stringr
+    stringr,
+    curl
 Depends: 
     R (>= 2.10)

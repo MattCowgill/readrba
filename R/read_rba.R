@@ -13,9 +13,10 @@
 read_rba <- function(table_no = NULL,
                      cur_hist = "current",
                      path = tempdir()) {
-
-  urls <- get_rba_urls(table_no = table_no,
-                       cur_hist = cur_hist)
+  urls <- get_rba_urls(
+    table_no = table_no,
+    cur_hist = cur_hist
+  )
 
   filenames <- download_rba(urls, path)
 

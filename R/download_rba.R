@@ -10,6 +10,7 @@
 #'
 #' @export
 download_rba <- function(urls, path = tempdir()) {
+  check_rba_connection()
 
   filenames <- basename(urls)
   filenames_with_path <- file.path(path, filenames)

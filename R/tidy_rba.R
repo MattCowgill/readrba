@@ -18,10 +18,13 @@ tidy_rba <- function(excel_sheet) {
     dplyr::filter(!is.na(.data$title))
 
   excel_sheet <- excel_sheet %>%
-    tidyr::gather(
-      key = "series", value = "value",
-      -.data$title
-    ) %>%
+    tidyr::pivot_longer(
+      cols = -.data$title,
+      names_to = "series",
+      values_to = "value"
+    )
+
+  excel_sheet <- excel_sheet %>%
     dplyr::group_by(.data$series) %>%
     dplyr::mutate(
       description = .data$value[.data$title == "Description"],
@@ -32,7 +35,9 @@ tidy_rba <- function(excel_sheet) {
       pub_date = .data$value[.data$title == "Publication date"],
       series_d = .data$value[.data$title == "Series ID"]
     ) %>%
-    dplyr::ungroup() %>%
+    dplyr::ungroup()
+
+  excel_sheet <- excel_sheet %>%
     dplyr::filter(!.data$title %in% c(
       "Description",
       "Frequency",
@@ -52,6 +57,8 @@ tidy_rba <- function(excel_sheet) {
     value = suppressWarnings(as.numeric(.data$value)),
     table_title = .table_title
     )
+
+  excel_sheet <- dplyr::arrange(excel_sheet, series, date)
 
   excel_sheet
 }

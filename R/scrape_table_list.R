@@ -1,8 +1,9 @@
 #' Scrape the RBA site to obtain links to tables
-#' @param table_url URL containing links to RBA tables
 #' @return A tibble containing the text and URL of XLS/XLSX links
 
-scrape_table_list <- function(table_url = "https://www.rba.gov.au/statistics/tables/") {
+scrape_table_list <- function() {
+  table_url <- "https://www.rba.gov.au/statistics/tables/"
+
   table_page <- xml2::read_html(table_url)
 
   link_list <- rvest::html_nodes(table_page, "#tables-list li a")
@@ -15,8 +16,10 @@ scrape_table_list <- function(table_url = "https://www.rba.gov.au/statistics/tab
 
   stopifnot(identical(length(excel_links), length(excel_text)))
 
-  table_list <- tibble::tibble(title = excel_text,
-                               url = paste0("https://rba.gov.au", excel_links))
+  table_list <- tibble::tibble(
+    title = excel_text,
+    url = paste0("https://rba.gov.au", excel_links)
+  )
 
   # regex_string <- "–(?![^–]*–)"
   emdash <- "\u2013"
@@ -24,12 +27,15 @@ scrape_table_list <- function(table_url = "https://www.rba.gov.au/statistics/tab
 
   table_list <- table_list %>%
     tidyr::separate(.data$title,
-                    into = c("title", "no"),
-                    sep = regex_string) %>%
-    dplyr::mutate(dplyr::across(c("title", "no"),
-                                stringr::str_trim))
+      into = c("title", "no"),
+      sep = regex_string
+    ) %>%
+    dplyr::mutate(dplyr::across(
+      c("title", "no"),
+      stringr::str_trim
+    ))
+
+  table_list$current_or_historical <- "current"
 
   table_list
-
 }
-

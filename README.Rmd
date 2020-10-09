@@ -21,7 +21,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-Get data from the RBA in a tidy tibble. Note that this package is in an initial stage of development. Function arguments are very likely to change.
+Get data from the RBA in a tidy tibble. 
+
+**Note that this package is in an initial stage of development. Function arguments are very likely to change.**
 
 ## Installation
 
@@ -32,7 +34,7 @@ remotes::install_github("mattcowgill/readrba")
 ## Example
 
 ```{r}
-rba_data <- readrba::read_rba(table_filenames = c("g01hist", "g03hist"))
+rba_data <- readrba::read_rba(table_no = c("a1", "g1"))
 
 dplyr::glimpse(rba_data)
 
