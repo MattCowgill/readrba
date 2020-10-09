@@ -1,4 +1,10 @@
-
+#' Find the url(s) corresponding to RBA table number(s)
+#' @param table_no Character vector of RBA table number(s), such as `"A1"` or `c("A1", "g1")`.
+#' Not case-sensitive.
+#' @param cur_hist Either `"current"` (the default) or `"historical"`. Choose between getting
+#' the URLs corresponding to current RBA tables, or historical tables.
+#' @return Vector of URL(s) corresponding to the supplied `table_no`
+#' @noRd
 get_rba_urls <- function(table_no, cur_hist = "current") {
   stopifnot(cur_hist %in% c("current", "historical"))
 

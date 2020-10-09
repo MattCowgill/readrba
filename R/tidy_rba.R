@@ -1,6 +1,6 @@
 #' Tidy a statistical table from the RBA
 #' @name tidy_rba
-#' @param excel_sheet Dataframe of RBA spreadsheet, loaded using \code{load_rba()}
+#' @param excel_sheet Dataframe of RBA spreadsheet.
 #' @return Tidy tibble
 #' @importFrom rlang .data
 #' @export
@@ -58,8 +58,10 @@ tidy_rba <- function(excel_sheet) {
     table_title = .table_title
     )
 
-  excel_sheet <- dplyr::arrange(excel_sheet,
-                                .data$series, .data$date)
+  excel_sheet <- dplyr::arrange(
+    excel_sheet,
+    .data$series, .data$date
+  )
 
   excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
 

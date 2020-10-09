@@ -1,5 +1,6 @@
 #' Scrape the RBA site to obtain links to tables
 #' @return A tibble containing the text and URL of XLS/XLSX links
+#' @noRd
 
 scrape_table_list <- function() {
   table_url <- "https://www.rba.gov.au/statistics/tables/"

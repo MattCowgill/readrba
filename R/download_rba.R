@@ -8,7 +8,7 @@
 #' download_rba(url = "https://rba.gov.au/statistics/tables/xls/f02d.xls")
 #' }
 #'
-#' @export
+#' @noRd
 download_rba <- function(urls, path = tempdir()) {
   check_rba_connection()
 

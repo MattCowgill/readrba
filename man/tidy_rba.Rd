@@ -7,7 +7,7 @@
 tidy_rba(excel_sheet)
 }
 \arguments{
-\item{excel_sheet}{Dataframe of RBA spreadsheet, loaded using \code{load_rba()}}
+\item{excel_sheet}{Dataframe of RBA spreadsheet.}
 }
 \value{
 Tidy tibble
