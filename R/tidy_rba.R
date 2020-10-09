@@ -29,11 +29,11 @@ tidy_rba <- function(excel_sheet) {
     dplyr::mutate(
       description = .data$value[.data$title == "Description"],
       frequency = .data$value[.data$title == "Frequency"],
-      type = .data$value[.data$title == "Type"],
+      series_type = .data$value[.data$title == "Type"],
       units = .data$value[.data$title == "Units"],
       source = .data$value[.data$title == "Source"],
       pub_date = .data$value[.data$title == "Publication date"],
-      series_d = .data$value[.data$title == "Series ID"]
+      series_id = .data$value[.data$title == "Series ID"]
     ) %>%
     dplyr::ungroup()
 
@@ -59,6 +59,8 @@ tidy_rba <- function(excel_sheet) {
     )
 
   excel_sheet <- dplyr::arrange(excel_sheet, series, date)
+
+  excel_sheet <- dplyr::filter(excel_sheet, !is.na(value))
 
   excel_sheet
 }
