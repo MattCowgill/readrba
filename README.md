@@ -21,6 +21,8 @@ Get data from the RBA in a tidy tibble.
 **Note that this package is in an initial stage of development. Function
 arguments are very likely to change.**
 
+Historical tables not yet working. All current tables should be OK.
+
 ## Installation
 
 ``` r
