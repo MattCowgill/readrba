@@ -58,9 +58,10 @@ tidy_rba <- function(excel_sheet) {
     table_title = .table_title
     )
 
-  excel_sheet <- dplyr::arrange(excel_sheet, series, date)
+  excel_sheet <- dplyr::arrange(excel_sheet,
+                                .data$series, .data$date)
 
-  excel_sheet <- dplyr::filter(excel_sheet, !is.na(value))
+  excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
 
   excel_sheet
 }

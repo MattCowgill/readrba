@@ -28,6 +28,7 @@ Imports:
     rvest,
     tibble,
     stringr,
-    curl
+    curl,
+    httr
 Depends: 
     R (>= 2.10)
