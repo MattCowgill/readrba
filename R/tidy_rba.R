@@ -32,7 +32,7 @@ tidy_rba <- function(excel_sheet) {
       series_type = .data$value[.data$title == "Type"],
       units = .data$value[.data$title == "Units"],
       source = .data$value[.data$title == "Source"],
-      pub_date = .data$value[.data$title == "Publication date"],
+      pub_date = .data$value[grepl("Publi.* date", .data$title)],
       series_id = .data$value[.data$title == "Series ID"]
     ) %>%
     dplyr::ungroup()
@@ -44,15 +44,25 @@ tidy_rba <- function(excel_sheet) {
       "Type",
       "Units",
       "Source",
-      "Publication date",
       "Series ID"
-    )) %>%
+    ) &
+    !grepl("Publi.* date", .data$title)) %>%
     dplyr::rename(date = .data$title)
+
+  date_fix_function <- function(string) {
+    # Sometimes dates are recognised as a string that looks like a date
+    # ("09-Oct-2020"), sometimes its an Excel-style integer date (41414)
+    if (any(grepl("-", string))) {
+      as.Date(string, format = "%d-%b-%Y")
+    } else {
+      as.Date(as.numeric(string), origin = "1899-12-30")
+    }
+  }
 
   excel_sheet <- excel_sheet %>%
     dplyr::mutate(dplyr::across(
       c(.data$date, .data$pub_date),
-      ~ as.Date(as.numeric(.), origin = "1899-12-30")
+      date_fix_function
     ),
     value = suppressWarnings(as.numeric(.data$value)),
     table_title = .table_title
