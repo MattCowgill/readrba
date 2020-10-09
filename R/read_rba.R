@@ -22,7 +22,7 @@ read_rba <- function(table_no = NULL,
 
   sheets <- purrr::map(filenames, readxl::excel_sheets)
 
-  sheets <- purrr::map(sheets, .f = ~ .x[.x != "Notes"])
+  sheets <- purrr::map(sheets, .f = ~ .x[!.x %in% c("Notes", "Series breaks")])
 
   raw_dfs <- purrr::map2(filenames, sheets, load_rba_sheet)
 

@@ -53,10 +53,13 @@ test_that("read_rba() works", {
   )
 })
 
-#
+
 # test_that("all tables work",{
-#   mydf <- map2(.x = table_list$no,
-#                .y = table_list$current_or_historical,
+#   tab <- table_list %>%
+#     dplyr::filter(no != "A5")
+#
+#   mydf <- map2(.x = tab$no,
+#                .y = tab$current_or_historical,
 #                .f = read_rba)
 #
 #

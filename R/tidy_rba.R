@@ -9,13 +9,18 @@
 tidy_rba <- function(excel_sheet) {
   .table_title <- names(excel_sheet)[1]
 
-  names(excel_sheet) <- as.character(excel_sheet[1, ])
+  # Create unique column names combining title + series_id
+  new_colnames <- paste(as.character(excel_sheet[1, ]),
+                         as.character(excel_sheet[10, ]),
+                        sep = "___")
 
-  excel_sheet <- excel_sheet[-1, ]
+  names(excel_sheet) <- new_colnames
 
-  excel_sheet <- excel_sheet %>%
-    dplyr::rename(title = .data$Title) %>%
-    dplyr::filter(!is.na(.data$title))
+  excel_sheet <- excel_sheet[-c(1, 10), ]
+
+  names(excel_sheet)[1] <- "title"
+
+  excel_sheet <- excel_sheet[!is.na(excel_sheet$title), ]
 
   excel_sheet <- excel_sheet %>%
     tidyr::pivot_longer(
@@ -32,10 +37,10 @@ tidy_rba <- function(excel_sheet) {
       series_type = .data$value[.data$title == "Type"],
       units = .data$value[.data$title == "Units"],
       source = .data$value[.data$title == "Source"],
-      pub_date = .data$value[grepl("Publi.* date", .data$title)],
-      series_id = .data$value[.data$title == "Series ID"]
+      pub_date = .data$value[grepl("Publi.* date", .data$title)]
     ) %>%
     dplyr::ungroup()
+
 
   excel_sheet <- excel_sheet %>%
     dplyr::filter(!.data$title %in% c(
@@ -43,11 +48,17 @@ tidy_rba <- function(excel_sheet) {
       "Frequency",
       "Type",
       "Units",
-      "Source",
-      "Series ID"
+      "Source"
     ) &
       !grepl("Publi.* date", .data$title)) %>%
     dplyr::rename(date = .data$title)
+
+  excel_sheet <- excel_sheet %>%
+    tidyr::separate(series,
+             into = c("series", "series_id"),
+             sep = "___",
+             extra = "warn",
+             fill = "warn")
 
   date_fix_function <- function(string) {
     # Sometimes dates are recognised as a string that looks like a date
