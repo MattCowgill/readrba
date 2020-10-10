@@ -1,14 +1,21 @@
 #' Load an Excel sheet containing an RBA statistical table
 #' @name load_rba
-#' @param filename Filename, including path, of an RBA Excel workbook
-#' @param sheets Character vector of length >= 1 containing names of Excel worksheets
+#' @param filename Filename, including path, to an RBA Excel workbook
 #' @noRd
 
-load_rba_sheet <- function(filename, sheets = "Data") {
+load_rba_sheet <- function(filename) {
+  sheets <- readxl::excel_sheets(filename)
+
+  sheets <- sheets[!sheets %in% c("Notes",
+                                  "Series breaks",
+                                  "AGS - Notes",
+                                  "Use of Expert Judgement")]
+
   purrr::map(
     .x = sheets,
     .f = ~ readxl::read_excel(
       path = filename,
+      sheet = .x,
       .name_repair = "minimal"
     )
   )

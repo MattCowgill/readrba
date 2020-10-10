@@ -13,18 +13,21 @@
 read_rba <- function(table_no = NULL,
                      cur_hist = "current",
                      path = tempdir()) {
-  urls <- get_rba_urls(
-    table_no = table_no,
-    cur_hist = cur_hist
-  )
+
+  if (cur_hist %in% c("current", "historical")) {
+    urls <- get_rba_urls(
+      table_no = table_no,
+      cur_hist = cur_hist
+    )
+  } else if (cur_hist == "all") {
+    urls <- purrr::map_chr(.x = c("current", "historical"),
+                           .f = ~get_rba_urls(table_no = table_no,
+                                             cur_hist = .x))
+  }
 
   filenames <- download_rba(urls, path)
 
-  sheets <- purrr::map(filenames, readxl::excel_sheets)
-
-  sheets <- purrr::map(sheets, .f = ~ .x[!.x %in% c("Notes", "Series breaks")])
-
-  raw_dfs <- purrr::map2(filenames, sheets, load_rba_sheet)
+  raw_dfs <- purrr::map(filenames, load_rba_sheet)
 
   raw_dfs <- purrr::flatten(raw_dfs)
 

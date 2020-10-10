@@ -57,27 +57,28 @@ test_that("read_rba() works", {
   )
 })
 
+check_df <- function(df) {
+  a <- inherits(df, "tbl_df")
+  b <- length(df) == 11
+  c <- nrow(df) > 1
+  d <- inherits(df$date, "Date")
+  e <- inherits(df$pub_date, "Date")
+  f <- inherits(df$value, "numeric")
 
-test_that("all tables work", {
+  all(a, b, c, d, e, f)
+}
+
+test_that("all current tables work", {
   skip_if_offline()
   skip_on_cran()
 
   tab <- table_list %>%
-    dplyr::filter(no != "A5")
+    dplyr::filter(current_or_historical == "current",
+                  no != "A5")
 
   tab <- tab %>%
     # Tables E3-E7 are 'balance sheets', not formatted like a time series
     dplyr::filter(!no %in% c("E3", "E4", "E5", "E6", "E7"))
-
-  check_df <- function(df) {
-    a <- inherits(df, "tbl_df")
-    b <- length(df) == 11
-    c <- nrow(df) > 1
-    d <- inherits(df$date, "Date")
-    e <- inherits(df$pub_date, "Date")
-    f <- inherits(df$value, "numeric")
-    all(a, b, c, d, e, f)
-  }
 
   purrr::map2(
     .x = tab$no,

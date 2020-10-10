@@ -9,6 +9,15 @@
 tidy_rba <- function(excel_sheet) {
   .table_title <- names(excel_sheet)[1]
 
+  # Check if the sheet contains the expected metadata in the first column
+  contains_expected_metadata <- check_if_rba_ts(excel_sheet)
+
+  if (isFALSE(contains_expected_metadata)) {
+    stop(.table_title,
+         " doesn't seem to be formatted like a standard RBA time series",
+         " spreadsheet and cannot be imported.")
+  }
+
   # Remove entirely empty/NA columns
   excel_sheet <- excel_sheet[ , colSums(is.na(excel_sheet)) != nrow(excel_sheet)]
 
@@ -20,6 +29,7 @@ tidy_rba <- function(excel_sheet) {
   # Create unique column names combining title + series_id
   title_row <- as.character(excel_sheet[1, ])
   num_seriesid_row <- which(grepl("Series ID", excel_sheet[[1]], ignore.case = T))
+  num_desc_row <- which(grepl("Description", excel_sheet[[1]], ignore.case = T))
 
   # Occasionally the RBA refers to the series ID as "mnemonic" instead
   if (length(num_seriesid_row) == 0) {
@@ -34,14 +44,15 @@ tidy_rba <- function(excel_sheet) {
   }
 
   seriesid_row <- as.character(excel_sheet[num_seriesid_row, ])
+  desc_row <- as.character(excel_sheet[num_desc_row, ])
 
-  new_colnames <- paste(title_row, seriesid_row,
+  new_colnames <- paste(title_row, seriesid_row, desc_row,
     sep = "___"
   )
 
   names(excel_sheet) <- new_colnames
 
-  excel_sheet <- excel_sheet[-c(1, num_seriesid_row), ]
+  excel_sheet <- excel_sheet[-c(1, num_seriesid_row, num_desc_row), ]
 
   names(excel_sheet)[1] <- "title"
 
@@ -57,7 +68,6 @@ tidy_rba <- function(excel_sheet) {
   excel_sheet <- excel_sheet %>%
     dplyr::group_by(.data$series) %>%
     dplyr::mutate(
-      description = .data$value[.data$title == "Description"],
       frequency = .data$value[.data$title == "Frequency"],
       series_type = .data$value[.data$title == "Type"],
       units = .data$value[.data$title == "Units"],
@@ -69,7 +79,6 @@ tidy_rba <- function(excel_sheet) {
 
   excel_sheet <- excel_sheet %>%
     dplyr::filter(!.data$title %in% c(
-      "Description",
       "Frequency",
       "Type",
       "Units",
@@ -80,9 +89,10 @@ tidy_rba <- function(excel_sheet) {
 
   # Split the combined series-seriesid col into two
   # Note that this is substantially faster than using tidyr::separate()
-  split_series <- stringr::str_split_fixed(excel_sheet$series, "___", n = 2)
+  split_series <- stringr::str_split_fixed(excel_sheet$series, "___", n = 3)
   excel_sheet$series  <- as.character(split_series[ , 1])
   excel_sheet$series_id <- as.character(split_series[ , 2])
+  excel_sheet$description <- as.character(split_series[ , 3])
 
   fix_date <- function(string) {
     # Sometimes dates are recognised as a string that looks like a date "09-Oct-2020"
@@ -120,11 +130,6 @@ tidy_rba <- function(excel_sheet) {
       value = suppressWarnings(as.numeric(.data$value)),
       table_title = .table_title
     )
-
-  # excel_sheet <- dplyr::arrange(
-  #   excel_sheet,
-  #   .data$series, .data$date
-  # )
 
   excel_sheet <- excel_sheet[order(excel_sheet$series,
                                    excel_sheet$date),
