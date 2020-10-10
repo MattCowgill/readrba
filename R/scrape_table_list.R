@@ -60,7 +60,7 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
       c("title", "no"),
       stringr::str_trim
     )) %>%
-    dplyr::filter(!is.na(no))
+    dplyr::filter(!is.na(.data$no))
 
   table_list$current_or_historical <- cur_hist
 
