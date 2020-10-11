@@ -28,7 +28,7 @@ read_rba <- function(table_no = NULL,
       )
     )
   } else {
-    stop("cur_hist must be one of c('current', 'historical', 'all'")
+    stop("cur_hist must be one of c('current', 'historical', 'all')")
   }
 
   readable <- table_list$readable[table_list$url %in% urls]
@@ -37,7 +37,7 @@ read_rba <- function(table_no = NULL,
     non_ts_urls <- paste0(urls[!readable], collapse = "\n")
     stop(
       "The spreadsheets at url(s)\n", non_ts_urls, "\nare not formatted",
-      " like a standard RBA time series spreadheet and cannot currently",
+      " like a standard RBA time series spreadsheet and cannot currently",
       " be read by `read_rba()`."
     )
   }

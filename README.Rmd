@@ -21,17 +21,33 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-Get data from the RBA in a tidy tibble. 
+Get data from the [Reserve Bank of Australia](https://rba.gov.au/statistics/tables/) in a [tidy](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) [tibble](https://tibble.tidyverse.org). 
 
-Note that this package is still in active development. Some aspects of its functionality are incomplete.
+This package is still in active development. Some aspects of its functionality are incomplete.
 
 ## Installation
+The package is not yet on CRAN. Install from GitHub:
 
 ```{r eval=FALSE}
 remotes::install_github("mattcowgill/readrba")
 ```
 
-## Example
+## Examples
+There is one main function in {readrba}: `read_rba()`.
+
+Here's how you fetch the current version of a single RBA statistical table: table G1, consumer price inflation:
+
+```{r}
+cpi <- readrba::read_rba(table_no = "g1")
+```
+
+The object returned by `read_rba()` is a tidy tibble (ie. in 'long' format):
+
+```{r}
+dplyr::glimpse(cpi)
+```
+
+You can also request multiple tables. They'll be returned together as one tidy tibble:
 
 ```{r}
 rba_data <- readrba::read_rba(table_no = c("a1", "g1"))
@@ -39,4 +55,41 @@ rba_data <- readrba::read_rba(table_no = c("a1", "g1"))
 dplyr::glimpse(rba_data)
 
 unique(rba_data$table_title)
+```
+
+By default, `read_rba()` fetches the current version of whatever table you request. You can specify the historical version of a table, if it's available, using the `cur_hist` argument:
+
+```{r hist}
+
+hist_a11 <- readrba::read_rba(table_no = "a1.1", cur_hist = "historical")
+
+dplyr::glimpse(hist_a11)
+```
+
+# Data availability
+
+The `read_rba()` function is able to import most tables on the [Statistical Tables](https://rba.gov.au/statistics/tables/) page of the RBA website. These are the tables that are downloaded when you use `read_rba(cur_hist = "current")`, the default. 
+
+`read_rba()` can also download many of the tables on the [Historical Data](https://rba.gov.au/statistics/historical-data.html) page of the RBA website. To get these, specify `cur_hist = "historical"` in `read_rba()`. 
+
+## Historical exchange rate tables
+The historical exchange rate tables do not have table numbers on the RBA website. They can still be downloaded, using the following table numbers:
+
+```{r echo=FALSE}
+ex_rates <- dplyr::filter(readrba:::table_list, grepl("ex", no)) 
+
+ex_rates <- dplyr::select(ex_rates, `Table title` = title, `table_no` = no)
+
+knitr::kable(ex_rates, caption = "Table numbers for historical exchange rate tables")
+```
+
+## Non-standard tables
+`read_rba()` is currently only able to import RBA statistical tables that are formatted in a (more or less) standard way. Some are formatted in a non-standard way, either because they're distributions rather than time series, or because they're particularly old. 
+
+Tables that are **not** able to be downloaded are:
+
+```{r echo=FALSE}
+nonreadable <- dplyr::filter(readrba:::table_list, readable == FALSE)
+nonreadable <- dplyr::select(nonreadable, `Table title` = title, table_no = no)
+knitr::kable(nonreadable, caption = "Tables not currently readable with `read_rba()`")
 ```

@@ -2,6 +2,13 @@ test_that("read_rba() works", {
   skip_if_offline()
   skip_on_cran()
 
+  # Fails with non-existent table number
+  expect_error(read_rba("x9"))
+  # Fails when !cur_hist %in% c("current", "historical", "all")
+  expect_error(read_rba("a1.1", cur_hist = "somearbitrarystring"))
+  # Fails when table is not readable (not in standard TS format)
+  expect_error(read_rba("a5"))
+
   tables <- read_rba(c("a1.1", "g1"))
 
   expect_is(tables, "tbl_df")
