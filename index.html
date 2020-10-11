@@ -67,24 +67,47 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div id="readrba" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#readrba" class="anchor"></a>readrba</h1></div>
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>Get data from the RBA in a tidy tibble.</p>
-<p>Note that this package is still in active development. Some aspects of its functionality are incomplete.</p>
+<p>Get data from the <a href="https://rba.gov.au/statistics/tables/">Reserve Bank of Australia</a> in a <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">tidy</a> <a href="https://tibble.tidyverse.org">tibble</a>.</p>
+<p>This package is still in active development. Some aspects of its functionality are incomplete.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
+<p>The package is not yet on CRAN. Install from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mattcowgill/readrba"</span><span class="op">)</span></pre></div>
 </div>
-<div id="example" class="section level2">
+<div id="examples" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<a href="#examples" class="anchor"></a>Examples</h2>
+<p>There is one main function in {readrba}: <code><a href="reference/read_rba.html">read_rba()</a></code>.</p>
+<p>Here’s how you fetch the current version of a single RBA statistical table: table G1, consumer price inflation:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="va">cpi</span> <span class="op">&lt;-</span> <span class="fu">readrba</span><span class="fu">::</span><span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"g1"</span><span class="op">)</span></pre></div>
+<p>The object returned by <code><a href="reference/read_rba.html">read_rba()</a></code> is a tidy tibble (ie. in ‘long’ format):</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">cpi</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 3,843</span>
+<span class="co">#&gt; Columns: 11</span>
+<span class="co">#&gt; $ date        &lt;date&gt; 1922-06-01, 1922-09-01, 1922-12-01, 1923-03-01, 1923-06-…</span>
+<span class="co">#&gt; $ series      &lt;chr&gt; "Consumer price index", "Consumer price index", "Consumer…</span>
+<span class="co">#&gt; $ value       &lt;dbl&gt; 2.8, 2.8, 2.7, 2.7, 2.8, 2.9, 2.9, 2.8, 2.8, 2.8, 2.8, 2.…</span>
+<span class="co">#&gt; $ frequency   &lt;chr&gt; "Quarterly", "Quarterly", "Quarterly", "Quarterly", "Quar…</span>
+<span class="co">#&gt; $ series_type &lt;chr&gt; "Original", "Original", "Original", "Original", "Original…</span>
+<span class="co">#&gt; $ units       &lt;chr&gt; "Index, 2011/12=100", "Index, 2011/12=100", "Index, 2011/…</span>
+<span class="co">#&gt; $ source      &lt;chr&gt; "ABS / RBA", "ABS / RBA", "ABS / RBA", "ABS / RBA", "ABS …</span>
+<span class="co">#&gt; $ pub_date    &lt;date&gt; 2020-07-30, 2020-07-30, 2020-07-30, 2020-07-30, 2020-07-…</span>
+<span class="co">#&gt; $ series_id   &lt;chr&gt; "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG…</span>
+<span class="co">#&gt; $ description &lt;chr&gt; "Consumer price index; All groups", "Consumer price index…</span>
+<span class="co">#&gt; $ table_title &lt;chr&gt; "G1 CONSUMER PRICE INFLATION", "G1 CONSUMER PRICE INFLATI…</span></pre></div>
+<p>You can also request multiple tables. They’ll be returned together as one tidy tibble:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">rba_data</span> <span class="op">&lt;-</span> <span class="fu">readrba</span><span class="fu">::</span><span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a1"</span>, <span class="st">"g1"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">rba_data</span><span class="op">)</span>
@@ -105,8 +128,203 @@
 <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">rba_data</span><span class="op">$</span><span class="va">table_title</span><span class="op">)</span>
 <span class="co">#&gt; [1] "A1 RESERVE BANK OF AUSTRALIA - LIABILITIES AND ASSETS - SUMMARY"</span>
 <span class="co">#&gt; [2] "G1 CONSUMER PRICE INFLATION"</span></pre></div>
+<p>By default, <code><a href="reference/read_rba.html">read_rba()</a></code> fetches the current version of whatever table you request. You can specify the historical version of a table, if it’s available, using the <code>cur_hist</code> argument:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+
+<span class="va">hist_a11</span> <span class="op">&lt;-</span> <span class="fu">readrba</span><span class="fu">::</span><span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"a1.1"</span>, cur_hist <span class="op">=</span> <span class="st">"historical"</span><span class="op">)</span>
+
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">hist_a11</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 8,889</span>
+<span class="co">#&gt; Columns: 11</span>
+<span class="co">#&gt; $ date        &lt;date&gt; 1977-07-31, 1977-08-31, 1977-09-30, 1977-10-31, 1977-11-…</span>
+<span class="co">#&gt; $ series      &lt;chr&gt; "Australian Government Deposits", "Australian Government …</span>
+<span class="co">#&gt; $ value       &lt;dbl&gt; 654, 665, 695, 609, 560, 614, 596, 505, 688, 642, 587, 64…</span>
+<span class="co">#&gt; $ frequency   &lt;chr&gt; "Monthly", "Monthly", "Monthly", "Monthly", "Monthly", "M…</span>
+<span class="co">#&gt; $ series_type &lt;chr&gt; "Original; average of weekly data for the month", "Origin…</span>
+<span class="co">#&gt; $ units       &lt;chr&gt; "$ million", "$ million", "$ million", "$ million", "$ mi…</span>
+<span class="co">#&gt; $ source      &lt;chr&gt; "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "…</span>
+<span class="co">#&gt; $ pub_date    &lt;date&gt; 2015-06-26, 2015-06-26, 2015-06-26, 2015-06-26, 2015-06-…</span>
+<span class="co">#&gt; $ series_id   &lt;chr&gt; "ARBALDOGIAG", "ARBALDOGIAG", "ARBALDOGIAG", "ARBALDOGIAG…</span>
+<span class="co">#&gt; $ description &lt;chr&gt; "Australian Government Deposits", "Australian Government …</span>
+<span class="co">#&gt; $ table_title &lt;chr&gt; "A1.1 RESERVE BANK OF AUSTRALIA - LIABILITIES AND ASSETS"…</span></pre></div>
 </div>
 </div>
+<div id="data-availability" class="section level1">
+<h1 class="hasAnchor">
+<a href="#data-availability" class="anchor"></a>Data availability</h1>
+<p>The <code><a href="reference/read_rba.html">read_rba()</a></code> function is able to import most tables on the <a href="https://rba.gov.au/statistics/tables/">Statistical Tables</a> page of the RBA website. These are the tables that are downloaded when you use <code><a href="reference/read_rba.html">read_rba(cur_hist = "current")</a></code>, the default.</p>
+<p><code><a href="reference/read_rba.html">read_rba()</a></code> can also download many of the tables on the <a href="https://rba.gov.au/statistics/historical-data.html">Historical Data</a> page of the RBA website. To get these, specify <code>cur_hist = "historical"</code> in <code><a href="reference/read_rba.html">read_rba()</a></code>.</p>
+<div id="historical-exchange-rate-tables" class="section level2">
+<h2 class="hasAnchor">
+<a href="#historical-exchange-rate-tables" class="anchor"></a>Historical exchange rate tables</h2>
+<p>The historical exchange rate tables do not have table numbers on the RBA website. They can still be downloaded, using the following table numbers:</p>
+<table class="table">
+<colgroup>
+<col width="81%">
+<col width="18%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Table title</th>
+<th align="left">table_no</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Exchange Rates – Daily – 1983 to 1986</td>
+<td align="left">ex_daily_8386</td>
+</tr>
+<tr class="even">
+<td align="left">Exchange Rates – Daily – 1987 to 1990</td>
+<td align="left">ex_daily_8790</td>
+</tr>
+<tr class="odd">
+<td align="left">Exchange Rates – Daily – 1991 to 1994</td>
+<td align="left">ex_daily_9194</td>
+</tr>
+<tr class="even">
+<td align="left">Exchange Rates – Daily – 1995 to 1998</td>
+<td align="left">ex_daily_9598</td>
+</tr>
+<tr class="odd">
+<td align="left">Exchange Rates – Daily – 1999 to 2002</td>
+<td align="left">ex_daily_9902</td>
+</tr>
+<tr class="even">
+<td align="left">Exchange Rates – Daily – 2003 to 2006</td>
+<td align="left">ex_daily_0306</td>
+</tr>
+<tr class="odd">
+<td align="left">Exchange Rates – Daily – 2007 to 2009</td>
+<td align="left">ex_daily_0709</td>
+</tr>
+<tr class="even">
+<td align="left">Exchange Rates – Daily – 2010 to 2013</td>
+<td align="left">ex_daily_1013</td>
+</tr>
+<tr class="odd">
+<td align="left">Exchange Rates – Daily – 2014 to 2017</td>
+<td align="left">ex_daily_1417</td>
+</tr>
+<tr class="even">
+<td align="left">Exchange Rates – Daily – 2018 to Current</td>
+<td align="left">ex_daily_18cur</td>
+</tr>
+<tr class="odd">
+<td align="left">Exchange Rates – Monthly – January 2010 to latest complete month of current year</td>
+<td align="left">ex_monthly_10cur</td>
+</tr>
+<tr class="even">
+<td align="left">Exchange Rates – Monthly – July 1969 to December 2009</td>
+<td align="left">ex_monthly_6909</td>
+</tr>
+</tbody>
+</table>
+<p>Table numbers for historical exchange rate tables</p>
+</div>
+<div id="non-standard-tables" class="section level2">
+<h2 class="hasAnchor">
+<a href="#non-standard-tables" class="anchor"></a>Non-standard tables</h2>
+<p><code><a href="reference/read_rba.html">read_rba()</a></code> is currently only able to import RBA statistical tables that are formatted in a (more or less) standard way. Some are formatted in a non-standard way, either because they’re distributions rather than time series, or because they’re particularly old.</p>
+<p>Tables that are <strong>not</strong> able to be downloaded are:</p>
+<table class="table">
+<colgroup>
+<col width="89%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Table title</th>
+<th align="left">table_no</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Daily Foreign Exchange Market Intervention Transactions</td>
+<td align="left">A5</td>
+</tr>
+<tr class="even">
+<td align="left">Household Balance Sheets – Distribution</td>
+<td align="left">E3</td>
+</tr>
+<tr class="odd">
+<td align="left">Household Gearing – Distribution</td>
+<td align="left">E4</td>
+</tr>
+<tr class="even">
+<td align="left">Household Financial Assets – Distribution</td>
+<td align="left">E5</td>
+</tr>
+<tr class="odd">
+<td align="left">Household Non-Financial Assets – Distribution</td>
+<td align="left">E6</td>
+</tr>
+<tr class="even">
+<td align="left">Household Debt – Distribution</td>
+<td align="left">E7</td>
+</tr>
+<tr class="odd">
+<td align="left">Open Market Operations – 2012 to 2013</td>
+<td align="left">A3</td>
+</tr>
+<tr class="even">
+<td align="left">Open Market Operations – 2009 to 2011</td>
+<td align="left">A3</td>
+</tr>
+<tr class="odd">
+<td align="left">Open Market Operations – 2003 to 2008</td>
+<td align="left">A3</td>
+</tr>
+<tr class="even">
+<td align="left">Individual Banks’ Assets – 1991–1992 to 1997–1998</td>
+<td align="left">J1</td>
+</tr>
+<tr class="odd">
+<td align="left">Individual Banks’ Liabilities – 1991–1992 to 1997–1998</td>
+<td align="left">J2</td>
+</tr>
+<tr class="even">
+<td align="left">Treasury Note Tenders - 1989–2006</td>
+<td align="left">E4</td>
+</tr>
+<tr class="odd">
+<td align="left">Treasury Bond Tenders – 1982–2006</td>
+<td align="left">E5</td>
+</tr>
+<tr class="even">
+<td align="left">Treasury Bond Tenders – Amount Allotted, by Years to Maturity – 1982–2006</td>
+<td align="left">E5</td>
+</tr>
+<tr class="odd">
+<td align="left">Treasury Bond Switch Tenders – 2008</td>
+<td align="left">E6</td>
+</tr>
+<tr class="even">
+<td align="left">Treasury Capital Indexed Bonds – 1985–2006</td>
+<td align="left">E7</td>
+</tr>
+<tr class="odd">
+<td align="left">Capital Market Yields – Government Bonds – Daily – 1995 to 17 May 2013</td>
+<td align="left">F2</td>
+</tr>
+<tr class="even">
+<td align="left">Capital Market Yields – Government Bonds – Monthly – 1969 to May 2013</td>
+<td align="left">F2</td>
+</tr>
+<tr class="odd">
+<td align="left">Indicative Mid Rates of Australian Government Securities – 1992 to 2008</td>
+<td align="left">F16</td>
+</tr>
+<tr class="even">
+<td align="left">Indicative Mid Rates of Australian Government Securities – 2009 to 2018</td>
+<td align="left">F16</td>
+</tr>
+<tr class="odd">
+<td align="left">Zero-coupon Interest Rates – Analytical Series – 1992 to 2008</td>
+<td align="left">F17</td>
+</tr>
+</tbody>
+</table>
+<p>Tables not currently readable with <code><a href="reference/read_rba.html">read_rba()</a></code></p>
+</div>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
