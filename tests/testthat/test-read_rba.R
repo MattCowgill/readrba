@@ -101,6 +101,9 @@ test_that("historical tables work", {
 })
 
 test_that("getting `both` series works", {
+  skip_if_offline()
+  skip_on_cran()
+
   cur <- read_rba("a1.1", "current")
   hist <- read_rba("a1.1", "historical")
 

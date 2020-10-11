@@ -1,5 +1,5 @@
 Package: readrba
-Title: Download and tidy RBA statistical tables
+Title: Download and Tidy Statistical Tables from the Reserve Bank of Australia
 Version: 0.0.1
 Authors@R: 
     person(given = "Matt",
