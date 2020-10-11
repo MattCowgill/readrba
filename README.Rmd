@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 Get data from the RBA in a tidy tibble. 
 
-**Note that this package is in an initial stage of development. Function arguments are very likely to change.**
+Note that this package is still in active development. Some aspects of its functionality are incomplete.
 
 ## Installation
 

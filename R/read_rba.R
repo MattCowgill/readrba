@@ -2,7 +2,7 @@
 #' @name read_rba
 #' @param table_no Table number(s) as character vector,
 #' such as "A1" or c("a1.1", "g1").
-#' @param cur_hist Character; either "current" or "historical".
+#' @param cur_hist Character; "current" "historical", or "all".
 #' @param path directory in which to save file(s); default is `tempdir()`
 #' @return A single tidy tibble containing the requested table(s)
 #' @examples
@@ -27,6 +27,8 @@ read_rba <- function(table_no = NULL,
         cur_hist = .x
       )
     )
+  } else {
+    stop("cur_hist must be one of c('current', 'historical', 'all'")
   }
 
   readable <- table_list$readable[table_list$url %in% urls]

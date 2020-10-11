@@ -99,3 +99,22 @@ test_that("historical tables work", {
     ))
   )
 })
+
+test_that("getting `both` series works", {
+  cur <- read_rba("a1.1", "current")
+  hist <- read_rba("a1.1", "historical")
+
+  expect_true(check_df(cur))
+  expect_true(check_df(hist))
+
+  both <- read_rba("a1.1", "all") %>%
+    dplyr::arrange(series, date)
+
+  expect_true(check_df(both))
+
+  comb <- dplyr::bind_rows(cur, hist) %>%
+    dplyr::arrange(series, date)
+
+
+  expect_identical(both, comb)
+})
