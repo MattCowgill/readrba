@@ -6,3 +6,6 @@
 ^\.travis\.yml$
 ^codecov\.yml$
 ^data-raw$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
