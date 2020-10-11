@@ -6,10 +6,13 @@
 load_rba_sheet <- function(filename) {
   sheets <- readxl::excel_sheets(filename)
 
-  sheets <- sheets[!sheets %in% c("Notes",
-                                  "Series breaks",
-                                  "AGS - Notes",
-                                  "Use of Expert Judgement")]
+  sheets <- sheets[!sheets %in% c(
+    "Notes",
+    "Notes ",
+    "Series breaks",
+    "AGS - Notes",
+    "Use of Expert Judgement"
+  )]
 
   purrr::map(
     .x = sheets,

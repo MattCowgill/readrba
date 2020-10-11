@@ -73,43 +73,29 @@ test_that("all current tables work", {
   skip_on_cran()
 
   tab <- table_list %>%
-    dplyr::filter(current_or_historical == "current",
-                  no != "A5")
-
-  tab <- tab %>%
-    # Tables E3-E7 are 'balance sheets', not formatted like a time series
-    dplyr::filter(!no %in% c("E3", "E4", "E5", "E6", "E7"))
-
-  # Rando spreadsheet isn't formatted in the modern way
-  tab <- tab %>%
-    dplyr::filter(basename(url) != "c01-3-hist.xlsx")
+    dplyr::filter(current_or_historical == "current" &
+      readable == TRUE)
 
   purrr::map(
     .x = tab$no,
-    .f = ~expect_true(check_df(
-      read_rba(table_no = .x , cur_hist = "current")
-      ))
+    .f = ~ expect_true(check_df(
+      read_rba(table_no = .x, cur_hist = "current")
+    ))
   )
 })
 
-# test_that("historical tables work", {
-#   skip_if_offline()
-#   skip_on_cran()
-#
-#   tab <- table_list %>%
-#     dplyr::filter(current_or_historical == "historical")
-#
-#   tab %>%
-#     filter(no != "A3")
-#   get_rba_urls("A3", "historical")
-#
-#   purrr::map(.x = tab$no,
-#       .f = ~check_df(read_rba(table_no = .x, cur_hist = "historical")))
-#
-#   # purrr::map(
-#   #   .x = tab$no,
-#   #   .f = ~expect_true(check_df(
-#   #     read_rba(table_no = .x , cur_hist = "historical")
-#   #   ))
-#   # )
-# })
+test_that("historical tables work", {
+  skip_if_offline()
+  skip_on_cran()
+
+  tab <- table_list %>%
+    dplyr::filter(current_or_historical == "historical" &
+      readable == TRUE)
+
+  purrr::map(
+    .x = tab$no,
+    .f = ~ expect_true(check_df(
+      read_rba(table_no = .x, cur_hist = "historical")
+    ))
+  )
+})

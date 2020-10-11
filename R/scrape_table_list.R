@@ -3,12 +3,13 @@
 #' @param cur_hist "current",  "historical", or "all"
 #' @noRd
 scrape_table_list <- function(cur_hist = "all") {
-
   if (cur_hist %in% c("current", "historical")) {
     scrape_indiv_table_list(cur_hist = cur_hist)
   } else if (cur_hist == "all") {
-    purrr::map_dfr(.x = c("current", "historical"),
-                   .f = scrape_indiv_table_list)
+    purrr::map_dfr(
+      .x = c("current", "historical"),
+      .f = scrape_indiv_table_list
+    )
   } else {
     stop("cur_hist must be 'current', 'historical', or 'all'.")
   }
@@ -23,7 +24,6 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
   if (cur_hist == "current") {
     table_url <- "https://www.rba.gov.au/statistics/tables/"
     css_selector <- "#tables-list li a"
-
   } else if (cur_hist == "historical") {
     table_url <- "https://rba.gov.au/statistics/historical-data.html"
     css_selector <- ".width-text li a"
@@ -41,14 +41,42 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
 
   stopifnot(identical(length(excel_links), length(excel_text)))
 
+  emdash <- "\u2013"
+  regex_string <- paste0(emdash, "(?![^", emdash, "]*", emdash, ")")
+
+  # Some historical tables don't have a table number; we add one
+  if (cur_hist == "historical") {
+    excel_text <- dplyr::case_when(
+      grepl(paste0("Exchange Rates"), excel_text) &
+        grepl("Daily", excel_text) &
+        grepl("Current", excel_text) ~
+      paste0(
+        excel_text, " ", emdash, " ",
+        "ex_daily_",
+        stringr::str_sub(excel_text, -13, -12),
+        "cur"
+      ),
+      grepl(paste0("Exchange Rates ", emdash, " Daily"), excel_text) ~
+      paste0(
+        excel_text, " ", emdash, " ",
+        "ex_daily_",
+        stringr::str_sub(excel_text, -10, -9),
+        stringr::str_sub(excel_text, -2, -1)
+      ),
+      grepl(paste0("Exchange Rates ", emdash, " Monthly"), excel_text) &
+        grepl("current", excel_text) ~
+      paste0(excel_text, " ", emdash, " ", "ex_monthly_10cur"),
+      grepl(paste0("Exchange Rates ", emdash, " Monthly"), excel_text) &
+        grepl("1969", excel_text) ~
+      paste0(excel_text, " ", emdash, " ", "ex_monthly_6909"),
+      TRUE ~ excel_text
+    )
+  }
+
   table_list <- tibble::tibble(
     title = excel_text,
     url = paste0("https://rba.gov.au", excel_links)
   )
-
-  # regex_string <- "–(?![^–]*–)"
-  emdash <- "\u2013"
-  regex_string <- paste0(emdash, "(?![^", emdash, "]*", emdash, ")")
 
   table_list <- table_list %>%
     tidyr::separate(.data$title,
@@ -60,7 +88,11 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
       c("title", "no"),
       stringr::str_trim
     )) %>%
-    dplyr::filter(!is.na(.data$no))
+    dplyr::filter(
+      !is.na(.data$no),
+      !grepl("Occasional Paper", excel_text),
+      !grepl("Download", excel_text)
+    )
 
   table_list$current_or_historical <- cur_hist
 

@@ -6,15 +6,20 @@
 #' @noRd
 
 check_if_rba_ts <- function(df) {
-  first_col <- df[ , 1]
+  first_col <- df[, 1]
 
-  correct_metadata <- purrr::map_lgl(.x = c("title",
-                                            "description",
-                                            "source"
-                                            ),
-                                     .f = ~grepl(pattern = .x,
-                                                 x = first_col,
-                                                 ignore.case = TRUE))
+  correct_metadata <- purrr::map_lgl(
+    .x = c(
+      "title",
+      "description",
+      "source"
+    ),
+    .f = ~ grepl(
+      pattern = .x,
+      x = first_col,
+      ignore.case = TRUE
+    )
+  )
 
   correct_metadata <- all(correct_metadata)
 

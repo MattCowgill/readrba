@@ -7,7 +7,8 @@
 read_rba(table_no = NULL, cur_hist = "current", path = tempdir())
 }
 \arguments{
-\item{table_no}{Table number(s) as character vector, such as "A1" or c("a1.1", "g1").}
+\item{table_no}{Table number(s) as character vector,
+such as "A1" or c("a1.1", "g1").}
 
 \item{cur_hist}{Character; either "current" or "historical".}
 

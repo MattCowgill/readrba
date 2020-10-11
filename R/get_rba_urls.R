@@ -1,8 +1,10 @@
 #' Find the url(s) corresponding to RBA table number(s).
 #' Note that multiple URLs can be returned for a single table_no, eg. `A3`.
-#' @param table_no Character vector of RBA table number(s), such as `"A1"` or `c("A1", "g1")`.
+#' @param table_no Character vector of RBA table number(s), such as `"A1"`
+#' or `c("A1", "g1")`.
 #' Not case-sensitive.
-#' @param cur_hist Either `"current"` (the default) or `"historical"`. Choose between getting
+#' @param cur_hist Either `"current"` (the default) or `"historical"`.
+#' Choose between getting
 #' the URLs corresponding to current RBA tables, or historical tables.
 #' @return Vector of URL(s) corresponding to the supplied `table_no`
 #' @noRd
@@ -14,11 +16,6 @@ get_rba_urls <- function(table_no, cur_hist = "current") {
   get_urls <- function(tab, table_no) {
     tab <- tab[tab$current_or_historical == cur_hist, ]
     tab$no <- tolower(tab$no)
-    # tab$url[grepl(table_no, tab$no)] no good because you get false positives with eg. a3.1
-    # tab$url[table_no == tab$no] no good because you get a warning
-    # tab$url[pmatch(table_no, tab$no)]
-    # charmatch(table_no, tab$no)
-    # grep(table_no, tab$no, fixed = T)
     tab$url[tab$no %in% table_no]
   }
 
