@@ -1,5 +1,5 @@
 ---
-output: github_document
+output: github_document 
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -13,17 +13,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-# readrba
+# readrba <img src="man/figures/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions) [![Travis build status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba) [![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions) [![Travis build status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba) [![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
 
 <!-- badges: end -->
 
 Get data from the [Reserve Bank of Australia](https://rba.gov.au/statistics/tables/) in a [tidy](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) [tibble](https://tibble.tidyverse.org). 
 
 This package is still in active development. Some aspects of its functionality are incomplete.
+
+## Disclaimer
+
+This package is not affiliated with or endorsed by the Reserve Bank of Australia. All data is provided subject to any conditions and restrictions set out on the RBA website.
 
 ## Installation
 The package is not yet on CRAN. Install from GitHub:
@@ -66,13 +70,13 @@ hist_a11 <- readrba::read_rba(table_no = "a1.1", cur_hist = "historical")
 dplyr::glimpse(hist_a11)
 ```
 
-# Data availability
+## Data availability
 
 The `read_rba()` function is able to import most tables on the [Statistical Tables](https://rba.gov.au/statistics/tables/) page of the RBA website. These are the tables that are downloaded when you use `read_rba(cur_hist = "current")`, the default. 
 
 `read_rba()` can also download many of the tables on the [Historical Data](https://rba.gov.au/statistics/historical-data.html) page of the RBA website. To get these, specify `cur_hist = "historical"` in `read_rba()`. 
 
-## Historical exchange rate tables
+### Historical exchange rate tables
 The historical exchange rate tables do not have table numbers on the RBA website. They can still be downloaded, using the following table numbers:
 
 ```{r echo=FALSE}
@@ -80,10 +84,10 @@ ex_rates <- dplyr::filter(readrba:::table_list, grepl("ex", no))
 
 ex_rates <- dplyr::select(ex_rates, `Table title` = title, `table_no` = no)
 
-knitr::kable(ex_rates, caption = "Table numbers for historical exchange rate tables")
+knitr::kable(ex_rates)
 ```
 
-## Non-standard tables
+### Non-standard tables
 `read_rba()` is currently only able to import RBA statistical tables that are formatted in a (more or less) standard way. Some are formatted in a non-standard way, either because they're distributions rather than time series, or because they're particularly old. 
 
 Tables that are **not** able to be downloaded are:
@@ -91,5 +95,11 @@ Tables that are **not** able to be downloaded are:
 ```{r echo=FALSE}
 nonreadable <- dplyr::filter(readrba:::table_list, readable == FALSE)
 nonreadable <- dplyr::select(nonreadable, `Table title` = title, table_no = no)
-knitr::kable(nonreadable, caption = "Tables not currently readable with `read_rba()`")
+knitr::kable(nonreadable )
 ```
+
+## Issues and contributions
+
+I welcome any feature requests or bug reports. The best way is to file a [GitHub issue](https://github.com/MattCowgill/readrba/issues). 
+
+I would welcome contributions to the package. Please start by filing an issue, outlining the bug you intend to fix or functionality you intend to add or modify.

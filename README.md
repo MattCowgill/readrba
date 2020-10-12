@@ -1,12 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# readrba
+# readrba <img src="man/figures/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build
 status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions)
 [![Travis build
@@ -23,6 +23,12 @@ Australia](https://rba.gov.au/statistics/tables/) in a
 
 This package is still in active development. Some aspects of its
 functionality are incomplete.
+
+## Disclaimer
+
+This package is not affiliated with or endorsed by the Reserve Bank of
+Australia. All data is provided subject to any conditions and
+restrictions set out on the RBA website.
 
 ## Installation
 
@@ -113,7 +119,7 @@ dplyr::glimpse(hist_a11)
 #> $ table_title <chr> "A1.1 RESERVE BANK OF AUSTRALIA - LIABILITIES AND ASSETS"…
 ```
 
-# Data availability
+## Data availability
 
 The `read_rba()` function is able to import most tables on the
 [Statistical Tables](https://rba.gov.au/statistics/tables/) page of the
@@ -125,7 +131,7 @@ Data](https://rba.gov.au/statistics/historical-data.html) page of the
 RBA website. To get these, specify `cur_hist = "historical"` in
 `read_rba()`.
 
-## Historical exchange rate tables
+### Historical exchange rate tables
 
 The historical exchange rate tables do not have table numbers on the RBA
 website. They can still be downloaded, using the following table
@@ -146,9 +152,7 @@ numbers:
 | Exchange Rates – Monthly – January 2010 to latest complete month of current year | ex\_monthly\_10cur |
 | Exchange Rates – Monthly – July 1969 to December 2009                            | ex\_monthly\_6909  |
 
-Table numbers for historical exchange rate tables
-
-## Non-standard tables
+### Non-standard tables
 
 `read_rba()` is currently only able to import RBA statistical tables
 that are formatted in a (more or less) standard way. Some are formatted
@@ -181,4 +185,11 @@ Tables that are **not** able to be downloaded are:
 | Indicative Mid Rates of Australian Government Securities – 2009 to 2018   | F16       |
 | Zero-coupon Interest Rates – Analytical Series – 1992 to 2008             | F17       |
 
-Tables not currently readable with `read_rba()`
+## Issues and contributions
+
+I welcome any feature requests or bug reports. The best way is to file a
+[GitHub issue](https://github.com/MattCowgill/readrba/issues).
+
+I would welcome contributions to the package. Please start by filing an
+issue, outlining the bug you intend to fix or functionality you intend
+to add or modify.
