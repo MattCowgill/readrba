@@ -8,6 +8,7 @@
 
 tidy_rba <- function(excel_sheet) {
   .table_title <- names(excel_sheet)[1]
+  .table_title <- stringr::str_to_title(.table_title)
 
   # Check if the sheet contains the expected metadata in the first column
   contains_expected_metadata <- check_if_rba_ts(excel_sheet)

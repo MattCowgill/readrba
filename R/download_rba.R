@@ -10,8 +10,6 @@
 #'
 #' @noRd
 download_rba <- function(urls, path = tempdir()) {
-  check_rba_connection()
-
   filenames <- basename(urls)
   filenames_with_path <- file.path(path, filenames)
 
@@ -36,7 +34,6 @@ download_rba <- function(urls, path = tempdir()) {
     )
     # nocov end
   }
-
 
   invisible(filenames_with_path)
 }

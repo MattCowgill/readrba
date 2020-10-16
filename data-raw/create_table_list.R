@@ -22,4 +22,25 @@ table_list <- table_list %>%
       )
   )
 
+# Create a df of all individual series
+
+current_data <- table_list %>%
+  dplyr::filter(
+    readable == TRUE,
+    current_or_historical == "current"
+  ) %>%
+  purrr::map2_dfr(
+    .x = setNames(.$no, .$no),
+    .y = .$current_or_historical,
+    .f = ~ read_rba(table_no = .x, cur_hist = .y),
+    .id = "table_no"
+  )
+
+current_series <- current_data %>%
+  dplyr::group_by(table_no, series, series_id, table_title) %>%
+  dplyr::summarise() %>%
+  dplyr::mutate(cur_hist = "current")
+
+
+
 usethis::use_data(table_list, overwrite = TRUE, internal = TRUE)
