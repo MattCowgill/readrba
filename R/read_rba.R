@@ -54,3 +54,13 @@ read_rba <- function(table_no = NULL,
 
   tidy_dfs
 }
+
+
+#' @noRd
+#' @keywords internal
+read_rba_seriesid <- function(series_id) {
+  supplied_id <- series_id
+
+  dplyr::filter(all_data, .data$series_id == supplied_id)
+
+}

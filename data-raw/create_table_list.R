@@ -3,7 +3,7 @@ library(readrba)
 # Scrape the RBA website ----
 table_list <- scrape_table_list(cur_hist = "all")
 
-# Indicate tables that can't be read----
+# Indicate tables that can't be read ----
 # Temporary; replace this with a function, then work on loading these
 # non-TS spreadsheets
 
@@ -24,23 +24,22 @@ table_list <- table_list %>%
 
 # Create a df of all individual series
 
-current_data <- table_list %>%
+all_data <- table_list %>%
   dplyr::filter(
-    readable == TRUE,
-    current_or_historical == "current"
+    readable == TRUE
   ) %>%
   purrr::map2_dfr(
     .x = setNames(.$no, .$no),
     .y = .$current_or_historical,
-    .f = ~ read_rba(table_no = .x, cur_hist = .y),
+    .f = ~ read_rba(table_no = .x, cur_hist = .y) %>% dplyr::mutate(cur_hist = .y),
     .id = "table_no"
   )
 
-current_series <- current_data %>%
-  dplyr::group_by(table_no, series, series_id, table_title) %>%
+series_list <- all_data %>%
+  dplyr::group_by(table_no, series, series_id, series_type,
+                  table_title, cur_hist, description) %>%
   dplyr::summarise() %>%
-  dplyr::mutate(cur_hist = "current")
+  dplyr::ungroup()
 
-
-
-usethis::use_data(table_list, overwrite = TRUE, internal = TRUE)
+usethis::use_data(table_list, series_list,
+                  overwrite = TRUE, internal = TRUE)
