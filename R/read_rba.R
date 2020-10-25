@@ -13,7 +13,22 @@
 #'
 read_rba <- function(table_no = NULL,
                      cur_hist = "current",
+                     series_id = NULL,
                      path = tempdir()) {
+
+  # Check inputs
+  if (is.null(table_no) & is.null(series_id)) {
+    stop("You must specify either `cat_no` or `series_id.")
+  } else if (!is.null(table_no) & !is.null(series_id)) {
+    stop("You must specify either `cat_no` or `series_id, not both.")
+  }
+
+  # If series_id supplied, figure out which tables they're in
+  if (!is.null(series_id)) {
+    table_no <- series_list$table_no[series_list$series_id %in% series_id]
+    stopifnot(length(table_no) > 0)
+  }
+
   if (cur_hist %in% c("current", "historical")) {
     urls <- get_rba_urls(
       table_no = table_no,

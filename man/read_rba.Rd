@@ -4,7 +4,12 @@
 \alias{read_rba}
 \title{Download, import, and tidy statistical tables from the RBA}
 \usage{
-read_rba(table_no = NULL, cur_hist = "current", path = tempdir())
+read_rba(
+  table_no = NULL,
+  cur_hist = "current",
+  series_id = NULL,
+  path = tempdir()
+)
 }
 \arguments{
 \item{table_no}{Table number(s) as character vector,

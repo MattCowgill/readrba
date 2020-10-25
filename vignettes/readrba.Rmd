@@ -1,0 +1,26 @@
+---
+title: "readrba"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{readrba}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The Reserve Bank of Australia publishes lots of useful [statistical tables on its website](https://rba.gov.au/statistics/tables/). The `readrba` package helps you do two things:
+
+1. Download RBA statistical tables; and
+2. Import the data into R as a tidy tibble. 
+
+
+
+```{r setup}
+library(readrba)
+```

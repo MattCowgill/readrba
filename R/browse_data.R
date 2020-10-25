@@ -26,7 +26,6 @@
 #' browse_rba_tables()
 #'
 #' @rdname browse_rba
-#'
 browse_rba_series <- function(search_string = "") {
   do_rba_browse(search_string = search_string,
                 lookup_table = series_list)
@@ -36,9 +35,7 @@ browse_rba_series <- function(search_string = "") {
 #' @rdname browse_rba
 browse_rba_tables <- function(search_string = "") {
   do_rba_browse(search_string = search_string,
-                lookup_table = table_list) %>%
-    dplyr::select(-readable)
-
+                lookup_table = table_list)
 }
 
 #' @noRd
