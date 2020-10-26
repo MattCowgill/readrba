@@ -2,6 +2,7 @@
 % Please edit documentation in R/read_rba.R
 \name{read_rba}
 \alias{read_rba}
+\alias{read_rba_seriesid}
 \title{Download, import, and tidy statistical tables from the RBA}
 \usage{
 read_rba(
@@ -10,19 +11,30 @@ read_rba(
   series_id = NULL,
   path = tempdir()
 )
+
+read_rba_seriesid(series_id, path = tempdir())
 }
 \arguments{
-\item{table_no}{Table number(s) as character vector,
-such as "A1" or c("a1.1", "g1").}
+\item{table_no}{Character vector of table number(s),
+such as \code{"A1"} or \code{c("a1.1", "g1")}.}
 
-\item{cur_hist}{Character; "current" "historical", or "all".}
+\item{cur_hist}{Character; valid values are \code{"current"} or \code{"historical"}.
 
-\item{series_id}{Optional, character. Alternative to specifying \code{table_no}.
-Supply unique RBA time series identifier(s). For example, "GCPIAG" is the identifier
-for the consumer price index. You can supply multiple series IDs as a character
-vector, such as \code{series_id = c("GCPIAG", "GCPIAGSAQP")}.}
+Must be either a vector of either length 1 (eg. "\code{cur_hist = "current"}) or
+the same length as \code{table_no} (eg. \code{cur_hist = c("current", "historical")}).}
 
-\item{path}{directory in which to save file(s); default is \code{tempdir()}}
+\item{series_id}{Optional, character. Specifying \code{series_id} is an alternative
+to specifying \code{table_no}.
+
+Supply unique RBA time series identifier(s).
+For example, "GCPIAG" is the identifier for the CPI, so \code{series_id = "GCPIAG"} will
+return this series. You can supply multiple series IDs as a character
+vector, such as \code{series_id = c("GCPIAG", "GCPIAGSAQP")}.
+
+Note that \code{cur_hist} is ignored if you specify \code{series_id} -
+both current and historical data will be included in the output.}
+
+\item{path}{Directory in which to save file(s). Default is \code{tempdir()}.}
 }
 \value{
 A single tidy tibble containing the requested table(s)
@@ -30,8 +42,33 @@ A single tidy tibble containing the requested table(s)
 \description{
 Download, import, and tidy statistical tables from the RBA
 }
+\details{
+\code{read_rba()} downloads, imports and tidies data from statistical
+tables published by the Reserve Bank of Australia. You can specify the
+requested data using the \code{table_no} or \code{series_id}.
+
+\code{read_rba_seriesid()} is a wrapper around \code{read_rba()}.
+}
 \examples{
 \dontrun{
+# Get a single table:
+read_rba(table_no = "a1.1")
+
+# Get multiple tables, combined in a tidy tibble:
 read_rba(table_no = c("a1.1", "g1"))
+
+# Get both the current and historical versions of a table
+read_rba(table_no = c("a1.1", "a1.1"), cur_hist = c("current", "historical"))
+
+# Get data based on the series ID:
+read_rba(series_id = "GCPIAG")
+
+# Or, equivalently, use:
+read_rba_seriesid("GCPIAG")
+
+# Get multiple series IDs:
+read_rba(series_id = c("GCPIAG", "GCPIAGSAQP"))
+
 }
 }
+\keyword{internal}

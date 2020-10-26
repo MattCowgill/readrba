@@ -38,5 +38,4 @@ browse_rba_tables("labour")
 
 # Or all tables
 browse_rba_tables()
-
 }
