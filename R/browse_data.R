@@ -24,18 +24,21 @@
 #'
 #' # Or all tables
 #' browse_rba_tables()
-#'
 #' @rdname browse_rba
 browse_rba_series <- function(search_string = "") {
-  do_rba_browse(search_string = search_string,
-                lookup_table = series_list)
+  do_rba_browse(
+    search_string = search_string,
+    lookup_table = series_list
+  )
 }
 
 #' @export
 #' @rdname browse_rba
 browse_rba_tables <- function(search_string = "") {
-  do_rba_browse(search_string = search_string,
-                lookup_table = table_list)
+  do_rba_browse(
+    search_string = search_string,
+    lookup_table = table_list
+  )
 }
 
 #' @noRd
@@ -47,8 +50,7 @@ do_rba_browse <- function(search_string, lookup_table) {
     lookup_table,
     row_any(dplyr::across(
       dplyr::everything(),
-      ~ grepl(search_string, ., ignore.case = T)
+      ~ grepl(search_string, ., ignore.case = TRUE)
     ))
   )
-
 }

@@ -17,6 +17,11 @@ such as "A1" or c("a1.1", "g1").}
 
 \item{cur_hist}{Character; "current" "historical", or "all".}
 
+\item{series_id}{Optional, character. Alternative to specifying \code{table_no}.
+Supply unique RBA time series identifier(s). For example, "GCPIAG" is the identifier
+for the consumer price index. You can supply multiple series IDs as a character
+vector, such as \code{series_id = c("GCPIAG", "GCPIAGSAQP")}.}
+
 \item{path}{directory in which to save file(s); default is \code{tempdir()}}
 }
 \value{

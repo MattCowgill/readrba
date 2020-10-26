@@ -111,16 +111,16 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
 
 note_readable <- function(table_list) {
   dplyr::mutate(table_list,
-      readable =
-        dplyr::case_when(
-          current_or_historical == "current" &
-            no %in% c("A5", "E3", "E4", "E5", "E6", "E7") ~ FALSE,
-          current_or_historical == "historical" &
-            no %in% c(
-              "A3", "J1", "J2", "E4", "E5", "E6", "E7",
-              "F2", "F16", "F17"
-            ) ~ FALSE,
-          TRUE ~ TRUE
-        )
-    )
+    readable =
+      dplyr::case_when(
+        .data$current_or_historical == "current" &
+          no %in% c("A5", "E3", "E4", "E5", "E6", "E7") ~ FALSE,
+        .data$current_or_historical == "historical" &
+          no %in% c(
+            "A3", "J1", "J2", "E4", "E5", "E6", "E7",
+            "F2", "F16", "F17"
+          ) ~ FALSE,
+        TRUE ~ TRUE
+      )
+  )
 }
