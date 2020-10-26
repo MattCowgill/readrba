@@ -14,12 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-The Reserve Bank of Australia publishes lots of useful [statistical tables on its website](https://rba.gov.au/statistics/tables/). The `readrba` package helps you do two things:
+The Reserve Bank of Australia publishes lots of useful [statistical tables on its website](https://rba.gov.au/statistics/tables/). The `readrba` package helps you:
 
 1. Download RBA statistical tables; and
 2. Import the data into R as a tidy tibble. 
 
-
+You can import the data
 
 ```{r setup}
 library(readrba)

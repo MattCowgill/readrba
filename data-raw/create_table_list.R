@@ -3,6 +3,12 @@ library(readrba)
 # Scrape the RBA website ----
 table_list <- scrape_table_list(cur_hist = "all")
 
+# Note: we save this internal data object and then re-load the package
+# before proceeding, so that any changes to the table list are reflected
+# in subsequent steps.
+usethis::use_data(table_list, overwrite = TRUE, internal = TRUE)
+devtools::load_all()
+
 # Create a df of all individual series
 all_data <- table_list %>%
   dplyr::filter(

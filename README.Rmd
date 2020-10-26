@@ -25,10 +25,6 @@ Get data from the [Reserve Bank of Australia](https://rba.gov.au/statistics/tabl
 
 This package is still in active development. Some aspects of its functionality are incomplete.
 
-## Disclaimer
-
-This package is not affiliated with or endorsed by the Reserve Bank of Australia. All data is provided subject to any conditions and restrictions set out on the RBA website.
-
 ## Installation
 The package is not yet on CRAN. Install from GitHub:
 
@@ -37,18 +33,19 @@ remotes::install_github("mattcowgill/readrba")
 ```
 
 ## Examples
+### Reading RBA data
 There is one main function in {readrba}: `read_rba()`.
 
 Here's how you fetch the current version of a single RBA statistical table: table G1, consumer price inflation:
 
 ```{r}
-cpi <- readrba::read_rba(table_no = "g1")
+cpi_table <- readrba::read_rba(table_no = "g1")
 ```
 
 The object returned by `read_rba()` is a tidy tibble (ie. in 'long' format):
 
 ```{r}
-dplyr::glimpse(cpi)
+dplyr::glimpse(cpi_table)
 ```
 
 You can also request multiple tables. They'll be returned together as one tidy tibble:
@@ -61,6 +58,15 @@ dplyr::glimpse(rba_data)
 unique(rba_data$table_title)
 ```
 
+You can also retrieve data based on the unique RBA time series identifier(s). For example, to getch the consumer price index series only:
+```{r}
+cpi_series <- readrba::read_rba(series_id = "GCPIAG")
+dplyr::glimpse(cpi_series)
+unique(cpi_series$series_id)
+```
+
+The convenience function `read_rba_seriesid()` is a wrapper around `read_rba()`. This means `read_rba_seriesid("GCPIAG")` is equivalent to `read_rba(series_id = "GCPIAG")`.
+
 By default, `read_rba()` fetches the current version of whatever table you request. You can specify the historical version of a table, if it's available, using the `cur_hist` argument:
 
 ```{r hist}
@@ -69,6 +75,22 @@ hist_a11 <- readrba::read_rba(table_no = "a1.1", cur_hist = "historical")
 
 dplyr::glimpse(hist_a11)
 ```
+
+### Browsing RBA data
+Two functions are provided to help you find the table number or series ID you need. These are `browse_rba_tables()` and `browse_rba_series()`. Each returns a tibble with information about the available RBA data. 
+
+```{r browse}
+readrba::browse_rba_tables()
+```
+```{r browse_series}
+readrba::browse_rba_series()
+```
+
+You can specify a search string to filter the tables or series, as in:
+```{r browse-search}
+readrba::browse_rba_tables("inflation")
+```
+
 
 ## Data availability
 
@@ -103,3 +125,7 @@ knitr::kable(nonreadable )
 I welcome any feature requests or bug reports. The best way is to file a [GitHub issue](https://github.com/MattCowgill/readrba/issues). 
 
 I would welcome contributions to the package. Please start by filing an issue, outlining the bug you intend to fix or functionality you intend to add or modify.
+
+## Disclaimer
+
+This package is not affiliated with or endorsed by the Reserve Bank of Australia. All data is provided subject to any conditions and restrictions set out on the RBA website.

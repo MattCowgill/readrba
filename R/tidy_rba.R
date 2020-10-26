@@ -10,6 +10,19 @@ tidy_rba <- function(excel_sheet) {
   .table_title <- names(excel_sheet)[1]
   .table_title <- stringr::str_to_title(.table_title)
 
+  if (.table_title == "F16 Indicative Mid Rates Of Selected Commonwealth Government Securities" &
+      excel_sheet[1, 1] == "Per cent per annum") {
+    excel_sheet <- prelim_tidy_old_f16(excel_sheet)
+  }
+
+  excel_sheet <- tidy_rba_normal(excel_sheet = excel_sheet,
+                                 .table_title = .table_title)
+
+  excel_sheet
+}
+
+
+tidy_rba_normal <- function(excel_sheet, .table_title) {
   # Check if the sheet contains the expected metadata in the first column
   contains_expected_metadata <- check_if_rba_ts(excel_sheet)
 
@@ -32,20 +45,20 @@ tidy_rba <- function(excel_sheet) {
   # Create unique column names combining title + series_id
   title_row <- as.character(excel_sheet[1, ])
   num_seriesid_row <- which(grepl("Series ID",
-    excel_sheet[[1]],
-    ignore.case = T
+                                  excel_sheet[[1]],
+                                  ignore.case = T
   ))
 
   num_desc_row <- which(grepl("Description",
-    excel_sheet[[1]],
-    ignore.case = T
+                              excel_sheet[[1]],
+                              ignore.case = T
   ))
 
   # Occasionally the RBA refers to the series ID as "mnemonic" instead
   if (length(num_seriesid_row) == 0) {
     num_seriesid_row <- which(grepl("Mnemonic",
-      excel_sheet[[1]],
-      ignore.case = T
+                                    excel_sheet[[1]],
+                                    ignore.case = T
     ))
   }
 
@@ -60,7 +73,7 @@ tidy_rba <- function(excel_sheet) {
   desc_row <- as.character(excel_sheet[num_desc_row, ])
 
   new_colnames <- paste(title_row, seriesid_row, desc_row,
-    sep = "___"
+                        sep = "___"
   )
 
   names(excel_sheet) <- new_colnames
@@ -153,5 +166,62 @@ tidy_rba <- function(excel_sheet) {
 
   excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
 
-  excel_sheet
+}
+
+#' Function to wrangle historical yields data to get it in the standard format
+#' Called indirectly from tidy_rba()
+#' @param excel_sheet Excel sheet with no tidying done
+#' @noRd
+#' @keywords internal
+
+prelim_tidy_old_f16 <- function(excel_sheet) {
+  n_col <- ncol(excel_sheet)
+
+  issue_id <- as.character(excel_sheet[3, 2:n_col])
+
+  bond_type <- dplyr::case_when(substr(issue_id, 1, 2) == "TB" ~
+                     "Treasury Bond ",
+                   substr(issue_id, 1, 2) == "TI" ~
+                     "Treasury Indexed Bond ",
+                   TRUE ~ NA_character_)
+
+  bond_num <- readr::parse_number(issue_id)
+
+  coupon <- as.character(excel_sheet[4, 2:n_col])
+  maturity <- as.character(excel_sheet[5, 2:n_col])
+  last_updated <- as.character(excel_sheet[8, 2:n_col])
+  source <- as.character(excel_sheet[9, 2:n_col])
+  mnemonic <- as.character(excel_sheet[10, 2:n_col])
+
+  new_title <- c("Title",
+                 rep("Treasury Bonds", n_col - 1))
+  new_description <- c("Description",
+                       paste0(bond_type,
+                              bond_num, "\n",
+                              readr::parse_number(coupon) * 100, "%\n",
+                              suppressWarnings(format(as.Date(as.numeric(maturity),
+                                             origin = "1899-12-30"),
+                                     "%d-%b-%Y"))))
+
+  new_description <- ifelse(grepl("NA", new_description),
+                            NA_character_,
+                            new_description)
+
+  new_frequency <- c("Frequency", rep("Daily", n_col - 1))
+  new_type <- c("Type", rep("Original", n_col - 1))
+  new_units <- c("Units", rep("Units", n_col - 1))
+  new_source <- c("Source", source)
+  new_pub_date <- c("Publication date", last_updated)
+  new_series_id <- c("Series ID", mnemonic)
+
+  new_metadata <- purrr::map(list(new_title, new_description, new_frequency, new_type,
+                                  new_units, new_source, new_pub_date, new_series_id),
+                             ~setNames(.x, paste0("V", 0:(n_col -1)))) %>%
+    dplyr::bind_rows()
+
+  names(new_metadata) <- names(excel_sheet)
+
+  new_sheet <- rbind(new_metadata, excel_sheet[-(1:10), ])
+
+  new_sheet
 }

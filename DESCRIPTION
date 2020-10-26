@@ -1,6 +1,6 @@
 Package: readrba
 Title: Download and Tidy Statistical Tables from the Reserve Bank of Australia
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person(given = "Matt",
            family = "Cowgill",
@@ -33,7 +33,8 @@ Imports:
     stringr,
     curl,
     httr,
-    lubridate
+    lubridate,
+    readr
 Depends: 
     R (>= 2.10)
 VignetteBuilder: knitr
