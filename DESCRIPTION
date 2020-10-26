@@ -29,7 +29,6 @@ Imports:
     rlang,
     xml2,
     rvest,
-    tibble,
     stringr,
     curl,
     httr,

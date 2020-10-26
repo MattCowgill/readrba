@@ -75,7 +75,7 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
     )
   }
 
-  table_list <- tibble::tibble(
+  table_list <- dplyr::tibble(
     title = excel_text,
     url = paste0("https://rba.gov.au", excel_links)
   )
