@@ -86,7 +86,7 @@ read_rba <- function(table_no = NULL,
       cur_hist = cur_hist
     )
   } else {
-    urls <- purrr::map2_chr(
+    urls <- purrr::map2(
       .x = table_no,
       .y = cur_hist,
       .f = ~ get_rba_urls(
@@ -94,6 +94,8 @@ read_rba <- function(table_no = NULL,
         cur_hist = .y
       )
     )
+
+    urls <- purrr::flatten_chr(urls)
   }
 
   readable <- table_list$readable[table_list$url %in% urls]

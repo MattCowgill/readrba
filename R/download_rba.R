@@ -20,6 +20,7 @@ download_rba <- function(urls, path = tempdir()) {
       url = urls,
       mode = "wb",
       destfile = filenames_with_path,
+      quiet = FALSE,
       method = "libcurl",
       cacheOK = FALSE
     )
@@ -29,6 +30,7 @@ download_rba <- function(urls, path = tempdir()) {
       .x = urls,
       .y = filenames,
       .f = utils::download.file,
+      quiet = FALSE,
       mode = "wb",
       cacheOK = FALSE
     )

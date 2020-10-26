@@ -127,6 +127,7 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
 
       # Sometimes dates are Excel style integers, parsed as strings, like "33450"
     } else if (!any(grepl("-", string)) & !any(grepl("/", string))) {
+      string <- ifelse(string == "NA", NA_character_, string)
       as.Date(as.numeric(string), origin = "1899-12-30")
     } else {
       NA_character_
@@ -166,6 +167,9 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
 
   excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
 
+  excel_sheet$description <- gsub("\n", " - ", excel_sheet$description, fixed = T)
+
+  excel_sheet
 }
 
 #' Function to wrangle historical yields data to get it in the standard format
@@ -185,7 +189,9 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
                      "Treasury Indexed Bond ",
                    TRUE ~ NA_character_)
 
-  bond_num <- readr::parse_number(issue_id)
+  bond_num <- ifelse(issue_id == "NA",
+                     NA_character_,
+                     substr(issue_id, 3, nchar(issue_id)))
 
   coupon <- as.character(excel_sheet[4, 2:n_col])
   maturity <- as.character(excel_sheet[5, 2:n_col])
@@ -195,13 +201,20 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 
   new_title <- c("Title",
                  rep("Treasury Bonds", n_col - 1))
+
+  excel_date_to_string <- function(x) {
+    x <- ifelse(x == "NA", NA_character_, x)
+    x <- as.numeric(x)
+    x <- as.Date(x, origin ="1899-12-30")
+    x <- format(x, "%d-%b-%Y")
+  }
+
   new_description <- c("Description",
                        paste0(bond_type,
                               bond_num, "\n",
-                              readr::parse_number(coupon) * 100, "%\n",
-                              suppressWarnings(format(as.Date(as.numeric(maturity),
-                                             origin = "1899-12-30"),
-                                     "%d-%b-%Y"))))
+                              suppressWarnings(as.numeric(coupon)) * 100, "%\n",
+                              excel_date_to_string(maturity)
+                              ))
 
   new_description <- ifelse(grepl("NA", new_description),
                             NA_character_,
