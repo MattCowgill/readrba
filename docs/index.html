@@ -39,14 +39,26 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="articles/readrba.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -75,30 +87,28 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>Get data from the <a href="https://rba.gov.au/statistics/tables/">Reserve Bank of Australia</a> in a <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">tidy</a> <a href="https://tibble.tidyverse.org">tibble</a>.</p>
+<p>Get data from the <a href="https://rba.gov.au/statistics/tables/">Reserve Bank of Australia</a> in a <a href="https://tidyr.tidyverse.org/articles/tidy-data.html">tidy</a> <a href="https://tibble.tidyverse.org">tibble</a>.</p>
 <p>This package is still in active development. Some aspects of its functionality are incomplete.</p>
-<div id="disclaimer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#disclaimer" class="anchor"></a>Disclaimer</h2>
-<p>This package is not affiliated with or endorsed by the Reserve Bank of Australia. All data is provided subject to any conditions and restrictions set out on the RBA website.</p>
-</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The package is not yet on CRAN. Install from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mattcowgill/readrba"</span><span class="op">)</span></pre></div>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"mattcowgill/readrba"</span>)</pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
+<div id="reading-rba-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#reading-rba-data" class="anchor"></a>Reading RBA data</h3>
 <p>There is one main function in {readrba}: <code><a href="reference/read_rba.html">read_rba()</a></code>.</p>
 <p>Here’s how you fetch the current version of a single RBA statistical table: table G1, consumer price inflation:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">cpi</span> <span class="op">&lt;-</span> <span class="fu">readrba</span><span class="fu">::</span><span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"g1"</span><span class="op">)</span></pre></div>
+<span class="kw">cpi_table</span> <span class="op">&lt;-</span> <span class="kw">readrba</span>::<span class="fu"><a href="reference/read_rba.html">read_rba</a></span>(table_no = <span class="st">"g1"</span>)</pre></div>
 <p>The object returned by <code><a href="reference/read_rba.html">read_rba()</a></code> is a tidy tibble (ie. in ‘long’ format):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">cpi</span><span class="op">)</span>
+<span class="kw">dplyr</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(<span class="kw">cpi_table</span>)
 <span class="co">#&gt; Rows: 3,843</span>
 <span class="co">#&gt; Columns: 11</span>
 <span class="co">#&gt; $ date        &lt;date&gt; 1922-06-01, 1922-09-01, 1922-12-01, 1923-03-01, 1923-06-…</span>
@@ -111,13 +121,13 @@
 <span class="co">#&gt; $ pub_date    &lt;date&gt; 2020-07-30, 2020-07-30, 2020-07-30, 2020-07-30, 2020-07-…</span>
 <span class="co">#&gt; $ series_id   &lt;chr&gt; "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG…</span>
 <span class="co">#&gt; $ description &lt;chr&gt; "Consumer price index; All groups", "Consumer price index…</span>
-<span class="co">#&gt; $ table_title &lt;chr&gt; "G1 CONSUMER PRICE INFLATION", "G1 CONSUMER PRICE INFLATI…</span></pre></div>
+<span class="co">#&gt; $ table_title &lt;chr&gt; "G1 Consumer Price Inflation", "G1 Consumer Price Inflati…</span></pre></div>
 <p>You can also request multiple tables. They’ll be returned together as one tidy tibble:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">rba_data</span> <span class="op">&lt;-</span> <span class="fu">readrba</span><span class="fu">::</span><span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a1"</span>, <span class="st">"g1"</span><span class="op">)</span><span class="op">)</span>
+<span class="kw">rba_data</span> <span class="op">&lt;-</span> <span class="kw">readrba</span>::<span class="fu"><a href="reference/read_rba.html">read_rba</a></span>(table_no = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a1"</span>, <span class="st">"g1"</span>))
 
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">rba_data</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 17,603</span>
+<span class="kw">dplyr</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(<span class="kw">rba_data</span>)
+<span class="co">#&gt; Rows: 17,623</span>
 <span class="co">#&gt; Columns: 11</span>
 <span class="co">#&gt; $ date        &lt;date&gt; 1994-06-01, 1994-06-08, 1994-06-15, 1994-06-22, 1994-06-…</span>
 <span class="co">#&gt; $ series      &lt;chr&gt; "Australian dollar investments", "Australian dollar inves…</span>
@@ -126,20 +136,40 @@
 <span class="co">#&gt; $ series_type &lt;chr&gt; "Original", "Original", "Original", "Original", "Original…</span>
 <span class="co">#&gt; $ units       &lt;chr&gt; "$ million", "$ million", "$ million", "$ million", "$ mi…</span>
 <span class="co">#&gt; $ source      &lt;chr&gt; "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "…</span>
-<span class="co">#&gt; $ pub_date    &lt;date&gt; 2020-10-09, 2020-10-09, 2020-10-09, 2020-10-09, 2020-10-…</span>
+<span class="co">#&gt; $ pub_date    &lt;date&gt; 2020-10-23, 2020-10-23, 2020-10-23, 2020-10-23, 2020-10-…</span>
 <span class="co">#&gt; $ series_id   &lt;chr&gt; "ARBAAASTW", "ARBAAASTW", "ARBAAASTW", "ARBAAASTW", "ARBA…</span>
 <span class="co">#&gt; $ description &lt;chr&gt; "Australian dollar investments", "Australian dollar inves…</span>
-<span class="co">#&gt; $ table_title &lt;chr&gt; "A1 RESERVE BANK OF AUSTRALIA - LIABILITIES AND ASSETS - …</span>
+<span class="co">#&gt; $ table_title &lt;chr&gt; "A1 Reserve Bank Of Australia - Liabilities And Assets - …</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">rba_data</span><span class="op">$</span><span class="va">table_title</span><span class="op">)</span>
-<span class="co">#&gt; [1] "A1 RESERVE BANK OF AUSTRALIA - LIABILITIES AND ASSETS - SUMMARY"</span>
-<span class="co">#&gt; [2] "G1 CONSUMER PRICE INFLATION"</span></pre></div>
-<p>By default, <code><a href="reference/read_rba.html">read_rba()</a></code> fetches the current version of whatever table you request. You can specify the historical version of a table, if it’s available, using the <code>cur_hist</code> argument:</p>
+<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="kw">rba_data</span><span class="op">$</span><span class="kw">table_title</span>)
+<span class="co">#&gt; [1] "A1 Reserve Bank Of Australia - Liabilities And Assets - Summary"</span>
+<span class="co">#&gt; [2] "G1 Consumer Price Inflation"</span></pre></div>
+<p>You can also retrieve data based on the unique RBA time series identifier(s). For example, to getch the consumer price index series only:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">cpi_series</span> <span class="op">&lt;-</span> <span class="kw">readrba</span>::<span class="fu"><a href="reference/read_rba.html">read_rba</a></span>(series_id = <span class="st">"GCPIAG"</span>)
+<span class="kw">dplyr</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(<span class="kw">cpi_series</span>)
+<span class="co">#&gt; Rows: 393</span>
+<span class="co">#&gt; Columns: 11</span>
+<span class="co">#&gt; $ date        &lt;date&gt; 1922-06-01, 1922-09-01, 1922-12-01, 1923-03-01, 1923-06-…</span>
+<span class="co">#&gt; $ series      &lt;chr&gt; "Consumer price index", "Consumer price index", "Consumer…</span>
+<span class="co">#&gt; $ value       &lt;dbl&gt; 2.8, 2.8, 2.7, 2.7, 2.8, 2.9, 2.9, 2.8, 2.8, 2.8, 2.8, 2.…</span>
+<span class="co">#&gt; $ frequency   &lt;chr&gt; "Quarterly", "Quarterly", "Quarterly", "Quarterly", "Quar…</span>
+<span class="co">#&gt; $ series_type &lt;chr&gt; "Original", "Original", "Original", "Original", "Original…</span>
+<span class="co">#&gt; $ units       &lt;chr&gt; "Index, 2011/12=100", "Index, 2011/12=100", "Index, 2011/…</span>
+<span class="co">#&gt; $ source      &lt;chr&gt; "ABS / RBA", "ABS / RBA", "ABS / RBA", "ABS / RBA", "ABS …</span>
+<span class="co">#&gt; $ pub_date    &lt;date&gt; 2020-07-30, 2020-07-30, 2020-07-30, 2020-07-30, 2020-07-…</span>
+<span class="co">#&gt; $ series_id   &lt;chr&gt; "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG", "GCPIAG…</span>
+<span class="co">#&gt; $ description &lt;chr&gt; "Consumer price index; All groups", "Consumer price index…</span>
+<span class="co">#&gt; $ table_title &lt;chr&gt; "G1 Consumer Price Inflation", "G1 Consumer Price Inflati…</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="kw">cpi_series</span><span class="op">$</span><span class="kw">series_id</span>)
+<span class="co">#&gt; [1] "GCPIAG"</span></pre></div>
+<p>The convenience function <code><a href="reference/read_rba.html">read_rba_seriesid()</a></code> is a wrapper around <code><a href="reference/read_rba.html">read_rba()</a></code>. This means <code><a href="reference/read_rba.html">read_rba_seriesid("GCPIAG")</a></code> is equivalent to <code><a href="reference/read_rba.html">read_rba(series_id = "GCPIAG")</a></code>.</p>
+<p>By default, <code><a href="reference/read_rba.html">read_rba()</a></code> fetches the current version of whatever table you request. You can specify the historical version of a table, if it’s available, using the <code>cur_hist</code> argument:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
 
-<span class="va">hist_a11</span> <span class="op">&lt;-</span> <span class="fu">readrba</span><span class="fu">::</span><span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"a1.1"</span>, cur_hist <span class="op">=</span> <span class="st">"historical"</span><span class="op">)</span>
+<span class="kw">hist_a11</span> <span class="op">&lt;-</span> <span class="kw">readrba</span>::<span class="fu"><a href="reference/read_rba.html">read_rba</a></span>(table_no = <span class="st">"a1.1"</span>, cur_hist = <span class="st">"historical"</span>)
 
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">hist_a11</span><span class="op">)</span>
+<span class="kw">dplyr</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(<span class="kw">hist_a11</span>)
 <span class="co">#&gt; Rows: 8,889</span>
 <span class="co">#&gt; Columns: 11</span>
 <span class="co">#&gt; $ date        &lt;date&gt; 1977-07-31, 1977-08-31, 1977-09-30, 1977-10-31, 1977-11-…</span>
@@ -152,7 +182,54 @@
 <span class="co">#&gt; $ pub_date    &lt;date&gt; 2015-06-26, 2015-06-26, 2015-06-26, 2015-06-26, 2015-06-…</span>
 <span class="co">#&gt; $ series_id   &lt;chr&gt; "ARBALDOGIAG", "ARBALDOGIAG", "ARBALDOGIAG", "ARBALDOGIAG…</span>
 <span class="co">#&gt; $ description &lt;chr&gt; "Australian Government Deposits", "Australian Government …</span>
-<span class="co">#&gt; $ table_title &lt;chr&gt; "A1.1 RESERVE BANK OF AUSTRALIA - LIABILITIES AND ASSETS"…</span></pre></div>
+<span class="co">#&gt; $ table_title &lt;chr&gt; "A1.1 Reserve Bank Of Australia - Liabilities And Assets"…</span></pre></div>
+</div>
+<div id="browsing-rba-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#browsing-rba-data" class="anchor"></a>Browsing RBA data</h3>
+<p>Two functions are provided to help you find the table number or series ID you need. These are <code><a href="reference/browse_rba_series.html">browse_rba_tables()</a></code> and <code><a href="reference/browse_rba_series.html">browse_rba_series()</a></code>. Each returns a tibble with information about the available RBA data.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">readrba</span>::<span class="fu"><a href="reference/browse_rba_series.html">browse_rba_tables</a></span>()
+<span class="co">#&gt; # A tibble: 123 x 5</span>
+<span class="co">#&gt;    title                   no    url                  current_or_histo… readable</span>
+<span class="co">#&gt;    &lt;chr&gt;                   &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt;             &lt;lgl&gt;   </span>
+<span class="co">#&gt;  1 Liabilities and Assets… A1    https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt;  2 Liabilities and Assets… A1.1  https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt;  3 Monetary Policy Changes A2    https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt;  4 Monetary Policy Operat… A3    https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt;  5 Holdings of Australian… A3.1  https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt;  6 Foreign Exchange Trans… A4    https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt;  7 Daily Foreign Exchange… A5    https://rba.gov.au/… current           FALSE   </span>
+<span class="co">#&gt;  8 Banknotes on Issue by … A6    https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt;  9 Detected Australian Co… A7    https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt; 10 Assets of Financial In… B1    https://rba.gov.au/… current           TRUE    </span>
+<span class="co">#&gt; # … with 113 more rows</span></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">readrba</span>::<span class="fu"><a href="reference/browse_rba_series.html">browse_rba_series</a></span>()
+<span class="co">#&gt; # A tibble: 4,236 x 7</span>
+<span class="co">#&gt;    table_no series   series_id series_type table_title    cur_hist description  </span>
+<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;        </span>
+<span class="co">#&gt;  1 A1       Austral… ARBAAASTW Original    A1 Reserve Ba… current  Australian d…</span>
+<span class="co">#&gt;  2 A1       Capital… ARBALCRFW Original    A1 Reserve Ba… current  Capital and …</span>
+<span class="co">#&gt;  3 A1       Deposit… ARBALDEPW Original    A1 Reserve Ba… current  Deposits (ex…</span>
+<span class="co">#&gt;  4 A1       Exchang… ARBALESBW Original    A1 Reserve Ba… current  Exchange set…</span>
+<span class="co">#&gt;  5 A1       Gold an… ARBAAGFXW Original    A1 Reserve Ba… current  Gold and for…</span>
+<span class="co">#&gt;  6 A1       Notes o… ARBALNOIW Original    A1 Reserve Ba… current  Notes on iss…</span>
+<span class="co">#&gt;  7 A1       Other a… ARBAAOAW  Original    A1 Reserve Ba… current  Other assets…</span>
+<span class="co">#&gt;  8 A1       Other l… ARBALOLW  Original    A1 Reserve Ba… current  Other liabil…</span>
+<span class="co">#&gt;  9 A1       Total a… ARBAATAW  Original    A1 Reserve Ba… current  Total RBA as…</span>
+<span class="co">#&gt; 10 A1       Total l… ARBALTLW  Original    A1 Reserve Ba… current  Total RBA li…</span>
+<span class="co">#&gt; # … with 4,226 more rows</span></pre></div>
+<p>You can specify a search string to filter the tables or series, as in:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">readrba</span>::<span class="fu"><a href="reference/browse_rba_series.html">browse_rba_tables</a></span>(<span class="st">"inflation"</span>)
+<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt;   title                 no    url                     current_or_histo… readable</span>
+<span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt;                   &lt;chr&gt;             &lt;lgl&gt;   </span>
+<span class="co">#&gt; 1 Consumer Price Infla… G1    https://rba.gov.au/sta… current           TRUE    </span>
+<span class="co">#&gt; 2 Consumer Price Infla… G2    https://rba.gov.au/sta… current           TRUE    </span>
+<span class="co">#&gt; 3 Inflation Expectatio… G3    https://rba.gov.au/sta… current           TRUE</span></pre></div>
+</div>
 </div>
 <div id="data-availability" class="section level2">
 <h2 class="hasAnchor">
@@ -312,14 +389,6 @@
 <td align="left">F2</td>
 </tr>
 <tr class="odd">
-<td align="left">Indicative Mid Rates of Australian Government Securities – 1992 to 2008</td>
-<td align="left">F16</td>
-</tr>
-<tr class="even">
-<td align="left">Indicative Mid Rates of Australian Government Securities – 2009 to 2018</td>
-<td align="left">F16</td>
-</tr>
-<tr class="odd">
 <td align="left">Zero-coupon Interest Rates – Analytical Series – 1992 to 2008</td>
 <td align="left">F17</td>
 </tr>
@@ -332,6 +401,11 @@
 <a href="#issues-and-contributions" class="anchor"></a>Issues and contributions</h2>
 <p>I welcome any feature requests or bug reports. The best way is to file a <a href="https://github.com/MattCowgill/readrba/issues">GitHub issue</a>.</p>
 <p>I would welcome contributions to the package. Please start by filing an issue, outlining the bug you intend to fix or functionality you intend to add or modify.</p>
+</div>
+<div id="disclaimer" class="section level2">
+<h2 class="hasAnchor">
+<a href="#disclaimer" class="anchor"></a>Disclaimer</h2>
+<p>This package is not affiliated with or endorsed by the Reserve Bank of Australia. All data is provided subject to any conditions and restrictions set out on the RBA website.</p>
 </div>
 </div>
   </div>
@@ -378,7 +452,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>
