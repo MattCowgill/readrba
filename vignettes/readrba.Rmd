@@ -3,8 +3,10 @@ title: "readrba"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{readrba}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -19,8 +21,48 @@ The Reserve Bank of Australia publishes lots of useful [statistical tables on it
 1. Download RBA statistical tables; and
 2. Import the data into R as a tidy tibble. 
 
-You can import the data
+You can import the data using either the table number or the series ID. 
 
-```{r setup}
+
+
+```{r setup, results=FALSE, message=FALSE, warning=FALSE}
 library(readrba)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+
+```
+
+Let's start off by visualising the yield on a 10 year Australian Government bond over time. 
+
+
+```{r 10year}
+read_rba_seriesid("FCMYGBAG10D")
+```
+
+
+```{r yield-curve}
+# yields <- read_rba(c("f16", "f16"), c("current", "historical"))
+# 
+# 
+# yields <- yields %>%
+#   separate(description,
+#            into = c("bond_num",
+#                     "coupon",
+#                     "maturity"),
+#            sep = " - ")
+# 
+# 
+# yields <- yields %>%
+#   mutate(maturity = lubridate::dmy((maturity)))
+# 
+# 
+# static_plot <- yields %>%
+#   ggplot(aes(x = maturity, y = value, col = factor(date))) +
+#   geom_line()
+
+# library(gganimate)
+# static_plot +
+#   transition_states(date)
+
 ```

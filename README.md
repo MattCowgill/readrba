@@ -18,7 +18,7 @@ coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.sv
 
 Get data from the [Reserve Bank of
 Australia](https://rba.gov.au/statistics/tables/) in a
-[tidy](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
+[tidy](https://tidyr.tidyverse.org/articles/tidy-data.html)
 [tibble](https://tibble.tidyverse.org).
 
 This package is still in active development. Some aspects of its
@@ -147,7 +147,7 @@ dplyr::glimpse(hist_a11)
 
 Two functions are provided to help you find the table number or series
 ID you need. These are `browse_rba_tables()` and `browse_rba_series()`.
-Each returns a tibble with information about the available RBA data:
+Each returns a tibble with information about the available RBA data.
 
 ``` r
 readrba::browse_rba_tables()
@@ -165,6 +165,36 @@ readrba::browse_rba_tables()
 #>  9 Detected Australian Co… A7    https://rba.gov.au/… current           TRUE    
 #> 10 Assets of Financial In… B1    https://rba.gov.au/… current           TRUE    
 #> # … with 113 more rows
+```
+
+``` r
+readrba::browse_rba_series()
+#> # A tibble: 4,236 x 7
+#>    table_no series   series_id series_type table_title    cur_hist description  
+#>    <chr>    <chr>    <chr>     <chr>       <chr>          <chr>    <chr>        
+#>  1 A1       Austral… ARBAAASTW Original    A1 Reserve Ba… current  Australian d…
+#>  2 A1       Capital… ARBALCRFW Original    A1 Reserve Ba… current  Capital and …
+#>  3 A1       Deposit… ARBALDEPW Original    A1 Reserve Ba… current  Deposits (ex…
+#>  4 A1       Exchang… ARBALESBW Original    A1 Reserve Ba… current  Exchange set…
+#>  5 A1       Gold an… ARBAAGFXW Original    A1 Reserve Ba… current  Gold and for…
+#>  6 A1       Notes o… ARBALNOIW Original    A1 Reserve Ba… current  Notes on iss…
+#>  7 A1       Other a… ARBAAOAW  Original    A1 Reserve Ba… current  Other assets…
+#>  8 A1       Other l… ARBALOLW  Original    A1 Reserve Ba… current  Other liabil…
+#>  9 A1       Total a… ARBAATAW  Original    A1 Reserve Ba… current  Total RBA as…
+#> 10 A1       Total l… ARBALTLW  Original    A1 Reserve Ba… current  Total RBA li…
+#> # … with 4,226 more rows
+```
+
+You can specify a search string to filter the tables or series, as in:
+
+``` r
+readrba::browse_rba_tables("inflation")
+#> # A tibble: 3 x 5
+#>   title                 no    url                     current_or_histo… readable
+#>   <chr>                 <chr> <chr>                   <chr>             <lgl>   
+#> 1 Consumer Price Infla… G1    https://rba.gov.au/sta… current           TRUE    
+#> 2 Consumer Price Infla… G2    https://rba.gov.au/sta… current           TRUE    
+#> 3 Inflation Expectatio… G3    https://rba.gov.au/sta… current           TRUE
 ```
 
 ## Data availability
@@ -229,8 +259,6 @@ Tables that are **not** able to be downloaded are:
 | Treasury Capital Indexed Bonds – 1985–2006                                | E7        |
 | Capital Market Yields – Government Bonds – Daily – 1995 to 17 May 2013    | F2        |
 | Capital Market Yields – Government Bonds – Monthly – 1969 to May 2013     | F2        |
-| Indicative Mid Rates of Australian Government Securities – 1992 to 2008   | F16       |
-| Indicative Mid Rates of Australian Government Securities – 2009 to 2018   | F16       |
 | Zero-coupon Interest Rates – Analytical Series – 1992 to 2008             | F17       |
 
 ## Issues and contributions

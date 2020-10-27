@@ -44,7 +44,6 @@
 #'
 #' # Get multiple series IDs:
 #' read_rba(series_id = c("GCPIAG", "GCPIAGSAQP"))
-#'
 #' }
 #' @export
 #' @rdname read_rba
@@ -55,7 +54,7 @@ read_rba <- function(table_no = NULL,
                      path = tempdir()) {
 
   # Users must specify table_no OR series_id
-  if (is.null(table_no) & is.null(series_id)) {
+  if (is.null(table_no) && is.null(series_id)) {
     stop("You must specify either `cat_no` or `series_id.")
   } else if (!is.null(table_no) & !is.null(series_id)) {
     stop("You must specify either `cat_no` or `series_id, not both.")
@@ -131,8 +130,10 @@ read_rba <- function(table_no = NULL,
 #' @rdname read_rba
 #' @keywords internal
 read_rba_seriesid <- function(series_id, path = tempdir()) {
-  read_rba(series_id = series_id,
-           path = path)
+  read_rba(
+    series_id = series_id,
+    path = path
+  )
 }
 
 #' Given series ID(s), find the corresponding table number(s)

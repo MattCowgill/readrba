@@ -13,8 +13,10 @@ test_that("browse_rba functions work", {
   expect_length(tabs, 5)
   expect_gt(nrow(tabs), 100)
 
-  expect_identical(unique(tabs$current_or_historical),
-                   c("current", "historical"))
+  expect_identical(
+    unique(tabs$current_or_historical),
+    c("current", "historical")
+  )
 
   cpi <- browse_rba_tables("consumer price")
   expect_gt(nrow(cpi), 1)

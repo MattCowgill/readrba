@@ -68,7 +68,6 @@ read_rba_seriesid("GCPIAG")
 
 # Get multiple series IDs:
 read_rba(series_id = c("GCPIAG", "GCPIAGSAQP"))
-
 }
 }
 \keyword{internal}

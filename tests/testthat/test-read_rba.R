@@ -76,12 +76,16 @@ check_df <- function(df) {
 }
 
 test_that("multiple tables work", {
+  skip_if_offline()
+  skip_on_cran()
   cur <- read_rba(table_no = "a1.1", cur_hist = "current")
   his <- read_rba(table_no = "a1.1", cur_hist = "historical")
   both <- read_rba(table_no = c("a1.1", "a1.1"), cur_hist = c("current", "historical"))
 
-  expect_identical(dplyr::bind_rows(cur, his),
-                   both)
+  expect_identical(
+    dplyr::bind_rows(cur, his),
+    both
+  )
 
   expect_true(check_df(both))
 })
@@ -118,4 +122,3 @@ test_that("historical tables work", {
     ))
   )
 })
-

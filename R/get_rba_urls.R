@@ -30,7 +30,7 @@ get_rba_urls <- function(table_no, cur_hist = "current") {
 
   urls_work <- url_exists(urls)
 
-  if (any(is.na(urls)) | any(urls_work == FALSE)) {
+  if (any(is.na(urls)) || any(urls_work == FALSE)) {
     # Re-scrape the list of URLs if some cannot be matched
     new_table_list <- scrape_table_list(cur_hist)
     urls <- get_urls(new_table_list, table_no)

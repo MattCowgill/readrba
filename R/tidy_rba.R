@@ -10,13 +10,20 @@ tidy_rba <- function(excel_sheet) {
   .table_title <- names(excel_sheet)[1]
   .table_title <- stringr::str_to_title(.table_title)
 
-  if (.table_title == "F16 Indicative Mid Rates Of Selected Commonwealth Government Securities" &
-      excel_sheet[1, 1] == "Per cent per annum") {
+  if (.table_title == "F16 Indicative Mid Rates Of Selected Commonwealth Government Securities" &&
+    excel_sheet[1, 1] == "Per cent per annum") {
     excel_sheet <- prelim_tidy_old_f16(excel_sheet)
   }
 
-  excel_sheet <- tidy_rba_normal(excel_sheet = excel_sheet,
-                                 .table_title = .table_title)
+  if (.table_title == "F2  Capital Market Yields - Government Bonds" &&
+      excel_sheet[1,1] == "Per cent per annum") {
+    excel_sheet <- prelim_tidy_old_f2(excel_sheet)
+  }
+
+  excel_sheet <- tidy_rba_normal(
+    excel_sheet = excel_sheet,
+    .table_title = .table_title
+  )
 
   excel_sheet
 }
@@ -45,20 +52,20 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   # Create unique column names combining title + series_id
   title_row <- as.character(excel_sheet[1, ])
   num_seriesid_row <- which(grepl("Series ID",
-                                  excel_sheet[[1]],
-                                  ignore.case = T
+    excel_sheet[[1]],
+    ignore.case = T
   ))
 
   num_desc_row <- which(grepl("Description",
-                              excel_sheet[[1]],
-                              ignore.case = T
+    excel_sheet[[1]],
+    ignore.case = T
   ))
 
   # Occasionally the RBA refers to the series ID as "mnemonic" instead
   if (length(num_seriesid_row) == 0) {
     num_seriesid_row <- which(grepl("Mnemonic",
-                                    excel_sheet[[1]],
-                                    ignore.case = T
+      excel_sheet[[1]],
+      ignore.case = T
     ))
   }
 
@@ -73,7 +80,7 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   desc_row <- as.character(excel_sheet[num_desc_row, ])
 
   new_colnames <- paste(title_row, seriesid_row, desc_row,
-                        sep = "___"
+    sep = "___"
   )
 
   names(excel_sheet) <- new_colnames
@@ -183,15 +190,18 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 
   issue_id <- as.character(excel_sheet[3, 2:n_col])
 
-  bond_type <- dplyr::case_when(substr(issue_id, 1, 2) == "TB" ~
-                     "Treasury Bond ",
-                   substr(issue_id, 1, 2) == "TI" ~
-                     "Treasury Indexed Bond ",
-                   TRUE ~ NA_character_)
+  bond_type <- dplyr::case_when(
+    substr(issue_id, 1, 2) == "TB" ~
+    "Treasury Bond ",
+    substr(issue_id, 1, 2) == "TI" ~
+    "Treasury Indexed Bond ",
+    TRUE ~ NA_character_
+  )
 
   bond_num <- ifelse(issue_id == "NA",
-                     NA_character_,
-                     substr(issue_id, 3, nchar(issue_id)))
+    NA_character_,
+    substr(issue_id, 3, nchar(issue_id))
+  )
 
   coupon <- as.character(excel_sheet[4, 2:n_col])
   maturity <- as.character(excel_sheet[5, 2:n_col])
@@ -199,26 +209,32 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
   source <- as.character(excel_sheet[9, 2:n_col])
   mnemonic <- as.character(excel_sheet[10, 2:n_col])
 
-  new_title <- c("Title",
-                 rep("Treasury Bonds", n_col - 1))
+  new_title <- c(
+    "Title",
+    rep("Treasury Bonds", n_col - 1)
+  )
 
   excel_date_to_string <- function(x) {
     x <- ifelse(x == "NA", NA_character_, x)
     x <- as.numeric(x)
-    x <- as.Date(x, origin ="1899-12-30")
+    x <- as.Date(x, origin = "1899-12-30")
     x <- format(x, "%d-%b-%Y")
   }
 
-  new_description <- c("Description",
-                       paste0(bond_type,
-                              bond_num, "\n",
-                              suppressWarnings(as.numeric(coupon)) * 100, "%\n",
-                              excel_date_to_string(maturity)
-                              ))
+  new_description <- c(
+    "Description",
+    paste0(
+      bond_type,
+      bond_num, "\n",
+      suppressWarnings(as.numeric(coupon)) * 100, "%\n",
+      excel_date_to_string(maturity)
+    )
+  )
 
   new_description <- ifelse(grepl("NA", new_description),
-                            NA_character_,
-                            new_description)
+    NA_character_,
+    new_description
+  )
 
   new_frequency <- c("Frequency", rep("Daily", n_col - 1))
   new_type <- c("Type", rep("Original", n_col - 1))
@@ -227,9 +243,75 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
   new_pub_date <- c("Publication date", last_updated)
   new_series_id <- c("Series ID", mnemonic)
 
-  new_metadata <- purrr::map(list(new_title, new_description, new_frequency, new_type,
-                                  new_units, new_source, new_pub_date, new_series_id),
-                             ~setNames(.x, paste0("V", 0:(n_col -1)))) %>%
+  new_metadata <- purrr::map(
+    list(
+      new_title, new_description, new_frequency, new_type,
+      new_units, new_source, new_pub_date, new_series_id
+    ),
+    ~ setNames(.x, paste0("V", 0:(n_col - 1)))
+  ) %>%
+    dplyr::bind_rows()
+
+  names(new_metadata) <- names(excel_sheet)
+
+  new_sheet <- rbind(new_metadata, excel_sheet[-(1:10), ])
+
+  new_sheet
+}
+
+prelim_tidy_old_f2 <- function(excel_sheet) {
+
+  # fill_blank() adapted from {zoo} - note that this version removes leading NAs
+  fill_blanks <- function(x) {
+    L <- !is.na(x)
+    c(x[L])[cumsum(L)]
+  }
+
+  issuer <- as.character(excel_sheet[3, ])
+  issuer <- fill_blanks(issuer)
+
+  maturity <- as.character(excel_sheet[4, ])
+  maturity <- maturity[!is.na(maturity)]
+  maturity <- gsub(" yrs", " years", maturity)
+
+  title <- paste(issuer, maturity, "bond", sep = " ")
+  title <- gsub("years", "year", title)
+  new_title <- c("Title", title)
+
+  description <- paste("Yields on", issuer, "bonds,
+                       interpolated,", maturity, "maturity",
+                       sep = " ")
+  new_description <- c("Description", description)
+
+  n_rows <- nrow(excel_sheet)
+  n_col <- ncol(excel_sheet)
+  max_date <- as.Date(as.numeric(excel_sheet[n_rows, 1]), origin = "1899-12-30")
+  min_date <- as.Date(as.numeric(excel_sheet[11, 1]), origin = "1899-12-30")
+  approx_days_per_row <- trunc(as.numeric(max_date - min_date) / n_rows)
+
+  frequency <- ifelse(approx_days_per_row == 1, "Daily", "Monthly")
+  new_frequency <- c("Frequency", rep(frequency, n_col - 1))
+
+  new_type <- c("Type", rep("Original", n_col - 1))
+
+  new_units <- c("Units", rep("Per cent per annum", n_col - 1))
+
+  new_source <- as.character(excel_sheet[9, ])
+
+  pub_date <- as.character(excel_sheet[8, ])
+  new_pub_date <- gsub("Last updated:", "Publish date", pub_date)
+
+  series_id <- as.character(excel_sheet[10, ])
+  new_series_id <- gsub("Mnemonic", "Series ID", series_id)
+
+  new_metadata <- purrr::map(
+    list(
+      new_title, new_description, new_frequency, new_type,
+      new_units, new_source, new_pub_date, new_series_id
+    ),
+    ~ setNames(.x, paste0("V", 0:(n_col - 1))
+               )
+  ) %>%
     dplyr::bind_rows()
 
   names(new_metadata) <- names(excel_sheet)
