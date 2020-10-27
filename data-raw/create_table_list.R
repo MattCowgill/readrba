@@ -24,10 +24,11 @@ all_data <- table_list %>%
 series_list <- all_data %>%
   dplyr::group_by(
     table_no, series, series_id, series_type,
-    table_title, cur_hist, description
+    table_title, cur_hist, description, frequency
   ) %>%
   dplyr::summarise() %>%
-  dplyr::ungroup()
+  dplyr::ungroup() %>%
+  dplyr::distinct()
 
 usethis::use_data(table_list, series_list,
   overwrite = TRUE, internal = TRUE

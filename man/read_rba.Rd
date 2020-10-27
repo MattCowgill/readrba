@@ -70,4 +70,3 @@ read_rba_seriesid("GCPIAG")
 read_rba(series_id = c("GCPIAG", "GCPIAGSAQP"))
 }
 }
-\keyword{internal}

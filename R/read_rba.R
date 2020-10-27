@@ -128,7 +128,7 @@ read_rba <- function(table_no = NULL,
 
 
 #' @rdname read_rba
-#' @keywords internal
+#' @export
 read_rba_seriesid <- function(series_id, path = tempdir()) {
   read_rba(
     series_id = series_id,

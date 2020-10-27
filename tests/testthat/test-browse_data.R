@@ -2,7 +2,7 @@ test_that("browse_rba functions work", {
   # Unfiltered series
   expect_is(browse_rba_series(), "tbl_df")
   expect_gt(nrow(browse_rba_series()), 4000)
-  expect_equal(length(browse_rba_series()), 7)
+  expect_length(browse_rba_series(), 8)
 
   # Filtered series
   expect_lt(nrow(browse_rba_series("inflation")), 100)

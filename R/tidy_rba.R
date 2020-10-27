@@ -9,13 +9,15 @@
 tidy_rba <- function(excel_sheet) {
   .table_title <- names(excel_sheet)[1]
   .table_title <- stringr::str_to_title(.table_title)
+  .table_title <- stringr::str_squish(.table_title)
+  .table_title <- gsub(" \u2013 ", " - ", .table_title)
 
   if (.table_title == "F16 Indicative Mid Rates Of Selected Commonwealth Government Securities" &&
     excel_sheet[1, 1] == "Per cent per annum") {
     excel_sheet <- prelim_tidy_old_f16(excel_sheet)
   }
 
-  if (.table_title == "F2  Capital Market Yields - Government Bonds" &&
+  if (.table_title == "F2 Capital Market Yields - Government Bonds" &&
       excel_sheet[1,1] == "Per cent per annum") {
     excel_sheet <- prelim_tidy_old_f2(excel_sheet)
   }
@@ -176,6 +178,11 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
 
   excel_sheet$description <- gsub("\n", " - ", excel_sheet$description, fixed = T)
 
+  excel_sheet <- excel_sheet %>%
+    dplyr::mutate(dplyr::across(c(.data$series, .data$description),
+                  ~gsub("Commonwealth Government|Australian government", "Australian Government", ., ignore.case = T))
+    )
+
   excel_sheet
 }
 
@@ -269,6 +276,8 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
 
   issuer <- as.character(excel_sheet[3, ])
   issuer <- fill_blanks(issuer)
+  issuer <- gsub("Australian Government", "Commonwealth Government", issuer,
+                 fixed = T)
 
   maturity <- as.character(excel_sheet[4, ])
   maturity <- maturity[!is.na(maturity)]
@@ -278,8 +287,9 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
   title <- gsub("years", "year", title)
   new_title <- c("Title", title)
 
-  description <- paste("Yields on", issuer, "bonds,
-                       interpolated,", maturity, "maturity",
+  description <- paste("Yields on",
+                       issuer, "bonds,",
+                       maturity, "maturity",
                        sep = " ")
   new_description <- c("Description", description)
 
