@@ -180,8 +180,10 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
 
   excel_sheet <- excel_sheet %>%
     dplyr::mutate(dplyr::across(c(.data$series, .data$description),
-                  ~gsub("Commonwealth Government|Australian government", "Australian Government", ., ignore.case = T))
-    )
+                  ~gsub("Commonwealth Government|Australian government", "Australian Government", ., ignore.case = T)),
+                  dplyr::across(c(.data$series, .data$description),
+                                stringr::str_squish)) %>%
+    dplyr::arrange(excel_sheet, .data$series, .data$date)
 
   excel_sheet
 }
@@ -199,9 +201,9 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 
   bond_type <- dplyr::case_when(
     substr(issue_id, 1, 2) == "TB" ~
-    "Treasury Bond ",
+    "Treasury Bonds ",
     substr(issue_id, 1, 2) == "TI" ~
-    "Treasury Indexed Bond ",
+    "Treasury Indexed Bonds ",
     TRUE ~ NA_character_
   )
 
@@ -218,7 +220,7 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 
   new_title <- c(
     "Title",
-    rep("Treasury Bonds", n_col - 1)
+    bond_type
   )
 
   excel_date_to_string <- function(x) {

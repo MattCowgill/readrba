@@ -21,7 +21,8 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    ggplot2
+    ggplot2,
+    gganimate
 Imports: 
     readxl,
     tidyr (>= 1.0.0),

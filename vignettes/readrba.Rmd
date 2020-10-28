@@ -33,7 +33,7 @@ library(readrba)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
-
+library(lubridate)
 ```
 ### Example: Individual series - 10-year bond yield
 Let's start off by visualising the yield on a 10 year Australian Government bond over time. 
@@ -80,7 +80,7 @@ bond_yield %>%
 
 That's a bit normcore-basic ggplot, but not bad. With a few lines of code, we've got an up-to-date graph of the 10 year bond yield.
 
-### Example: Multiple series from a table - 3, 5 and 10 year bond yields
+### Example: Multiple series from a table - 2, 3, 5 and 10 year bond yields
 Now we'll have a look at another example, this time using multiple data series from the one table. I want to make a graph of Australian Government bond yields at different maturities, over time. This time I'll confine myself to the recent data, at daily frequency. 
 
 ```{r yieldbrowse, eval=FALSE}
@@ -122,31 +122,82 @@ filtered_f2 %>%
 
 ```
 
-Nice! Again, normcore aesthetics aside, we've got a decent plot with a few lines of code.
+Nice! Again, normcore aesthetics aside, we've got a decent plot with a few lines of code. Using the same data, we can have a look at the spread between the yield on 10 year and 2 year bonds, as a rough measure of the slope of (a portion of) the yield curve.
 
+```{r}
+filtered_f2 %>%
+  select(date, series, value) %>%
+  spread(key = series, value = value) %>%
+  mutate(spread_10_2 = `Australian Government 10 year bond` - `Australian Government 2 year bond`) %>%
+  ggplot(aes(x = date, y = spread_10_2)) +
+  geom_line()
+```
 
+Now I'll have a look at a more complicated data wrangling task using `read_rba()` - visualising the full yield curve over time.
+
+### Example: Multiple series from current and historical tables
+
+For this example, I'll use data from table F16, "Indicative Mid Rates of Australian Government Securities". This contains the yields on various actual bonds over time. There are three versions of this table - a "current" table that contains data from 2018 to present, and two "historical" tables spanning the periods 1992 to 2008, and then 2008 to 2018. 
+
+We can get all the data by requesting both the "current" and "historical" versions of the table. Note that requesting historical f16 gets both historical tables - the one from 1992 to 2008 and 2008 to 2018 will be combined.
 ```{r yield-curve}
-# yields <- read_rba(c("f16", "f16"), c("current", "historical"))
-# 
-# 
-# yields <- yields %>%
-#   separate(description,
-#            into = c("bond_num",
-#                     "coupon",
-#                     "maturity"),
-#            sep = " - ")
-# 
-# 
-# yields <- yields %>%
-#   mutate(maturity = lubridate::dmy((maturity)))
-# 
-# 
-# static_plot <- yields %>%
-#   ggplot(aes(x = maturity, y = value, col = factor(date))) +
-#   geom_line()
+yields_raw <- read_rba(c("f16", "f16"), c("current", "historical"))
+```
 
+
+
+```{r}
+
+yields <- yields_raw %>%
+  separate(description,
+           into = c("bond_num",
+                    "coupon",
+                    "maturity"),
+           sep = " - ")
+
+
+yields <- yields %>%
+  filter(series == "Treasury Bonds") %>%
+  mutate(maturity = dmy((maturity)),
+         years_to_maturity = interval(date, maturity ) / years(1))
+
+
+# # At least one bond has a 0% yield listed on the day it was sold; we want to remove this
+yields <- yields %>%
+  group_by(bond_num) %>%
+  mutate(value = if_else(row_number() == 1 & value == 0, NA_real_, value)) %>%
+  ungroup() %>%
+  filter(!is.na(value))
+```
+
+
+```{r single-yield-curve}
+
+yields %>%
+  filter(date == max(date)) %>%
+  ggplot(aes(x = years_to_maturity, y = value)) +
+  geom_line() 
+
+
+yields %>%
+  filter(date == ymd("2020-01-22")) %>%
+  ggplot(aes(x = years_to_maturity, y = value)) +
+  geom_line()
+```
+
+```{r anim-yield-curve, gganimate = list(nframes = 300, fps = 15)}
 # library(gganimate)
-# static_plot +
-#   transition_states(date)
-
+# 
+# animated_curve <- yields %>%
+#   filter(year(date) >= 2005) %>%
+#   ggplot(aes(x = years_to_maturity, y = value)) +
+#   geom_line() +
+#   labs(subtitle = "Yield curve on {closest_state}") +
+#   transition_states(date) +
+#   shadow_wake(wake_length = 0.4)
+# 
+# animate(animated_curve,
+#         nframes = 223,
+#         fps = 18)
+# anim_save("test.gif")
 ```
