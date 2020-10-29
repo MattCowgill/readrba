@@ -54,12 +54,9 @@ I'll get the monthly data, which we can see from the table above has the series 
 
 ```{r bondyield} 
 bond_yield <- read_rba(series_id = "FCMYGBAG10")
-
-# This is identical to:
-# read_rba_seriesid("FCMYGBAG10")
 ```
 
-A quick aside: the code above gives identical results to using the `read_rba_seriesid()` function.
+A quick aside: the code above gives identical results to using `read_rba_seriesid("FCMYGBAG10")`. The `read_rba_seriesid("SOMETHING")` function is a wrapper around `read_rba(series_id = "SOMETHING")`.
 
 OK, no we have the bond yield data in tibble form, let's see what it looks like:
 
