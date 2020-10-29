@@ -116,7 +116,7 @@ Tables that are **not** able to be downloaded are:
 
 ```{r echo=FALSE}
 nonreadable <- dplyr::filter(readrba:::table_list, readable == FALSE)
-nonreadable <- dplyr::select(nonreadable, `Table title` = title, table_no = no)
+nonreadable <- dplyr::select(nonreadable, `Table title` = title, table_no = no, current_or_historical)
 knitr::kable(nonreadable )
 ```
 
