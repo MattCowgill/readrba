@@ -18,7 +18,7 @@ tidy_rba <- function(excel_sheet) {
   }
 
   if (.table_title == "F2 Capital Market Yields - Government Bonds" &&
-      excel_sheet[1,1] == "Per cent per annum") {
+    excel_sheet[1, 1] == "Per cent per annum") {
     excel_sheet <- prelim_tidy_old_f2(excel_sheet)
   }
 
@@ -183,12 +183,16 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   excel_sheet$description <- gsub("\n", " - ", excel_sheet$description, fixed = T)
 
   excel_sheet <- excel_sheet %>%
-    dplyr::mutate(dplyr::across(c(.data$series, .data$description),
-                                ~stringr::str_replace_all(., "Commonwealth Government|Australian government|Commonwealth government", "Australian Government")))
+    dplyr::mutate(dplyr::across(
+      c(.data$series, .data$description),
+      ~ stringr::str_replace_all(., "Commonwealth Government|Australian government|Commonwealth government", "Australian Government")
+    ))
 
   excel_sheet <- excel_sheet %>%
-    dplyr::mutate(dplyr::across(c(.data$series, .data$description),
-                                stringr::str_squish)) %>%
+    dplyr::mutate(dplyr::across(
+      c(.data$series, .data$description),
+      stringr::str_squish
+    )) %>%
     dplyr::arrange(excel_sheet, .data$series, .data$date)
 
   excel_sheet

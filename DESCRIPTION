@@ -31,7 +31,6 @@ Imports:
     xml2,
     rvest,
     stringr,
-    curl,
     httr,
     lubridate
 Depends: 

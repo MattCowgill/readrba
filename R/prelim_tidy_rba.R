@@ -13,15 +13,15 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 
   bond_type <- dplyr::case_when(
     substr(issue_id, 1, 2) == "TB" ~
-      "Treasury Bonds ",
+    "Treasury Bonds ",
     substr(issue_id, 1, 2) == "TI" ~
-      "Treasury Indexed Bonds ",
+    "Treasury Indexed Bonds ",
     TRUE ~ NA_character_
   )
 
   bond_num <- ifelse(issue_id == "NA",
-                     NA_character_,
-                     substr(issue_id, 3, nchar(issue_id))
+    NA_character_,
+    substr(issue_id, 3, nchar(issue_id))
   )
 
   coupon <- as.character(excel_sheet[4, 2:n_col])
@@ -53,8 +53,8 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
   )
 
   new_description <- ifelse(grepl("NA", new_description),
-                            NA_character_,
-                            new_description
+    NA_character_,
+    new_description
   )
 
   new_frequency <- c("Frequency", rep("Daily", n_col - 1))
@@ -96,7 +96,8 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
   issuer <- as.character(excel_sheet[3, ])
   issuer <- fill_blanks(issuer)
   issuer <- gsub("Australian Government", "Commonwealth Government", issuer,
-                 fixed = T)
+    fixed = T
+  )
 
   maturity <- as.character(excel_sheet[4, ])
   maturity <- maturity[!is.na(maturity)]
@@ -107,9 +108,10 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
   new_title <- c("Title", title)
 
   description <- paste("Yields on",
-                       issuer, "bonds,",
-                       maturity, "maturity",
-                       sep = " ")
+    issuer, "bonds,",
+    maturity, "maturity",
+    sep = " "
+  )
   new_description <- c("Description", description)
 
   n_rows <- nrow(excel_sheet)
@@ -138,8 +140,7 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
       new_title, new_description, new_frequency, new_type,
       new_units, new_source, new_pub_date, new_series_id
     ),
-    ~ setNames(.x, paste0("V", 0:(n_col - 1))
-    )
+    ~ setNames(.x, paste0("V", 0:(n_col - 1)))
   ) %>%
     dplyr::bind_rows()
 

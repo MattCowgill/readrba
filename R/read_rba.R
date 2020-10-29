@@ -121,11 +121,12 @@ read_rba <- function(table_no = NULL,
 }
 
 #' Load and tidy local RBA Excel sheets
-#' @param filenames Vector of filenames (with path) pointing to local RBA Excel sheets
+#' @param filenames Vector of filename(s) (with path) pointing to local RBA Excel sheets
 #' @examples
 #' \dontrun{
 #' read_rba_local("data/rba_file.xls")
 #' }
+#' @return A `tbl_df` containing tidied RBA Excel sheet(s)
 #' @export
 read_rba_local <- function(filenames) {
   raw_dfs <- purrr::map(filenames, load_rba_sheet)
