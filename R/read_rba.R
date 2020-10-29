@@ -110,6 +110,24 @@ read_rba <- function(table_no = NULL,
 
   filenames <- download_rba(urls, path)
 
+  tidy_df <- read_rba_local(filenames)
+
+  if (!is.null(series_id)) {
+    .series_id <- series_id
+    tidy_df <- dplyr::filter(tidy_df, .data$series_id %in% .series_id)
+  }
+
+  tidy_df
+}
+
+#' Load and tidy local RBA Excel sheets
+#' @param filenames Vector of filenames (with path) pointing to local RBA Excel sheets
+#' @examples
+#' \dontrun{
+#' read_rba_local("data/rba_file.xls")
+#' }
+#' @export
+read_rba_local <- function(filenames) {
   raw_dfs <- purrr::map(filenames, load_rba_sheet)
 
   raw_dfs <- purrr::flatten(raw_dfs)
@@ -117,11 +135,6 @@ read_rba <- function(table_no = NULL,
   tidy_dfs <- purrr::map(raw_dfs, tidy_rba)
 
   tidy_df <- dplyr::bind_rows(tidy_dfs)
-
-  if (!is.null(series_id)) {
-    .series_id <- series_id
-    tidy_df <- dplyr::filter(tidy_df, .data$series_id %in% .series_id)
-  }
 
   tidy_df
 }
@@ -138,7 +151,6 @@ read_rba_seriesid <- function(series_id, path = tempdir()) {
 
 #' Given series ID(s), find the corresponding table number(s)
 #' @param series_id A character vector of RBA series ID(s)
-#' @noRd
 #' @keywords internal
 tables_from_seriesid <- function(series_id) {
 

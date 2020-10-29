@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • readrba</title>
+<title>Given series ID(s), find the corresponding table number(s) — tables_from_seriesid • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Given series ID(s), find the corresponding table number(s) — tables_from_seriesid" />
+<meta property="og:description" content="Given series ID(s), find the corresponding table number(s)" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -115,31 +116,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/MattCowgill/readrba/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Given series ID(s), find the corresponding table number(s)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/read_rba.R'><code>R/read_rba.R</code></a></small>
+    <div class="hidden name"><code>tables_from_seriesid.Rd</code></div>
     </div>
 
-    <div id="readrba-002" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.2">
-<a href="#readrba-002" class="anchor"></a>readrba 0.0.2</h1>
-<ul>
-<li>Can now use <code>series_id</code> argument to <code><a href="../reference/read_rba.html">read_rba()</a></code> to fetch based on series ID(s)</li>
-<li>Examine available RBA data using <code><a href="../reference/browse_rba_series.html">browse_rba_series()</a></code> and <code><a href="../reference/browse_rba_series.html">browse_rba_tables()</a></code>
-</li>
-<li>
-<code>cur_hist = "all"</code> no longer allowed</li>
-<li>Some non-standard tables now able to be tidied</li>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Given series ID(s), find the corresponding table number(s)</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>tables_from_seriesid</span><span class='op'>(</span><span class='va'>series_id</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>series_id</th>
+      <td><p>A character vector of RBA series ID(s)</p></td>
+    </tr>
+    </table>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

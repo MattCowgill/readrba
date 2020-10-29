@@ -19,14 +19,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-The Reserve Bank of Australia publishes lots of useful [statistical tables on its website](https://rba.gov.au/statistics/tables/). The `readrba` package helps you:
+The Reserve Bank of Australia publishes lots of useful [statistical tables on its website](https://rba.gov.au/statistics/tables/). The `{readrba}` package helps you:
 
-1. Download RBA statistical tables; and
-2. Import the data into R as a tidy tibble. 
+1.  Download RBA statistical tables; and
+2.  Import the data into R as a tidy tibble.
 
-You can import the data using either the table number or the series ID. 
-
-
+You can import the data using either the table number or the series ID.
 
 ```{r setup, results=FALSE, message=FALSE, warning=FALSE}
 library(readrba)
@@ -35,8 +33,10 @@ library(dplyr)
 library(ggplot2)
 library(lubridate)
 ```
+
 ### Example: Individual series - 10-year bond yield
-Let's start off by visualising the yield on a 10 year Australian Government bond over time. 
+
+Let's start off by visualising the yield on a 10 year Australian Government bond over time.
 
 I want to find the series ID for the 10 year Australian Government bond yield. The function `browse_rba_series()` will help me find it. If you use the function with no argument, it will return a tibble listing every data series published by the RBA (and readable by {readrba}). I'll specify a search string:
 
@@ -50,10 +50,32 @@ browse_rba_series("Australian government 10 year") %>%
 
 OK, so we have two unique series for 10 year bond yield - one is daily data, the other monthly. These two series are split across four tables - a 'current' and 'historical' table for each of the daily and monthly series.
 
-I'll get the monthly data, which we can see from the table above has the series ID `FCMYGBAG10`. 
+I'll get the monthly data, which we can see from the table above has the series ID `FCMYGBAG10`.
 
-```{r bondyield} 
+If you prefer, you can find the series ID by looking at the relevant spreadsheet from the RBA's website:
+
+`r knitr::include_graphics("seriesid_spreadsheet.png")`
+
+```{r bondyield, eval = F}
 bond_yield <- read_rba(series_id = "FCMYGBAG10")
+```
+```{r, include = F}
+# filenames <- file.path(tempdir(), paste0("f2", c("a", "b", "c"), ".xls"))
+# 
+# purrr::map2(.x = c("f2", "f2"),
+#             .y = c("current", "historical"),
+#             .f = get_rba_urls) %>%
+#   purrr::flatten_chr() %>%
+#   download.file(url = ., destfile = filenames)
+# 
+# bond_yield <- read_rba_local(filenames)
+# 
+# bond_yield <- bond_yield %>%
+#   dplyr::filter(series_id == "FCMYGBAG10")
+# 
+# save(bond_yield, file = file.path("vignettes", "FCMYGBAG10.rda"))
+
+load("FCMYGBAG10.rda")
 ```
 
 A quick aside: the code above gives identical results to using `read_rba_seriesid("FCMYGBAG10")`. The `read_rba_seriesid("SOMETHING")` function is a wrapper around `read_rba(series_id = "SOMETHING")`.
@@ -64,7 +86,7 @@ OK, no we have the bond yield data in tibble form, let's see what it looks like:
 glimpse(bond_yield)
 ```
 
-The data you import using `read_rba()` is always in this standard tidy format. The values are in the `value` column. 
+The data you import using `read_rba()` is always in this standard tidy format. The values are in the `value` column.
 
 Let's make a graph of the 10 year bond yield over time:
 
@@ -78,26 +100,37 @@ bond_yield %>%
 That's a bit normcore-basic ggplot, but not bad. With a few lines of code, we've got an up-to-date graph of the 10 year bond yield.
 
 ### Example: Multiple series from a table - 2, 3, 5 and 10 year bond yields
-Now we'll have a look at another example, this time using multiple data series from the one table. I want to make a graph of Australian Government bond yields at different maturities, over time. This time I'll confine myself to the recent data, at daily frequency. 
+
+Now we'll have a look at another example, this time using multiple data series from the one table. I want to make a graph of Australian Government bond yields at different maturities, over time. This time I'll confine myself to the recent data, at daily frequency.
 
 ```{r yieldbrowse, eval=FALSE}
 browse_rba_tables("government bond")
 ```
+
 ```{r yieldbrowse2, echo=FALSE}
 browse_rba_tables("government bond") %>%
   knitr::kable()
 ```
 
-The daily data is in table F2. If you prefer, you can look up the table on the [RBA website](https://www.rba.gov.au/statistics/tables/) and find the table number that way:
-`r knitr::include_graphics("rba_site.png")`
+The daily data is in table F2. If you prefer, you can look up the table on the [RBA website](https://www.rba.gov.au/statistics/tables/) and find the table number that way: `r knitr::include_graphics("rba_site.png")`
 
 Now we know the table number that contains the data we want, let's load it into r.
 
-```{r variousyields}
+```{r variousyields, eval = F}
 f2 <- read_rba("f2")
 ```
+```{r, include = F}
+# tempf2 <- tempfile(fileext = ".xls")
+# get_rba_urls("f2") %>%
+#   download.file(destfile = tempf2)
+# f2 <- read_rba_local(tempf2)
+# save(f2, file = "vignettes/f2.rda", compress = TRUE, compression_level = 9)
+load("f2.rda")
+```
 
-This table looks just like the single series table we downloaded earlier: `r glimpse(f2)`. Unlike the single series table - which only contained the ten year bond yield - we now have a tidy tibble containing a number of data series. Here's what we've got: 
+
+This table looks just like the single series table we downloaded earlier: `r glimpse(f2)`. Unlike the single series table - which only contained the ten year bond yield - we now have a tidy tibble containing a number of data series. Here's what we've got:
+
 ```{r uniquef2}
 unique(f2$series)
 ```
@@ -128,90 +161,4 @@ filtered_f2 %>%
   mutate(spread_10_2 = `Australian Government 10 year bond` - `Australian Government 2 year bond`) %>%
   ggplot(aes(x = date, y = spread_10_2)) +
   geom_line()
-```
-
-Now I'll have a look at a more complicated data wrangling task using `read_rba()` - visualising the full yield curve over time.
-
-### Example: Multiple series from current and historical tables
-
-For this example, I'll use data from table F16, "Indicative Mid Rates of Australian Government Securities". This contains the yields on various actual bonds over time. There are three versions of this table - a "current" table that contains data from 2018 to present, and two "historical" tables spanning the periods 1992 to 2008, and then 2008 to 2018. 
-
-We can get all the data by requesting both the "current" and "historical" versions of the table. Note that requesting historical f16 gets both historical tables - the one from 1992 to 2008 and 2008 to 2018 will be combined.
-```{r yield-curve}
-yields_raw <- read_rba(c("f16", "f16"), c("current", "historical"))
-```
-
-
-
-```{r}
-
-yields <- yields_raw %>%
-  separate(description,
-           into = c("bond_num",
-                    "coupon",
-                    "maturity"),
-           sep = " - ")
-
-
-yields <- yields %>%
-  filter(series == "Treasury Bonds") %>%
-  mutate(maturity = dmy((maturity)),
-         years_to_maturity = interval(date, maturity ) / years(1))
-
-
-# # At least one bond has a 0% yield listed on the day it was sold; we want to remove this
-yields <- yields %>%
-  group_by(bond_num) %>%
-  mutate(value = if_else(row_number() == 1 & value == 0, NA_real_, value)) %>%
-  ungroup() %>%
-  filter(!is.na(value))
-```
-
-
-```{r single-yield-curve}
-
-yields %>%
-  filter(date == max(date)) %>%
-  ggplot(aes(x = years_to_maturity, y = value)) +
-  geom_line() 
-
-
-yields %>%
-  filter(date == ymd("2020-01-22")) %>%
-  ggplot(aes(x = years_to_maturity, y = value)) +
-  geom_line()
-```
-
-```{r facet-yield-curve, fig.height=7.5}
-yields %>%
-  filter(month(date) == month(max(date)) & 
-           day(date) == day(max(date))) %>%
-  mutate(year = factor(year(date))) %>%
-  ggplot(aes(x = years_to_maturity, y = value, group = date)) +
-  geom_hline(yintercept = 0) +
-  geom_line(data = ~select(., -year),
-            col = "gray50", alpha = 0.33, size = 0.66) +
-  geom_line(aes(col = year),
-            size = 1.1) +
-  geom_text(data = ~group_by(., year) %>% summarise(),
-            x = 15, y = 11, 
-            aes(label = year, col = year),
-            vjust = 0,
-            inherit.aes = F) +
-  facet_wrap(~year, ncol = 3) +
-  scale_y_continuous(limits = c(0, 13), breaks = seq(0, 10, 5)) +
-  theme_minimal() +
-  theme(legend.position = "none",
-        panel.grid.minor = element_blank(),
-        panel.grid.major = element_line(size = 0.25),
-        strip.text = element_blank()) +
-  labs(x = "Years to maturity",
-       y = "Interest rate",
-       title = "The Australian yield curve has flattened and moved down",
-       subtitle = paste("Interest rate on Australian Government bonds at various maturities\nas at",
-                         day(max(yields$date)), month(max(yields$date), label = TRUE, abbr = FALSE),
-                        "each year since", year(min(yields$date))),
-       caption = "Source: RBA Statistical Table F16.")
-
-
 ```

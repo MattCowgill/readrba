@@ -45,7 +45,7 @@ cpi_table <- readrba::read_rba(table_no = "g1")
 The object returned by `read_rba()` is a tidy tibble (ie. in 'long' format):
 
 ```{r}
-dplyr::glimpse(cpi_table)
+head(cpi_table)
 ```
 
 You can also request multiple tables. They'll be returned together as one tidy tibble:
@@ -53,7 +53,7 @@ You can also request multiple tables. They'll be returned together as one tidy t
 ```{r}
 rba_data <- readrba::read_rba(table_no = c("a1", "g1"))
 
-dplyr::glimpse(rba_data)
+head(rba_data)
 
 unique(rba_data$table_title)
 ```
@@ -61,7 +61,7 @@ unique(rba_data$table_title)
 You can also retrieve data based on the unique RBA time series identifier(s). For example, to getch the consumer price index series only:
 ```{r}
 cpi_series <- readrba::read_rba(series_id = "GCPIAG")
-dplyr::glimpse(cpi_series)
+head(cpi_series)
 unique(cpi_series$series_id)
 ```
 
@@ -73,7 +73,7 @@ By default, `read_rba()` fetches the current version of whatever table you reque
 
 hist_a11 <- readrba::read_rba(table_no = "a1.1", cur_hist = "historical")
 
-dplyr::glimpse(hist_a11)
+head(hist_a11)
 ```
 
 ### Browsing RBA data
