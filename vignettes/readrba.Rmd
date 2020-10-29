@@ -185,19 +185,36 @@ yields %>%
   geom_line()
 ```
 
-```{r anim-yield-curve, gganimate = list(nframes = 300, fps = 15)}
-# library(gganimate)
-# 
-# animated_curve <- yields %>%
-#   filter(year(date) >= 2005) %>%
-#   ggplot(aes(x = years_to_maturity, y = value)) +
-#   geom_line() +
-#   labs(subtitle = "Yield curve on {closest_state}") +
-#   transition_states(date) +
-#   shadow_wake(wake_length = 0.4)
-# 
-# animate(animated_curve,
-#         nframes = 223,
-#         fps = 18)
-# anim_save("test.gif")
+```{r facet-yield-curve, fig.height=7.5}
+yields %>%
+  filter(month(date) == month(max(date)) & 
+           day(date) == day(max(date))) %>%
+  mutate(year = factor(year(date))) %>%
+  ggplot(aes(x = years_to_maturity, y = value, group = date)) +
+  geom_hline(yintercept = 0) +
+  geom_line(data = ~select(., -year),
+            col = "gray50", alpha = 0.33, size = 0.66) +
+  geom_line(aes(col = year),
+            size = 1.1) +
+  geom_text(data = ~group_by(., year) %>% summarise(),
+            x = 15, y = 11, 
+            aes(label = year, col = year),
+            vjust = 0,
+            inherit.aes = F) +
+  facet_wrap(~year, ncol = 3) +
+  scale_y_continuous(limits = c(0, 13), breaks = seq(0, 10, 5)) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_line(size = 0.25),
+        strip.text = element_blank()) +
+  labs(x = "Years to maturity",
+       y = "Interest rate",
+       title = "The Australian yield curve has flattened and moved down",
+       subtitle = paste("Interest rate on Australian Government bonds at various maturities\nas at",
+                         day(max(yields$date)), month(max(yields$date), label = TRUE, abbr = FALSE),
+                        "each year since", year(min(yields$date))),
+       caption = "Source: RBA Statistical Table F16.")
+
+
 ```
