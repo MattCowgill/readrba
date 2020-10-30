@@ -172,13 +172,6 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
       table_title = .table_title
     )
 
-  excel_sheet <- excel_sheet[order(
-    excel_sheet$series,
-    excel_sheet$date
-  ), ,
-  drop = FALSE
-  ]
-
   excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
 
   excel_sheet$description <- gsub("\n", " - ", excel_sheet$description, fixed = T)
@@ -193,8 +186,14 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
     dplyr::mutate(dplyr::across(
       c(.data$series, .data$description),
       stringr::str_squish
-    )) %>%
-    dplyr::arrange(excel_sheet, .data$series, .data$date)
+    ))
+
+  excel_sheet <- excel_sheet[order(
+    excel_sheet$series,
+    excel_sheet$date
+  ), ,
+  drop = FALSE
+  ]
 
   excel_sheet
 }
