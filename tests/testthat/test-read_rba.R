@@ -71,8 +71,9 @@ check_df <- function(df) {
   d <- inherits(df$date, "Date")
   e <- inherits(df$pub_date, "Date")
   f <- inherits(df$value, "numeric")
+  g <- !any(is.na(df$date))
 
-  all(a, b, c, d, e, f)
+  all(a, b, c, d, e, f, g)
 }
 
 test_that("multiple tables work", {

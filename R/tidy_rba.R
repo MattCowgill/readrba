@@ -136,33 +136,34 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   fix_date <- function(string) {
     # Sometimes dates are recognised as a string that looks like a date "09-Oct-2020"
     if (all(grepl("-", string)) | all(grepl("/", string))) {
-      lubridate::dmy(string)
+      fixed_date <- lubridate::dmy(string)
 
       # Sometimes dates are Excel style integers, parsed as strings, like "33450"
     } else if (!any(grepl("-", string)) & !any(grepl("/", string))) {
       string <- ifelse(string == "NA", NA_character_, string)
-      as.Date(as.numeric(string), origin = "1899-12-30")
+      fixed_date <- as.Date(as.numeric(string), origin = "1899-12-30")
+
+      # Sometimes dates change formatting partway through the column
     } else {
-      NA_character_
+      date_is_num <- ifelse(!is.na(suppressWarnings(as.numeric(string))),
+        TRUE,
+        FALSE
+      )
+
+      fixed_date <- rep(lubridate::NA_Date_, length(string))
+      non_num <- lubridate::dmy(string[!date_is_num])
+      num <- janitor::excel_numeric_to_date(as.numeric(string[date_is_num]))
+
+      fixed_date[which(!date_is_num)] <- non_num
+      fixed_date[which(date_is_num)] <- num
     }
+    fixed_date
   }
 
   excel_sheet$pub_date <- fix_date(excel_sheet$pub_date)
 
   .date <- fix_date(excel_sheet$date)
-
-  if (any(is.na(.date))) {
-    # Note we need to do this slightly hacky iteration (with `map_dbl`)
-    # rather than just vectorise, because in some tables the RBA changes the way
-    # a date column is formatted halfway through
-    .date <- as.Date(purrr::map_dbl(
-      excel_sheet$date,
-      fix_date
-    ),
-    origin = "1970-01-01"
-    )
-  }
-
+  stopifnot(!any(is.na(.date)))
   excel_sheet$date <- .date
 
   excel_sheet <- excel_sheet %>%

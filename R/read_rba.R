@@ -17,12 +17,14 @@
 #' Note that `cur_hist` is ignored if you specify `series_id` -
 #' both current and historical data will be included in the output.
 #'
-#' @param path Directory in which to save file(s). Default is `tempdir()`.
+#' @param path Directory in which to save downloaded RBA Excel file(s).
+#' Default is `tempdir()`.
 #' @details `read_rba()` downloads, imports and tidies data from statistical
 #' tables published by the Reserve Bank of Australia. You can specify the
 #' requested data using the `table_no` or `series_id`.
 #'
 #' `read_rba_seriesid()` is a wrapper around `read_rba()`.
+#' `rba_stat_table()` is a wrapper around `read_rba()`.
 #'
 #' @return A single tidy tibble containing the requested table(s)
 #' @examples
@@ -140,6 +142,12 @@ read_rba_local <- function(filenames) {
   tidy_df
 }
 
+#' @rdname read_rba
+#' @export
+#'
+rba_stat_table <- function(...) {
+  read_rba(...)
+}
 
 #' @rdname read_rba
 #' @export
