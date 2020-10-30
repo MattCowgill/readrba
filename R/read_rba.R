@@ -142,6 +142,7 @@ read_rba_local <- function(filenames) {
   tidy_df
 }
 
+#' @param ... arguments in `read_stat_table()` passed to `read_rba()`
 #' @rdname read_rba
 #' @export
 #'

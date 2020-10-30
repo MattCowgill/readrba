@@ -43,6 +43,7 @@ browse_rba_tables <- function(search_string = "") {
   )
 }
 
+#' @param ... arguments to `rba_list_tables()` passed to `browse_rba_tables()`
 #' @export
 #' @rdname browse_rba
 rba_list_tables <- function(...) {

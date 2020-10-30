@@ -15,6 +15,8 @@ rba_list_tables(...)
 \arguments{
 \item{search_string}{Word or phrase to search for, such as "gold" or "commodity" or "labour".
 If left as \code{""}, the function will return all series.}
+
+\item{...}{arguments to \code{rba_list_tables()} passed to \code{browse_rba_tables()}}
 }
 \value{
 A \code{data.frame} (\code{tbl_df}) containing RBA data series/tables that match the \code{search_string}.

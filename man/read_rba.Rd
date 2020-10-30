@@ -39,6 +39,8 @@ both current and historical data will be included in the output.}
 
 \item{path}{Directory in which to save downloaded RBA Excel file(s).
 Default is \code{tempdir()}.}
+
+\item{...}{arguments in \code{read_stat_table()} passed to \code{read_rba()}}
 }
 \value{
 A single tidy tibble containing the requested table(s)

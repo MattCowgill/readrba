@@ -152,7 +152,7 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
 
       fixed_date <- rep(lubridate::NA_Date_, length(string))
       non_num <- lubridate::dmy(string[!date_is_num])
-      num <- janitor::excel_numeric_to_date(as.numeric(string[date_is_num]))
+      num <- as.Date(as.numeric(string[date_is_num]), origin = "1899-12-30")
 
       fixed_date[which(!date_is_num)] <- non_num
       fixed_date[which(date_is_num)] <- num
