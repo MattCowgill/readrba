@@ -1,0 +1,164 @@
+---
+title: "readrba"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{readrba}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, fig.height = 5, fig.align = "center",fig.retina = 2,
+  out.width = "100%",
+  out.extra = 'style="border:0px;"'
+)
+```
+
+The Reserve Bank of Australia publishes lots of useful [statistical tables on its website](https://rba.gov.au/statistics/tables/). The `{readrba}` package helps you:
+
+1.  Download RBA statistical tables; and
+2.  Import the data into R as a tidy tibble.
+
+You can import the data using either the table number or the series ID.
+
+```{r setup, results=FALSE, message=FALSE, warning=FALSE}
+library(readrba)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+```
+
+### Example: Individual series - 10-year bond yield
+
+Let's start off by visualising the yield on a 10 year Australian Government bond over time.
+
+I want to find the series ID for the 10 year Australian Government bond yield. The function `browse_rba_series()` will help me find it. If you use the function with no argument, it will return a tibble listing every data series published by the RBA (and readable by {readrba}). I'll specify a search string:
+
+```{r 10yearnorun, eval=FALSE}
+browse_rba_series("Australian government 10 year")
+```
+```{r 10year, echo=FALSE}
+browse_rba_series("Australian government 10 year") %>%
+  knitr::kable()
+```
+
+OK, so we have two unique series for 10 year bond yield - one is daily data, the other monthly. These two series are split across four tables - a 'current' and 'historical' table for each of the daily and monthly series.
+
+I'll get the monthly data, which we can see from the table above has the series ID `FCMYGBAG10`.
+
+If you prefer, you can find the series ID by looking at the relevant spreadsheet from the RBA's website:
+
+`r knitr::include_graphics("seriesid_spreadsheet.png")`
+
+```{r bondyield, eval = F}
+bond_yield <- read_rba(series_id = "FCMYGBAG10")
+```
+```{r, include = F}
+# filenames <- file.path(tempdir(), paste0("f2", c("a", "b", "c"), ".xls"))
+# 
+# purrr::map2(.x = c("f2", "f2"),
+#             .y = c("current", "historical"),
+#             .f = get_rba_urls) %>%
+#   purrr::flatten_chr() %>%
+#   download.file(url = ., destfile = filenames)
+# 
+# bond_yield <- read_rba_local(filenames)
+# 
+# bond_yield <- bond_yield %>%
+#   dplyr::filter(series_id == "FCMYGBAG10")
+# 
+# save(bond_yield, file = file.path("vignettes", "FCMYGBAG10.rda"))
+
+load("FCMYGBAG10.rda")
+```
+
+A quick aside: the code above gives identical results to using `read_rba_seriesid("FCMYGBAG10")`. The `read_rba_seriesid("SOMETHING")` function is a wrapper around `read_rba(series_id = "SOMETHING")`.
+
+OK, no we have the bond yield data in tibble form, let's see what it looks like:
+
+```{r glimpsebondyield}
+glimpse(bond_yield)
+```
+
+The data you import using `read_rba()` is always in this standard tidy format. The values are in the `value` column.
+
+Let's make a graph of the 10 year bond yield over time:
+
+```{r vizbondyield}
+bond_yield %>%
+  ggplot(aes(x = date, y = value)) +
+  geom_line()
+
+```
+
+That's a bit normcore-basic ggplot, but not bad. With a few lines of code, we've got an up-to-date graph of the 10 year bond yield.
+
+### Example: Multiple series from a table - 2, 3, 5 and 10 year bond yields
+
+Now we'll have a look at another example, this time using multiple data series from the one table. I want to make a graph of Australian Government bond yields at different maturities, over time. This time I'll confine myself to the recent data, at daily frequency.
+
+```{r yieldbrowse, eval=FALSE}
+browse_rba_tables("government bond")
+```
+
+```{r yieldbrowse2, echo=FALSE}
+browse_rba_tables("government bond") %>%
+  knitr::kable()
+```
+
+The daily data is in table F2. If you prefer, you can look up the table on the [RBA website](https://www.rba.gov.au/statistics/tables/) and find the table number that way: `r knitr::include_graphics("rba_site.png")`
+
+Now we know the table number that contains the data we want, let's load it into r.
+
+```{r variousyields, eval = F}
+f2 <- read_rba("f2")
+```
+```{r, include = F}
+# tempf2 <- tempfile(fileext = ".xls")
+# get_rba_urls("f2") %>%
+#   download.file(destfile = tempf2)
+# f2 <- read_rba_local(tempf2)
+# save(f2, file = "vignettes/f2.rda", compress = TRUE, compression_level = 9)
+load("f2.rda")
+```
+
+
+This table looks just like the single series table we downloaded earlier: `r glimpse(f2)`. Unlike the single series table - which only contained the ten year bond yield - we now have a tidy tibble containing a number of data series. Here's what we've got:
+
+```{r uniquef2}
+unique(f2$series)
+```
+
+I'm not interested in NSW bonds, nor indexed bonds, so we'll need some brief {dplyr}-ing of the data before we can get down to graphing.
+
+```{r filterf2}
+filtered_f2 <- f2 %>%
+  filter(grepl("Australian Government", series) &
+           !grepl("Indexed", series))
+```
+
+We've dropped the series we're not interested in, going from `r nrow(f2)` rows to `r nrow(filtered_f2)` rows. Now let's graph:
+
+```{r vizf2}
+filtered_f2 %>%
+  ggplot(aes(x = date, y = value, col = series)) +
+  geom_line()
+
+```
+
+Nice! Again, normcore aesthetics aside, we've got a decent plot with a few lines of code. Using the same data, we can have a look at the spread between the yield on 10 year and 2 year bonds, as a rough measure of the slope of (a portion of) the yield curve.
+
+```{r}
+filtered_f2 %>%
+  select(date, series, value) %>%
+  spread(key = series, value = value) %>%
+  mutate(spread_10_2 = `Australian Government 10 year bond` - `Australian Government 2 year bond`) %>%
+  ggplot(aes(x = date, y = spread_10_2)) +
+  geom_line()
+```

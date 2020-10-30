@@ -1,6 +1,6 @@
 Package: readrba
 Title: Download and Tidy Statistical Tables from the Reserve Bank of Australia
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person(given = "Matt",
            family = "Cowgill",
@@ -18,19 +18,21 @@ URL: https://github.com/MattCowgill/readrba
 BugReports: https://github.com/MattCowgill/readrba/issues
 Suggests: 
     covr,
-    testthat
+    testthat,
+    knitr,
+    rmarkdown,
+    ggplot2
 Imports: 
     readxl,
-    tidyr,
+    tidyr (>= 1.0.0),
     dplyr,
     purrr,
     rlang,
     xml2,
     rvest,
-    tibble,
     stringr,
-    curl,
     httr,
     lubridate
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
+VignetteBuilder: knitr

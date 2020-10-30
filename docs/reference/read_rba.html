@@ -80,20 +80,20 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../articles/readrba.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -125,34 +125,76 @@
     <p>Download, import, and tidy statistical tables from the RBA</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_rba</span>(table_no = <span class='kw'>NULL</span>, cur_hist = <span class='st'>"current"</span>, path = <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>())</pre>
+    <pre class="usage"><span class='fu'>read_rba</span><span class='op'>(</span>
+  table_no <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cur_hist <span class='op'>=</span> <span class='st'>"current"</span>,
+  series_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='fu'>read_rba_seriesid</span><span class='op'>(</span><span class='va'>series_id</span>, path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table_no</th>
-      <td><p>Table number(s) as character vector,
-such as "A1" or c("a1.1", "g1").</p></td>
+      <td><p>Character vector of table number(s),
+such as <code>"A1"</code> or <code><a href='https://rdrr.io/r/base/c.html'>c("a1.1", "g1")</a></code>.</p></td>
     </tr>
     <tr>
       <th>cur_hist</th>
-      <td><p>Character; "current" "historical", or "all".</p></td>
+      <td><p>Character; valid values are <code>"current"</code> or <code>"historical"</code>.</p>
+<p>Must be either a vector of either length 1 (eg. "<code>cur_hist = "current"</code>) or
+the same length as <code>table_no</code> (eg. <code>cur_hist = c("current", "historical")</code>).</p></td>
+    </tr>
+    <tr>
+      <th>series_id</th>
+      <td><p>Optional, character. Specifying <code>series_id</code> is an alternative
+to specifying <code>table_no</code>.</p>
+<p>Supply unique RBA time series identifier(s).
+For example, "GCPIAG" is the identifier for the CPI, so <code>series_id = "GCPIAG"</code> will
+return this series. You can supply multiple series IDs as a character
+vector, such as <code>series_id = c("GCPIAG", "GCPIAGSAQP")</code>.</p>
+<p>Note that <code>cur_hist</code> is ignored if you specify <code>series_id</code> -
+both current and historical data will be included in the output.</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>directory in which to save file(s); default is <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code></p></td>
+      <td><p>Directory in which to save file(s). Default is <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A single tidy tibble containing the requested table(s)</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>read_rba()</code> downloads, imports and tidies data from statistical
+tables published by the Reserve Bank of Australia. You can specify the
+requested data using the <code>table_no</code> or <code>series_id</code>.</p>
+<p><code>read_rba_seriesid()</code> is a wrapper around <code>read_rba()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>read_rba</span>(table_no = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a1.1"</span>, <span class='st'>"g1"</span>))
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># Get a single table:</span>
+<span class='fu'>read_rba</span><span class='op'>(</span>table_no <span class='op'>=</span> <span class='st'>"a1.1"</span><span class='op'>)</span>
+
+<span class='co'># Get multiple tables, combined in a tidy tibble:</span>
+<span class='fu'>read_rba</span><span class='op'>(</span>table_no <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a1.1"</span>, <span class='st'>"g1"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Get both the current and historical versions of a table</span>
+<span class='fu'>read_rba</span><span class='op'>(</span>table_no <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a1.1"</span>, <span class='st'>"a1.1"</span><span class='op'>)</span>, cur_hist <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"current"</span>, <span class='st'>"historical"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Get data based on the series ID:</span>
+<span class='fu'>read_rba</span><span class='op'>(</span>series_id <span class='op'>=</span> <span class='st'>"GCPIAG"</span><span class='op'>)</span>
+
+<span class='co'># Or, equivalently, use:</span>
+<span class='fu'>read_rba_seriesid</span><span class='op'>(</span><span class='st'>"GCPIAG"</span><span class='op'>)</span>
+
+<span class='co'># Get multiple series IDs:</span>
+<span class='fu'>read_rba</span><span class='op'>(</span>series_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"GCPIAG"</span>, <span class='st'>"GCPIAGSAQP"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -169,7 +211,7 @@ such as "A1" or c("a1.1", "g1").</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -75,6 +75,22 @@ check_df <- function(df) {
   all(a, b, c, d, e, f)
 }
 
+test_that("multiple tables work", {
+  skip_if_offline()
+  skip_on_cran()
+  cur <- read_rba(table_no = "a1.1", cur_hist = "current")
+  his <- read_rba(table_no = "a1.1", cur_hist = "historical")
+  both <- read_rba(table_no = c("a1.1", "a1.1"), cur_hist = c("current", "historical"))
+
+  expect_identical(
+    dplyr::bind_rows(cur, his),
+    both
+  )
+
+  expect_true(check_df(both))
+})
+
+
 test_that("all current tables work", {
   skip_if_offline()
   skip_on_cran()
@@ -105,26 +121,4 @@ test_that("historical tables work", {
       read_rba(table_no = .x, cur_hist = "historical")
     ))
   )
-})
-
-test_that("getting `both` series works", {
-  skip_if_offline()
-  skip_on_cran()
-
-  cur <- read_rba("a1.1", "current")
-  hist <- read_rba("a1.1", "historical")
-
-  expect_true(check_df(cur))
-  expect_true(check_df(hist))
-
-  both <- read_rba("a1.1", "all") %>%
-    dplyr::arrange(series, date)
-
-  expect_true(check_df(both))
-
-  comb <- dplyr::bind_rows(cur, hist) %>%
-    dplyr::arrange(series, date)
-
-
-  expect_identical(both, comb)
 })
