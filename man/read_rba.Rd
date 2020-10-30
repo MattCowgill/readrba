@@ -2,6 +2,7 @@
 % Please edit documentation in R/read_rba.R
 \name{read_rba}
 \alias{read_rba}
+\alias{rba_stat_table}
 \alias{read_rba_seriesid}
 \title{Download, import, and tidy statistical tables from the RBA}
 \usage{
@@ -11,6 +12,8 @@ read_rba(
   series_id = NULL,
   path = tempdir()
 )
+
+rba_stat_table(...)
 
 read_rba_seriesid(series_id, path = tempdir())
 }
@@ -34,7 +37,8 @@ vector, such as \code{series_id = c("GCPIAG", "GCPIAGSAQP")}.
 Note that \code{cur_hist} is ignored if you specify \code{series_id} -
 both current and historical data will be included in the output.}
 
-\item{path}{Directory in which to save file(s). Default is \code{tempdir()}.}
+\item{path}{Directory in which to save downloaded RBA Excel file(s).
+Default is \code{tempdir()}.}
 }
 \value{
 A single tidy tibble containing the requested table(s)
@@ -48,6 +52,7 @@ tables published by the Reserve Bank of Australia. You can specify the
 requested data using the \code{table_no} or \code{series_id}.
 
 \code{read_rba_seriesid()} is a wrapper around \code{read_rba()}.
+\code{rba_stat_table()} is a wrapper around \code{read_rba()}.
 }
 \examples{
 \dontrun{

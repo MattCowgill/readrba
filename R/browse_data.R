@@ -4,6 +4,8 @@
 #' If left as `""`, the function will return all series.
 #' @return A `data.frame` (`tbl_df`) containing RBA data series/tables that match the `search_string`.
 #'
+#' @details
+#' rba_list_tables() is a wrapper around browse_rba_tables()
 #' @export
 #' @examples
 #'
@@ -39,6 +41,12 @@ browse_rba_tables <- function(search_string = "") {
     search_string = search_string,
     lookup_table = table_list
   )
+}
+
+#' @export
+#' @rdname browse_rba
+rba_list_tables <- function(...) {
+  browse_rba_tables(...)
 }
 
 #' @noRd

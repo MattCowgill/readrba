@@ -3,11 +3,14 @@
 \name{browse_rba_series}
 \alias{browse_rba_series}
 \alias{browse_rba_tables}
+\alias{rba_list_tables}
 \title{Browse available RBA data series}
 \usage{
 browse_rba_series(search_string = "")
 
 browse_rba_tables(search_string = "")
+
+rba_list_tables(...)
 }
 \arguments{
 \item{search_string}{Word or phrase to search for, such as "gold" or "commodity" or "labour".
@@ -18,6 +21,9 @@ A \code{data.frame} (\code{tbl_df}) containing RBA data series/tables that match
 }
 \description{
 Browse available RBA data series
+}
+\details{
+rba_list_tables() is a wrapper around browse_rba_tables()
 }
 \examples{
 

@@ -59,7 +59,7 @@ read_rba <- function(table_no = NULL,
   if (is.null(table_no) && is.null(series_id)) {
     stop("You must specify either `cat_no` or `series_id.")
   } else if (!is.null(table_no) & !is.null(series_id)) {
-    stop("You must specify either `cat_no` or `series_id, not both.")
+    warning("`cat_no` and `series_id` both specified; ignoring `cat_no`.")
   }
 
   if (length(cur_hist) == 1) {
