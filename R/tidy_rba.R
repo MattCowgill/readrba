@@ -166,11 +166,8 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   stopifnot(!any(is.na(.date)))
   excel_sheet$date <- .date
 
-  excel_sheet <- excel_sheet %>%
-    dplyr::mutate(
-      value = suppressWarnings(as.numeric(.data$value)),
-      table_title = .table_title
-    )
+  excel_sheet$value <- suppressWarnings(as.numeric(excel_sheet$value))
+  excel_sheet$table_title <- .table_title
 
   excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
 
