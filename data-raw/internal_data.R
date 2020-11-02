@@ -1,3 +1,4 @@
+devtools::load_all()
 library(dplyr)
 library(tidyr)
 library(readxl)
@@ -6,7 +7,39 @@ library(rvest)
 library(purrr)
 library(rlang)
 
-# Historical forecasts ------
+# Create table_list -------
+table_list <- scrape_table_list(cur_hist = "all")
+
+# Note: we save this internal data object and then re-load the package
+# before proceeding, so that any changes to the table list are reflected
+# in subsequent steps.
+usethis::use_data(table_list, overwrite = TRUE, internal = TRUE)
+devtools::load_all()
+
+# Create series_list ------
+# Create a df of all individual series
+all_data <- table_list %>%
+  dplyr::filter(
+    readable == TRUE
+  ) %>%
+  purrr::map2_dfr(
+    .x = setNames(.$no, .$no),
+    .y = .$current_or_historical,
+    .f = ~ read_rba(table_no = .x, cur_hist = .y) %>% dplyr::mutate(cur_hist = .y),
+    .id = "table_no"
+  )
+
+series_list <- all_data %>%
+  dplyr::group_by(
+    table_no, series, series_id, series_type,
+    table_title, cur_hist, description, frequency
+  ) %>%
+  dplyr::summarise() %>%
+  dplyr::ungroup() %>%
+  dplyr::distinct()
+
+# Create hist_forecasts ------
+# Historical RBA forecasts
 # As compiled in Tulip and Wallace RDP2012-07
 # https://www.rba.gov.au/statistics/historical-forecasts.html
 
@@ -40,8 +73,8 @@ load_hist_sheet <- function(filename, sheet_name) {
       -date
     ) %>%
     tidyr::separate(series,
-      into = c("forecast_date", "notes", "source"),
-      sep = ";"
+                    into = c("forecast_date", "notes", "source"),
+                    sep = ";"
     ) %>%
     mutate(across(everything(), na_if, y = "NA"))
 
@@ -81,19 +114,13 @@ hist_forecasts$value <- as.numeric(hist_forecasts$value)
 hist_forecasts <- hist_forecasts %>%
   filter(!is.na(value))
 
-# Recent forecasts -----
-# Since Nov 2018
-# From: https://www.rba.gov.au/publications/smp/forecasts-archive.html
+# Create recent_forecasts -----
 
-recent_forecasts <- readrba::scrape_rba_forecasts()
-
-# Add semi-recent forecasts ----
-# Those after the end of the Bishop-Tulip dataset but before Nov 2018
+recent_forecasts <- scrape_rba_forecasts()
 
 
-# Combine forecasts ----
-forecasts <- recent_forecasts %>%
-  bind_rows(hist_forecasts) %>%
-  arrange(forecast_date, series, date)
+usethis::use_data(table_list, series_list,
+                  hist_forecasts, recent_forecasts,
+                  overwrite = TRUE, internal = TRUE
+)
 
-usethis::use_data(forecasts, internal = FALSE, overwrite = TRUE)

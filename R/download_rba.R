@@ -16,11 +16,13 @@ download_rba <- function(urls, path = tempdir()) {
   # if libcurl is available we can vectorise urls and destfile to download
   # files simultaneously; if not, we have to iterate
   if (isTRUE(capabilities("libcurl"))) {
+    message("Downloading ", paste0(urls, collapse = "\n"))
+
     utils::download.file(
       url = urls,
       mode = "wb",
       destfile = filenames_with_path,
-      quiet = FALSE,
+      quiet = TRUE,
       method = "libcurl",
       cacheOK = FALSE
     )

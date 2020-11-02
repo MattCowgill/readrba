@@ -1,3 +1,25 @@
+#' Compile the RBA's public forecasts of key economic variables over time
+#'
+#' @param refresh logical; default is `TRUE`. When set to `TRUE`, the RBA's
+#' website will be scraped to obtain recent forecasts. When `FALSE`, only
+#' the package's internal data will be returned, which may be out of date.
+#'
+
+rba_forecasts <- function(refresh = TRUE) {
+  hist_forecasts <- hist_forecasts
+
+  if (isTRUE(refresh)) {
+    recent_forecasts <- scrape_rba_forecasts()
+  } else {
+    # Use internal data if refresh == FALSE
+    recent_forecasts <- recent_forecasts
+  }
+
+  dplyr::bind_rows(hist_forecasts,
+                   recent_forecasts)
+}
+
+
 #' Scrape the RBA's website to obtain recent forecasts
 #'
 #' Scrape and tidy forecasts from all editions of the RBA's Statement on Monetary Policy
@@ -13,7 +35,7 @@
 #'  \item{`source`}{ For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy.}
 #'  \item{`notes`}{ Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given `forecast_date`.}
 #' }
-#' @export
+#' @keywords internal
 scrape_rba_forecasts <- function() {
 
   recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
