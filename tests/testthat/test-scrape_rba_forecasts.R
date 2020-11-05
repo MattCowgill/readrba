@@ -9,6 +9,8 @@ test_that("scrape_rba_forecasts() returns expected output", {
   expect_gt(nrow(forecasts), 800)
   expect_false(any(is.na(forecasts$value)))
   expect_is(forecasts$value, "numeric")
-  expect_lt(Sys.Date() - max(forecasts$forecast_date),
-            100)
+  expect_lt(
+    Sys.Date() - max(forecasts$forecast_date),
+    100
+  )
 })

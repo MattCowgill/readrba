@@ -139,6 +139,13 @@ read_rba_local <- function(filenames) {
 
   tidy_df <- dplyr::bind_rows(tidy_dfs)
 
+  tidy_df <- tidy_df[order(
+    tidy_df$series,
+    tidy_df$date
+  ), ,
+  drop = FALSE
+  ]
+
   tidy_df
 }
 

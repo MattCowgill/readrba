@@ -166,7 +166,7 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   stopifnot(!any(is.na(.date)))
   excel_sheet$date <- .date
 
-  excel_sheet$value <- suppressWarnings(as.numeric(excel_sheet$value))
+  excel_sheet$value <- rba_value_to_num(excel_sheet$value)
   excel_sheet$table_title <- .table_title
 
   excel_sheet <- dplyr::filter(excel_sheet, !is.na(.data$value))
@@ -184,13 +184,6 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
       c(.data$series, .data$description),
       stringr::str_squish
     ))
-
-  excel_sheet <- excel_sheet[order(
-    excel_sheet$series,
-    excel_sheet$date
-  ), ,
-  drop = FALSE
-  ]
 
   excel_sheet
 }

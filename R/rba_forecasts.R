@@ -15,8 +15,10 @@ rba_forecasts <- function(refresh = TRUE) {
     recent_forecasts <- recent_forecasts
   }
 
-  dplyr::bind_rows(hist_forecasts,
-                   recent_forecasts)
+  dplyr::bind_rows(
+    hist_forecasts,
+    recent_forecasts
+  )
 }
 
 
@@ -37,7 +39,6 @@ rba_forecasts <- function(refresh = TRUE) {
 #' }
 #' @keywords internal
 scrape_rba_forecasts <- function() {
-
   recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
 
   recent_forecast_urls <- recent_forecast_list_url %>%
@@ -48,7 +49,6 @@ scrape_rba_forecasts <- function() {
   recent_forecast_urls <- paste0("https://www.rba.gov.au", recent_forecast_urls)
 
   load_recent_table <- function(url) {
-
     forecast_date <- gsub(".*https://www.rba.gov.au/publications/smp/(.+)/forecasts.html*", "\\1", url)
     forecast_date <- paste0(forecast_date, "/01")
     forecast_date <- lubridate::ymd(forecast_date)
@@ -74,52 +74,58 @@ scrape_rba_forecasts <- function() {
       tidyr::pivot_longer(-.data$series_desc, names_to = "q_year")
 
     table <- table %>%
-      dplyr::mutate(forecast_date = forecast_date,
-             notes = notes)
+      dplyr::mutate(
+        forecast_date = forecast_date,
+        notes = notes
+      )
 
     table <- table %>%
-      dplyr::mutate(date = lubridate::dmy(paste0("01 ", .data$q_year)),
-             source = "SMP") %>%
+      dplyr::mutate(
+        date = lubridate::dmy(paste0("01 ", .data$q_year)),
+        source = "SMP"
+      ) %>%
       dplyr::select(-.data$q_year)
 
     table <- table %>%
-      dplyr::mutate(value = rba_value_to_num(.data$value) )
+      dplyr::mutate(value = rba_value_to_num(.data$value))
 
     table <- table %>%
-      dplyr::mutate(series = dplyr::case_when(.data$series_desc == "Gross domestic product" ~ "gdp_change",
-                                .data$series_desc == "Household consumption" ~ "hh_cons_change",
-                                .data$series_desc == "Dwelling investment" ~ "dwelling_inv_change",
-                                .data$series_desc == "Business investment" ~ "business_inv_change",
-                                .data$series_desc == "Public demand" ~ "public_demand_change",
-                                .data$series_desc == "Gross national expenditure" ~ "gne_change",
-                                .data$series_desc == "Imports" ~ "imports_change",
-                                .data$series_desc == "Exports" ~ "exports_change",
-                                .data$series_desc == "Real household disposable income" ~ "real_hh_disp_income_change",
-                                .data$series_desc == "Terms of trade" ~ "tot_change",
-                                .data$series_desc == "Major trading partner (export-weighted) GDP" ~ "trading_partner_gdp_change",
-                                grepl("Unemployment rate", .data$series_desc) ~ "unemp_rate",
-                                .data$series_desc == "Employment" ~ "employment_change",
-                                .data$series_desc == "Wage price index" ~ "wpi_change",
-                                .data$series_desc == "Nominal (non-farm) average earnings per hour" ~ "aena_change",
-                                .data$series_desc == "Trimmed mean inflation" ~ "underlying_annual_inflation",
-                                .data$series_desc == "Consumer price index" ~ "cpi_annual_inflation",
-                                TRUE ~ NA_character_))
+      dplyr::mutate(series = dplyr::case_when(
+        .data$series_desc == "Gross domestic product" ~ "gdp_change",
+        .data$series_desc == "Household consumption" ~ "hh_cons_change",
+        .data$series_desc == "Dwelling investment" ~ "dwelling_inv_change",
+        .data$series_desc == "Business investment" ~ "business_inv_change",
+        .data$series_desc == "Public demand" ~ "public_demand_change",
+        .data$series_desc == "Gross national expenditure" ~ "gne_change",
+        .data$series_desc == "Imports" ~ "imports_change",
+        .data$series_desc == "Exports" ~ "exports_change",
+        .data$series_desc == "Real household disposable income" ~ "real_hh_disp_income_change",
+        .data$series_desc == "Terms of trade" ~ "tot_change",
+        .data$series_desc == "Major trading partner (export-weighted) GDP" ~ "trading_partner_gdp_change",
+        grepl("Unemployment rate", .data$series_desc) ~ "unemp_rate",
+        .data$series_desc == "Employment" ~ "employment_change",
+        .data$series_desc == "Wage price index" ~ "wpi_change",
+        .data$series_desc == "Nominal (non-farm) average earnings per hour" ~ "aena_change",
+        .data$series_desc == "Trimmed mean inflation" ~ "underlying_annual_inflation",
+        .data$series_desc == "Consumer price index" ~ "cpi_annual_inflation",
+        TRUE ~ NA_character_
+      ))
     table
   }
 
   recent_forecasts <- purrr::map_dfr(recent_forecast_urls, load_recent_table)
 
   recent_forecasts <- recent_forecasts %>%
-    dplyr::select(.data$forecast_date,
-                  .data$date,
-                  .data$series,
-                  .data$value,
-                  .data$series_desc,
-                  .data$source,
-                  .data$notes,
-                  dplyr::everything())
+    dplyr::select(
+      .data$forecast_date,
+      .data$date,
+      .data$series,
+      .data$value,
+      .data$series_desc,
+      .data$source,
+      .data$notes,
+      dplyr::everything()
+    )
 
   recent_forecasts
 }
-
-

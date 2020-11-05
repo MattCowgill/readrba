@@ -7,19 +7,24 @@
 rba_value_to_num(x)
 }
 \arguments{
-\item{x}{character vector}
+\item{x}{character vector of number-like values, such as c("1.0", "-2", "1½", "1½–2½").}
+}
+\value{
+Numeric vector the same length as \code{x}
 }
 \description{
-Some RBA data are given as ranges (eg. 3-4\%). We want to take the
-mean of the range (3.5\%). This primarily applies to forecasts, but also
+Some RBA data are given as ranges (eg. 3-4\%). In this case,
+we want to take the mean of the range (3.5\%).
+This primarily applies to forecasts, but also
 includes some actual data (such as the cash rate target in the early 1990s).
 }
 \details{
 Other values have non-standard characters such as
-em-dashes rather than minus signs. We want to replace these and convert
-to numeric.
+em-dashes rather than minus signs. We want to replace these with minus signs.
 }
 \examples{
+\dontrun{
 rba_value_to_num(c("1.0", "-2", "1½", "1½–2½", "1½–2½", "1½–2½", "1½–2½"))
+}
 }
 \keyword{internal}

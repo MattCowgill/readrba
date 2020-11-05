@@ -73,8 +73,8 @@ load_hist_sheet <- function(filename, sheet_name) {
       -date
     ) %>%
     tidyr::separate(series,
-                    into = c("forecast_date", "notes", "source"),
-                    sep = ";"
+      into = c("forecast_date", "notes", "source"),
+      sep = ";"
     ) %>%
     mutate(across(everything(), na_if, y = "NA"))
 
@@ -101,13 +101,15 @@ hist_forecasts <- purrr::map_dfr(
 )
 
 hist_forecasts <- hist_forecasts %>%
-  mutate(series = case_when(series_desc == "GDP - 1 quarter change" ~ "gdp_change",
-                            series_desc == "GDP - Level" ~ "gdp_level",
-                            series_desc == "CPI - 4 quarter change" ~ "cpi_annual_inflation",
-                            series_desc == "Underlying - 4 quarter change" ~ "underlying_annual_inflation",
-                            series_desc == "Underlying - 1 quarter change" ~ "underlying_quarterly_inflation",
-                            series_desc == "Unemployment rate - Level" ~ "unemp_rate",
-                            TRUE ~ NA_character_) )
+  mutate(series = case_when(
+    series_desc == "GDP - 1 quarter change" ~ "gdp_change",
+    series_desc == "GDP - Level" ~ "gdp_level",
+    series_desc == "CPI - 4 quarter change" ~ "cpi_annual_inflation",
+    series_desc == "Underlying - 4 quarter change" ~ "underlying_annual_inflation",
+    series_desc == "Underlying - 1 quarter change" ~ "underlying_quarterly_inflation",
+    series_desc == "Unemployment rate - Level" ~ "unemp_rate",
+    TRUE ~ NA_character_
+  ))
 
 hist_forecasts$value <- as.numeric(hist_forecasts$value)
 
@@ -122,7 +124,6 @@ recent_forecasts <- scrape_rba_forecasts()
 
 
 usethis::use_data(table_list, series_list,
-                  hist_forecasts, recent_forecasts,
-                  overwrite = TRUE, internal = TRUE
+  hist_forecasts, recent_forecasts,
+  overwrite = TRUE, internal = TRUE
 )
-
