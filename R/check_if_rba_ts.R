@@ -6,7 +6,7 @@
 #' @noRd
 
 check_if_rba_ts <- function(df) {
-  stopifnot(inherits(x, "data.frame"))
+  stopifnot(inherits(df, "data.frame"))
 
   first_col <- df[, 1]
 
