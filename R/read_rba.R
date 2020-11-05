@@ -23,6 +23,11 @@
 #' tables published by the Reserve Bank of Australia. You can specify the
 #' requested data using the `table_no` or `series_id`.
 #'
+#' To find the `table_no` or `series_id` that corresponds to the data you want,
+#' use the functions `browse_rba_series()` and/or `browse_rba_tables()`.
+#'
+#' To see which tables cannot currently be read, run `browse_rba_tables(FALSE)`.
+#'
 #' `read_rba_seriesid()` is a wrapper around `read_rba()`.
 #' `rba_stat_table()` is a wrapper around `read_rba()`.
 #'

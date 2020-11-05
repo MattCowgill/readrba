@@ -8,7 +8,7 @@
 \usage{
 browse_rba_series(search_string = "")
 
-browse_rba_tables(search_string = "")
+browse_rba_tables(search_string = "", refresh = FALSE)
 
 rba_list_tables(...)
 }
@@ -16,13 +16,20 @@ rba_list_tables(...)
 \item{search_string}{Word or phrase to search for, such as "gold" or "commodity" or "labour".
 If left as \code{""}, the function will return all series.}
 
+\item{refresh}{logical; \code{FALSE} by default. When \code{FALSE}, internal data is
+used. When \code{TRUE}, the RBA website is re-scraped to obtain current information
+about available tables This can take a few seconds.}
+
 \item{...}{arguments to \code{rba_list_tables()} passed to \code{browse_rba_tables()}}
 }
 \value{
 A \code{data.frame} (\code{tbl_df}) containing RBA data series/tables that match the \code{search_string}.
+Where no \code{search_string} is supplied, the data.frame will contain information
+about all RBA series/tables.
 }
 \description{
-Browse available RBA data series
+Use these functions to find the table number or series ID of the data you're
+interested in.
 }
 \details{
 rba_list_tables() is a wrapper around browse_rba_tables()
@@ -46,4 +53,11 @@ browse_rba_tables("labour")
 
 # Or all tables
 browse_rba_tables()
+
+# To re-scrape the RBA website to ensure you have up-to-date information
+# about available tables:
+\dontrun{
+browse_rba_tables(refresh = TRUE)
+}
+
 }
