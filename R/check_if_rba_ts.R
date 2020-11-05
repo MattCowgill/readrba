@@ -6,6 +6,8 @@
 #' @noRd
 
 check_if_rba_ts <- function(df) {
+  stopifnot(inherits(x, "data.frame"))
+
   first_col <- df[, 1]
 
   correct_metadata <- purrr::map_lgl(

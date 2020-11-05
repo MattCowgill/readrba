@@ -9,6 +9,7 @@ test_that("browse_rba functions work", {
 
   # Tables
   tabs <- browse_rba_tables()
+  expect_identical(tabs, rba_list_tables())
   expect_is(tabs, "tbl_df")
   expect_length(tabs, 5)
   expect_gt(nrow(tabs), 100)
