@@ -30,7 +30,7 @@ rba_forecasts <- function(refresh = TRUE) {
 #'  \item{`forecast_date`}{ The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the `forecast_date` for forecasts in the February 2020 Statement on Monetary Policy is `as.Date("2020-02-01")`.}
 #'  \item{`date`}{ The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be `as.Date("2021-06-01")`.}
 #'  \item{`series`}{ Short, snake_case description of the data series being forecast, such as `gdp_change` or `unemp_rate`.}
-#'  \item{`value`}{ The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be `3`.}
+#'  \item{`value`}{ The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be `3`. Note that where a forecast is given as a range (eg. 3.5-4.5%) the `value` will be the midpoint of the range (eg. 4%).}
 #'  \item{`series_desc`}{ Full description of the series being forecast, as per the RBA website, such as "Real household disposable income".}
 #'  \item{`source`}{ For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy.}
 #'  \item{`notes`}{ Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given `forecast_date`.}
@@ -82,18 +82,8 @@ scrape_rba_forecasts <- function() {
              source = "SMP") %>%
       dplyr::select(-.data$q_year)
 
-    value_to_num <- function(x) {
-      x <- gsub("\u2013", "-", x)
-      x <- gsub(intToUtf8(8722), "-", x)
-      x <- gsub("\u00BD", ".5", x)
-      x <- gsub("\u00BC", ".25", x)
-      x <- gsub("\u00BE", ".75", x)
-      x <- as.numeric(x)
-      x
-    }
-
     table <- table %>%
-      dplyr::mutate(value = value_to_num(.data$value) )
+      dplyr::mutate(value = rba_value_to_num(.data$value) )
 
     table <- table %>%
       dplyr::mutate(series = dplyr::case_when(.data$series_desc == "Gross domestic product" ~ "gdp_change",
@@ -131,3 +121,5 @@ scrape_rba_forecasts <- function() {
 
   recent_forecasts
 }
+
+

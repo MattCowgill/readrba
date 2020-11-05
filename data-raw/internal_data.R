@@ -114,6 +114,8 @@ hist_forecasts$value <- as.numeric(hist_forecasts$value)
 hist_forecasts <- hist_forecasts %>%
   filter(!is.na(value))
 
+# Create 2014-18 forecasts -----
+
 # Create recent_forecasts -----
 
 recent_forecasts <- scrape_rba_forecasts()
