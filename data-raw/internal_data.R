@@ -208,6 +208,6 @@ forecasts <- dplyr::bind_rows(hist_forecasts,
 save(forecasts, file = file.path("data-raw", "forecasts.Rda"))
 
 usethis::use_data(table_list, series_list,
-  hist_forecasts, forecasts_1418, recent_forecasts, forecasts,
+  hist_forecasts, forecasts_1418, recent_forecasts,
   overwrite = TRUE, internal = TRUE
 )

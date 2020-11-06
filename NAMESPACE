@@ -3,6 +3,7 @@
 export("%>%")
 export(browse_rba_series)
 export(browse_rba_tables)
+export(rba_forecasts)
 export(rba_list_tables)
 export(rba_stat_table)
 export(read_rba)
