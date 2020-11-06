@@ -177,8 +177,8 @@ forecasts <- rba_forecasts(refresh = FALSE)
 
 Here's what they look like:
 
-```{r, include = F}
-knitr::kable(forecasts)
+```{r, echo = F}
+dplyr::glimpse(forecasts)
 ```
 
 Let's visualise all the Bank's unemployment rate forecasts since 1990:
