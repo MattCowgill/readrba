@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -138,6 +138,8 @@
   path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
 
+<span class='fu'>rba_stat_table</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
+
 <span class='fu'>read_rba_seriesid</span><span class='op'>(</span><span class='va'>series_id</span>, path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -167,7 +169,12 @@ both current and historical data will be included in the output.</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>Directory in which to save file(s). Default is <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
+      <td><p>Directory in which to save downloaded RBA Excel file(s).
+Default is <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments in <code>read_stat_table()</code> passed to <code>read_rba()</code></p></td>
     </tr>
     </table>
 
@@ -179,7 +186,11 @@ both current and historical data will be included in the output.</p></td>
     <p><code>read_rba()</code> downloads, imports and tidies data from statistical
 tables published by the Reserve Bank of Australia. You can specify the
 requested data using the <code>table_no</code> or <code>series_id</code>.</p>
-<p><code>read_rba_seriesid()</code> is a wrapper around <code>read_rba()</code>.</p>
+<p>To find the <code>table_no</code> or <code>series_id</code> that corresponds to the data you want,
+use the functions <code><a href='browse_rba_series.html'>browse_rba_series()</a></code> and/or <code><a href='browse_rba_series.html'>browse_rba_tables()</a></code>.</p>
+<p>To see which tables cannot currently be read, run <code><a href='browse_rba_series.html'>browse_rba_tables(FALSE)</a></code>.</p>
+<p><code>read_rba_seriesid()</code> is a wrapper around <code>read_rba()</code>.
+<code>rba_stat_table()</code> is a wrapper around <code>read_rba()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

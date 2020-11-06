@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Browse available RBA data series — browse_rba_series" />
-<meta property="og:description" content="Browse available RBA data series" />
+<meta property="og:description" content="Use these functions to find the table number or series ID of the data you're
+interested in." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -128,12 +129,15 @@
     </div>
 
     <div class="ref-description">
-    <p>Browse available RBA data series</p>
+    <p>Use these functions to find the table number or series ID of the data you're
+interested in.</p>
     </div>
 
     <pre class="usage"><span class='fu'>browse_rba_series</span><span class='op'>(</span>search_string <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
 
-<span class='fu'>browse_rba_tables</span><span class='op'>(</span>search_string <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre>
+<span class='fu'>browse_rba_tables</span><span class='op'>(</span>search_string <span class='op'>=</span> <span class='st'>""</span>, refresh <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>rba_list_tables</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,11 +147,26 @@
       <td><p>Word or phrase to search for, such as "gold" or "commodity" or "labour".
 If left as <code>""</code>, the function will return all series.</p></td>
     </tr>
+    <tr>
+      <th>refresh</th>
+      <td><p>logical; <code>FALSE</code> by default. When <code>FALSE</code>, internal data is
+used. When <code>TRUE</code>, the RBA website is re-scraped to obtain current information
+about available tables This can take a few seconds.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments to <code>rba_list_tables()</code> passed to <code>browse_rba_tables()</code></p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>data.frame</code> (<code>tbl_df</code>) containing RBA data series/tables that match the <code>search_string</code>.</p>
+    <p>A <code>data.frame</code> (<code>tbl_df</code>) containing RBA data series/tables that match the <code>search_string</code>.
+Where no <code>search_string</code> is supplied, the data.frame will contain information
+about all RBA series/tables.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>rba_list_tables() is a wrapper around browse_rba_tables()</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -192,7 +211,7 @@ If left as <code>""</code>, the function will return all series.</p></td>
 #&gt; </span><span style='color: #555555;'># … with 1 more variable: frequency </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
 <span class='co'># Or all series</span>
 <span class='fu'>browse_rba_series</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4,252 x 8</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4,258 x 8</span><span>
 #&gt;    table_no series series_id series_type table_title cur_hist description
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
 #&gt; </span><span style='color: #555555;'> 1</span><span> A1       Austr… ARBAAASTW Original    A1 Reserve… current  Australian…
@@ -205,7 +224,7 @@ If left as <code>""</code>, the function will return all series.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> A1       Other… ARBALOLW  Original    A1 Reserve… current  Other liab…
 #&gt; </span><span style='color: #555555;'> 9</span><span> A1       Total… ARBAATAW  Original    A1 Reserve… current  Total RBA …
 #&gt; </span><span style='color: #555555;'>10</span><span> A1       Total… ARBALTLW  Original    A1 Reserve… current  Total RBA …
-#&gt; </span><span style='color: #555555;'># … with 4,242 more rows, and 1 more variable: frequency </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 4,248 more rows, and 1 more variable: frequency </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
 <span class='co'># Or just look for tables that contain the word 'labour'</span>
 <span class='fu'>browse_rba_tables</span><span class='op'>(</span><span class='st'>"labour"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
@@ -228,7 +247,14 @@ If left as <code>""</code>, the function will return all series.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> Banknotes on Issue by … A6    https://rba.gov.au/… current           TRUE    
 #&gt; </span><span style='color: #555555;'> 9</span><span> Detected Australian Co… A7    https://rba.gov.au/… current           TRUE    
 #&gt; </span><span style='color: #555555;'>10</span><span> Assets of Financial In… B1    https://rba.gov.au/… current           TRUE    
-#&gt; </span><span style='color: #555555;'># … with 113 more rows</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 113 more rows</span><span></div><div class='input'>
+<span class='co'># To re-scrape the RBA website to ensure you have up-to-date information</span>
+<span class='co'># about available tables:</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>browse_rba_tables</span><span class='op'>(</span>refresh <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
