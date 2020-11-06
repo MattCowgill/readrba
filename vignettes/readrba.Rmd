@@ -161,3 +161,31 @@ filtered_f2 %>%
   ggplot(aes(x = date, y = spread_10_2)) +
   geom_line()
 ```
+
+### Example: RBA forecasts
+The package also includes all public forecasts of key economic variables made 
+by the Reserve Bank since 1990. The `rba_forecasts()` function returns 
+these forecasts in a tidy tibble -- including the latest forecasts, scraped
+from the Statement on Monetary Policy.
+
+```{r, eval = F}
+forecasts <- rba_forecasts()
+```
+```{r, include = F}
+forecasts <- rba_forecasts(refresh = FALSE)
+```
+
+Here's what they look like:
+
+```{r, include = F}
+knitr::kable(forecasts)
+```
+
+Let's visualise all the Bank's unemployment rate forecasts since 1990:
+
+```{r viz-unemp-forecasts}
+forecasts %>%
+  filter(series == "unemp_rate") %>%
+  ggplot(aes(x = date, y = value, group = forecast_date)) +
+  geom_line()
+```

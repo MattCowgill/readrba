@@ -36,13 +36,14 @@ remotes::install_github("mattcowgill/readrba")
 
 ### Reading RBA data
 
-There is one main function in {readrba}: `read_rba()`.
+There primary function in {readrba} is `read_rba()`.
 
 Here’s how you fetch the current version of a single RBA statistical
-table: table G1, consumer price inflation:
+table: table G1, consumer price inflation using `read_rba()`:
 
 ``` r
 cpi_table <- readrba::read_rba(table_no = "g1")
+#> Downloading https://rba.gov.au/statistics/tables/xls/g01hist.xls
 ```
 
 The object returned by `read_rba()` is a tidy tibble (ie. in ‘long’
@@ -55,10 +56,10 @@ head(cpi_table)
 #>   <date>     <chr>  <dbl> <chr>     <chr>       <chr> <chr>  <date>    
 #> 1 1922-06-01 Consu…   2.8 Quarterly Original    Inde… ABS /… 2020-10-29
 #> 2 1922-09-01 Consu…   2.8 Quarterly Original    Inde… ABS /… 2020-10-29
-#> 3 1922-09-01 Quart…  -0.1 Quarterly Original    Per … ABS /… 2020-10-29
-#> 4 1922-12-01 Consu…   2.7 Quarterly Original    Inde… ABS /… 2020-10-29
-#> 5 1922-12-01 Quart…  -1.1 Quarterly Original    Per … ABS /… 2020-10-29
-#> 6 1923-03-01 Consu…   2.7 Quarterly Original    Inde… ABS /… 2020-10-29
+#> 3 1922-12-01 Consu…   2.7 Quarterly Original    Inde… ABS /… 2020-10-29
+#> 4 1923-03-01 Consu…   2.7 Quarterly Original    Inde… ABS /… 2020-10-29
+#> 5 1923-06-01 Consu…   2.8 Quarterly Original    Inde… ABS /… 2020-10-29
+#> 6 1923-09-01 Consu…   2.9 Quarterly Original    Inde… ABS /… 2020-10-29
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 ```
@@ -68,17 +69,19 @@ one tidy tibble:
 
 ``` r
 rba_data <- readrba::read_rba(table_no = c("a1", "g1"))
+#> Downloading https://rba.gov.au/statistics/tables/xls/a01whist-summary.xls
+#> https://rba.gov.au/statistics/tables/xls/g01hist.xls
 
 head(rba_data)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
 #>   <date>     <chr>  <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-10-23
-#> 2 1994-06-01 Capit…   633 Weekly    Original    $ mi… RBA    2020-10-23
-#> 3 1994-06-01 Depos…  2605 Weekly    Original    $ mi… RBA    2020-10-23
-#> 4 1994-06-01 Excha…  3241 Weekly    Original    $ mi… RBA    2020-10-23
-#> 5 1994-06-01 Gold … 19179 Weekly    Original    $ mi… RBA    2020-10-23
-#> 6 1994-06-01 Notes… 17231 Weekly    Original    $ mi… RBA    2020-10-23
+#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-10-30
+#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-10-30
+#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-10-30
+#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-10-30
+#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-10-30
+#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-10-30
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -93,6 +96,7 @@ only:
 
 ``` r
 cpi_series <- readrba::read_rba(series_id = "GCPIAG")
+#> Downloading https://rba.gov.au/statistics/tables/xls/g01hist.xls
 head(cpi_series)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
@@ -120,17 +124,18 @@ available, using the `cur_hist` argument:
 ``` r
 
 hist_a11 <- readrba::read_rba(table_no = "a1.1", cur_hist = "historical")
+#> Downloading https://rba.gov.au/statistics/tables/xls-hist/a01hist.xls
 
 head(hist_a11)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
 #>   <date>     <chr>  <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1969-07-31 Austr…   865 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 2 1969-07-31 Capit…    60 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 3 1969-07-31 Excha…  1144 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 4 1969-07-31 Gold …  1160 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 5 1969-07-31 Notes…  1104 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 6 1969-07-31 Other…   561 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 1 1977-07-31 Austr…   654 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 2 1977-08-31 Austr…   665 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 3 1977-09-30 Austr…   695 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 4 1977-10-31 Austr…   609 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 5 1977-11-30 Austr…   560 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 6 1977-12-31 Austr…   614 Monthly   Original; … $ mi… RBA    2015-06-26
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 ```
@@ -161,7 +166,7 @@ readrba::browse_rba_tables()
 
 ``` r
 readrba::browse_rba_series()
-#> # A tibble: 4,252 x 8
+#> # A tibble: 4,258 x 8
 #>    table_no series series_id series_type table_title cur_hist description
 #>    <chr>    <chr>  <chr>     <chr>       <chr>       <chr>    <chr>      
 #>  1 A1       Austr… ARBAAASTW Original    A1 Reserve… current  Australian…
@@ -174,7 +179,7 @@ readrba::browse_rba_series()
 #>  8 A1       Other… ARBALOLW  Original    A1 Reserve… current  Other liab…
 #>  9 A1       Total… ARBAATAW  Original    A1 Reserve… current  Total RBA …
 #> 10 A1       Total… ARBALTLW  Original    A1 Reserve… current  Total RBA …
-#> # … with 4,242 more rows, and 1 more variable: frequency <chr>
+#> # … with 4,248 more rows, and 1 more variable: frequency <chr>
 ```
 
 You can specify a search string to filter the tables or series, as in:
@@ -187,6 +192,51 @@ readrba::browse_rba_tables("inflation")
 #> 1 Consumer Price Infla… G1    https://rba.gov.au/sta… current           TRUE    
 #> 2 Consumer Price Infla… G2    https://rba.gov.au/sta… current           TRUE    
 #> 3 Inflation Expectatio… G3    https://rba.gov.au/sta… current           TRUE
+```
+
+### RBA forecasts
+
+The function `rba_forecasts()` provides easy access to all the RBA’s
+public forecasts of key economic variables since 1990. The function
+scrapes the RBA website to obtain the latest Statement on Monetary
+Policy forecasts.
+
+``` r
+readrba::rba_forecasts()
+#> # A tibble: 6,355 x 8
+#>    series_desc    forecast_date notes source value date       year_qtr series   
+#>    <chr>          <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr>    
+#>  1 CPI - 4 quart… 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_annu…
+#>  2 CPI - 4 quart… 1990-03-01    <NA>  JEFG     7.6 1990-06-01    1990. cpi_annu…
+#>  3 CPI - 4 quart… 1990-03-01    <NA>  JEFG     6.5 1990-09-01    1990. cpi_annu…
+#>  4 CPI - 4 quart… 1990-03-01    <NA>  JEFG     6   1990-12-01    1990. cpi_annu…
+#>  5 CPI - 4 quart… 1990-03-01    <NA>  JEFG     5.9 1991-03-01    1991. cpi_annu…
+#>  6 CPI - 4 quart… 1990-03-01    <NA>  JEFG     6.2 1991-06-01    1991. cpi_annu…
+#>  7 Unemployment … 1990-03-01    <NA>  JEFG     5.9 1989-12-01    1989. unemp_ra…
+#>  8 Unemployment … 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp_ra…
+#>  9 Unemployment … 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp_ra…
+#> 10 Unemployment … 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp_ra…
+#> # … with 6,345 more rows
+```
+
+If you just want the latest forecasts, you can request them:
+
+``` r
+readrba::rba_forecasts(all_or_latest = "latest")
+#> # A tibble: 102 x 7
+#>    forecast_date date       series    value series_desc     source notes        
+#>    <date>        <date>     <chr>     <dbl> <chr>           <chr>  <chr>        
+#>  1 2020-11-01    2020-06-01 aena_ch…  11.6  Nominal (non-f… SMP    (a) Forecast…
+#>  2 2020-11-01    2020-12-01 aena_ch…   4.25 Nominal (non-f… SMP    (a) Forecast…
+#>  3 2020-11-01    2021-06-01 aena_ch…  -7.25 Nominal (non-f… SMP    (a) Forecast…
+#>  4 2020-11-01    2021-12-01 aena_ch…  -2.25 Nominal (non-f… SMP    (a) Forecast…
+#>  5 2020-11-01    2022-06-01 aena_ch…   1    Nominal (non-f… SMP    (a) Forecast…
+#>  6 2020-11-01    2022-12-01 aena_ch…   1.75 Nominal (non-f… SMP    (a) Forecast…
+#>  7 2020-11-01    2020-06-01 busines…  -5.5  Business inves… SMP    (a) Forecast…
+#>  8 2020-11-01    2020-12-01 busines… -14    Business inves… SMP    (a) Forecast…
+#>  9 2020-11-01    2021-06-01 busines…  -9    Business inves… SMP    (a) Forecast…
+#> 10 2020-11-01    2021-12-01 busines…   4    Business inves… SMP    (a) Forecast…
+#> # … with 92 more rows
 ```
 
 ## Data availability
