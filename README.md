@@ -34,6 +34,56 @@ remotes::install_github("mattcowgill/readrba")
 
 ## Examples
 
+``` r
+library(ggplot2)
+library(dplyr)
+#> Warning: package 'dplyr' was built under R version 4.0.2
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+library(readrba)
+```
+
+### Quick examples
+
+With a few lines of code, you can get a data series from the RBA and
+visualise it. Here’s the unemployment rate:
+
+``` r
+unemp_rate <- read_rba(series_id = "GLFSURSA") 
+#> Downloading https://rba.gov.au/statistics/tables/xls/h05hist.xls
+
+unemp_rate %>%
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Unemployment rate (actual)")
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="672" />
+
+And you can also easily get the RBA’s public forecasts - from 1990 to
+present - and visualise those. Here’s every public forecast of the
+unemployment rate the RBA has made over the past three decades:
+
+``` r
+unemp_forecasts <- rba_forecasts() %>%
+  filter(series == "unemp_rate")
+
+unemp_forecasts %>%
+  ggplot(aes(x = date, y = value, group = forecast_date)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Unemployment rate (RBA forecasts)")
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="672" />
+
 ### Reading RBA data
 
 There primary function in {readrba} is `read_rba()`.
@@ -42,7 +92,7 @@ Here’s how you fetch the current version of a single RBA statistical
 table: table G1, consumer price inflation using `read_rba()`:
 
 ``` r
-cpi_table <- readrba::read_rba(table_no = "g1")
+cpi_table <- read_rba(table_no = "g1")
 #> Downloading https://rba.gov.au/statistics/tables/xls/g01hist.xls
 ```
 
@@ -68,7 +118,7 @@ You can also request multiple tables. They’ll be returned together as
 one tidy tibble:
 
 ``` r
-rba_data <- readrba::read_rba(table_no = c("a1", "g1"))
+rba_data <- read_rba(table_no = c("a1", "g1"))
 #> Downloading https://rba.gov.au/statistics/tables/xls/a01whist-summary.xls
 #> https://rba.gov.au/statistics/tables/xls/g01hist.xls
 
@@ -76,12 +126,12 @@ head(rba_data)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
 #>   <date>     <chr>  <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-10-30
-#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-10-30
-#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-10-30
-#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-10-30
-#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-10-30
-#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-10-30
+#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-11-06
+#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-11-06
+#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-11-06
+#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-11-06
+#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-11-06
+#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-11-06
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -95,7 +145,7 @@ identifier(s). For example, to getch the consumer price index series
 only:
 
 ``` r
-cpi_series <- readrba::read_rba(series_id = "GCPIAG")
+cpi_series <- read_rba(series_id = "GCPIAG")
 #> Downloading https://rba.gov.au/statistics/tables/xls/g01hist.xls
 head(cpi_series)
 #> # A tibble: 6 x 11
@@ -123,7 +173,7 @@ available, using the `cur_hist` argument:
 
 ``` r
 
-hist_a11 <- readrba::read_rba(table_no = "a1.1", cur_hist = "historical")
+hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 #> Downloading https://rba.gov.au/statistics/tables/xls-hist/a01hist.xls
 
 head(hist_a11)
@@ -147,7 +197,7 @@ ID you need. These are `browse_rba_tables()` and `browse_rba_series()`.
 Each returns a tibble with information about the available RBA data.
 
 ``` r
-readrba::browse_rba_tables()
+browse_rba_tables()
 #> # A tibble: 123 x 5
 #>    title                   no    url                  current_or_histo… readable
 #>    <chr>                   <chr> <chr>                <chr>             <lgl>   
@@ -165,7 +215,7 @@ readrba::browse_rba_tables()
 ```
 
 ``` r
-readrba::browse_rba_series()
+browse_rba_series()
 #> # A tibble: 4,258 x 8
 #>    table_no series series_id series_type table_title cur_hist description
 #>    <chr>    <chr>  <chr>     <chr>       <chr>       <chr>    <chr>      
@@ -185,7 +235,7 @@ readrba::browse_rba_series()
 You can specify a search string to filter the tables or series, as in:
 
 ``` r
-readrba::browse_rba_tables("inflation")
+browse_rba_tables("inflation")
 #> # A tibble: 3 x 5
 #>   title                 no    url                     current_or_histo… readable
 #>   <chr>                 <chr> <chr>                   <chr>             <lgl>   
@@ -202,7 +252,7 @@ scrapes the RBA website to obtain the latest Statement on Monetary
 Policy forecasts.
 
 ``` r
-readrba::rba_forecasts()
+rba_forecasts()
 #> # A tibble: 6,355 x 8
 #>    series_desc    forecast_date notes source value date       year_qtr series   
 #>    <chr>          <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr>    
@@ -222,7 +272,7 @@ readrba::rba_forecasts()
 If you just want the latest forecasts, you can request them:
 
 ``` r
-readrba::rba_forecasts(all_or_latest = "latest")
+rba_forecasts(all_or_latest = "latest")
 #> # A tibble: 102 x 7
 #>    forecast_date date       series    value series_desc     source notes        
 #>    <date>        <date>     <chr>     <dbl> <chr>           <chr>  <chr>        
