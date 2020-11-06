@@ -81,7 +81,7 @@ from November 2018 onwards." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@ from November 2018 onwards." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Scrape the RBA's website to obtain recent forecasts</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/scrape_rba_forecasts.R'><code>R/scrape_rba_forecasts.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/rba_forecasts.R'><code>R/rba_forecasts.R</code></a></small>
     <div class="hidden name"><code>scrape_rba_forecasts.Rd</code></div>
     </div>
 
@@ -136,7 +136,7 @@ from November 2018 onwards.</p>
 <li><p><code>forecast_date</code> The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2020-02-01")</a></code>.</p></li>
 <li><p><code>date</code> The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2021-06-01")</a></code>.</p></li>
 <li><p><code>series</code> Short, snake_case description of the data series being forecast, such as <code>gdp_change</code> or <code>unemp_rate</code>.</p></li>
-<li><p><code>value</code> The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be <code>3</code>.</p></li>
+<li><p><code>value</code> The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be <code>3</code>. Note that where a forecast is given as a range (eg. 3.5-4.5%) the <code>value</code> will be the midpoint of the range (eg. 4%).</p></li>
 <li><p><code>series_desc</code> Full description of the series being forecast, as per the RBA website, such as "Real household disposable income".</p></li>
 <li><p><code>source</code> For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy.</p></li>
 <li><p><code>notes</code> Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given <code>forecast_date</code>.</p></li>

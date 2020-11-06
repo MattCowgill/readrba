@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function to wrangle historical F2 table to get it in the standard format
-Called indirectly from tidy_rba() — prelim_tidy_old_f2 • readrba</title>
+<title>Compile the RBA's public forecasts of key economic variables over time — rba_forecasts • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -47,10 +46,8 @@ Called indirectly from tidy_rba() — prelim_tidy_old_f2 • readrba</title>
 
 
 
-<meta property="og:title" content="Function to wrangle historical F2 table to get it in the standard format
-Called indirectly from tidy_rba() — prelim_tidy_old_f2" />
-<meta property="og:description" content="Function to wrangle historical F2 table to get it in the standard format
-Called indirectly from tidy_rba()" />
+<meta property="og:title" content="Compile the RBA's public forecasts of key economic variables over time — rba_forecasts" />
+<meta property="og:description" content="Compile the RBA's public forecasts of key economic variables over time" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +116,69 @@ Called indirectly from tidy_rba()" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Function to wrangle historical F2 table to get it in the standard format
-Called indirectly from tidy_rba()</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/prelim_tidy_rba.R'><code>R/prelim_tidy_rba.R</code></a></small>
-    <div class="hidden name"><code>prelim_tidy_old_f2.Rd</code></div>
+    <h1>Compile the RBA's public forecasts of key economic variables over time</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/rba_forecasts.R'><code>R/rba_forecasts.R</code></a></small>
+    <div class="hidden name"><code>rba_forecasts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to wrangle historical F2 table to get it in the standard format
-Called indirectly from tidy_rba()</p>
+    <p>Compile the RBA's public forecasts of key economic variables over time</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prelim_tidy_old_f2</span><span class='op'>(</span><span class='va'>excel_sheet</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rba_forecasts</span><span class='op'>(</span>
+  refresh <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  all_or_latest <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"all"</span>, <span class='st'>"latest"</span><span class='op'>)</span>,
+  remove_old <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>excel_sheet</th>
-      <td><p>Excel sheet with no tidying done</p></td>
+      <th>refresh</th>
+      <td><p>logical; default is <code>TRUE</code>. When set to <code>TRUE</code>, the RBA's
+website will be scraped to obtain recent forecasts. When <code>FALSE</code>, only
+the package's internal data will be returned, which may be out of date.</p></td>
+    </tr>
+    <tr>
+      <th>all_or_latest</th>
+      <td><p>character; default is <code>"all"</code>. When <code>"all"</code> is specified,
+all publicly-available forecasts will be returned; when <code>"latest"</code>, only the
+latest forecasts will be used.</p></td>
+    </tr>
+    <tr>
+      <th>remove_old</th>
+      <td><p>logical; default is <code>TRUE</code>. When <code>TRUE</code>, any observations
+for which the <code>date</code> is more than 180 days prior to the <code>forecast_date</code>
+is excluded.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A tidy <code>tbl_df</code> containing 7 columns:</p><ul>
+<li><p><code>forecast_date</code> The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2020-02-01")</a></code>.</p></li>
+<li><p><code>date</code> The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2021-06-01")</a></code>.</p></li>
+<li><p><code>series</code> Short, snake_case description of the data series being forecast, such as <code>gdp_change</code> or <code>unemp_rate</code>. These are consistent over time.</p></li>
+<li><p><code>value</code> The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be <code>3</code>. Note that where a forecast is given as a range (eg. 3.5-4.5%) the <code>value</code> will be the midpoint of the range (eg. 4%).</p></li>
+<li><p><code>series_desc</code> Full description of the series being forecast, as per the RBA website, such as "Real household disposable income". Note that series descriptions are not necessarily consistent over time; the values here are those published by the RBA. The <code>series</code> column is consistent over time.</p></li>
+<li><p><code>source</code> For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy. Forecasts prior to 2014 are sourced from various places; see <code>Details</code>.</p></li>
+<li><p><code>notes</code> Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given <code>forecast_date</code>.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Forecasts are not available for all series on all forecast dates. CPI
+inflation and GDP growth are included in all forecasts. The unemployment
+rate is included in most forecasts. Other series are included inconsistently,
+based on their availability in the underlying source data.</p>
+<p>All forecasts issued on or before November 2014 come from Tulip
+and Wallace (2012), RBA RDP2012-07.
+Data available: <a href='https://www.rba.gov.au/statistics/historical-forecasts.html'>https://www.rba.gov.au/statistics/historical-forecasts.html</a>.</p>
+<p>Data from 2015 to present are scraped from the RBA's quarterly Statement on
+Monetary Policy (<a href='https://www.rba.gov.au/publications/smp/2020/aug/'>https://www.rba.gov.au/publications/smp/2020/aug/</a>).
+Note from from Feb 2015 to August 2018 (inclusive) only include a few series;
+those from November 2018 onwards include more series.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
