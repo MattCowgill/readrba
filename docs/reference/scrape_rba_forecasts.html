@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function to tidy RBA sheets that are formatted in the standard way — tidy_rba_normal • readrba</title>
+<title>Scrape the RBA's website to obtain recent forecasts — scrape_rba_forecasts • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Function to tidy RBA sheets that are formatted in the standard way — tidy_rba_normal" />
-<meta property="og:description" content="Function to tidy RBA sheets that are formatted in the standard way" />
+<meta property="og:title" content="Scrape the RBA's website to obtain recent forecasts — scrape_rba_forecasts" />
+<meta property="og:description" content="Scrape and tidy forecasts from all editions of the RBA's Statement on Monetary Policy
+from November 2018 onwards." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -116,29 +117,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Function to tidy RBA sheets that are formatted in the standard way</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/tidy_rba.R'><code>R/tidy_rba.R</code></a></small>
-    <div class="hidden name"><code>tidy_rba_normal.Rd</code></div>
+    <h1>Scrape the RBA's website to obtain recent forecasts</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/scrape_rba_forecasts.R'><code>R/scrape_rba_forecasts.R</code></a></small>
+    <div class="hidden name"><code>scrape_rba_forecasts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to tidy RBA sheets that are formatted in the standard way</p>
+    <p>Scrape and tidy forecasts from all editions of the RBA's Statement on Monetary Policy
+from November 2018 onwards.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_rba_normal</span><span class='op'>(</span><span class='va'>excel_sheet</span>, <span class='va'>.table_title</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>scrape_rba_forecasts</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>excel_sheet</th>
-      <td><p>Data.frame of an RBA spreadsheet</p></td>
-    </tr>
-    <tr>
-      <th>.table_title</th>
-      <td><p>Length 1 character vector of table title</p></td>
-    </tr>
-    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A tidy <code>tbl_df</code> containing 7 columns:</p><ul>
+<li><p><code>forecast_date</code> The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2020-02-01")</a></code>.</p></li>
+<li><p><code>date</code> The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2021-06-01")</a></code>.</p></li>
+<li><p><code>series</code> Short, snake_case description of the data series being forecast, such as <code>gdp_change</code> or <code>unemp_rate</code>.</p></li>
+<li><p><code>value</code> The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be <code>3</code>.</p></li>
+<li><p><code>series_desc</code> Full description of the series being forecast, as per the RBA website, such as "Real household disposable income".</p></li>
+<li><p><code>source</code> For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy.</p></li>
+<li><p><code>notes</code> Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given <code>forecast_date</code>.</p></li>
+</ul>
 
 
   </div>

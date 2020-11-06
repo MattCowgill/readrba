@@ -1,4 +1,4 @@
-test_that("read_rba() works", {
+test_that("read_rba() fails with unexpected input", {
   skip_if_offline()
   skip_on_cran()
 
@@ -8,6 +8,17 @@ test_that("read_rba() works", {
   expect_error(read_rba("a1.1", cur_hist = "somearbitrarystring"))
   # Fails when table is not readable (not in standard TS format)
   expect_error(read_rba("a5"))
+  # Fails when cur_hist isn't length 1 or same length as table_no
+  expect_error(read_rba("g1", c("current", "historical")))
+  expect_error(read_rba(c("g1", "a1"), c("current", "historical", "current")))
+
+  # Fails when given nonsensical series_id
+  expect_error(read_rba(series_id = "nonsense"))
+})
+
+test_that("read_rba() works", {
+  skip_if_offline()
+  skip_on_cran()
 
   tables <- read_rba(c("a1.1", "g1"))
 
@@ -64,6 +75,15 @@ test_that("read_rba() works", {
   )
 })
 
+test_that("wrapper functions return expected output",{
+  skip_on_cran()
+  skip_if_offline()
+
+  expect_identical(read_rba("a1"),
+                   rba_stat_table("a1"))
+
+})
+
 check_df <- function(df) {
   a <- inherits(df, "tbl_df")
   b <- length(df) == 11
@@ -71,8 +91,9 @@ check_df <- function(df) {
   d <- inherits(df$date, "Date")
   e <- inherits(df$pub_date, "Date")
   f <- inherits(df$value, "numeric")
+  g <- !any(is.na(df$date))
 
-  all(a, b, c, d, e, f)
+  all(a, b, c, d, e, f, g)
 }
 
 test_that("multiple tables work", {
@@ -80,10 +101,12 @@ test_that("multiple tables work", {
   skip_on_cran()
   cur <- read_rba(table_no = "a1.1", cur_hist = "current")
   his <- read_rba(table_no = "a1.1", cur_hist = "historical")
+  manual_both <- dplyr::bind_rows(cur, his) %>%
+    dplyr::arrange(series, date)
   both <- read_rba(table_no = c("a1.1", "a1.1"), cur_hist = c("current", "historical"))
 
   expect_identical(
-    dplyr::bind_rows(cur, his),
+    manual_both,
     both
   )
 

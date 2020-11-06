@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
       </span>
     </div>
 
@@ -127,7 +127,9 @@
 
     <pre class="usage"><span class='fu'>browse_rba_series</span><span class='op'>(</span>search_string <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
 
-<span class='fu'>browse_rba_tables</span><span class='op'>(</span>search_string <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre>
+<span class='fu'>browse_rba_tables</span><span class='op'>(</span>search_string <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+
+<span class='fu'>rba_list_tables</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,11 +139,18 @@
       <td><p>Word or phrase to search for, such as "gold" or "commodity" or "labour".
 If left as <code>""</code>, the function will return all series.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments to <code>rba_list_tables()</code> passed to <code>browse_rba_tables()</code></p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>data.frame</code> (<code>tbl_df</code>) containing RBA data series/tables that match the <code>search_string</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>rba_list_tables() is a wrapper around browse_rba_tables()</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

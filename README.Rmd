@@ -34,9 +34,9 @@ remotes::install_github("mattcowgill/readrba")
 
 ## Examples
 ### Reading RBA data
-There is one main function in {readrba}: `read_rba()`.
+There primary function in {readrba} is `read_rba()`.
 
-Here's how you fetch the current version of a single RBA statistical table: table G1, consumer price inflation:
+Here's how you fetch the current version of a single RBA statistical table: table G1, consumer price inflation using `read_rba()`:
 
 ```{r}
 cpi_table <- readrba::read_rba(table_no = "g1")
@@ -91,6 +91,19 @@ You can specify a search string to filter the tables or series, as in:
 readrba::browse_rba_tables("inflation")
 ```
 
+### RBA forecasts
+The function `rba_forecasts()` provides easy access to all the RBA's public
+forecasts of key economic variables since 1990. The function scrapes the 
+RBA website to obtain the latest Statement on Monetary Policy forecasts.
+
+```{r forecasts}
+readrba::rba_forecasts()
+```
+
+If you just want the latest forecasts, you can request them:
+```{r latest-forecasts}
+readrba::rba_forecasts(all_or_latest = "latest")
+```
 
 ## Data availability
 

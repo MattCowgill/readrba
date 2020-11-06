@@ -7,7 +7,10 @@
 read_rba_local(filenames)
 }
 \arguments{
-\item{filenames}{Vector of filenames (with path) pointing to local RBA Excel sheets}
+\item{filenames}{Vector of filename(s) (with path) pointing to local RBA Excel sheets}
+}
+\value{
+A \code{tbl_df} containing tidied RBA Excel sheet(s)
 }
 \description{
 Load and tidy local RBA Excel sheets

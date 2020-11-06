@@ -17,12 +17,19 @@
 #' Note that `cur_hist` is ignored if you specify `series_id` -
 #' both current and historical data will be included in the output.
 #'
-#' @param path Directory in which to save file(s). Default is `tempdir()`.
+#' @param path Directory in which to save downloaded RBA Excel file(s).
+#' Default is `tempdir()`.
 #' @details `read_rba()` downloads, imports and tidies data from statistical
 #' tables published by the Reserve Bank of Australia. You can specify the
 #' requested data using the `table_no` or `series_id`.
 #'
+#' To find the `table_no` or `series_id` that corresponds to the data you want,
+#' use the functions `browse_rba_series()` and/or `browse_rba_tables()`.
+#'
+#' To see which tables cannot currently be read, run `browse_rba_tables(FALSE)`.
+#'
 #' `read_rba_seriesid()` is a wrapper around `read_rba()`.
+#' `rba_stat_table()` is a wrapper around `read_rba()`.
 #'
 #' @return A single tidy tibble containing the requested table(s)
 #' @examples
@@ -57,7 +64,7 @@ read_rba <- function(table_no = NULL,
   if (is.null(table_no) && is.null(series_id)) {
     stop("You must specify either `cat_no` or `series_id.")
   } else if (!is.null(table_no) & !is.null(series_id)) {
-    stop("You must specify either `cat_no` or `series_id, not both.")
+    warning("`cat_no` and `series_id` both specified; ignoring `cat_no`.")
   }
 
   if (length(cur_hist) == 1) {
@@ -137,9 +144,23 @@ read_rba_local <- function(filenames) {
 
   tidy_df <- dplyr::bind_rows(tidy_dfs)
 
+  tidy_df <- tidy_df[order(
+    tidy_df$series,
+    tidy_df$date
+  ), ,
+  drop = FALSE
+  ]
+
   tidy_df
 }
 
+#' @param ... arguments in `read_stat_table()` passed to `read_rba()`
+#' @rdname read_rba
+#' @export
+#'
+rba_stat_table <- function(...) {
+  read_rba(...)
+}
 
 #' @rdname read_rba
 #' @export

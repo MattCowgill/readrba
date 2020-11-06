@@ -1,8 +1,8 @@
 test_that("read_rba() works with series_id", {
   skip_on_cran()
   skip_if_offline()
-  # Can't specify both table_no and series_id
-  expect_error(read_rba(table_no = "g1", series_id = "GCPIAG"))
+  # Shouldn't specify both table_no and series_id
+  expect_warning(read_rba(table_no = "g1", series_id = "GCPIAG"))
 
   # Can't specify neither table_no nor series_id
   expect_error(read_rba())

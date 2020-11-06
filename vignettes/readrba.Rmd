@@ -13,7 +13,7 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7, fig.height = 5, fig.align = "center",fig.retina = 2,
+  fig.width = 5.6, fig.height = 4, fig.align = "center",fig.retina = 2,
   out.width = "100%",
   out.extra = 'style="border:0px;"'
 )
@@ -52,10 +52,9 @@ OK, so we have two unique series for 10 year bond yield - one is daily data, the
 
 I'll get the monthly data, which we can see from the table above has the series ID `FCMYGBAG10`.
 
-If you prefer, you can find the series ID by looking at the relevant spreadsheet from the RBA's website:
+If you prefer, you can find the series ID by looking at the relevant spreadsheet from the RBA's website.
 
-`r knitr::include_graphics("seriesid_spreadsheet.png")`
-
+Now we'll use that series ID to download the data:
 ```{r bondyield, eval = F}
 bond_yield <- read_rba(series_id = "FCMYGBAG10")
 ```
@@ -112,7 +111,7 @@ browse_rba_tables("government bond") %>%
   knitr::kable()
 ```
 
-The daily data is in table F2. If you prefer, you can look up the table on the [RBA website](https://www.rba.gov.au/statistics/tables/) and find the table number that way: `r knitr::include_graphics("rba_site.png")`
+The daily data is in table F2. If you prefer, you can look up the table on the [RBA website](https://www.rba.gov.au/statistics/tables/) and find the table number that way.
 
 Now we know the table number that contains the data we want, let's load it into r.
 
@@ -160,5 +159,33 @@ filtered_f2 %>%
   spread(key = series, value = value) %>%
   mutate(spread_10_2 = `Australian Government 10 year bond` - `Australian Government 2 year bond`) %>%
   ggplot(aes(x = date, y = spread_10_2)) +
+  geom_line()
+```
+
+### Example: RBA forecasts
+The package also includes all public forecasts of key economic variables made 
+by the Reserve Bank since 1990. The `rba_forecasts()` function returns 
+these forecasts in a tidy tibble -- including the latest forecasts, scraped
+from the Statement on Monetary Policy.
+
+```{r, eval = F}
+forecasts <- rba_forecasts()
+```
+```{r, include = F}
+forecasts <- rba_forecasts(refresh = FALSE)
+```
+
+Here's what they look like:
+
+```{r, echo = F}
+dplyr::glimpse(forecasts)
+```
+
+Let's visualise all the Bank's unemployment rate forecasts since 1990:
+
+```{r viz-unemp-forecasts}
+forecasts %>%
+  filter(series == "unemp_rate") %>%
+  ggplot(aes(x = date, y = value, group = forecast_date)) +
   geom_line()
 ```

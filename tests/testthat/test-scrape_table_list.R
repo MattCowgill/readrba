@@ -1,4 +1,6 @@
 test_that("scrape_table_list() scrapes urls", {
+  expect_error(scrape_table_list("nonsense"))
+
   skip_if_offline()
   skip_on_cran()
 

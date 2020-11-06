@@ -9,6 +9,7 @@ test_that("browse_rba functions work", {
 
   # Tables
   tabs <- browse_rba_tables()
+  expect_identical(tabs, rba_list_tables())
   expect_is(tabs, "tbl_df")
   expect_length(tabs, 5)
   expect_gt(nrow(tabs), 100)
@@ -21,4 +22,13 @@ test_that("browse_rba functions work", {
   cpi <- browse_rba_tables("consumer price")
   expect_gt(nrow(cpi), 1)
   expect_true("Consumer Price Inflation" %in% unique(cpi$title))
+})
+
+test_that("browse_rba_tables(refresh = TRUE) delivers expected results",{
+  skip_if_offline()
+  skip_on_cran()
+  refreshed <- browse_rba_tables(refresh = TRUE)
+  expect_is(refreshed, "tbl_df")
+  expect_length(refreshed, 5)
+  expect_gt(nrow(refreshed), 120)
 })
