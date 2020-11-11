@@ -20,9 +20,6 @@ Australia](https://rba.gov.au/statistics/tables/) in a
 [tidy](https://tidyr.tidyverse.org/articles/tidy-data.html)
 [tibble](https://tibble.tidyverse.org).
 
-This package is still in active development. Some aspects of its
-functionality are incomplete.
-
 ## Installation
 
 The package is not yet on CRAN. Install from GitHub:
