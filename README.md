@@ -13,7 +13,6 @@ status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)]
 status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba)
 [![Codecov test
 coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
-
 <!-- badges: end -->
 
 Get data from the [Reserve Bank of
@@ -37,7 +36,6 @@ remotes::install_github("mattcowgill/readrba")
 ``` r
 library(ggplot2)
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 4.0.2
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -172,7 +170,6 @@ you request. You can specify the historical version of a table, if it’s
 available, using the `cur_hist` argument:
 
 ``` r
-
 hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 #> Downloading https://rba.gov.au/statistics/tables/xls-hist/a01hist.xls
 
@@ -308,7 +305,7 @@ website. They can still be downloaded, using the following table
 numbers:
 
 | Table title                                                                      | table\_no          |
-| :------------------------------------------------------------------------------- | :----------------- |
+|:---------------------------------------------------------------------------------|:-------------------|
 | Exchange Rates – Daily – 1983 to 1986                                            | ex\_daily\_8386    |
 | Exchange Rates – Daily – 1987 to 1990                                            | ex\_daily\_8790    |
 | Exchange Rates – Daily – 1991 to 1994                                            | ex\_daily\_9194    |
@@ -332,7 +329,7 @@ time series, or because they’re particularly old.
 Tables that are **not** able to be downloaded are:
 
 | Table title                                                               | table\_no | current\_or\_historical |
-| :------------------------------------------------------------------------ | :-------- | :---------------------- |
+|:--------------------------------------------------------------------------|:----------|:------------------------|
 | Daily Foreign Exchange Market Intervention Transactions                   | A5        | current                 |
 | Household Balance Sheets – Distribution                                   | E3        | current                 |
 | Household Gearing – Distribution                                          | E4        | current                 |
