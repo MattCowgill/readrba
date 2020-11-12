@@ -8,7 +8,8 @@ test_that("correct tableis identified when single series_id supplied", {
     length(single_id$table_no),
     length(single_id$cur_hist)
   )
-  expect_equal(single_id$table_no[1], as.character("G1"))
+  expect_equal(as.character(single_id$table_no[1]),
+               as.character("G1"))
 })
 
 test_that("correct table is identified when multiple series_ids from one table are supplied", {
@@ -22,7 +23,8 @@ test_that("correct table is identified when multiple series_ids from one table a
     length(multiple_ids$table_no),
     length(multiple_ids$cur_hist)
   )
-  expect_equal(multiple_ids$table_no[1], as.character("G1"))
+  expect_equal(as.character(multiple_ids$table_no[1]),
+               as.character("G1"))
 })
 
 test_that("correct tables are identified when multiple series_ids from different tables are supplied", {
@@ -36,7 +38,8 @@ test_that("correct tables are identified when multiple series_ids from different
     length(multiple_ids$table_no),
     length(multiple_ids$cur_hist)
   )
-  expect_equal(multiple_ids$table_no, as.character(c("A1", "A1.1", "G1")))
+  expect_equal(as.character(multiple_ids$table_no),
+               as.character(c("A1", "A1.1", "G1")))
 })
 
 test_that("tables_from_series_id() fails when incorrect series_id(s) supplied", {
