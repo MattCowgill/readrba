@@ -3,12 +3,12 @@ test_that("correct tableis identified when single series_id supplied", {
 
   expect_is(single_id, "list")
   expect_length(single_id, 2)
-  expect_identical(names(single_id), c("table_no", "cur_hist"))
-  expect_identical(
+  expect_equal(names(single_id), c("table_no", "cur_hist"))
+  expect_equal(
     length(single_id$table_no),
     length(single_id$cur_hist)
   )
-  expect_identical(single_id$table_no[1], "G1")
+  expect_equal(single_id$table_no[1], "G1")
 })
 
 test_that("correct table is identified when multiple series_ids from one table are supplied", {
@@ -17,12 +17,12 @@ test_that("correct table is identified when multiple series_ids from one table a
 
   expect_is(multiple_ids, "list")
   expect_length(multiple_ids, 2)
-  expect_identical(names(multiple_ids), c("table_no", "cur_hist"))
-  expect_identical(
+  expect_equal(names(multiple_ids), c("table_no", "cur_hist"))
+  expect_equal(
     length(multiple_ids$table_no),
     length(multiple_ids$cur_hist)
   )
-  expect_identical(multiple_ids$table_no[1], "G1")
+  expect_equal(multiple_ids$table_no[1], "G1")
 })
 
 test_that("correct tables are identified when multiple series_ids from different tables are supplied", {
@@ -31,12 +31,12 @@ test_that("correct tables are identified when multiple series_ids from different
 
   expect_is(multiple_ids, "list")
   expect_length(multiple_ids, 2)
-  expect_identical(names(multiple_ids), c("table_no", "cur_hist"))
-  expect_identical(
+  expect_equal(names(multiple_ids), c("table_no", "cur_hist"))
+  expect_equal(
     length(multiple_ids$table_no),
     length(multiple_ids$cur_hist)
   )
-  expect_identical(multiple_ids$table_no, c("A1", "A1.1", "G1"))
+  expect_equal(multiple_ids$table_no, c("A1", "A1.1", "G1"))
 })
 
 test_that("tables_from_series_id() fails when incorrect series_id(s) supplied", {
