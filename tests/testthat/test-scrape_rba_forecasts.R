@@ -5,7 +5,7 @@ test_that("scrape_rba_forecasts() returns expected output", {
   forecasts <- scrape_rba_forecasts()
 
   expect_is(forecasts, "tbl_df")
-  expect_length(forecasts, 7)
+  expect_length(forecasts, 8)
   expect_gt(nrow(forecasts), 800)
   expect_false(any(is.na(forecasts$value)))
   expect_is(forecasts$value, "numeric")
