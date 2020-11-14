@@ -24,10 +24,11 @@ for which the \code{date} is more than 180 days prior to the \code{forecast_date
 is excluded.}
 }
 \value{
-A tidy \code{tbl_df} containing 7 columns:
+A tidy \code{tbl_df} containing 8 columns:
 \itemize{
 \item{\code{forecast_date}}{ The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the \code{forecast_date} for forecasts in the February 2020 Statement on Monetary Policy is \code{as.Date("2020-02-01")}.}
 \item{\code{date}}{ The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be \code{as.Date("2021-06-01")}.}
+\item{\code{year_qtr}}{ The year and quarter to which the forecast pertains, such as 2019.1.}
 \item{\code{series}}{ Short, snake_case description of the data series being forecast, such as \code{gdp_change} or \code{unemp_rate}. These are consistent over time.}
 \item{\code{value}}{ The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be \code{3}. Note that where a forecast is given as a range (eg. 3.5-4.5\%) the \code{value} will be the midpoint of the range (eg. 4\%).}
 \item{\code{series_desc}}{ Full description of the series being forecast, as per the RBA website, such as "Real household disposable income". Note that series descriptions are not necessarily consistent over time; the values here are those published by the RBA. The \code{series} column is consistent over time. }

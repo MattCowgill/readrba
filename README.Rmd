@@ -9,7 +9,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  # out.width = "100%",
+  fig.height = 5,
+  fig.width = 7,
+  fig.retina = 2
 )
 ```
 
@@ -18,12 +21,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions) [![Travis build status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba) [![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
-
 <!-- badges: end -->
 
 Get data from the [Reserve Bank of Australia](https://rba.gov.au/statistics/tables/) in a [tidy](https://tidyr.tidyverse.org/articles/tidy-data.html) [tibble](https://tibble.tidyverse.org). 
-
-This package is still in active development. Some aspects of its functionality are incomplete.
 
 ## Installation
 The package is not yet on CRAN. Install from GitHub:
@@ -33,13 +33,48 @@ remotes::install_github("mattcowgill/readrba")
 ```
 
 ## Examples
+```{r library}
+library(ggplot2)
+library(dplyr)
+library(readrba)
+```
+
+### Quick examples
+With a few lines of code, you can get a data series from the RBA and visualise it.
+Here's the unemployment rate:
+```{r}
+unemp_rate <- read_rba(series_id = "GLFSURSA") 
+
+unemp_rate %>%
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Unemployment rate (actual)")
+```
+
+And you can also easily get the RBA's public forecasts - from 1990 to present -
+and visualise those. Here's every public forecast of the unemployment rate the
+RBA has made over the past three decades:
+
+```{r}
+unemp_forecasts <- rba_forecasts() %>%
+  filter(series == "unemp_rate")
+
+unemp_forecasts %>%
+  ggplot(aes(x = date, y = value, group = forecast_date)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Unemployment rate (RBA forecasts)")
+```
+
+
 ### Reading RBA data
 There primary function in {readrba} is `read_rba()`.
 
 Here's how you fetch the current version of a single RBA statistical table: table G1, consumer price inflation using `read_rba()`:
 
 ```{r}
-cpi_table <- readrba::read_rba(table_no = "g1")
+cpi_table <- read_rba(table_no = "g1")
 ```
 
 The object returned by `read_rba()` is a tidy tibble (ie. in 'long' format):
@@ -51,7 +86,7 @@ head(cpi_table)
 You can also request multiple tables. They'll be returned together as one tidy tibble:
 
 ```{r}
-rba_data <- readrba::read_rba(table_no = c("a1", "g1"))
+rba_data <- read_rba(table_no = c("a1", "g1"))
 
 head(rba_data)
 
@@ -60,7 +95,7 @@ unique(rba_data$table_title)
 
 You can also retrieve data based on the unique RBA time series identifier(s). For example, to getch the consumer price index series only:
 ```{r}
-cpi_series <- readrba::read_rba(series_id = "GCPIAG")
+cpi_series <- read_rba(series_id = "GCPIAG")
 head(cpi_series)
 unique(cpi_series$series_id)
 ```
@@ -71,7 +106,7 @@ By default, `read_rba()` fetches the current version of whatever table you reque
 
 ```{r hist}
 
-hist_a11 <- readrba::read_rba(table_no = "a1.1", cur_hist = "historical")
+hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 
 head(hist_a11)
 ```
@@ -80,15 +115,15 @@ head(hist_a11)
 Two functions are provided to help you find the table number or series ID you need. These are `browse_rba_tables()` and `browse_rba_series()`. Each returns a tibble with information about the available RBA data. 
 
 ```{r browse}
-readrba::browse_rba_tables()
+browse_rba_tables()
 ```
 ```{r browse_series}
-readrba::browse_rba_series()
+browse_rba_series()
 ```
 
 You can specify a search string to filter the tables or series, as in:
 ```{r browse-search}
-readrba::browse_rba_tables("inflation")
+browse_rba_tables("inflation")
 ```
 
 ### RBA forecasts
@@ -97,12 +132,12 @@ forecasts of key economic variables since 1990. The function scrapes the
 RBA website to obtain the latest Statement on Monetary Policy forecasts.
 
 ```{r forecasts}
-readrba::rba_forecasts()
+rba_forecasts()
 ```
 
 If you just want the latest forecasts, you can request them:
 ```{r latest-forecasts}
-readrba::rba_forecasts(all_or_latest = "latest")
+rba_forecasts(all_or_latest = "latest")
 ```
 
 ## Data availability

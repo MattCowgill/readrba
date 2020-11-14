@@ -24,10 +24,11 @@
 #' Note from from Feb 2015 to August 2018 (inclusive) only include a few series;
 #' those from November 2018 onwards include more series.
 #'
-#' @return A tidy `tbl_df` containing 7 columns:
+#' @return A tidy `tbl_df` containing 8 columns:
 #' \itemize{
 #'  \item{`forecast_date`}{ The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the `forecast_date` for forecasts in the February 2020 Statement on Monetary Policy is `as.Date("2020-02-01")`.}
 #'  \item{`date`}{ The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be `as.Date("2021-06-01")`.}
+#'  \item{`year_qtr`}{ The year and quarter to which the forecast pertains, such as 2019.1.}
 #'  \item{`series`}{ Short, snake_case description of the data series being forecast, such as `gdp_change` or `unemp_rate`. These are consistent over time.}
 #'  \item{`value`}{ The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be `3`. Note that where a forecast is given as a range (eg. 3.5-4.5%) the `value` will be the midpoint of the range (eg. 4%).}
 #'  \item{`series_desc`}{ Full description of the series being forecast, as per the RBA website, such as "Real household disposable income". Note that series descriptions are not necessarily consistent over time; the values here are those published by the RBA. The `series` column is consistent over time. }
@@ -140,6 +141,7 @@ scrape_rba_forecasts <- function() {
     table <- table %>%
       dplyr::mutate(
         date = lubridate::dmy(paste0("01 ", .data$q_year)),
+        year_qtr = lubridate::quarter(date, with_year = TRUE),
         source = "SMP"
       ) %>%
       dplyr::select(-.data$q_year)

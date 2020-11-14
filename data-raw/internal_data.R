@@ -155,6 +155,7 @@ tidy_forecast <- function(url, xpath = '//*[@id="table-6.1"]') {
     tidyr::gather(key = date, value = value, -series_desc) %>%
     dplyr::mutate(value = rba_value_to_num(value),
            date = lubridate::dmy(paste0("01 ", date)),
+           year_qtr = lubridate::quarter(date, with_year = TRUE),
            forecast_date = forecast_date,
            notes = notes
     )
