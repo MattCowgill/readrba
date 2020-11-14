@@ -162,9 +162,10 @@ is excluded.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tidy <code>tbl_df</code> containing 7 columns:</p><ul>
+    <p>A tidy <code>tbl_df</code> containing 8 columns:</p><ul>
 <li><p><code>forecast_date</code> The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2020-02-01")</a></code>.</p></li>
 <li><p><code>date</code> The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be <code><a href='https://rdrr.io/r/base/as.Date.html'>as.Date("2021-06-01")</a></code>.</p></li>
+<li><p><code>year_qtr</code> The year and quarter to which the forecast pertains, such as 2019.1.</p></li>
 <li><p><code>series</code> Short, snake_case description of the data series being forecast, such as <code>gdp_change</code> or <code>unemp_rate</code>. These are consistent over time.</p></li>
 <li><p><code>value</code> The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be <code>3</code>. Note that where a forecast is given as a range (eg. 3.5-4.5%) the <code>value</code> will be the midpoint of the range (eg. 4%).</p></li>
 <li><p><code>series_desc</code> Full description of the series being forecast, as per the RBA website, such as "Real household disposable income". Note that series descriptions are not necessarily consistent over time; the values here are those published by the RBA. The <code>series</code> column is consistent over time.</p></li>
