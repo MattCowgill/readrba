@@ -2,6 +2,7 @@
 % Please edit documentation in R/rba_forecasts.R
 \name{rba_forecasts}
 \alias{rba_forecasts}
+\alias{read_forecasts}
 \title{Compile the RBA's public forecasts of key economic variables over time}
 \usage{
 rba_forecasts(
@@ -9,6 +10,8 @@ rba_forecasts(
   all_or_latest = c("all", "latest"),
   remove_old = TRUE
 )
+
+read_forecasts(...)
 }
 \arguments{
 \item{refresh}{logical; default is \code{TRUE}. When set to \code{TRUE}, the RBA's
@@ -22,6 +25,8 @@ latest forecasts will be used.}
 \item{remove_old}{logical; default is \code{TRUE}. When \code{TRUE}, any observations
 for which the \code{date} is more than 180 days prior to the \code{forecast_date}
 is excluded.}
+
+\item{...}{Arguments passed to \code{rba_forecasts()}}
 }
 \value{
 A tidy \code{tbl_df} containing 8 columns:
@@ -53,4 +58,6 @@ Data from 2015 to present are scraped from the RBA's quarterly Statement on
 Monetary Policy (\url{https://www.rba.gov.au/publications/smp/2020/aug/}).
 Note from from Feb 2015 to August 2018 (inclusive) only include a few series;
 those from November 2018 onwards include more series.
+
+\code{read_forecasts()} is a wrapper around \code{rba_forecasts()}.
 }

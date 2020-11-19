@@ -24,7 +24,9 @@ such as \code{"A1"} or \code{c("a1.1", "g1")}.}
 \item{cur_hist}{Character; valid values are \code{"current"} or \code{"historical"}.
 
 Must be either a vector of either length 1 (eg. "\code{cur_hist = "current"}) or
-the same length as \code{table_no} (eg. \code{cur_hist = c("current", "historical")}).}
+the same length as \code{table_no} (eg. \code{cur_hist = c("current", "historical")}).
+
+\code{cur_hist} is ignored if \code{series_id} is specified.}
 
 \item{series_id}{Optional, character. Specifying \code{series_id} is an alternative
 to specifying \code{table_no}.

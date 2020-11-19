@@ -24,7 +24,7 @@ test_that("browse_rba functions work", {
   expect_true("Consumer Price Inflation" %in% unique(cpi$title))
 })
 
-test_that("browse_rba_tables(refresh = TRUE) delivers expected results",{
+test_that("browse_rba_tables(refresh = TRUE) delivers expected results", {
   skip_if_offline()
   skip_on_cran()
   refreshed <- browse_rba_tables(refresh = TRUE)

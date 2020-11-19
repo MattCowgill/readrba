@@ -4,12 +4,14 @@
 \alias{tidy_rba_normal}
 \title{Function to tidy RBA sheets that are formatted in the standard way}
 \usage{
-tidy_rba_normal(excel_sheet, .table_title)
+tidy_rba_normal(excel_sheet, .table_title, series_id = NULL)
 }
 \arguments{
 \item{excel_sheet}{Data.frame of an RBA spreadsheet}
 
 \item{.table_title}{Length 1 character vector of table title}
+
+\item{series_id}{Optional series ID}
 }
 \description{
 Function to tidy RBA sheets that are formatted in the standard way

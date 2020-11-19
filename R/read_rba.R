@@ -6,6 +6,8 @@
 #'
 #' Must be either a vector of either length 1 (eg. "`cur_hist = "current"`) or
 #' the same length as `table_no` (eg. `cur_hist = c("current", "historical")`).
+#'
+#' `cur_hist` is ignored if `series_id` is specified.
 #' @param series_id Optional, character. Specifying `series_id` is an alternative
 #' to specifying `table_no`.
 #'
@@ -102,6 +104,7 @@ read_rba <- function(table_no = NULL,
     )
 
     urls <- purrr::flatten_chr(urls)
+    urls <- unique(urls)
   }
 
   readable <- table_list$readable[table_list$url %in% urls]
@@ -117,11 +120,10 @@ read_rba <- function(table_no = NULL,
 
   filenames <- download_rba(urls, path)
 
-  tidy_df <- read_rba_local(filenames)
+  tidy_df <- read_rba_local(filenames = filenames, series_id = series_id)
 
-  if (!is.null(series_id)) {
-    .series_id <- series_id
-    tidy_df <- dplyr::filter(tidy_df, .data$series_id %in% .series_id)
+  if (nrow(tidy_df) == 0) {
+    stop("Could not find matching data for your request.")
   }
 
   tidy_df
@@ -129,18 +131,19 @@ read_rba <- function(table_no = NULL,
 
 #' Load and tidy local RBA Excel sheets
 #' @param filenames Vector of filename(s) (with path) pointing to local RBA Excel sheets
+#' @param series_id Optional series ID
 #' @examples
 #' \dontrun{
 #' read_rba_local("data/rba_file.xls")
 #' }
 #' @return A `tbl_df` containing tidied RBA Excel sheet(s)
 #' @export
-read_rba_local <- function(filenames) {
+read_rba_local <- function(filenames, series_id = NULL) {
   raw_dfs <- purrr::map(filenames, load_rba_sheet)
 
   raw_dfs <- purrr::flatten(raw_dfs)
 
-  tidy_dfs <- purrr::map(raw_dfs, tidy_rba)
+  tidy_dfs <- purrr::map(raw_dfs, tidy_rba, series_id = series_id)
 
   tidy_df <- dplyr::bind_rows(tidy_dfs)
 

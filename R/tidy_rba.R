@@ -1,12 +1,13 @@
 #' Tidy a statistical table from the RBA
 #' @name tidy_rba
 #' @param excel_sheet Dataframe of RBA spreadsheet.
+#' @param series_id Optional series ID
 #' @return Tidy tibble
 #' @importFrom rlang .data
 #' @export
 #'
 
-tidy_rba <- function(excel_sheet) {
+tidy_rba <- function(excel_sheet, series_id = NULL) {
   .table_title <- names(excel_sheet)[1]
   .table_title <- stringr::str_to_title(.table_title)
   .table_title <- stringr::str_squish(.table_title)
@@ -24,7 +25,8 @@ tidy_rba <- function(excel_sheet) {
 
   excel_sheet <- tidy_rba_normal(
     excel_sheet = excel_sheet,
-    .table_title = .table_title
+    .table_title = .table_title,
+    series_id = series_id
   )
 
   excel_sheet
@@ -33,9 +35,10 @@ tidy_rba <- function(excel_sheet) {
 #' Function to tidy RBA sheets that are formatted in the standard way
 #' @param excel_sheet Data.frame of an RBA spreadsheet
 #' @param .table_title Length 1 character vector of table title
+#' @param series_id Optional series ID
 #' @keywords internal
 
-tidy_rba_normal <- function(excel_sheet, .table_title) {
+tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
   # Check if the sheet contains the expected metadata in the first column
   contains_expected_metadata <- check_if_rba_ts(excel_sheet)
 
@@ -56,8 +59,7 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   }
 
   # Create unique column names combining title + series_id
-  title_row <- as.character(excel_sheet[1, ])
-  num_seriesid_row <- which(grepl("Series ID",
+  num_seriesid_row <- which(grepl("Series ID|Mnemonic",
     excel_sheet[[1]],
     ignore.case = T
   ))
@@ -67,14 +69,6 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
     ignore.case = T
   ))
 
-  # Occasionally the RBA refers to the series ID as "mnemonic" instead
-  if (length(num_seriesid_row) == 0) {
-    num_seriesid_row <- which(grepl("Mnemonic",
-      excel_sheet[[1]],
-      ignore.case = T
-    ))
-  }
-
   if (length(num_seriesid_row) == 0) {
     stop(
       "The Excel sheet for ", .table_title,
@@ -83,6 +77,17 @@ tidy_rba_normal <- function(excel_sheet, .table_title) {
   }
 
   seriesid_row <- as.character(excel_sheet[num_seriesid_row, ])
+
+  if (!is.null(series_id)) {
+    matching_cols <- which(seriesid_row %in% series_id)
+    if (length(matching_cols) == 0) {
+      return(dplyr::tibble())
+    }
+    excel_sheet <- excel_sheet[, c(1, matching_cols)]
+    seriesid_row <- as.character(excel_sheet[num_seriesid_row, ])
+  }
+
+  title_row <- as.character(excel_sheet[1, ])
   desc_row <- as.character(excel_sheet[num_desc_row, ])
 
   new_colnames <- paste(title_row, seriesid_row, desc_row,

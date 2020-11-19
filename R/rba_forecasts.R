@@ -24,6 +24,8 @@
 #' Note from from Feb 2015 to August 2018 (inclusive) only include a few series;
 #' those from November 2018 onwards include more series.
 #'
+#' `read_forecasts()` is a wrapper around `rba_forecasts()`.
+#'
 #' @return A tidy `tbl_df` containing 8 columns:
 #' \itemize{
 #'  \item{`forecast_date`}{ The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the `forecast_date` for forecasts in the February 2020 Statement on Monetary Policy is `as.Date("2020-02-01")`.}
@@ -36,6 +38,7 @@
 #'  \item{`notes`}{ Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given `forecast_date`.}
 #' }
 #' @export
+#' @rdname rba_forecasts
 
 rba_forecasts <- function(refresh = TRUE,
                           all_or_latest = c("all", "latest"),
@@ -56,7 +59,7 @@ rba_forecasts <- function(refresh = TRUE,
 
     forecasts <- forecasts %>%
       dplyr::filter(.data$forecast_date ==
-                      max(.data$forecast_date))
+        max(.data$forecast_date))
   } else {
     forecasts <- dplyr::bind_rows(
       hist_forecasts,
@@ -73,13 +76,19 @@ rba_forecasts <- function(refresh = TRUE,
   )
 
   if (isTRUE(remove_old)) {
-  forecasts <- forecasts %>%
-    dplyr::filter(.data$forecast_date - .data$date <= 180)
+    forecasts <- forecasts %>%
+      dplyr::filter(.data$forecast_date - .data$date <= 180)
   }
 
   forecasts
 }
 
+#' @rdname rba_forecasts
+#' @param ... Arguments passed to `rba_forecasts()`
+#' @export
+read_forecasts <- function(...) {
+  rba_forecasts(...)
+}
 
 #' Scrape the RBA's website to obtain recent forecasts
 #'

@@ -1,3 +1,7 @@
+# readrba 0.0.4
+* `read_cashrate()` convenience function added
+* Speed improvements, particularly when using series IDs
+
 # readrba 0.0.3
 * Historical and current RBA forecasts now available via `rba_forecasts()`
 * Bug fixes and speed improvements
