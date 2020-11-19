@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -154,7 +154,8 @@ such as <code>"A1"</code> or <code><a href='https://rdrr.io/r/base/c.html'>c("a1
       <th>cur_hist</th>
       <td><p>Character; valid values are <code>"current"</code> or <code>"historical"</code>.</p>
 <p>Must be either a vector of either length 1 (eg. "<code>cur_hist = "current"</code>) or
-the same length as <code>table_no</code> (eg. <code>cur_hist = c("current", "historical")</code>).</p></td>
+the same length as <code>table_no</code> (eg. <code>cur_hist = c("current", "historical")</code>).</p>
+<p><code>cur_hist</code> is ignored if <code>series_id</code> is specified.</p></td>
     </tr>
     <tr>
       <th>series_id</th>

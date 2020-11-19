@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert RBA values to numeric — rba_value_to_num • readrba</title>
+<title>Convenience function to get the RBA's cash rate. — read_cashrate • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="Convert RBA values to numeric — rba_value_to_num" />
-<meta property="og:description" content="Some RBA data are given as ranges (eg. 3-4%). In this case,
-we want to take the mean of the range (3.5%).
-This primarily applies to forecasts, but also
-includes some actual data (such as the cash rate target in the early 1990s)." />
+<meta property="og:title" content="Convenience function to get the RBA's cash rate. — read_cashrate" />
+<meta property="og:description" content="Convenience function to get the RBA's cash rate." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -125,42 +122,49 @@ includes some actual data (such as the cash rate target in the early 1990s)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert RBA values to numeric</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/rba_value_to_num.R'><code>R/rba_value_to_num.R</code></a></small>
-    <div class="hidden name"><code>rba_value_to_num.Rd</code></div>
+    <h1>Convenience function to get the RBA's cash rate.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/read_cashrate.R'><code>R/read_cashrate.R</code></a></small>
+    <div class="hidden name"><code>read_cashrate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Some RBA data are given as ranges (eg. 3-4%). In this case,
-we want to take the mean of the range (3.5%).
-This primarily applies to forecasts, but also
-includes some actual data (such as the cash rate target in the early 1990s).</p>
+    <p>Convenience function to get the RBA's cash rate.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rba_value_to_num</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>read_cashrate</span><span class='op'>(</span>type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"target"</span>, <span class='st'>"interbank"</span>, <span class='st'>"both"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>rba_cashrate</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>character vector of number-like values, such as c("1.0", "-2", "1½", "1½–2½").</p></td>
+      <th>type</th>
+      <td><p>One of <code>'target'</code> (the default), <code>'interbank'</code>, or <code>'both'</code>.</p><ul>
+<li><p><code>'target'</code> The RBA's cash rate target.</p></li>
+<li><p><code>'interbank'</code> The interbank overnight cash rate.</p></li>
+<li><p><code>'both'</code> Both the cash rate target and interbank overnight cash rate.</p></li>
+</ul>
+
+<p><code>'target'</code> fetches the RBA cash rate target. <code>'interbank'</code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments passed to <code>read_cashrate()</code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Numeric vector the same length as <code>x</code></p>
+    <p>A <code>tbl_df</code> with two columns: <code>date</code> and <code>cash_rate</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Other values have non-standard characters such as
-em-dashes rather than minus signs. We want to replace these with minus signs.</p>
+    <p>Note that in the very early 1990s, the cash rate target was
+expressed as a range (eg. "17% to 17.5%"). Where this is the case,
+the value returned here (and in <code><a href='read_rba.html'>read_rba()</a></code>) is the mid-point of this range.</p>
+<p>If <code>type = 'both'</code>, note that the returned tbl is tidy/long.</p>
+<p><code>rba_cashrate()</code> is a wrapper around <code>read_cashrate()</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>rba_value_to_num</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1.0"</span>, <span class='st'>"-2"</span>, <span class='st'>"1½"</span>, <span class='st'>"1½–2½"</span>, <span class='st'>"1½–2½"</span>, <span class='st'>"1½–2½"</span>, <span class='st'>"1½–2½"</span>, <span class='st'>"17 to 17.5"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

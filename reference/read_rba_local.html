@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@
     <p>Load and tidy local RBA Excel sheets</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_rba_local</span><span class='op'>(</span><span class='va'>filenames</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>read_rba_local</span><span class='op'>(</span><span class='va'>filenames</span>, series_id <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,6 +139,10 @@
     <tr>
       <th>filenames</th>
       <td><p>Vector of filename(s) (with path) pointing to local RBA Excel sheets</p></td>
+    </tr>
+    <tr>
+      <th>series_id</th>
+      <td><p>Optional series ID</p></td>
     </tr>
     </table>
 
