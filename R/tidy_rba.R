@@ -69,14 +69,6 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
     ignore.case = T
   ))
 
-  # Occasionally the RBA refers to the series ID as "mnemonic" instead
-  # if (length(num_seriesid_row) == 0) {
-  #   num_seriesid_row <- which(grepl("Mnemonic",
-  #     excel_sheet[[1]],
-  #     ignore.case = T
-  #   ))
-  # }
-
   if (length(num_seriesid_row) == 0) {
     stop(
       "The Excel sheet for ", .table_title,

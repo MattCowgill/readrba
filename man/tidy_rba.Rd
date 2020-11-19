@@ -4,10 +4,12 @@
 \alias{tidy_rba}
 \title{Tidy a statistical table from the RBA}
 \usage{
-tidy_rba(excel_sheet)
+tidy_rba(excel_sheet, series_id = NULL)
 }
 \arguments{
 \item{excel_sheet}{Dataframe of RBA spreadsheet.}
+
+\item{series_id}{Optional series ID}
 }
 \value{
 Tidy tibble

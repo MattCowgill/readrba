@@ -4,10 +4,12 @@
 \alias{read_rba_local}
 \title{Load and tidy local RBA Excel sheets}
 \usage{
-read_rba_local(filenames)
+read_rba_local(filenames, series_id = NULL)
 }
 \arguments{
 \item{filenames}{Vector of filename(s) (with path) pointing to local RBA Excel sheets}
+
+\item{series_id}{Optional series ID}
 }
 \value{
 A \code{tbl_df} containing tidied RBA Excel sheet(s)

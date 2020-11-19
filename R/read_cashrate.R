@@ -1,9 +1,22 @@
 #' Convenience function to get the RBA's cash rate.
 #'
+#' @param type One of `'target'` (the default), `'interbank'`, or `'both'`.
+#' \itemize{
+#'   \item{`'target'`}{ The RBA's cash rate target.}
+#'   \item{`'interbank'`}{ The interbank overnight cash rate.}
+#'   \item{`'both'`}{ Both the cash rate target and interbank overnight cash rate.}
+#' }
+#'
+#' `'target'` fetches the RBA cash rate target. `'interbank'`
 #' @return A `tbl_df` with two columns: `date` and `cash_rate`.
 #' @details Note that in the very early 1990s, the cash rate target was
 #' expressed as a range (eg. "17% to 17.5%"). Where this is the case,
 #' the value returned here (and in `read_rba()`) is the mid-point of this range.
+#'
+#' If `type = 'both'`, note that the returned tbl is tidy/long.
+#'
+#' `rba_cashrate()` is a wrapper around `read_cashrate()`.
+#' @rdname read_cashrate
 #' @export
 
 read_cashrate <- function(type = c("target",
@@ -33,4 +46,12 @@ read_cashrate <- function(type = c("target",
 
   out
 
+}
+
+#' @rdname read_cashrate
+#' @param ... arguments passed to `read_cashrate()`
+#' @export
+
+rba_cashrate <- function(...) {
+  read_cashrate(...)
 }
