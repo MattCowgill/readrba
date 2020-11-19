@@ -33,4 +33,6 @@ expressed as a range (eg. "17\% to 17.5\%"). Where this is the case,
 the value returned here (and in \code{read_rba()}) is the mid-point of this range.
 
 If \code{type = 'both'}, note that the returned tbl is tidy/long.
+
+\code{rba_cashrate()} is a wrapper around \code{read_cashrate()}.
 }

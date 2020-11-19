@@ -19,25 +19,29 @@
 #' @rdname read_cashrate
 #' @export
 
-read_cashrate <- function(type = c("target",
-                                   "interbank",
-                                   "both")
-                                 ) {
+read_cashrate <- function(type = c(
+                            "target",
+                            "interbank",
+                            "both"
+                          )) {
   type <- match.arg(type)
   stopifnot(!missing(type))
 
   out <- dplyr::tibble()
 
   if (type %in% c("target", "both")) {
-  out <- read_rba(series_id = "FIRMMCRTD",
-                  path = tempdir()) %>%
-    dplyr::bind_rows(out)
-
+    out <- read_rba(
+      series_id = "FIRMMCRTD",
+      path = tempdir()
+    ) %>%
+      dplyr::bind_rows(out)
   }
 
   if (type %in% c("interbank", "both")) {
-    out <- read_rba(series_id = "FIRMMCRID",
-                    path = tempdir()) %>%
+    out <- read_rba(
+      series_id = "FIRMMCRID",
+      path = tempdir()
+    ) %>%
       dplyr::bind_rows(out)
   }
 
@@ -45,7 +49,6 @@ read_cashrate <- function(type = c("target",
     dplyr::select(.data$date, .data$series, .data$value)
 
   out
-
 }
 
 #' @rdname read_cashrate

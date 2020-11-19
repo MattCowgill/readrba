@@ -79,7 +79,11 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
   seriesid_row <- as.character(excel_sheet[num_seriesid_row, ])
 
   if (!is.null(series_id)) {
-    excel_sheet <- excel_sheet[, c(1, which(seriesid_row %in% series_id) )]
+    matching_cols <- which(seriesid_row %in% series_id)
+    if (length(matching_cols) == 0) {
+      return(dplyr::tibble())
+    }
+    excel_sheet <- excel_sheet[, c(1, matching_cols)]
     seriesid_row <- as.character(excel_sheet[num_seriesid_row, ])
   }
 

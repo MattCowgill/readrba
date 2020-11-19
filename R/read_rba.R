@@ -122,10 +122,9 @@ read_rba <- function(table_no = NULL,
 
   tidy_df <- read_rba_local(filenames = filenames, series_id = series_id)
 
-  # if (!is.null(series_id)) {
-  #   .series_id <- series_id
-  #   tidy_df <- dplyr::filter(tidy_df, .data$series_id %in% .series_id)
-  # }
+  if (nrow(tidy_df) == 0) {
+    stop("Could not find matching data for your request.")
+  }
 
   tidy_df
 }
