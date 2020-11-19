@@ -123,7 +123,6 @@ hist_forecasts <- hist_forecasts %>%
 # in the SMP; the `tidy_forecast()` function scrapes and tidies it
 
 tidy_forecast <- function(url, xpath = '//*[@id="table-6.1"]') {
-
   forecast_date <- url %>%
     gsub("https://www.rba.gov.au/publications/smp/", "", .) %>%
     gsub("tables.html", "", .) %>%
@@ -142,59 +141,67 @@ tidy_forecast <- function(url, xpath = '//*[@id="table-6.1"]') {
 
   first_value_row <- min(which(forecast[, 1] != ""))
 
-  names(forecast) <- c("series_desc",
-                       as.character(forecast[first_value_row -1, 2:ncol(forecast)]))
+  names(forecast) <- c(
+    "series_desc",
+    as.character(forecast[first_value_row - 1, 2:ncol(forecast)])
+  )
 
-  year_ave_starts <- min(which(grepl("Year-average", forecast[,2])))
+  year_ave_starts <- min(which(grepl("Year-average", forecast[, 2])))
 
-  forecast <- forecast[3:(year_ave_starts-1),]
+  forecast <- forecast[3:(year_ave_starts - 1), ]
 
   forecast$series_desc <- gsub("\\(.\\)", "", forecast$series_desc)
 
   forecast <- forecast %>%
     tidyr::gather(key = date, value = value, -series_desc) %>%
-    dplyr::mutate(value = rba_value_to_num(value),
-           date = lubridate::dmy(paste0("01 ", date)),
-           year_qtr = lubridate::quarter(date, with_year = TRUE),
-           forecast_date = forecast_date,
-           notes = notes
+    dplyr::mutate(
+      value = rba_value_to_num(value),
+      date = lubridate::dmy(paste0("01 ", date)),
+      year_qtr = lubridate::quarter(date, with_year = TRUE),
+      forecast_date = forecast_date,
+      notes = notes
     )
 
   forecast
-
 }
 
 forecast_1418_urls <- tibble::tribble(
-                                                                                            ~url,                              ~xpath,
-                                  "https://www.rba.gov.au/publications/smp/2015/feb/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2015/may/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2015/aug/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2015/nov/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2016/feb/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2016/may/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2016/aug/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2016/nov/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2017/feb/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2017/may/tables.html",            "//*[@id=\"table-6.1\"]",
-                                  "https://www.rba.gov.au/publications/smp/2017/aug/tables.html",            "//*[@id=\"table-6.1\"]",
-                        "https://www.rba.gov.au/publications/smp/2017/nov/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
-                        "https://www.rba.gov.au/publications/smp/2018/feb/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
-                        "https://www.rba.gov.au/publications/smp/2018/aug/economic-outlook.html", "//*[@id=\"content\"]/div[1]/table"
-                        )
+  ~url, ~xpath,
+  "https://www.rba.gov.au/publications/smp/2015/feb/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2015/may/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2015/aug/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2015/nov/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2016/feb/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2016/may/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2016/aug/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2016/nov/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2017/feb/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2017/may/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2017/aug/tables.html", "//*[@id=\"table-6.1\"]",
+  "https://www.rba.gov.au/publications/smp/2017/nov/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
+  "https://www.rba.gov.au/publications/smp/2018/feb/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
+  "https://www.rba.gov.au/publications/smp/2018/aug/economic-outlook.html", "//*[@id=\"content\"]/div[1]/table"
+)
 
-forecasts_1418 <- purrr::map2_dfr(.x = forecast_1418_urls$url,
-                                  .y = forecast_1418_urls$xpath,
-                                  tidy_forecast) %>%
+forecasts_1418 <- purrr::map2_dfr(
+  .x = forecast_1418_urls$url,
+  .y = forecast_1418_urls$xpath,
+  tidy_forecast
+) %>%
   dplyr::as_tibble()
 
 forecasts_1418 <- forecasts_1418 %>%
-  dplyr::mutate(series = dplyr::case_when(series_desc == "GDP growth" ~ "gdp_change",
-                                   series_desc == "Non-farm GDP growth" ~ "nonfarmgdp_change",
-                                   series_desc == "CPI inflation" ~ "cpi_annual_inflation",
-                                   series_desc == "Underlying inflation" ~ "underlying_annual_inflation",
-                                   series_desc == "Unemployment rate" ~ "unemp_rate",
-                                   TRUE ~ NA_character_),
-                source = "SMP")
+  dplyr::mutate(
+    series = dplyr::case_when(
+      series_desc == "GDP growth" ~ "gdp_change",
+      series_desc == "Non-farm GDP growth" ~ "nonfarmgdp_change",
+      series_desc == "CPI inflation" ~ "cpi_annual_inflation",
+      series_desc == "Underlying inflation" ~ "underlying_annual_inflation",
+      series_desc == "Unemployment rate" ~ "unemp_rate",
+      TRUE ~ NA_character_
+    ),
+    source = "SMP"
+  )
 
 # Create recent_forecasts -----
 
@@ -202,9 +209,11 @@ recent_forecasts <- scrape_rba_forecasts()
 
 # Combine forecasts ----
 
-forecasts <- dplyr::bind_rows(hist_forecasts,
-                              forecasts_1418,
-                              recent_forecasts)
+forecasts <- dplyr::bind_rows(
+  hist_forecasts,
+  forecasts_1418,
+  recent_forecasts
+)
 
 save(forecasts, file = file.path("data-raw", "forecasts.Rda"))
 

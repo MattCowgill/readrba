@@ -75,13 +75,14 @@ test_that("read_rba() works", {
   )
 })
 
-test_that("wrapper functions return expected output",{
+test_that("wrapper functions return expected output", {
   skip_on_cran()
   skip_if_offline()
 
-  expect_identical(read_rba("a1"),
-                   rba_stat_table("a1"))
-
+  expect_identical(
+    read_rba("a1"),
+    rba_stat_table("a1")
+  )
 })
 
 check_df <- function(df) {

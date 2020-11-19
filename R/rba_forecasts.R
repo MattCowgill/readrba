@@ -56,7 +56,7 @@ rba_forecasts <- function(refresh = TRUE,
 
     forecasts <- forecasts %>%
       dplyr::filter(.data$forecast_date ==
-                      max(.data$forecast_date))
+        max(.data$forecast_date))
   } else {
     forecasts <- dplyr::bind_rows(
       hist_forecasts,
@@ -73,8 +73,8 @@ rba_forecasts <- function(refresh = TRUE,
   )
 
   if (isTRUE(remove_old)) {
-  forecasts <- forecasts %>%
-    dplyr::filter(.data$forecast_date - .data$date <= 180)
+    forecasts <- forecasts %>%
+      dplyr::filter(.data$forecast_date - .data$date <= 180)
   }
 
   forecasts
