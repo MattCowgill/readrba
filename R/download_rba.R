@@ -24,7 +24,8 @@ download_rba <- function(urls, path = tempdir()) {
       destfile = filenames_with_path,
       quiet = TRUE,
       method = "libcurl",
-      cacheOK = FALSE
+      cacheOK = FALSE,
+      headers = c("User-Agent" = "readrba R package - https://mattcowgill.github.io/readrba/index.html")
     )
   } else {
     # nocov start
@@ -34,7 +35,8 @@ download_rba <- function(urls, path = tempdir()) {
       .f = utils::download.file,
       quiet = FALSE,
       mode = "wb",
-      cacheOK = FALSE
+      cacheOK = FALSE,
+      headers = c("User-Agent" = "readrba R package - https://mattcowgill.github.io/readrba/index.html")
     )
     # nocov end
   }

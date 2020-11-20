@@ -123,12 +123,12 @@ test_that("all current tables work", {
     dplyr::filter(current_or_historical == "current" &
       readable == TRUE)
 
-  purrr::map(
-    .x = tab$no,
-    .f = ~ expect_true(check_df(
-      read_rba(table_no = .x, cur_hist = "current")
-    ))
-  )
+  for (tab in tab$no) {
+    df <- read_rba(table_no = tab, cur_hist = "current")
+    expect_true(check_df(df))
+    Sys.sleep(1)
+  }
+
 })
 
 test_that("historical tables work", {
@@ -139,10 +139,9 @@ test_that("historical tables work", {
     dplyr::filter(current_or_historical == "historical" &
       readable == TRUE)
 
-  purrr::map(
-    .x = tab$no,
-    .f = ~ expect_true(check_df(
-      read_rba(table_no = .x, cur_hist = "historical")
-    ))
-  )
+  for (tab in tab$no) {
+    df <- read_rba(table_no = tab, cur_hist = "historical")
+    expect_true(check_df(df))
+    Sys.sleep(1)
+  }
 })
