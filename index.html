@@ -100,6 +100,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: package 'dplyr' was built under R version 4.0.2</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -167,12 +168,12 @@
 <span class="co">#&gt; # A tibble: 6 x 11</span>
 <span class="co">#&gt;   date       series value frequency series_type units source pub_date  </span>
 <span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span>
-<span class="co">#&gt; 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-11-06</span>
-<span class="co">#&gt; 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-11-06</span>
-<span class="co">#&gt; 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-11-06</span>
-<span class="co">#&gt; 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-11-06</span>
-<span class="co">#&gt; 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-11-06</span>
-<span class="co">#&gt; 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-11-06</span>
+<span class="co">#&gt; 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-11-20</span>
+<span class="co">#&gt; 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-11-20</span>
+<span class="co">#&gt; 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-11-20</span>
+<span class="co">#&gt; 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-11-20</span>
+<span class="co">#&gt; 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-11-20</span>
+<span class="co">#&gt; 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-11-20</span>
 <span class="co">#&gt; # … with 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;,</span>
 <span class="co">#&gt; #   table_title &lt;chr&gt;</span>
 
@@ -200,6 +201,7 @@
 <p>The convenience function <code><a href="reference/read_rba.html">read_rba_seriesid()</a></code> is a wrapper around <code><a href="reference/read_rba.html">read_rba()</a></code>. This means <code><a href="reference/read_rba.html">read_rba_seriesid("GCPIAG")</a></code> is equivalent to <code><a href="reference/read_rba.html">read_rba(series_id = "GCPIAG")</a></code>.</p>
 <p>By default, <code><a href="reference/read_rba.html">read_rba()</a></code> fetches the current version of whatever table you request. You can specify the historical version of a table, if it’s available, using the <code>cur_hist</code> argument:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
+
 <span class="va">hist_a11</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"a1.1"</span>, cur_hist <span class="op">=</span> <span class="st">"historical"</span><span class="op">)</span>
 <span class="co">#&gt; Downloading https://rba.gov.au/statistics/tables/xls-hist/a01hist.xls</span>
 
@@ -285,19 +287,19 @@
 <p>If you just want the latest forecasts, you can request them:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="fu"><a href="reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span>all_or_latest <span class="op">=</span> <span class="st">"latest"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 102 x 7</span>
-<span class="co">#&gt;    forecast_date date       series    value series_desc     source notes        </span>
-<span class="co">#&gt;    &lt;date&gt;        &lt;date&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;        </span>
-<span class="co">#&gt;  1 2020-11-01    2020-06-01 aena_ch…  11.6  Nominal (non-f… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  2 2020-11-01    2020-12-01 aena_ch…   4.25 Nominal (non-f… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  3 2020-11-01    2021-06-01 aena_ch…  -7.25 Nominal (non-f… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  4 2020-11-01    2021-12-01 aena_ch…  -2.25 Nominal (non-f… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  5 2020-11-01    2022-06-01 aena_ch…   1    Nominal (non-f… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  6 2020-11-01    2022-12-01 aena_ch…   1.75 Nominal (non-f… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  7 2020-11-01    2020-06-01 busines…  -5.5  Business inves… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  8 2020-11-01    2020-12-01 busines… -14    Business inves… SMP    (a) Forecast…</span>
-<span class="co">#&gt;  9 2020-11-01    2021-06-01 busines…  -9    Business inves… SMP    (a) Forecast…</span>
-<span class="co">#&gt; 10 2020-11-01    2021-12-01 busines…   4    Business inves… SMP    (a) Forecast…</span>
+<span class="co">#&gt; # A tibble: 102 x 8</span>
+<span class="co">#&gt;    forecast_date date       series   value series_desc  source notes    year_qtr</span>
+<span class="co">#&gt;    &lt;date&gt;        &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 2020-11-01    2020-06-01 aena_c…  11.6  Nominal (no… SMP    (a) For…    2020.</span>
+<span class="co">#&gt;  2 2020-11-01    2020-12-01 aena_c…   4.25 Nominal (no… SMP    (a) For…    2020.</span>
+<span class="co">#&gt;  3 2020-11-01    2021-06-01 aena_c…  -7.25 Nominal (no… SMP    (a) For…    2021.</span>
+<span class="co">#&gt;  4 2020-11-01    2021-12-01 aena_c…  -2.25 Nominal (no… SMP    (a) For…    2021.</span>
+<span class="co">#&gt;  5 2020-11-01    2022-06-01 aena_c…   1    Nominal (no… SMP    (a) For…    2022.</span>
+<span class="co">#&gt;  6 2020-11-01    2022-12-01 aena_c…   1.75 Nominal (no… SMP    (a) For…    2022.</span>
+<span class="co">#&gt;  7 2020-11-01    2020-06-01 busine…  -5.5  Business in… SMP    (a) For…    2020.</span>
+<span class="co">#&gt;  8 2020-11-01    2020-12-01 busine… -14    Business in… SMP    (a) For…    2020.</span>
+<span class="co">#&gt;  9 2020-11-01    2021-06-01 busine…  -9    Business in… SMP    (a) For…    2021.</span>
+<span class="co">#&gt; 10 2020-11-01    2021-12-01 busine…   4    Business in… SMP    (a) For…    2021.</span>
 <span class="co">#&gt; # … with 92 more rows</span></pre></div>
 </div>
 </div>
@@ -312,8 +314,8 @@
 <p>The historical exchange rate tables do not have table numbers on the RBA website. They can still be downloaded, using the following table numbers:</p>
 <table class="table">
 <colgroup>
-<col width="80%">
-<col width="19%">
+<col width="81%">
+<col width="18%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Table title</th>
@@ -378,9 +380,9 @@
 <p>Tables that are <strong>not</strong> able to be downloaded are:</p>
 <table class="table">
 <colgroup>
-<col width="67%">
-<col width="9%">
-<col width="22%">
+<col width="69%">
+<col width="8%">
+<col width="21%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Table title</th>
@@ -518,9 +520,8 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://github.com/MattCowgill/readrba/actions"><img src="https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://travis-ci.com/MattCowgill/readrba"><img src="https://travis-ci.com/MattCowgill/readrba.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://codecov.io/gh/MattCowgill/readrba?branch=master"><img src="https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
