@@ -5,12 +5,10 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build
 status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions)
-[![Travis build
-status](https://travis-ci.com/MattCowgill/readrba.svg?branch=master)](https://travis-ci.com/MattCowgill/readrba)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Codecov test
 coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
 <!-- badges: end -->
@@ -33,6 +31,7 @@ remotes::install_github("mattcowgill/readrba")
 ``` r
 library(ggplot2)
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 4.0.2
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -121,12 +120,12 @@ head(rba_data)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
 #>   <date>     <chr>  <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-11-06
-#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-11-06
-#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-11-06
-#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-11-06
-#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-11-06
-#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-11-06
+#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-11-20
+#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-11-20
+#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-11-20
+#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-11-20
+#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-11-20
+#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-11-20
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -167,6 +166,7 @@ you request. You can specify the historical version of a table, if it’s
 available, using the `cur_hist` argument:
 
 ``` r
+
 hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 #> Downloading https://rba.gov.au/statistics/tables/xls-hist/a01hist.xls
 
@@ -267,19 +267,19 @@ If you just want the latest forecasts, you can request them:
 
 ``` r
 rba_forecasts(all_or_latest = "latest")
-#> # A tibble: 102 x 7
-#>    forecast_date date       series    value series_desc     source notes        
-#>    <date>        <date>     <chr>     <dbl> <chr>           <chr>  <chr>        
-#>  1 2020-11-01    2020-06-01 aena_ch…  11.6  Nominal (non-f… SMP    (a) Forecast…
-#>  2 2020-11-01    2020-12-01 aena_ch…   4.25 Nominal (non-f… SMP    (a) Forecast…
-#>  3 2020-11-01    2021-06-01 aena_ch…  -7.25 Nominal (non-f… SMP    (a) Forecast…
-#>  4 2020-11-01    2021-12-01 aena_ch…  -2.25 Nominal (non-f… SMP    (a) Forecast…
-#>  5 2020-11-01    2022-06-01 aena_ch…   1    Nominal (non-f… SMP    (a) Forecast…
-#>  6 2020-11-01    2022-12-01 aena_ch…   1.75 Nominal (non-f… SMP    (a) Forecast…
-#>  7 2020-11-01    2020-06-01 busines…  -5.5  Business inves… SMP    (a) Forecast…
-#>  8 2020-11-01    2020-12-01 busines… -14    Business inves… SMP    (a) Forecast…
-#>  9 2020-11-01    2021-06-01 busines…  -9    Business inves… SMP    (a) Forecast…
-#> 10 2020-11-01    2021-12-01 busines…   4    Business inves… SMP    (a) Forecast…
+#> # A tibble: 102 x 8
+#>    forecast_date date       series   value series_desc  source notes    year_qtr
+#>    <date>        <date>     <chr>    <dbl> <chr>        <chr>  <chr>       <dbl>
+#>  1 2020-11-01    2020-06-01 aena_c…  11.6  Nominal (no… SMP    (a) For…    2020.
+#>  2 2020-11-01    2020-12-01 aena_c…   4.25 Nominal (no… SMP    (a) For…    2020.
+#>  3 2020-11-01    2021-06-01 aena_c…  -7.25 Nominal (no… SMP    (a) For…    2021.
+#>  4 2020-11-01    2021-12-01 aena_c…  -2.25 Nominal (no… SMP    (a) For…    2021.
+#>  5 2020-11-01    2022-06-01 aena_c…   1    Nominal (no… SMP    (a) For…    2022.
+#>  6 2020-11-01    2022-12-01 aena_c…   1.75 Nominal (no… SMP    (a) For…    2022.
+#>  7 2020-11-01    2020-06-01 busine…  -5.5  Business in… SMP    (a) For…    2020.
+#>  8 2020-11-01    2020-12-01 busine… -14    Business in… SMP    (a) For…    2020.
+#>  9 2020-11-01    2021-06-01 busine…  -9    Business in… SMP    (a) For…    2021.
+#> 10 2020-11-01    2021-12-01 busine…   4    Business in… SMP    (a) For…    2021.
 #> # … with 92 more rows
 ```
 
@@ -302,7 +302,7 @@ website. They can still be downloaded, using the following table
 numbers:
 
 | Table title                                                                      | table\_no          |
-|:---------------------------------------------------------------------------------|:-------------------|
+| :------------------------------------------------------------------------------- | :----------------- |
 | Exchange Rates – Daily – 1983 to 1986                                            | ex\_daily\_8386    |
 | Exchange Rates – Daily – 1987 to 1990                                            | ex\_daily\_8790    |
 | Exchange Rates – Daily – 1991 to 1994                                            | ex\_daily\_9194    |
@@ -326,7 +326,7 @@ time series, or because they’re particularly old.
 Tables that are **not** able to be downloaded are:
 
 | Table title                                                               | table\_no | current\_or\_historical |
-|:--------------------------------------------------------------------------|:----------|:------------------------|
+| :------------------------------------------------------------------------ | :-------- | :---------------------- |
 | Daily Foreign Exchange Market Intervention Transactions                   | A5        | current                 |
 | Household Balance Sheets – Distribution                                   | E3        | current                 |
 | Household Gearing – Distribution                                          | E4        | current                 |
