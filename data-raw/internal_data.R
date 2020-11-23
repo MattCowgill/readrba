@@ -111,6 +111,7 @@ hist_forecasts <- hist_forecasts %>%
     TRUE ~ NA_character_
   ))
 
+# Expect lots of NAs introduced by coercion here
 hist_forecasts$value <- as.numeric(hist_forecasts$value)
 
 hist_forecasts <- hist_forecasts %>%
