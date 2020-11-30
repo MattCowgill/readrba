@@ -118,7 +118,7 @@ test_that("multiple tables work", {
 test_that("all current tables work", {
   skip_if_offline()
   skip_on_cran()
-  skip_on_ci()
+  # skip_on_ci()
 
   tab <- table_list %>%
     dplyr::filter(current_or_historical == "current" &
