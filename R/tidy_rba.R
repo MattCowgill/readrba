@@ -23,6 +23,11 @@ tidy_rba <- function(excel_sheet, series_id = NULL) {
     excel_sheet <- prelim_tidy_old_f2(excel_sheet)
   }
 
+  if (.table_title == "A5 Reserve Bank Of Australia - Daily Foreign Exchange Market Intervention Transactions" &&
+      excel_sheet[1, 1] == "A$ million") {
+    excel_sheet <- prelim_tidy_a5(excel_sheet)
+  }
+
   excel_sheet <- tidy_rba_normal(
     excel_sheet = excel_sheet,
     .table_title = .table_title,

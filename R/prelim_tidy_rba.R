@@ -4,6 +4,7 @@
 #' Function to wrangle historical yields data to get it in the standard format
 #' Called indirectly from tidy_rba()
 #' @param excel_sheet Excel sheet with no tidying done
+#' @rdname prelim_tidy
 #' @keywords internal
 
 prelim_tidy_old_f16 <- function(excel_sheet) {
@@ -83,6 +84,7 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 #' Function to wrangle historical F2 table to get it in the standard format
 #' Called indirectly from tidy_rba()
 #' @param excel_sheet Excel sheet with no tidying done
+#' @rdname prelim_tidy
 #' @keywords internal
 
 prelim_tidy_old_f2 <- function(excel_sheet) {
@@ -149,4 +151,35 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
   new_sheet <- rbind(new_metadata, excel_sheet[-(1:10), ])
 
   new_sheet
+}
+
+#' Tidy A5 Daily Forex Interventions
+#' @param excel_sheet RBA table A5
+#' @rdname prelim_tidy
+#' @keywords internal
+#'
+
+prelim_tidy_a5 <- function(excel_sheet) {
+  last_up_row <- which(excel_sheet[[1]] == "Last updated:")
+  excel_sheet[last_up_row, 1] <- "Publication date"
+  out <- excel_sheet[last_up_row:nrow(excel_sheet), ]
+
+  extra_metadata <- data.frame("a" = c("Title",
+                     "Description",
+                     "Frequency",
+                     "Type",
+                     "Units"),
+             "b" = c("Intervention transactions",
+                     "Daily foreign exchange market intervention transactions",
+                     "Daily",
+                     "Original",
+                     "A$ million"))
+
+  names(extra_metadata) <- names(out)
+
+  out <- rbind.data.frame(extra_metadata,
+                   out)
+
+  dplyr::as_tibble(out,
+                   .name_repair = "none")
 }

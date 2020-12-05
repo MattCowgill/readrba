@@ -114,7 +114,7 @@ note_readable <- function(table_list) {
     readable =
       dplyr::case_when(
         .data$current_or_historical == "current" &
-          no %in% c("A5", "E3", "E4", "E5", "E6", "E7") ~ FALSE,
+          no %in% c("E3", "E4", "E5", "E6", "E7") ~ FALSE,
         .data$current_or_historical == "historical" &
           no %in% c(
             "A3", "J1", "J2", "E4", "E5", "E6", "E7",

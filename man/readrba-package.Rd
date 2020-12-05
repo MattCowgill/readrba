@@ -14,7 +14,7 @@ Download data from the Reserve Bank of Australia in tidy
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/MattCowgill/readrba}
+  \item \url{https://mattcowgill.github.io/readrba/index.html}
   \item Report bugs at \url{https://github.com/MattCowgill/readrba/issues}
 }
 

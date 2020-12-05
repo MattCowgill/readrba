@@ -7,7 +7,7 @@ test_that("read_rba() fails with unexpected input", {
   # Fails when !cur_hist %in% c("current", "historical", "all")
   expect_error(read_rba("a1.1", cur_hist = "somearbitrarystring"))
   # Fails when table is not readable (not in standard TS format)
-  expect_error(read_rba("a5"))
+  expect_error(read_rba("e3"))
   # Fails when cur_hist isn't length 1 or same length as table_no
   expect_error(read_rba("g1", c("current", "historical")))
   expect_error(read_rba(c("g1", "a1"), c("current", "historical", "current")))

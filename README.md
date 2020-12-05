@@ -31,7 +31,6 @@ remotes::install_github("mattcowgill/readrba")
 ``` r
 library(ggplot2)
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 4.0.2
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -120,12 +119,12 @@ head(rba_data)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
 #>   <date>     <chr>  <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-11-20
-#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-11-20
-#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-11-20
-#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-11-20
-#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-11-20
-#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-11-20
+#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-12-04
+#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-12-04
+#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-12-04
+#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-12-04
+#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-12-04
+#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-12-04
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -166,7 +165,6 @@ you request. You can specify the historical version of a table, if it’s
 available, using the `cur_hist` argument:
 
 ``` r
-
 hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 #> Downloading https://rba.gov.au/statistics/tables/xls-hist/a01hist.xls
 
@@ -201,7 +199,7 @@ browse_rba_tables()
 #>  4 Monetary Policy Operat… A3    https://rba.gov.au/… current           TRUE    
 #>  5 Holdings of Australian… A3.1  https://rba.gov.au/… current           TRUE    
 #>  6 Foreign Exchange Trans… A4    https://rba.gov.au/… current           TRUE    
-#>  7 Daily Foreign Exchange… A5    https://rba.gov.au/… current           FALSE   
+#>  7 Daily Foreign Exchange… A5    https://rba.gov.au/… current           TRUE    
 #>  8 Banknotes on Issue by … A6    https://rba.gov.au/… current           TRUE    
 #>  9 Detected Australian Co… A7    https://rba.gov.au/… current           TRUE    
 #> 10 Assets of Financial In… B1    https://rba.gov.au/… current           TRUE    
@@ -210,7 +208,7 @@ browse_rba_tables()
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,258 x 8
+#> # A tibble: 4,259 x 8
 #>    table_no series series_id series_type table_title cur_hist description
 #>    <chr>    <chr>  <chr>     <chr>       <chr>       <chr>    <chr>      
 #>  1 A1       Austr… ARBAAASTW Original    A1 Reserve… current  Australian…
@@ -223,7 +221,7 @@ browse_rba_series()
 #>  8 A1       Other… ARBALOLW  Original    A1 Reserve… current  Other liab…
 #>  9 A1       Total… ARBAATAW  Original    A1 Reserve… current  Total RBA …
 #> 10 A1       Total… ARBALTLW  Original    A1 Reserve… current  Total RBA …
-#> # … with 4,248 more rows, and 1 more variable: frequency <chr>
+#> # … with 4,249 more rows, and 1 more variable: frequency <chr>
 ```
 
 You can specify a search string to filter the tables or series, as in:
@@ -302,7 +300,7 @@ website. They can still be downloaded, using the following table
 numbers:
 
 | Table title                                                                      | table\_no          |
-| :------------------------------------------------------------------------------- | :----------------- |
+|:---------------------------------------------------------------------------------|:-------------------|
 | Exchange Rates – Daily – 1983 to 1986                                            | ex\_daily\_8386    |
 | Exchange Rates – Daily – 1987 to 1990                                            | ex\_daily\_8790    |
 | Exchange Rates – Daily – 1991 to 1994                                            | ex\_daily\_9194    |
@@ -326,8 +324,7 @@ time series, or because they’re particularly old.
 Tables that are **not** able to be downloaded are:
 
 | Table title                                                               | table\_no | current\_or\_historical |
-| :------------------------------------------------------------------------ | :-------- | :---------------------- |
-| Daily Foreign Exchange Market Intervention Transactions                   | A5        | current                 |
+|:--------------------------------------------------------------------------|:----------|:------------------------|
 | Household Balance Sheets – Distribution                                   | E3        | current                 |
 | Household Gearing – Distribution                                          | E4        | current                 |
 | Household Financial Assets – Distribution                                 | E5        | current                 |

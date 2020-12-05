@@ -26,7 +26,10 @@
 #' requested data using the `table_no` or `series_id`.
 #'
 #' To find the `table_no` or `series_id` that corresponds to the data you want,
-#' use the functions `browse_rba_series()` and/or `browse_rba_tables()`.
+#' use the functions `browse_rba_tables()` and/or `browse_rba_series()`. Note
+#' that some historical exchange rate tables do not have table numbers on
+#' the RBA website; they have been assigned table numbers -
+#' see `browse_rba_tables("exchange rates").`
 #'
 #' To see which tables cannot currently be read, run `browse_rba_tables(FALSE)`.
 #'
@@ -126,7 +129,7 @@ read_rba <- function(table_no = NULL,
     stop("Could not find matching data for your request.")
   }
 
-  tidy_df
+  return(tidy_df)
 }
 
 #' Load and tidy local RBA Excel sheets
