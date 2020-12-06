@@ -16,8 +16,14 @@ url_exists <- function(urls) {
 #' @keywords internal
 #' @rdname url_exists
 check_url_success <- function(url) {
-  x <- httr::GET(url)
-  x <- httr::http_status(x)
-  result <- ifelse(x[["category"]] == "Success", TRUE, FALSE)
+  stopifnot(length(url) == 1)
+  get_safely <- purrr::safely(httr::GET)
+  x <- get_safely(url)
+  if (!is.null(x$error)) {
+    result <- FALSE
+  } else {
+    status <- httr::http_status(x$result)
+    result <- ifelse(status[["category"]] == "Success", TRUE, FALSE)
+  }
   result
 }
