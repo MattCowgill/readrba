@@ -31,7 +31,8 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
     css_selector <- ".width-text li a"
   }
 
-  table_page <- xml2::read_html(table_url)
+  table_page <- xml2::read_html(table_url,
+                                user_agent = "readrba R package - https://mattcowgill.github.io/readrba/index.html")
 
   link_list <- rvest::html_nodes(table_page, css_selector)
 
