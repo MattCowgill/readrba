@@ -164,22 +164,31 @@ prelim_tidy_a5 <- function(excel_sheet) {
   excel_sheet[last_up_row, 1] <- "Publication date"
   out <- excel_sheet[last_up_row:nrow(excel_sheet), ]
 
-  extra_metadata <- data.frame("a" = c("Title",
-                     "Description",
-                     "Frequency",
-                     "Type",
-                     "Units"),
-             "b" = c("Intervention transactions",
-                     "Daily foreign exchange market intervention transactions",
-                     "Daily",
-                     "Original",
-                     "A$ million"))
+  extra_metadata <- data.frame(
+    "a" = c(
+      "Title",
+      "Description",
+      "Frequency",
+      "Type",
+      "Units"
+    ),
+    "b" = c(
+      "Intervention transactions",
+      "Daily foreign exchange market intervention transactions",
+      "Daily",
+      "Original",
+      "A$ million"
+    )
+  )
 
   names(extra_metadata) <- names(out)
 
-  out <- rbind.data.frame(extra_metadata,
-                   out)
+  out <- rbind.data.frame(
+    extra_metadata,
+    out
+  )
 
   dplyr::as_tibble(out,
-                   .name_repair = "none")
+    .name_repair = "none"
+  )
 }

@@ -24,7 +24,7 @@ tidy_rba <- function(excel_sheet, series_id = NULL) {
   }
 
   if (.table_title == "A5 Reserve Bank Of Australia - Daily Foreign Exchange Market Intervention Transactions" &&
-      excel_sheet[1, 1] == "A$ million") {
+    excel_sheet[1, 1] == "A$ million") {
     excel_sheet <- prelim_tidy_a5(excel_sheet)
   }
 

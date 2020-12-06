@@ -21,4 +21,3 @@ check_url_success <- function(url) {
   result <- ifelse(x[["category"]] == "Success", TRUE, FALSE)
   result
 }
-

@@ -17,6 +17,7 @@ If the URL is read without error, an XML document
 }
 \description{
 The purpose of this function is to specify a user agent for scraping,
+to try a second time if a scrape attempt fails,
 and to return a useful error if the page cannot be scraped.
 }
 \keyword{internal}

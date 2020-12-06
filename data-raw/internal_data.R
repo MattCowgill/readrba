@@ -23,10 +23,14 @@ readable_tables <- table_list %>%
 
 all_data <- tibble()
 for (row in seq_len(nrow(readable_tables))) {
-  new_tbl <- read_rba(table_no = readable_tables$no[row],
-           cur_hist = readable_tables$current_or_historical[row]) %>%
-    dplyr::mutate(cur_hist = readable_tables$current_or_historical[row],
-                  table_no = readable_tables$no[row])
+  new_tbl <- read_rba(
+    table_no = readable_tables$no[row],
+    cur_hist = readable_tables$current_or_historical[row]
+  ) %>%
+    dplyr::mutate(
+      cur_hist = readable_tables$current_or_historical[row],
+      table_no = readable_tables$no[row]
+    )
 
   all_data <- bind_rows(all_data, new_tbl)
 }

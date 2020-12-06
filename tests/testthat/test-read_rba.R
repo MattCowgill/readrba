@@ -129,7 +129,6 @@ test_that("all current tables work", {
     expect_true(check_df(df))
     Sys.sleep(1)
   }
-
 })
 
 test_that("historical tables work", {
