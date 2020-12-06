@@ -110,7 +110,7 @@ scrape_rba_forecasts <- function() {
   recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
 
   recent_forecast_urls <- recent_forecast_list_url %>%
-    xml2::read_html(user_agent = "readrba R package - https://mattcowgill.github.io/readrba/index.html") %>%
+    safely_read_html() %>%
     rvest::html_nodes(".width-text a") %>%
     rvest::html_attr("href")
 
@@ -122,7 +122,7 @@ scrape_rba_forecasts <- function() {
     forecast_date <- lubridate::ymd(forecast_date)
 
     table <- url %>%
-      xml2::read_html(user_agent = "readrba R package - https://mattcowgill.github.io/readrba/index.html") %>%
+      safely_read_html() %>%
       rvest::html_nodes("#content > section > div.box-table > table") %>%
       rvest::html_table() %>%
       purrr::pluck(1) %>%

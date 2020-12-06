@@ -133,7 +133,7 @@ tidy_forecast <- function(url, xpath = '//*[@id="table-6.1"]') {
     lubridate::ymd()
 
   forecast <- url %>%
-    xml2::read_html() %>%
+    safely_read_html() %>%
     rvest::html_node(xpath = xpath) %>%
     rvest::html_table(fill = TRUE)
 
