@@ -28,6 +28,10 @@ tidy_rba <- function(excel_sheet, series_id = NULL) {
     excel_sheet <- prelim_tidy_a5(excel_sheet)
   }
 
+  if (.table_title == "Zero-Coupon Interest Rates - Analytical Series - 1992 To 2008") {
+    excel_sheet <- prelim_tidy_old_f17(excel_sheet)
+  }
+
   excel_sheet <- tidy_rba_normal(
     excel_sheet = excel_sheet,
     .table_title = .table_title,

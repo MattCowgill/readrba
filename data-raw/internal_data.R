@@ -22,6 +22,7 @@ readable_tables <- table_list %>%
   dplyr::filter(readable == TRUE)
 
 all_data <- tibble()
+
 for (row in seq_len(nrow(readable_tables))) {
   new_tbl <- read_rba(
     table_no = readable_tables$no[row],

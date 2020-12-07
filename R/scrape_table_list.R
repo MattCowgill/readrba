@@ -117,8 +117,7 @@ note_readable <- function(table_list) {
           no %in% c("E3", "E4", "E5", "E6", "E7") ~ FALSE,
         .data$current_or_historical == "historical" &
           no %in% c(
-            "A3", "J1", "J2", "E4", "E5", "E6", "E7",
-            "F17"
+            "A3", "J1", "J2", "E4", "E5", "E6", "E7"
           ) ~ FALSE,
         TRUE ~ TRUE
       )
