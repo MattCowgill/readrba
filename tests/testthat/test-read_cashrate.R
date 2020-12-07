@@ -1,4 +1,7 @@
 test_that("read_cashrate() returns expected output", {
+  skip_if_offline()
+  skip_on_cran()
+
   blank <- read_cashrate()
   target <- read_cashrate("target")
   interbank <- read_cashrate("interbank")

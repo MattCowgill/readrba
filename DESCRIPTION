@@ -7,8 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mattcowgill@gmail.com",
            comment = c(ORCID = "0000-0003-0422-3300"))
-Description: Download data from the Reserve Bank of Australia in tidy
-  tibble format.
+Description: Download data from the Reserve Bank of Australia in a tidy 
+    data frame.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
