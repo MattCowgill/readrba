@@ -19,7 +19,7 @@ load_rba_sheet <- function(filename) {
     .f = ~ readxl::read_excel(
       path = filename,
       sheet = .x,
-      .name_repair = "minimal"
+      .name_repair = "none"
     )
   )
 }

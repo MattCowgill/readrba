@@ -8,22 +8,25 @@
 check_if_rba_ts <- function(df) {
   stopifnot(inherits(df, "data.frame"))
 
-  first_col <- df[, 1]
+  # first_col <- df[, 1]
+  first_col <- df[[1]]
 
-  correct_metadata <- purrr::map_lgl(
-    .x = c(
-      "title",
-      "description",
-      "source"
-    ),
-    .f = ~ grepl(
-      pattern = .x,
-      x = first_col,
-      ignore.case = TRUE
-    )
-  )
+  metadata_present <- c("title", "description", "source") %in% tolower(first_col)
 
-  correct_metadata <- all(correct_metadata)
+  # correct_metadata <- purrr::map_lgl(
+  #   .x = c(
+  #     "title",
+  #     "description",
+  #     "source"
+  #   ),
+  #   .f = ~ grepl(
+  #     pattern = .x,
+  #     x = first_col,
+  #     ignore.case = TRUE
+  #   )
+  # )
 
-  return(correct_metadata)
+  all_metadata_present <- all(metadata_present)
+
+  return(all_metadata_present)
 }
