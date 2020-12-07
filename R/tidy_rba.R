@@ -146,12 +146,12 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
   fix_date <- function(string) {
     # Sometimes dates are recognised as a string that looks like a date "09-Oct-2020"
     if (all(grepl("-", string, fixed = TRUE)) ||
-        all(grepl("/", string, fixed = TRUE))) {
+      all(grepl("/", string, fixed = TRUE))) {
       fixed_date <- lubridate::dmy(string)
 
       # Sometimes dates are Excel style integers, parsed as strings, like "33450"
     } else if (!any(grepl("-", string, fixed = TRUE)) &&
-               !any(grepl("/", string, fixed = TRUE))) {
+      !any(grepl("/", string, fixed = TRUE))) {
       string <- ifelse(string == "NA", NA_character_, string)
       fixed_date <- as.Date(as.numeric(string), origin = "1899-12-30")
 

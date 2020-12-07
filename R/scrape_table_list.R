@@ -1,7 +1,7 @@
 #' Scrape the RBA site to obtain links to tables
 #' @return A tibble containing the text and URL of XLS/XLSX links
 #' @param cur_hist "current",  "historical", or "all"
-#' @noRd
+#' @keywords internal
 scrape_table_list <- function(cur_hist = "all") {
   if (cur_hist %in% c("current", "historical")) {
     table_list <- scrape_indiv_table_list(cur_hist = cur_hist)

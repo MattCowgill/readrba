@@ -24,8 +24,10 @@ em-dashes rather than minus signs. We want to replace these with minus signs.
 }
 \examples{
 \dontrun{
-rba_value_to_num(c("1.0", "-2", "1½", "1½–2½", "1½–2½",
-                   "1½–2½", "1½–2½", "17 to 17.5"))
+rba_value_to_num(c(
+  "1.0", "-2", "1½", "1½–2½", "1½–2½",
+  "1½–2½", "1½–2½", "17 to 17.5"
+))
 }
 }
 \keyword{internal}

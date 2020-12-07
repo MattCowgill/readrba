@@ -1,8 +1,10 @@
-#' Load an Excel sheet containing an RBA statistical table
-#' @name load_rba
+#' Load the data sheet(s) from an RBA Excel file
 #' @param filename Filename, including path, to an RBA Excel workbook
-#' @noRd
-
+#' @return list of dataframes
+#' @details Function loads every sheet in the Excel workbook at `filename`
+#' other than any with names that correspond to known non-data sheets
+#' (eg. "Notes").
+#' @keywords internal
 load_rba_sheet <- function(filename) {
   sheets <- readxl::excel_sheets(filename)
 
