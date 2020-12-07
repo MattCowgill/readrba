@@ -8,8 +8,8 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Download data from the Reserve Bank of Australia in tidy
-  tibble format.
+Download data from the Reserve Bank of Australia in a tidy 
+    data frame.
 }
 \seealso{
 Useful links:
