@@ -121,8 +121,9 @@ test_that("all current tables work", {
   # skip_on_ci()
 
   rba_site_works <- ifelse(is.null(curl::nslookup("rba.gov.au", error = FALSE)),
-                           FALSE,
-                           TRUE)
+    FALSE,
+    TRUE
+  )
 
   skip_if(isFALSE(rba_site_works))
 

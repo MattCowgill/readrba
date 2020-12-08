@@ -43,32 +43,17 @@ download_rba <- function(urls, path = tempdir()) {
 #' @rdname download_rba
 
 do_download_files <- function(urls, filenames_with_path) {
-
-  # if libcurl is available we can vectorise urls and destfile to download
-  # files simultaneously; if not, we have to iterate
-  if (isTRUE(capabilities("libcurl"))) {
-    message("Downloading ", paste0(urls, collapse = "\n"))
-
-    utils::download.file(
-      url = urls,
-      mode = "wb",
-      destfile = filenames_with_path,
-      quiet = TRUE,
-      method = "libcurl",
-      cacheOK = FALSE,
-      headers = c("User-Agent" = "readrba R package - https://mattcowgill.github.io/readrba/index.html")
+  readrba_handle <- curl::new_handle() %>%
+    curl::handle_setheaders(
+      "User-Agent" = "readrba R package - https://mattcowgill.github.io/readrba/index.html"
     )
-  } else {
-    # nocov start
-    purrr::walk2(
-      .x = urls,
-      .y = filenames_with_path,
-      .f = utils::download.file,
-      quiet = FALSE,
-      mode = "wb",
-      cacheOK = FALSE,
-      headers = c("User-Agent" = "readrba R package - https://mattcowgill.github.io/readrba/index.html")
-    )
-    # nocov end
-  }
+
+  purrr::walk2(
+    .x = urls,
+    .y = filenames_with_path,
+    .f = curl::curl_download,
+    quiet = FALSE,
+    mode = "wb",
+    handle = readrba_handle
+  )
 }

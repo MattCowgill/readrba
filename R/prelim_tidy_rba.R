@@ -199,25 +199,35 @@ prelim_tidy_old_f17 <- function(excel_sheet) {
   first_cell <- as.character(excel_sheet[1, 1])
 
   years <- as.character(
-    excel_sheet[min(which(excel_sheet[[2]] == 0)),
-                2:ncol(excel_sheet)]
-    )
+    excel_sheet[
+      min(which(excel_sheet[[2]] == 0)),
+      2:ncol(excel_sheet)
+    ]
+  )
 
   length_years <- length(years)
 
-  type <- dplyr::case_when(grepl("Forward rates", first_cell) ~ "forward rate",
-                           grepl("Yields", first_cell) ~ "yield",
-                           grepl("Discount factors", first_cell) ~ "discount factor",
-                           TRUE ~ NA_character_)
+  type <- dplyr::case_when(
+    grepl("Forward rates", first_cell) ~ "forward rate",
+    grepl("Yields", first_cell) ~ "yield",
+    grepl("Discount factors", first_cell) ~ "discount factor",
+    TRUE ~ NA_character_
+  )
 
-  title <- c("Title",
-             paste0("Zero-coupon ", type, " - ", years, " yrs"))
-  description <- c("Description",
-                   paste0("Zero-coupon ",
-                        ifelse(type == "yield", "interest rate yield", type),
-                        " - ",
-                        years,
-                        " yrs: daily, per cent per annum; See notes for more details"))
+  title <- c(
+    "Title",
+    paste0("Zero-coupon ", type, " - ", years, " yrs")
+  )
+  description <- c(
+    "Description",
+    paste0(
+      "Zero-coupon ",
+      ifelse(type == "yield", "interest rate yield", type),
+      " - ",
+      years,
+      " yrs: daily, per cent per annum; See notes for more details"
+    )
+  )
 
   type <- c("Type", rep("Original", length_years))
   frequency <- c("Frequency", rep("Daily", length_years))

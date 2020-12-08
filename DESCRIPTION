@@ -29,10 +29,11 @@ Imports:
     purrr,
     rlang,
     xml2,
-    rvest,
+    rvest (>= 0.3.6),
     stringr,
     httr,
-    lubridate
+    lubridate,
+    curl
 Depends: 
-    R (>= 3.5.0)
+    R (>= 3.6.0)
 VignetteBuilder: knitr

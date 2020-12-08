@@ -4,8 +4,9 @@ test_that("scrape_table_list() scrapes urls", {
   skip_if_offline()
   skip_on_cran()
   rba_site_works <- ifelse(is.null(curl::nslookup("rba.gov.au", error = FALSE)),
-                           FALSE,
-                           TRUE)
+    FALSE,
+    TRUE
+  )
 
   skip_if(isFALSE(rba_site_works))
 
