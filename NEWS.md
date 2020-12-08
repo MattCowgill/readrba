@@ -1,4 +1,5 @@
-# readrba 0.0.4.900
+# readrba 0.1.0
+* Speed and stability improvements
 * More non-standard tables can be tidied
 
 # readrba 0.0.4
