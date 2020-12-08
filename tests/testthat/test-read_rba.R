@@ -127,7 +127,7 @@ test_that("all current tables work", {
   for (tab in tab$no) {
     df <- read_rba(table_no = tab, cur_hist = "current")
     expect_true(check_df(df))
-    Sys.sleep(1)
+    Sys.sleep(2)
   }
 })
 

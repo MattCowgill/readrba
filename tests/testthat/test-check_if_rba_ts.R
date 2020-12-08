@@ -1,5 +1,8 @@
 
 test_that("check_if_rba_ts() returns expected output", {
+  skip_on_cran()
+  skip_if_offline()
+
   temp_dir <- tempdir()
   on.exit(unlink(temp_dir))
 
