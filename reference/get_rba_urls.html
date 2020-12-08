@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • readrba</title>
+<title>Find the url(s) corresponding to RBA table number(s).
+Note that multiple URLs can be returned for a single table_no, eg. A3. — get_rba_urls • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +47,10 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:title" content="Find the url(s) corresponding to RBA table number(s).
+Note that multiple URLs can be returned for a single table_no, eg. A3. — get_rba_urls" />
+<meta property="og:description" content="Find the url(s) corresponding to RBA table number(s).
+Note that multiple URLs can be returned for a single table_no, eg. A3." />
 <meta property="og:image" content="https://mattcowgill.github.io/readrba/index.html/logo.png" />
 
 
@@ -122,18 +125,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Find the url(s) corresponding to RBA table number(s).
+Note that multiple URLs can be returned for a single table_no, eg. <code>A3</code>.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/get_rba_urls.R'><code>R/get_rba_urls.R</code></a></small>
+    <div class="hidden name"><code>get_rba_urls.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>Find the url(s) corresponding to RBA table number(s).
+Note that multiple URLs can be returned for a single table_no, eg. <code>A3</code>.</p>
     </div>
 
-    <pre class="usage"><span class='va'>lhs</span> <span class='op'>%&gt;%</span> <span class='va'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>get_rba_urls</span><span class='op'>(</span><span class='va'>table_no</span>, cur_hist <span class='op'>=</span> <span class='st'>"current"</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>table_no</th>
+      <td><p>Character vector of RBA table number(s), such as <code>"A1"</code>
+or <code><a href='https://rdrr.io/r/base/c.html'>c("A1", "g1")</a></code>.
+Not case-sensitive.</p></td>
+    </tr>
+    <tr>
+      <th>cur_hist</th>
+      <td><p>Either <code>"current"</code> (the default) or <code>"historical"</code>. Must be
+length 1.
+Choose between getting
+the URLs corresponding to current RBA tables, or historical tables.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Vector of URL(s) corresponding to the supplied <code>table_no</code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

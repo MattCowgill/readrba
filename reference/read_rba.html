@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Download, import, and tidy statistical tables from the RBA — read_rba" />
 <meta property="og:description" content="Download, import, and tidy statistical tables from the RBA" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://mattcowgill.github.io/readrba/index.html/logo.png" />
 
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -188,7 +188,10 @@ Default is <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></c
 tables published by the Reserve Bank of Australia. You can specify the
 requested data using the <code>table_no</code> or <code>series_id</code>.</p>
 <p>To find the <code>table_no</code> or <code>series_id</code> that corresponds to the data you want,
-use the functions <code><a href='browse_rba_series.html'>browse_rba_series()</a></code> and/or <code><a href='browse_rba_series.html'>browse_rba_tables()</a></code>.</p>
+use the functions <code><a href='browse_rba_series.html'>browse_rba_tables()</a></code> and/or <code><a href='browse_rba_series.html'>browse_rba_series()</a></code>. Note
+that some historical exchange rate tables do not have table numbers on
+the RBA website; they have been assigned table numbers -
+see <code>browse_rba_tables("exchange rates").</code></p>
 <p>To see which tables cannot currently be read, run <code><a href='browse_rba_series.html'>browse_rba_tables(FALSE)</a></code>.</p>
 <p><code>read_rba_seriesid()</code> is a wrapper around <code>read_rba()</code>.
 <code>rba_stat_table()</code> is a wrapper around <code>read_rba()</code>.</p>

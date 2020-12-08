@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • readrba</title>
+<title>Function to wrangle historical yields data to get it in the standard format
+Called indirectly from tidy_rba() — prelim_tidy_old_f16 • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +47,13 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:title" content="Function to wrangle historical yields data to get it in the standard format
+Called indirectly from tidy_rba() — prelim_tidy_old_f16" />
+<meta property="og:description" content="Function to wrangle historical yields data to get it in the standard format
+Called indirectly from tidy_rba()
+Function to wrangle historical F2 table to get it in the standard format
+Called indirectly from tidy_rba()
+Tidy A5 Daily Forex Interventions" />
 <meta property="og:image" content="https://mattcowgill.github.io/readrba/index.html/logo.png" />
 
 
@@ -122,17 +128,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Function to wrangle historical yields data to get it in the standard format
+Called indirectly from tidy_rba()</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/prelim_tidy_rba.R'><code>R/prelim_tidy_rba.R</code></a></small>
+    <div class="hidden name"><code>prelim_tidy.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>Function to wrangle historical yields data to get it in the standard format
+Called indirectly from tidy_rba()</p>
+<p>Function to wrangle historical F2 table to get it in the standard format
+Called indirectly from tidy_rba()</p>
+<p>Tidy A5 Daily Forex Interventions</p>
     </div>
 
-    <pre class="usage"><span class='va'>lhs</span> <span class='op'>%&gt;%</span> <span class='va'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>prelim_tidy_old_f16</span><span class='op'>(</span><span class='va'>excel_sheet</span><span class='op'>)</span>
 
+<span class='fu'>prelim_tidy_old_f2</span><span class='op'>(</span><span class='va'>excel_sheet</span><span class='op'>)</span>
+
+<span class='fu'>prelim_tidy_a5</span><span class='op'>(</span><span class='va'>excel_sheet</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>excel_sheet</th>
+      <td><p>RBA table A5</p></td>
+    </tr>
+    </table>
 
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • readrba</title>
+<title>Download statistical table(s) from the RBA — download_rba • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:title" content="Download statistical table(s) from the RBA — download_rba" />
+<meta property="og:description" content="Download statistical table(s) from the RBA
+Internal function to download files" />
 <meta property="og:image" content="https://mattcowgill.github.io/readrba/index.html/logo.png" />
 
 
@@ -122,19 +123,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Download statistical table(s) from the RBA</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/download_rba.R'><code>R/download_rba.R</code></a></small>
+    <div class="hidden name"><code>download_rba.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>Download statistical table(s) from the RBA</p>
+<p>Internal function to download files</p>
     </div>
 
-    <pre class="usage"><span class='va'>lhs</span> <span class='op'>%&gt;%</span> <span class='va'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>download_rba</span><span class='op'>(</span><span class='va'>urls</span>, path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
+<span class='fu'>do_download_files</span><span class='op'>(</span><span class='va'>urls</span>, <span class='va'>filenames_with_path</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>urls</th>
+      <td><p>Table url(s)</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>Directory in which to save the downloaded file(s);
+default is <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code></p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Invisibly returns path to downloaded file(s)</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>download_rba</span><span class='op'>(</span>urls <span class='op'>=</span> <span class='st'>"https://rba.gov.au/statistics/tables/xls/f02d.xls"</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

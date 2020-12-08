@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • readrba</title>
+<title>read_html() safely. — safely_read_html • readrba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:title" content="read_html() safely. — safely_read_html" />
+<meta property="og:description" content="The purpose of this function is to specify a user agent for scraping,
+to try a second time if a scrape attempt fails,
+and to return a useful error if the page cannot be scraped." />
 <meta property="og:image" content="https://mattcowgill.github.io/readrba/index.html/logo.png" />
 
 
@@ -122,18 +124,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1><code>read_html()</code> safely.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MattCowgill/readrba/blob/master/R/safely_read_html.R'><code>R/safely_read_html.R</code></a></small>
+    <div class="hidden name"><code>safely_read_html.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>The purpose of this function is to specify a user agent for scraping,
+to try a second time if a scrape attempt fails,
+and to return a useful error if the page cannot be scraped.</p>
     </div>
 
-    <pre class="usage"><span class='va'>lhs</span> <span class='op'>%&gt;%</span> <span class='va'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>safely_read_html</span><span class='op'>(</span><span class='va'>url</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>url</th>
+      <td><p>url to read with <code><a href='http://xml2.r-lib.org/reference/read_xml.html'>xml2::read_html()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments passed to <code><a href='http://xml2.r-lib.org/reference/read_xml.html'>xml2::read_html()</a></code></p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>If the URL is read without error, an XML document
+(see <code><a href='http://xml2.r-lib.org/reference/read_xml.html'>?xml2::read_html</a></code>).</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
