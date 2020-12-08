@@ -1,7 +1,7 @@
 #' Scrape the RBA site to obtain links to tables
 #' @return A tibble containing the text and URL of XLS/XLSX links
 #' @param cur_hist "current",  "historical", or "all"
-#' @noRd
+#' @keywords internal
 scrape_table_list <- function(cur_hist = "all") {
   if (cur_hist %in% c("current", "historical")) {
     table_list <- scrape_indiv_table_list(cur_hist = cur_hist)
@@ -31,7 +31,7 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
     css_selector <- ".width-text li a"
   }
 
-  table_page <- xml2::read_html(table_url)
+  table_page <- safely_read_html(url = table_url)
 
   link_list <- rvest::html_nodes(table_page, css_selector)
 
@@ -114,11 +114,10 @@ note_readable <- function(table_list) {
     readable =
       dplyr::case_when(
         .data$current_or_historical == "current" &
-          no %in% c("A5", "E3", "E4", "E5", "E6", "E7") ~ FALSE,
+          no %in% c("E3", "E4", "E5", "E6", "E7") ~ FALSE,
         .data$current_or_historical == "historical" &
           no %in% c(
-            "A3", "J1", "J2", "E4", "E5", "E6", "E7",
-            "F17"
+            "A3", "J1", "J2", "E4", "E5", "E6", "E7"
           ) ~ FALSE,
         TRUE ~ TRUE
       )

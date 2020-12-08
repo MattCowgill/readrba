@@ -7,7 +7,7 @@ test_that("read_rba() fails with unexpected input", {
   # Fails when !cur_hist %in% c("current", "historical", "all")
   expect_error(read_rba("a1.1", cur_hist = "somearbitrarystring"))
   # Fails when table is not readable (not in standard TS format)
-  expect_error(read_rba("a5"))
+  expect_error(read_rba("e3"))
   # Fails when cur_hist isn't length 1 or same length as table_no
   expect_error(read_rba("g1", c("current", "historical")))
   expect_error(read_rba(c("g1", "a1"), c("current", "historical", "current")))
@@ -118,18 +118,24 @@ test_that("multiple tables work", {
 test_that("all current tables work", {
   skip_if_offline()
   skip_on_cran()
-  skip_on_ci()
+  # skip_on_ci()
+
+  rba_site_works <- ifelse(is.null(curl::nslookup("rba.gov.au", error = FALSE)),
+    FALSE,
+    TRUE
+  )
+
+  skip_if(isFALSE(rba_site_works))
 
   tab <- table_list %>%
     dplyr::filter(current_or_historical == "current" &
       readable == TRUE)
 
   for (tab in tab$no) {
+    Sys.sleep(1)
     df <- read_rba(table_no = tab, cur_hist = "current")
     expect_true(check_df(df))
-    Sys.sleep(1)
   }
-
 })
 
 test_that("historical tables work", {

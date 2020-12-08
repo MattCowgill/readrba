@@ -1,3 +1,7 @@
+# readrba 0.1.0
+* Speed and stability improvements
+* More non-standard tables can be tidied
+
 # readrba 0.0.4
 * `read_cashrate()` convenience function added
 * Speed improvements, particularly when using series IDs

@@ -2,16 +2,27 @@
 % Please edit documentation in R/prelim_tidy_rba.R
 \name{prelim_tidy_old_f16}
 \alias{prelim_tidy_old_f16}
+\alias{prelim_tidy_old_f2}
+\alias{prelim_tidy_a5}
 \title{Function to wrangle historical yields data to get it in the standard format
 Called indirectly from tidy_rba()}
 \usage{
 prelim_tidy_old_f16(excel_sheet)
+
+prelim_tidy_old_f2(excel_sheet)
+
+prelim_tidy_a5(excel_sheet)
 }
 \arguments{
-\item{excel_sheet}{Excel sheet with no tidying done}
+\item{excel_sheet}{RBA table A5}
 }
 \description{
 Function to wrangle historical yields data to get it in the standard format
 Called indirectly from tidy_rba()
+
+Function to wrangle historical F2 table to get it in the standard format
+Called indirectly from tidy_rba()
+
+Tidy A5 Daily Forex Interventions
 }
 \keyword{internal}

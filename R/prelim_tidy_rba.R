@@ -4,6 +4,7 @@
 #' Function to wrangle historical yields data to get it in the standard format
 #' Called indirectly from tidy_rba()
 #' @param excel_sheet Excel sheet with no tidying done
+#' @rdname prelim_tidy
 #' @keywords internal
 
 prelim_tidy_old_f16 <- function(excel_sheet) {
@@ -83,6 +84,7 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 #' Function to wrangle historical F2 table to get it in the standard format
 #' Called indirectly from tidy_rba()
 #' @param excel_sheet Excel sheet with no tidying done
+#' @rdname prelim_tidy
 #' @keywords internal
 
 prelim_tidy_old_f2 <- function(excel_sheet) {
@@ -149,4 +151,100 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
   new_sheet <- rbind(new_metadata, excel_sheet[-(1:10), ])
 
   new_sheet
+}
+
+#' Tidy A5 Daily Forex Interventions
+#' @param excel_sheet RBA table A5
+#' @rdname prelim_tidy
+#' @keywords internal
+#'
+
+prelim_tidy_a5 <- function(excel_sheet) {
+  last_up_row <- which(excel_sheet[[1]] == "Last updated:")
+  excel_sheet[last_up_row, 1] <- "Publication date"
+  out <- excel_sheet[last_up_row:nrow(excel_sheet), ]
+
+  extra_metadata <- data.frame(
+    "a" = c(
+      "Title",
+      "Description",
+      "Frequency",
+      "Type",
+      "Units"
+    ),
+    "b" = c(
+      "Intervention transactions",
+      "Daily foreign exchange market intervention transactions",
+      "Daily",
+      "Original",
+      "A$ million"
+    )
+  )
+
+  names(extra_metadata) <- names(out)
+
+  out <- rbind.data.frame(
+    extra_metadata,
+    out
+  )
+
+  dplyr::as_tibble(out,
+    .name_repair = "none"
+  )
+}
+
+prelim_tidy_old_f17 <- function(excel_sheet) {
+  # Create new metadata to bind to the data
+  # This is based on the formatting of current sheet F17
+  first_cell <- as.character(excel_sheet[1, 1])
+
+  years <- as.character(
+    excel_sheet[
+      min(which(excel_sheet[[2]] == 0)),
+      2:ncol(excel_sheet)
+    ]
+  )
+
+  length_years <- length(years)
+
+  type <- dplyr::case_when(
+    grepl("Forward rates", first_cell) ~ "forward rate",
+    grepl("Yields", first_cell) ~ "yield",
+    grepl("Discount factors", first_cell) ~ "discount factor",
+    TRUE ~ NA_character_
+  )
+
+  title <- c(
+    "Title",
+    paste0("Zero-coupon ", type, " - ", years, " yrs")
+  )
+  description <- c(
+    "Description",
+    paste0(
+      "Zero-coupon ",
+      ifelse(type == "yield", "interest rate yield", type),
+      " - ",
+      years,
+      " yrs: daily, per cent per annum; See notes for more details"
+    )
+  )
+
+  type <- c("Type", rep("Original", length_years))
+  frequency <- c("Frequency", rep("Daily", length_years))
+  source <- c("Source", rep("RBA", length_years))
+  units <- c("Units", rep("Per cent per annum", length_years))
+
+  new_metadata <- rbind(title, description, type, frequency, units)
+  new_metadata <- data.frame(new_metadata)
+  names(new_metadata) <- names(excel_sheet)
+  new_metadata <- dplyr::as_tibble(new_metadata, .name_repair = "none")
+
+  last_up_row <- min(which(excel_sheet[[1]] == "Last updated:"))
+  excel_sheet[last_up_row, 1] <- "Publication date"
+
+  # Add newly-created metadata to the sheet
+  excel_sheet <- excel_sheet[last_up_row:nrow(excel_sheet), ]
+  excel_sheet <- rbind(new_metadata, excel_sheet)
+
+  excel_sheet
 }

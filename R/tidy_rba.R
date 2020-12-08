@@ -23,6 +23,15 @@ tidy_rba <- function(excel_sheet, series_id = NULL) {
     excel_sheet <- prelim_tidy_old_f2(excel_sheet)
   }
 
+  if (.table_title == "A5 Reserve Bank Of Australia - Daily Foreign Exchange Market Intervention Transactions" &&
+    excel_sheet[1, 1] == "A$ million") {
+    excel_sheet <- prelim_tidy_a5(excel_sheet)
+  }
+
+  if (.table_title == "Zero-Coupon Interest Rates - Analytical Series - 1992 To 2008") {
+    excel_sheet <- prelim_tidy_old_f17(excel_sheet)
+  }
+
   excel_sheet <- tidy_rba_normal(
     excel_sheet = excel_sheet,
     .table_title = .table_title,
@@ -140,11 +149,13 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
 
   fix_date <- function(string) {
     # Sometimes dates are recognised as a string that looks like a date "09-Oct-2020"
-    if (all(grepl("-", string)) | all(grepl("/", string))) {
+    if (all(grepl("-", string, fixed = TRUE)) ||
+      all(grepl("/", string, fixed = TRUE))) {
       fixed_date <- lubridate::dmy(string)
 
       # Sometimes dates are Excel style integers, parsed as strings, like "33450"
-    } else if (!any(grepl("-", string)) & !any(grepl("/", string))) {
+    } else if (!any(grepl("-", string, fixed = TRUE)) &&
+      !any(grepl("/", string, fixed = TRUE))) {
       string <- ifelse(string == "NA", NA_character_, string)
       fixed_date <- as.Date(as.numeric(string), origin = "1899-12-30")
 

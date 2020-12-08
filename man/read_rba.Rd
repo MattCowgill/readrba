@@ -56,7 +56,10 @@ tables published by the Reserve Bank of Australia. You can specify the
 requested data using the \code{table_no} or \code{series_id}.
 
 To find the \code{table_no} or \code{series_id} that corresponds to the data you want,
-use the functions \code{browse_rba_series()} and/or \code{browse_rba_tables()}.
+use the functions \code{browse_rba_tables()} and/or \code{browse_rba_series()}. Note
+that some historical exchange rate tables do not have table numbers on
+the RBA website; they have been assigned table numbers -
+see \verb{browse_rba_tables("exchange rates").}
 
 To see which tables cannot currently be read, run \code{browse_rba_tables(FALSE)}.
 

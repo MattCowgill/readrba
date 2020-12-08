@@ -18,16 +18,23 @@ devtools::load_all()
 
 # Create series_list ------
 # Create a df of all individual series
-all_data <- table_list %>%
-  dplyr::filter(
-    readable == TRUE
+readable_tables <- table_list %>%
+  dplyr::filter(readable == TRUE)
+
+all_data <- tibble()
+
+for (row in seq_len(nrow(readable_tables))) {
+  new_tbl <- read_rba(
+    table_no = readable_tables$no[row],
+    cur_hist = readable_tables$current_or_historical[row]
   ) %>%
-  purrr::map2_dfr(
-    .x = setNames(.$no, .$no),
-    .y = .$current_or_historical,
-    .f = ~ read_rba(table_no = .x, cur_hist = .y) %>% dplyr::mutate(cur_hist = .y),
-    .id = "table_no"
-  )
+    dplyr::mutate(
+      cur_hist = readable_tables$current_or_historical[row],
+      table_no = readable_tables$no[row]
+    )
+
+  all_data <- bind_rows(all_data, new_tbl)
+}
 
 series_list <- all_data %>%
   dplyr::group_by(
@@ -131,7 +138,7 @@ tidy_forecast <- function(url, xpath = '//*[@id="table-6.1"]') {
     lubridate::ymd()
 
   forecast <- url %>%
-    xml2::read_html() %>%
+    safely_read_html() %>%
     rvest::html_node(xpath = xpath) %>%
     rvest::html_table(fill = TRUE)
 
