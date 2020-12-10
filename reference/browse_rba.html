@@ -164,9 +164,13 @@ about available tables This can take a few seconds.</p></td>
     <p>A <code>data.frame</code> (<code>tbl_df</code>) containing RBA data series/tables that match the <code>search_string</code>.
 Where no <code>search_string</code> is supplied, the data.frame will contain information
 about all RBA series/tables.</p>
+<p>The data.frame returned by <code>browse_rba_tables()</code> includes a column called
+<code>readable</code>. This column takes the value <code>TRUE</code> if the table is able to be
+read by <code><a href='read_rba.html'>read_rba()</a></code> and <code>FALSE</code> if it cannot be read.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>rba_list_tables() is a wrapper around browse_rba_tables()</p>
+    <p><code>rba_list_tables()</code> is a wrapper around browse_rba_tables() and is
+provided for compatibility with a previous package.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
