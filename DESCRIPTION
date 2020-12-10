@@ -1,5 +1,5 @@
 Package: readrba
-Title: Download and Tidy Statistical Tables from the Reserve Bank of Australia
+Title: Download and Tidy Data from the Reserve Bank of Australia
 Version: 0.1.0
 Authors@R: 
     person(given = "Matt",
@@ -7,8 +7,13 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mattcowgill@gmail.com",
            comment = c(ORCID = "0000-0003-0422-3300"))
-Description: Download data from the Reserve Bank of Australia in a tidy 
-    data frame.
+Description: Download up-to-date data from the Reserve Bank of Australia 
+    in a tidy data frame. Package includes functions to download current and 
+    historical RBA statistical tables 
+    (<https://www.rba.gov.au/statistics/tables/>) and RBA forecasts 
+    (<https://www.rba.gov.au/publications/smp/forecasts-archive.html>). Data
+    includes a broad range of Australian macroeconomic and financial time
+    series.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

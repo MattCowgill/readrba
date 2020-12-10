@@ -12,8 +12,13 @@
 #' Where no `search_string` is supplied, the data.frame will contain information
 #' about all RBA series/tables.
 #'
+#' The data.frame returned by `browse_rba_tables()` includes a column called
+#' `readable`. This column takes the value `TRUE` if the table is able to be
+#' read by `read_rba()` and `FALSE` if it cannot be read.
+#'
 #' @details
-#' rba_list_tables() is a wrapper around browse_rba_tables()
+#' `rba_list_tables()` is a wrapper around browse_rba_tables() and is
+#' provided for compatibility with a previous package.
 #' @export
 #' @examples
 #'

@@ -26,13 +26,18 @@ about available tables This can take a few seconds.}
 A \code{data.frame} (\code{tbl_df}) containing RBA data series/tables that match the \code{search_string}.
 Where no \code{search_string} is supplied, the data.frame will contain information
 about all RBA series/tables.
+
+The data.frame returned by \code{browse_rba_tables()} includes a column called
+\code{readable}. This column takes the value \code{TRUE} if the table is able to be
+read by \code{read_rba()} and \code{FALSE} if it cannot be read.
 }
 \description{
 Use these functions to find the table number or series ID of the data you're
 interested in.
 }
 \details{
-rba_list_tables() is a wrapper around browse_rba_tables()
+\code{rba_list_tables()} is a wrapper around browse_rba_tables() and is
+provided for compatibility with a previous package.
 }
 \examples{
 
