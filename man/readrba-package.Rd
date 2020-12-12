@@ -10,8 +10,8 @@
 
 Download up-to-date data from the Reserve Bank of Australia 
     in a tidy data frame. Package includes functions to download current and 
-    historical RBA statistical tables 
-    (<https://www.rba.gov.au/statistics/tables/>) and RBA forecasts 
+    historical statistical tables 
+    (<https://www.rba.gov.au/statistics/tables/>) and forecasts 
     (<https://www.rba.gov.au/publications/smp/forecasts-archive.html>). Data
     includes a broad range of Australian macroeconomic and financial time
     series.
