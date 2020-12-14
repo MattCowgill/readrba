@@ -138,8 +138,6 @@
   path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='fu'>rba_stat_table</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
-
 <span class='fu'>read_rba_seriesid</span><span class='op'>(</span><span class='va'>series_id</span>, path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -173,10 +171,6 @@ both current and historical data will be included in the output.</p></td>
       <td><p>Directory in which to save downloaded RBA Excel file(s).
 Default is <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
     </tr>
-    <tr>
-      <th>...</th>
-      <td><p>arguments in <code>read_stat_table()</code> passed to <code>read_rba()</code></p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -193,8 +187,7 @@ that some historical exchange rate tables do not have table numbers on
 the RBA website; they have been assigned table numbers -
 see <code>browse_rba_tables("exchange rates").</code></p>
 <p>To see which tables cannot currently be read, run <code><a href='browse_rba_series.html'>browse_rba_tables(FALSE)</a></code>.</p>
-<p><code>read_rba_seriesid()</code> is a wrapper around <code>read_rba()</code>.
-<code>rba_stat_table()</code> is a wrapper around <code>read_rba()</code>.</p>
+<p><code>read_rba_seriesid()</code> is a wrapper around <code>read_rba()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
