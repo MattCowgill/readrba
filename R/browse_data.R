@@ -77,7 +77,6 @@ rba_list_tables <- function(...) {
 }
 
 #' @noRd
-#' @keywords internal
 do_rba_browse <- function(search_string, lookup_table) {
   row_any <- function(x) rowSums(x) > 0
 

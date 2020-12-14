@@ -105,7 +105,7 @@ read_forecasts <- function(...) {
 #'  \item{`source`}{ For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy.}
 #'  \item{`notes`}{ Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given `forecast_date`.}
 #' }
-#' @keywords internal
+#' @noRd
 scrape_rba_forecasts <- function() {
   recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
 

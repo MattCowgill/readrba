@@ -8,7 +8,7 @@
 #' Choose between getting
 #' the URLs corresponding to current RBA tables, or historical tables.
 #' @return Vector of URL(s) corresponding to the supplied `table_no`
-#' @keywords internal
+#' @noRd
 get_rba_urls <- function(table_no, cur_hist = "current") {
   stopifnot(length(cur_hist) == 1)
   stopifnot(cur_hist %in% c("current", "historical"))

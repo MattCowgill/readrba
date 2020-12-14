@@ -9,7 +9,7 @@
 #' download_rba(urls = "https://rba.gov.au/statistics/tables/xls/f02d.xls")
 #' }
 #'
-#' @keywords internal
+#' @noRd
 #' @rdname download_rba
 download_rba <- function(urls, path = tempdir()) {
   filenames <- basename(urls)
@@ -39,8 +39,7 @@ download_rba <- function(urls, path = tempdir()) {
 }
 
 #' Internal function to download files
-#' @keywords internal
-#' @rdname download_rba
+#' @noRd
 
 do_download_files <- function(urls, filenames_with_path) {
   readrba_handle <- curl::new_handle() %>%

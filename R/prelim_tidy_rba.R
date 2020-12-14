@@ -5,7 +5,7 @@
 #' Called indirectly from tidy_rba()
 #' @param excel_sheet Excel sheet with no tidying done
 #' @rdname prelim_tidy
-#' @keywords internal
+#' @noRd
 
 prelim_tidy_old_f16 <- function(excel_sheet) {
   n_col <- ncol(excel_sheet)
@@ -85,7 +85,7 @@ prelim_tidy_old_f16 <- function(excel_sheet) {
 #' Called indirectly from tidy_rba()
 #' @param excel_sheet Excel sheet with no tidying done
 #' @rdname prelim_tidy
-#' @keywords internal
+#' @noRd
 
 prelim_tidy_old_f2 <- function(excel_sheet) {
 
@@ -156,7 +156,7 @@ prelim_tidy_old_f2 <- function(excel_sheet) {
 #' Tidy A5 Daily Forex Interventions
 #' @param excel_sheet RBA table A5
 #' @rdname prelim_tidy
-#' @keywords internal
+#' @noRd
 #'
 
 prelim_tidy_a5 <- function(excel_sheet) {

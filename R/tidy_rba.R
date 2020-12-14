@@ -45,7 +45,7 @@ tidy_rba <- function(excel_sheet, series_id = NULL) {
 #' @param excel_sheet Data.frame of an RBA spreadsheet
 #' @param .table_title Length 1 character vector of table title
 #' @param series_id Optional series ID
-#' @keywords internal
+#' @noRd
 
 tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
   # Check if the sheet contains the expected metadata in the first column
