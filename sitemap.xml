@@ -10,25 +10,13 @@
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/check_if_rba_ts.html</loc>
   </url>
   <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/reference/download_rba.html</loc>
-  </url>
-  <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/reference/get_rba_urls.html</loc>
-  </url>
-  <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/load_rba_sheet.html</loc>
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/reference/prelim_tidy.html</loc>
-  </url>
-  <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/rba_forecasts.html</loc>
-  </url>
-  <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/reference/rba_value_to_num.html</loc>
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/read_cashrate.html</loc>
@@ -46,9 +34,6 @@
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/safely_read_html.html</loc>
   </url>
   <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/reference/scrape_rba_forecasts.html</loc>
-  </url>
-  <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/scrape_table_list.html</loc>
   </url>
   <url>
@@ -56,12 +41,6 @@
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/tidy_rba.html</loc>
-  </url>
-  <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/reference/tidy_rba_normal.html</loc>
-  </url>
-  <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/reference/url_exists.html</loc>
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/articles/readrba.html</loc>
