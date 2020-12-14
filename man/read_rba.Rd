@@ -2,7 +2,6 @@
 % Please edit documentation in R/read_rba.R
 \name{read_rba}
 \alias{read_rba}
-\alias{rba_stat_table}
 \alias{read_rba_seriesid}
 \title{Download, import, and tidy statistical tables from the RBA}
 \usage{
@@ -12,8 +11,6 @@ read_rba(
   series_id = NULL,
   path = tempdir()
 )
-
-rba_stat_table(...)
 
 read_rba_seriesid(series_id, path = tempdir())
 }
@@ -41,8 +38,6 @@ both current and historical data will be included in the output.}
 
 \item{path}{Directory in which to save downloaded RBA Excel file(s).
 Default is \code{tempdir()}.}
-
-\item{...}{arguments in \code{read_stat_table()} passed to \code{read_rba()}}
 }
 \value{
 A single tidy tibble containing the requested table(s)
@@ -64,7 +59,6 @@ see \verb{browse_rba_tables("exchange rates").}
 To see which tables cannot currently be read, run \code{browse_rba_tables(FALSE)}.
 
 \code{read_rba_seriesid()} is a wrapper around \code{read_rba()}.
-\code{rba_stat_table()} is a wrapper around \code{read_rba()}.
 }
 \examples{
 \dontrun{

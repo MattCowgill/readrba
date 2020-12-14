@@ -3,14 +3,11 @@
 \name{browse_rba_series}
 \alias{browse_rba_series}
 \alias{browse_rba_tables}
-\alias{rba_list_tables}
 \title{Browse available RBA data series}
 \usage{
 browse_rba_series(search_string = "")
 
 browse_rba_tables(search_string = "", refresh = FALSE)
-
-rba_list_tables(...)
 }
 \arguments{
 \item{search_string}{Word or phrase to search for, such as "gold" or "commodity" or "labour".
@@ -19,8 +16,6 @@ If left as \code{""}, the function will return all series.}
 \item{refresh}{logical; \code{FALSE} by default. When \code{FALSE}, internal data is
 used. When \code{TRUE}, the RBA website is re-scraped to obtain current information
 about available tables This can take a few seconds.}
-
-\item{...}{arguments to \code{rba_list_tables()} passed to \code{browse_rba_tables()}}
 }
 \value{
 A \code{data.frame} (\code{tbl_df}) containing RBA data series/tables that match the \code{search_string}.
@@ -34,10 +29,6 @@ read by \code{read_rba()} and \code{FALSE} if it cannot be read.
 \description{
 Use these functions to find the table number or series ID of the data you're
 interested in.
-}
-\details{
-\code{rba_list_tables()} is a wrapper around browse_rba_tables() and is
-provided for compatibility with a previous package.
 }
 \examples{
 

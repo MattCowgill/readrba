@@ -34,7 +34,6 @@
 #' To see which tables cannot currently be read, run `browse_rba_tables(FALSE)`.
 #'
 #' `read_rba_seriesid()` is a wrapper around `read_rba()`.
-#' `rba_stat_table()` is a wrapper around `read_rba()`.
 #'
 #' @return A single tidy tibble containing the requested table(s)
 #' @examples
@@ -158,14 +157,6 @@ read_rba_local <- function(filenames, series_id = NULL) {
   ]
 
   tidy_df
-}
-
-#' @param ... arguments in `read_stat_table()` passed to `read_rba()`
-#' @rdname read_rba
-#' @export
-#'
-rba_stat_table <- function(...) {
-  read_rba(...)
 }
 
 #' @rdname read_rba

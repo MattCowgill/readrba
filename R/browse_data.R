@@ -16,9 +16,6 @@
 #' `readable`. This column takes the value `TRUE` if the table is able to be
 #' read by `read_rba()` and `FALSE` if it cannot be read.
 #'
-#' @details
-#' `rba_list_tables()` is a wrapper around browse_rba_tables() and is
-#' provided for compatibility with a previous package.
 #' @export
 #' @examples
 #'
@@ -67,13 +64,6 @@ browse_rba_tables <- function(search_string = "", refresh = FALSE) {
     search_string = search_string,
     lookup_table = .tables
   )
-}
-
-#' @param ... arguments to `rba_list_tables()` passed to `browse_rba_tables()`
-#' @export
-#' @rdname browse_rba
-rba_list_tables <- function(...) {
-  browse_rba_tables(...)
 }
 
 #' @noRd
