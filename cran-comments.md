@@ -13,4 +13,4 @@
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
-* Second resubmission, addressing comments by Julia Haider on 2020-12-09 and Gregor Seyer on 2020-12-11.
+* Third resubmission, addressing comments by Julia Haider on 2020-12-09, and Gregor Seyer on 2020-12-11 and 2012-12-14.

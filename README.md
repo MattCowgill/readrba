@@ -11,6 +11,8 @@ status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)]
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Codecov test
 coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/readrba)](https://CRAN.R-project.org/package=readrba)
 <!-- badges: end -->
 
 Get data from the [Reserve Bank of
@@ -20,7 +22,13 @@ Australia](https://rba.gov.au/statistics/tables/) in a
 
 ## Installation
 
-The package is not yet on CRAN. Install from GitHub:
+Install from CRAN using:
+
+``` r
+install.packages("readrba")
+```
+
+Or install the development version from GitHub:
 
 ``` r
 remotes::install_github("mattcowgill/readrba")
@@ -49,7 +57,6 @@ visualise it. Here’s the unemployment rate:
 
 ``` r
 unemp_rate <- read_rba(series_id = "GLFSURSA") 
-#> Downloading https://rba.gov.au/statistics/tables/xls/h05hist.xls
 
 unemp_rate %>%
   ggplot(aes(x = date, y = value)) +
@@ -58,7 +65,7 @@ unemp_rate %>%
   labs(title = "Unemployment rate (actual)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="672" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="672" />
 
 And you can also easily get the RBA’s public forecasts - from 1990 to
 present - and visualise those. Here’s every public forecast of the
@@ -75,7 +82,7 @@ unemp_forecasts %>%
   labs(title = "Unemployment rate (RBA forecasts)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="672" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="672" />
 
 ### Reading RBA data
 
@@ -86,7 +93,6 @@ table: table G1, consumer price inflation using `read_rba()`:
 
 ``` r
 cpi_table <- read_rba(table_no = "g1")
-#> Downloading https://rba.gov.au/statistics/tables/xls/g01hist.xls
 ```
 
 The object returned by `read_rba()` is a tidy tibble (ie. in ‘long’
@@ -112,19 +118,17 @@ one tidy tibble:
 
 ``` r
 rba_data <- read_rba(table_no = c("a1", "g1"))
-#> Downloading https://rba.gov.au/statistics/tables/xls/a01whist-summary.xls
-#> https://rba.gov.au/statistics/tables/xls/g01hist.xls
 
 head(rba_data)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
 #>   <date>     <chr>  <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-12-04
-#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-12-04
-#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-12-04
-#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-12-04
-#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-12-04
-#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-12-04
+#> 1 1994-06-01 Austr… 13680 Weekly    Original    $ mi… RBA    2020-12-11
+#> 2 1994-06-08 Austr… 13055 Weekly    Original    $ mi… RBA    2020-12-11
+#> 3 1994-06-15 Austr… 13086 Weekly    Original    $ mi… RBA    2020-12-11
+#> 4 1994-06-22 Austr… 12802 Weekly    Original    $ mi… RBA    2020-12-11
+#> 5 1994-06-29 Austr… 13563 Weekly    Original    $ mi… RBA    2020-12-11
+#> 6 1994-07-06 Austr… 12179 Weekly    Original    $ mi… RBA    2020-12-11
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -139,7 +143,6 @@ only:
 
 ``` r
 cpi_series <- read_rba(series_id = "GCPIAG")
-#> Downloading https://rba.gov.au/statistics/tables/xls/g01hist.xls
 head(cpi_series)
 #> # A tibble: 6 x 11
 #>   date       series value frequency series_type units source pub_date  
@@ -166,7 +169,6 @@ available, using the `cur_hist` argument:
 
 ``` r
 hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
-#> Downloading https://rba.gov.au/statistics/tables/xls-hist/a01hist.xls
 
 head(hist_a11)
 #> # A tibble: 6 x 11
@@ -208,7 +210,7 @@ browse_rba_tables()
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,259 x 8
+#> # A tibble: 4,382 x 8
 #>    table_no series series_id series_type table_title cur_hist description
 #>    <chr>    <chr>  <chr>     <chr>       <chr>       <chr>    <chr>      
 #>  1 A1       Austr… ARBAAASTW Original    A1 Reserve… current  Australian…
@@ -221,7 +223,7 @@ browse_rba_series()
 #>  8 A1       Other… ARBALOLW  Original    A1 Reserve… current  Other liab…
 #>  9 A1       Total… ARBAATAW  Original    A1 Reserve… current  Total RBA …
 #> 10 A1       Total… ARBALTLW  Original    A1 Reserve… current  Total RBA …
-#> # … with 4,249 more rows, and 1 more variable: frequency <chr>
+#> # … with 4,372 more rows, and 1 more variable: frequency <chr>
 ```
 
 You can specify a search string to filter the tables or series, as in:
@@ -340,7 +342,6 @@ Tables that are **not** able to be downloaded are:
 | Treasury Bond Tenders – Amount Allotted, by Years to Maturity – 1982–2006 | E5        | historical              |
 | Treasury Bond Switch Tenders – 2008                                       | E6        | historical              |
 | Treasury Capital Indexed Bonds – 1985–2006                                | E7        | historical              |
-| Zero-coupon Interest Rates – Analytical Series – 1992 to 2008             | F17       | historical              |
 
 ## Issues and contributions
 
