@@ -123,6 +123,7 @@ test_that("all current tables work", {
 
   for (tab in tab$no) {
     Sys.sleep(1)
+    print(tab)
     df <- read_rba(table_no = tab, cur_hist = "current")
     expect_true(check_df(df))
   }
@@ -139,6 +140,7 @@ test_that("historical tables work", {
 
   for (tab in tab$no) {
     df <- read_rba(table_no = tab, cur_hist = "historical")
+    print(tab)
     expect_true(check_df(df))
     Sys.sleep(1)
   }
