@@ -1,5 +1,6 @@
 # readrba 0.1.0.900
 * Internal data refreshed
+* 'www' added to URLs, to fix error encountered on some systems
 
 # readrba 0.1.0
 * Speed and stability improvements

@@ -27,7 +27,7 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
     table_url <- "https://www.rba.gov.au/statistics/tables/"
     css_selector <- "#tables-list li a"
   } else if (cur_hist == "historical") {
-    table_url <- "https://rba.gov.au/statistics/historical-data.html"
+    table_url <- "https://www.rba.gov.au/statistics/historical-data.html"
     css_selector <- ".width-text li a"
   }
 
@@ -77,7 +77,7 @@ scrape_indiv_table_list <- function(cur_hist = "current") {
 
   table_list <- dplyr::tibble(
     title = excel_text,
-    url = paste0("https://rba.gov.au", excel_links)
+    url = paste0("https://www.rba.gov.au", excel_links)
   )
 
   table_list <- table_list %>%
