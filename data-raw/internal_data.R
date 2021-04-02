@@ -7,6 +7,10 @@ library(rvest)
 library(purrr)
 library(rlang)
 
+# Create user agent for polite scraping -----
+readrba_user_agent <- "readrba R package - https://mattcowgill.github.io/readrba/index.html"
+readrba_header <- c("User-Agent" = readrba_user_agent)
+
 # Create table_list -------
 table_list <- scrape_table_list(cur_hist = "all")
 
@@ -225,7 +229,8 @@ forecasts <- dplyr::bind_rows(
 
 save(forecasts, file = file.path("data-raw", "forecasts.Rda"))
 
-usethis::use_data(table_list, series_list,
-  hist_forecasts, forecasts_1418, recent_forecasts,
-  overwrite = TRUE, internal = TRUE
+usethis::use_data(readrba_user_agent, readrba_header,
+                  table_list, series_list,
+                  hist_forecasts, forecasts_1418, recent_forecasts,
+                  overwrite = TRUE, internal = TRUE
 )
