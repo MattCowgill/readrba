@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   readrba: readrba.html
-last_built: 2021-01-20T05:00Z
+last_built: 2021-04-04T05:49Z
 urls:
   reference: https://mattcowgill.github.io/readrba/index.html/reference
   article: https://mattcowgill.github.io/readrba/index.html/articles
