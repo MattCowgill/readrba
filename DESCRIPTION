@@ -1,6 +1,6 @@
 Package: readrba
 Title: Download and Tidy Data from the Reserve Bank of Australia
-Version: 0.1.0.900
+Version: 0.1.1
 Authors@R: 
     person(given = "Matt",
            family = "Cowgill",
@@ -37,8 +37,7 @@ Imports:
     rvest (>= 0.3.6),
     stringr,
     httr,
-    lubridate,
-    curl
+    lubridate
 Depends: 
     R (>= 3.6.0)
 VignetteBuilder: knitr

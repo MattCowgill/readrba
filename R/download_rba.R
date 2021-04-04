@@ -12,6 +12,9 @@
 #' @noRd
 #' @rdname download_rba
 download_rba <- function(urls, path = tempdir()) {
+
+  check_rba_connection()
+
   filenames <- basename(urls)
   filenames_with_path <- file.path(path, filenames)
 
@@ -42,17 +45,13 @@ download_rba <- function(urls, path = tempdir()) {
 #' @noRd
 
 do_download_files <- function(urls, filenames_with_path) {
-  readrba_handle <- curl::new_handle() %>%
-    curl::handle_setheaders(
-      "User-Agent" = "readrba R package - https://mattcowgill.github.io/readrba/index.html"
-    )
 
   purrr::walk2(
     .x = urls,
     .y = filenames_with_path,
-    .f = curl::curl_download,
+    .f = utils::download.file,
     quiet = FALSE,
     mode = "wb",
-    handle = readrba_handle
+    headers = readrba_header
   )
 }

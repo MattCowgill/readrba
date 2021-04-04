@@ -7,6 +7,10 @@ library(rvest)
 library(purrr)
 library(rlang)
 
+# Create user agent for polite scraping -----
+readrba_user_agent <- "readrba R package - https://mattcowgill.github.io/readrba/index.html"
+readrba_header <- c("User-Agent" = readrba_user_agent)
+
 # Create table_list -------
 table_list <- scrape_table_list(cur_hist = "all")
 
@@ -14,6 +18,7 @@ table_list <- scrape_table_list(cur_hist = "all")
 # before proceeding, so that any changes to the table list are reflected
 # in subsequent steps.
 usethis::use_data(table_list, overwrite = TRUE, internal = TRUE)
+rm(list = c("table_list"))
 devtools::load_all()
 
 # Create series_list ------
@@ -124,6 +129,9 @@ hist_forecasts$value <- as.numeric(hist_forecasts$value)
 hist_forecasts <- hist_forecasts %>%
   filter(!is.na(value))
 
+save(hist_forecasts,
+     file = file.path("data-raw", "hist_forecasts.Rda"))
+
 # Create 2014-18 forecasts -----
 # To 2014, we use the historical series published by Bishop & Tulip (above)
 # From 2018, we use the full forecast tables published in the SMP
@@ -209,7 +217,8 @@ forecasts_1418 <- forecasts_1418 %>%
       TRUE ~ NA_character_
     ),
     source = "SMP"
-  )
+  ) %>%
+  dplyr::filter(!is.na(series))
 
 # Create recent_forecasts -----
 
@@ -225,7 +234,8 @@ forecasts <- dplyr::bind_rows(
 
 save(forecasts, file = file.path("data-raw", "forecasts.Rda"))
 
-usethis::use_data(table_list, series_list,
-  hist_forecasts, forecasts_1418, recent_forecasts,
-  overwrite = TRUE, internal = TRUE
+usethis::use_data(readrba_user_agent, readrba_header,
+                  table_list, series_list,
+                  hist_forecasts, forecasts_1418, recent_forecasts,
+                  overwrite = TRUE, internal = TRUE
 )
