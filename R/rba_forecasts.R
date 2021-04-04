@@ -196,5 +196,8 @@ scrape_rba_forecasts <- function() {
       dplyr::everything()
     )
 
+  recent_forecasts <- dplyr::filter(recent_forecasts,
+                                    !is.na(.data$series))
+
   recent_forecasts
 }
