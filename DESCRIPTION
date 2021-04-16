@@ -25,6 +25,7 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
+    markdown,
     ggplot2
 Imports: 
     readxl (>= 1.3.0),
