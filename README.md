@@ -103,12 +103,12 @@ head(cpi_table)
 #> # A tibble: 6 x 11
 #>   date       series      value frequency series_type units     source pub_date  
 #>   <date>     <chr>       <dbl> <chr>     <chr>       <chr>     <chr>  <date>    
-#> 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2020-01-28
+#> 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2021-04-29
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 ```
@@ -123,12 +123,12 @@ head(rba_data)
 #> # A tibble: 6 x 11
 #>   date       series         value frequency series_type units  source pub_date  
 #>   <date>     <chr>          <dbl> <chr>     <chr>       <chr>  <chr>  <date>    
-#> 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-03-26
-#> 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-03-26
-#> 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-03-26
-#> 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-03-26
-#> 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-03-26
-#> 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-03-26
+#> 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-04-23
+#> 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-04-23
+#> 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-04-23
+#> 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-04-23
+#> 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-04-23
+#> 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-04-23
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -147,12 +147,12 @@ head(cpi_series)
 #> # A tibble: 6 x 11
 #>   date       series      value frequency series_type units     source pub_date  
 #>   <date>     <chr>       <dbl> <chr>     <chr>       <chr>     <chr>  <date>    
-#> 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2020-01-28
-#> 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2020-01-28
+#> 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2021-04-29
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 unique(cpi_series$series_id)
@@ -210,7 +210,7 @@ browse_rba_tables()
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,390 x 8
+#> # A tibble: 4,394 x 8
 #>    table_no series   series_id series_type table_title    cur_hist description  
 #>    <chr>    <chr>    <chr>     <chr>       <chr>          <chr>    <chr>        
 #>  1 A1       Austral… ARBAAASTW Original    A1 Reserve Ba… current  Australian d…
@@ -223,7 +223,7 @@ browse_rba_series()
 #>  8 A1       Other l… ARBALOLW  Original    A1 Reserve Ba… current  Other liabil…
 #>  9 A1       Total a… ARBAATAW  Original    A1 Reserve Ba… current  Total RBA as…
 #> 10 A1       Total l… ARBALTLW  Original    A1 Reserve Ba… current  Total RBA li…
-#> # … with 4,380 more rows, and 1 more variable: frequency <chr>
+#> # … with 4,384 more rows, and 1 more variable: frequency <chr>
 ```
 
 You can specify a search string to filter the tables or series, as in:
@@ -247,7 +247,7 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 6,457 x 8
+#> # A tibble: 6,337 x 8
 #>    series_desc    forecast_date notes source value date       year_qtr series   
 #>    <chr>          <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr>    
 #>  1 CPI - 4 quart… 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_annu…
@@ -260,7 +260,7 @@ rba_forecasts()
 #>  8 Unemployment … 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp_ra…
 #>  9 Unemployment … 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp_ra…
 #> 10 Unemployment … 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp_ra…
-#> # … with 6,447 more rows
+#> # … with 6,327 more rows
 ```
 
 If you just want the latest forecasts, you can request them:
