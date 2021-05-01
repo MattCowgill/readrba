@@ -45,7 +45,8 @@ download_rba <- function(urls, path = tempdir()) {
 #' @noRd
 
 do_download_files <- function(urls, filenames_with_path) {
-
+  user_timeout <- getOption("timeout")
+  options(timeout = 120)
   purrr::walk2(
     .x = urls,
     .y = filenames_with_path,
@@ -54,4 +55,5 @@ do_download_files <- function(urls, filenames_with_path) {
     mode = "wb",
     headers = readrba_header
   )
+  options(timeout = user_timeout)
 }
