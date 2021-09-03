@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.900</span>
       </span>
     </div>
 
@@ -108,14 +108,6 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mattcowgill.github.io/readrba/index.html">readrba</a></span><span class="op">)</span></code></pre></div>
 <div id="quick-examples" class="section level3">
 <h3 class="hasAnchor">
@@ -136,7 +128,10 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">series</span> <span class="op">==</span> <span class="st">"unemp_rate"</span><span class="op">)</span>
 
 <span class="va">unemp_forecasts</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">forecast_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, 
+             y <span class="op">=</span> <span class="va">value</span>, 
+             group <span class="op">=</span> <span class="va">forecast_date</span>, 
+             col <span class="op">=</span> <span class="va">forecast_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Unemployment rate (RBA forecasts)"</span><span class="op">)</span></code></pre></div>
@@ -152,15 +147,15 @@
 <p>The object returned by <code><a href="reference/read_rba.html">read_rba()</a></code> is a tidy tibble (ie. in ‘long’ format):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cpi_table</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 11</span>
-<span class="co">#&gt;   date       series      value frequency series_type units     source pub_date  </span>
-<span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;  &lt;date&gt;    </span>
-<span class="co">#&gt; 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
+<span class="co">#&gt; # A tibble: 6 × 11</span>
+<span class="co">#&gt;   date       series               value frequency series_type units source pub_date  </span>
+<span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span>
+<span class="co">#&gt; 1 1922-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 2 1922-09-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 3 1922-12-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 4 1923-03-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 5 1923-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 6 1923-09-01 Consumer price index   2.9 Quarterly Original    Inde… ABS /… 2021-07-29</span>
 <span class="co">#&gt; # … with 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;,</span>
 <span class="co">#&gt; #   table_title &lt;chr&gt;</span></code></pre></div>
 <p>You can also request multiple tables. They’ll be returned together as one tidy tibble:</p>
@@ -168,15 +163,15 @@
 <code class="sourceCode R"><span class="va">rba_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a1"</span>, <span class="st">"g1"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">rba_data</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 11</span>
+<span class="co">#&gt; # A tibble: 6 × 11</span>
 <span class="co">#&gt;   date       series         value frequency series_type units  source pub_date  </span>
 <span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;date&gt;    </span>
-<span class="co">#&gt; 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-04-23</span>
-<span class="co">#&gt; 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-04-23</span>
-<span class="co">#&gt; 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-04-23</span>
-<span class="co">#&gt; 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-04-23</span>
-<span class="co">#&gt; 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-04-23</span>
-<span class="co">#&gt; 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-04-23</span>
+<span class="co">#&gt; 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-08-27</span>
+<span class="co">#&gt; 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-08-27</span>
+<span class="co">#&gt; 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-08-27</span>
+<span class="co">#&gt; 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-08-27</span>
+<span class="co">#&gt; 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-08-27</span>
+<span class="co">#&gt; 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-08-27</span>
 <span class="co">#&gt; # … with 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;,</span>
 <span class="co">#&gt; #   table_title &lt;chr&gt;</span>
 
@@ -187,15 +182,15 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cpi_series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"GCPIAG"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cpi_series</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 11</span>
-<span class="co">#&gt;   date       series      value frequency series_type units     source pub_date  </span>
-<span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;  &lt;date&gt;    </span>
-<span class="co">#&gt; 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
-<span class="co">#&gt; 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2021-04-29</span>
+<span class="co">#&gt; # A tibble: 6 × 11</span>
+<span class="co">#&gt;   date       series               value frequency series_type units source pub_date  </span>
+<span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span>
+<span class="co">#&gt; 1 1922-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 2 1922-09-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 3 1922-12-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 4 1923-03-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 5 1923-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29</span>
+<span class="co">#&gt; 6 1923-09-01 Consumer price index   2.9 Quarterly Original    Inde… ABS /… 2021-07-29</span>
 <span class="co">#&gt; # … with 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;,</span>
 <span class="co">#&gt; #   table_title &lt;chr&gt;</span>
 <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">cpi_series</span><span class="op">$</span><span class="va">series_id</span><span class="op">)</span>
@@ -206,7 +201,7 @@
 <code class="sourceCode R"><span class="va">hist_a11</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"a1.1"</span>, cur_hist <span class="op">=</span> <span class="st">"historical"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hist_a11</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 11</span>
+<span class="co">#&gt; # A tibble: 6 × 11</span>
 <span class="co">#&gt;   date       series     value frequency series_type      units source pub_date  </span>
 <span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span>
 <span class="co">#&gt; 1 1977-07-31 Australia…   654 Monthly   Original; avera… $ mi… RBA    2015-06-26</span>
@@ -224,7 +219,7 @@
 <p>Two functions are provided to help you find the table number or series ID you need. These are <code><a href="reference/browse_rba_series.html">browse_rba_tables()</a></code> and <code><a href="reference/browse_rba_series.html">browse_rba_series()</a></code>. Each returns a tibble with information about the available RBA data.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/browse_rba_series.html">browse_rba_tables</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 122 x 5</span>
+<span class="co">#&gt; # A tibble: 122 × 5</span>
 <span class="co">#&gt;    title                  no    url                   current_or_histo… readable</span>
 <span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;                 &lt;chr&gt;             &lt;lgl&gt;   </span>
 <span class="co">#&gt;  1 Liabilities and Asset… A1    https://www.rba.gov.… current           TRUE    </span>
@@ -240,7 +235,7 @@
 <span class="co">#&gt; # … with 112 more rows</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/browse_rba_series.html">browse_rba_series</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4,394 x 8</span>
+<span class="co">#&gt; # A tibble: 4,394 × 8</span>
 <span class="co">#&gt;    table_no series   series_id series_type table_title    cur_hist description  </span>
 <span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;        </span>
 <span class="co">#&gt;  1 A1       Austral… ARBAAASTW Original    A1 Reserve Ba… current  Australian d…</span>
@@ -257,7 +252,7 @@
 <p>You can specify a search string to filter the tables or series, as in:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/browse_rba_series.html">browse_rba_tables</a></span><span class="op">(</span><span class="st">"inflation"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt; # A tibble: 3 × 5</span>
 <span class="co">#&gt;   title                no    url                      current_or_histo… readable</span>
 <span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;             &lt;lgl&gt;   </span>
 <span class="co">#&gt; 1 Consumer Price Infl… G1    https://www.rba.gov.au/… current           TRUE    </span>
@@ -270,7 +265,7 @@
 <p>The function <code><a href="reference/rba_forecasts.html">rba_forecasts()</a></code> provides easy access to all the RBA’s public forecasts of key economic variables since 1990. The function scrapes the RBA website to obtain the latest Statement on Monetary Policy forecasts.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6,337 x 8</span>
+<span class="co">#&gt; # A tibble: 6,541 × 8</span>
 <span class="co">#&gt;    series_desc    forecast_date notes source value date       year_qtr series   </span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;date&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt;    </span>
 <span class="co">#&gt;  1 CPI - 4 quart… 1990-03-01    &lt;NA&gt;  JEFG     8.6 1990-03-01    1990. cpi_annu…</span>
@@ -283,23 +278,23 @@
 <span class="co">#&gt;  8 Unemployment … 1990-03-01    &lt;NA&gt;  JEFG     6.3 1990-03-01    1990. unemp_ra…</span>
 <span class="co">#&gt;  9 Unemployment … 1990-03-01    &lt;NA&gt;  JEFG     6.5 1990-06-01    1990. unemp_ra…</span>
 <span class="co">#&gt; 10 Unemployment … 1990-03-01    &lt;NA&gt;  JEFG     6.7 1990-09-01    1990. unemp_ra…</span>
-<span class="co">#&gt; # … with 6,327 more rows</span></code></pre></div>
+<span class="co">#&gt; # … with 6,531 more rows</span></code></pre></div>
 <p>If you just want the latest forecasts, you can request them:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span>all_or_latest <span class="op">=</span> <span class="st">"latest"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 102 x 8</span>
+<span class="co">#&gt; # A tibble: 102 × 8</span>
 <span class="co">#&gt;    forecast_date date       series  value series_desc   source notes    year_qtr</span>
 <span class="co">#&gt;    &lt;date&gt;        &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2021-02-01    2020-12-01 aena_c…  4    Nominal (non… SMP    (a) For…    2020.</span>
-<span class="co">#&gt;  2 2021-02-01    2021-06-01 aena_c… -7.25 Nominal (non… SMP    (a) For…    2021.</span>
-<span class="co">#&gt;  3 2021-02-01    2021-12-01 aena_c… -1.5  Nominal (non… SMP    (a) For…    2021.</span>
-<span class="co">#&gt;  4 2021-02-01    2022-06-01 aena_c…  1.25 Nominal (non… SMP    (a) For…    2022.</span>
-<span class="co">#&gt;  5 2021-02-01    2022-12-01 aena_c…  1.75 Nominal (non… SMP    (a) For…    2022.</span>
-<span class="co">#&gt;  6 2021-02-01    2023-06-01 aena_c…  2    Nominal (non… SMP    (a) For…    2023.</span>
-<span class="co">#&gt;  7 2021-02-01    2020-12-01 busine… -8.5  Business inv… SMP    (a) For…    2020.</span>
-<span class="co">#&gt;  8 2021-02-01    2021-06-01 busine… -2.5  Business inv… SMP    (a) For…    2021.</span>
-<span class="co">#&gt;  9 2021-02-01    2021-12-01 busine…  3    Business inv… SMP    (a) For…    2021.</span>
-<span class="co">#&gt; 10 2021-02-01    2022-06-01 busine…  6    Business inv… SMP    (a) For…    2022.</span>
+<span class="co">#&gt;  1 2021-08-01    2021-06-01 aena_c… -5.25 Nominal (non… SMP    (a) For…    2021.</span>
+<span class="co">#&gt;  2 2021-08-01    2021-12-01 aena_c… -0.75 Nominal (non… SMP    (a) For…    2021.</span>
+<span class="co">#&gt;  3 2021-08-01    2022-06-01 aena_c…  2.25 Nominal (non… SMP    (a) For…    2022.</span>
+<span class="co">#&gt;  4 2021-08-01    2022-12-01 aena_c…  2.75 Nominal (non… SMP    (a) For…    2022.</span>
+<span class="co">#&gt;  5 2021-08-01    2023-06-01 aena_c…  3    Nominal (non… SMP    (a) For…    2023.</span>
+<span class="co">#&gt;  6 2021-08-01    2023-12-01 aena_c…  3    Nominal (non… SMP    (a) For…    2023.</span>
+<span class="co">#&gt;  7 2021-08-01    2021-06-01 busine…  4.75 Business inv… SMP    (a) For…    2021.</span>
+<span class="co">#&gt;  8 2021-08-01    2021-12-01 busine…  8.5  Business inv… SMP    (a) For…    2021.</span>
+<span class="co">#&gt;  9 2021-08-01    2022-06-01 busine…  8    Business inv… SMP    (a) For…    2022.</span>
+<span class="co">#&gt; 10 2021-08-01    2022-12-01 busine…  9    Business inv… SMP    (a) For…    2022.</span>
 <span class="co">#&gt; # … with 92 more rows</span></code></pre></div>
 </div>
 </div>
