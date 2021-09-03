@@ -39,14 +39,6 @@ remotes::install_github("mattcowgill/readrba")
 ``` r
 library(ggplot2)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(readrba)
 ```
 
@@ -76,7 +68,10 @@ unemp_forecasts <- rba_forecasts() %>%
   filter(series == "unemp_rate")
 
 unemp_forecasts %>%
-  ggplot(aes(x = date, y = value, group = forecast_date)) +
+  ggplot(aes(x = date, 
+             y = value, 
+             group = forecast_date, 
+             col = forecast_date)) +
   geom_line() +
   theme_minimal() +
   labs(title = "Unemployment rate (RBA forecasts)")
@@ -100,15 +95,15 @@ format):
 
 ``` r
 head(cpi_table)
-#> # A tibble: 6 x 11
-#>   date       series      value frequency series_type units     source pub_date  
-#>   <date>     <chr>       <dbl> <chr>     <chr>       <chr>     <chr>  <date>    
-#> 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> # A tibble: 6 × 11
+#>   date       series               value frequency series_type units source pub_date  
+#>   <date>     <chr>                <dbl> <chr>     <chr>       <chr> <chr>  <date>    
+#> 1 1922-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 2 1922-09-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 3 1922-12-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 4 1923-03-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 5 1923-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 6 1923-09-01 Consumer price index   2.9 Quarterly Original    Inde… ABS /… 2021-07-29
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 ```
@@ -120,15 +115,15 @@ one tidy tibble:
 rba_data <- read_rba(table_no = c("a1", "g1"))
 
 head(rba_data)
-#> # A tibble: 6 x 11
+#> # A tibble: 6 × 11
 #>   date       series         value frequency series_type units  source pub_date  
 #>   <date>     <chr>          <dbl> <chr>     <chr>       <chr>  <chr>  <date>    
-#> 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-04-23
-#> 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-04-23
-#> 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-04-23
-#> 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-04-23
-#> 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-04-23
-#> 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-04-23
+#> 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-08-27
+#> 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-08-27
+#> 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-08-27
+#> 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-08-27
+#> 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-08-27
+#> 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-08-27
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -144,15 +139,15 @@ only:
 ``` r
 cpi_series <- read_rba(series_id = "GCPIAG")
 head(cpi_series)
-#> # A tibble: 6 x 11
-#>   date       series      value frequency series_type units     source pub_date  
-#>   <date>     <chr>       <dbl> <chr>     <chr>       <chr>     <chr>  <date>    
-#> 1 1922-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 2 1922-09-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 3 1922-12-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 4 1923-03-01 Consumer p…   2.7 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 5 1923-06-01 Consumer p…   2.8 Quarterly Original    Index, 2… ABS /… 2021-04-29
-#> 6 1923-09-01 Consumer p…   2.9 Quarterly Original    Index, 2… ABS /… 2021-04-29
+#> # A tibble: 6 × 11
+#>   date       series               value frequency series_type units source pub_date  
+#>   <date>     <chr>                <dbl> <chr>     <chr>       <chr> <chr>  <date>    
+#> 1 1922-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 2 1922-09-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 3 1922-12-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 4 1923-03-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 5 1923-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
+#> 6 1923-09-01 Consumer price index   2.9 Quarterly Original    Inde… ABS /… 2021-07-29
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 unique(cpi_series$series_id)
@@ -171,7 +166,7 @@ available, using the `cur_hist` argument:
 hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 
 head(hist_a11)
-#> # A tibble: 6 x 11
+#> # A tibble: 6 × 11
 #>   date       series     value frequency series_type      units source pub_date  
 #>   <date>     <chr>      <dbl> <chr>     <chr>            <chr> <chr>  <date>    
 #> 1 1977-07-31 Australia…   654 Monthly   Original; avera… $ mi… RBA    2015-06-26
@@ -192,7 +187,7 @@ Each returns a tibble with information about the available RBA data.
 
 ``` r
 browse_rba_tables()
-#> # A tibble: 122 x 5
+#> # A tibble: 122 × 5
 #>    title                  no    url                   current_or_histo… readable
 #>    <chr>                  <chr> <chr>                 <chr>             <lgl>   
 #>  1 Liabilities and Asset… A1    https://www.rba.gov.… current           TRUE    
@@ -210,7 +205,7 @@ browse_rba_tables()
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,394 x 8
+#> # A tibble: 4,394 × 8
 #>    table_no series   series_id series_type table_title    cur_hist description  
 #>    <chr>    <chr>    <chr>     <chr>       <chr>          <chr>    <chr>        
 #>  1 A1       Austral… ARBAAASTW Original    A1 Reserve Ba… current  Australian d…
@@ -230,7 +225,7 @@ You can specify a search string to filter the tables or series, as in:
 
 ``` r
 browse_rba_tables("inflation")
-#> # A tibble: 3 x 5
+#> # A tibble: 3 × 5
 #>   title                no    url                      current_or_histo… readable
 #>   <chr>                <chr> <chr>                    <chr>             <lgl>   
 #> 1 Consumer Price Infl… G1    https://www.rba.gov.au/… current           TRUE    
@@ -247,7 +242,7 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 6,337 x 8
+#> # A tibble: 6,541 × 8
 #>    series_desc    forecast_date notes source value date       year_qtr series   
 #>    <chr>          <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr>    
 #>  1 CPI - 4 quart… 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_annu…
@@ -260,26 +255,26 @@ rba_forecasts()
 #>  8 Unemployment … 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp_ra…
 #>  9 Unemployment … 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp_ra…
 #> 10 Unemployment … 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp_ra…
-#> # … with 6,327 more rows
+#> # … with 6,531 more rows
 ```
 
 If you just want the latest forecasts, you can request them:
 
 ``` r
 rba_forecasts(all_or_latest = "latest")
-#> # A tibble: 102 x 8
+#> # A tibble: 102 × 8
 #>    forecast_date date       series  value series_desc   source notes    year_qtr
 #>    <date>        <date>     <chr>   <dbl> <chr>         <chr>  <chr>       <dbl>
-#>  1 2021-02-01    2020-12-01 aena_c…  4    Nominal (non… SMP    (a) For…    2020.
-#>  2 2021-02-01    2021-06-01 aena_c… -7.25 Nominal (non… SMP    (a) For…    2021.
-#>  3 2021-02-01    2021-12-01 aena_c… -1.5  Nominal (non… SMP    (a) For…    2021.
-#>  4 2021-02-01    2022-06-01 aena_c…  1.25 Nominal (non… SMP    (a) For…    2022.
-#>  5 2021-02-01    2022-12-01 aena_c…  1.75 Nominal (non… SMP    (a) For…    2022.
-#>  6 2021-02-01    2023-06-01 aena_c…  2    Nominal (non… SMP    (a) For…    2023.
-#>  7 2021-02-01    2020-12-01 busine… -8.5  Business inv… SMP    (a) For…    2020.
-#>  8 2021-02-01    2021-06-01 busine… -2.5  Business inv… SMP    (a) For…    2021.
-#>  9 2021-02-01    2021-12-01 busine…  3    Business inv… SMP    (a) For…    2021.
-#> 10 2021-02-01    2022-06-01 busine…  6    Business inv… SMP    (a) For…    2022.
+#>  1 2021-08-01    2021-06-01 aena_c… -5.25 Nominal (non… SMP    (a) For…    2021.
+#>  2 2021-08-01    2021-12-01 aena_c… -0.75 Nominal (non… SMP    (a) For…    2021.
+#>  3 2021-08-01    2022-06-01 aena_c…  2.25 Nominal (non… SMP    (a) For…    2022.
+#>  4 2021-08-01    2022-12-01 aena_c…  2.75 Nominal (non… SMP    (a) For…    2022.
+#>  5 2021-08-01    2023-06-01 aena_c…  3    Nominal (non… SMP    (a) For…    2023.
+#>  6 2021-08-01    2023-12-01 aena_c…  3    Nominal (non… SMP    (a) For…    2023.
+#>  7 2021-08-01    2021-06-01 busine…  4.75 Business inv… SMP    (a) For…    2021.
+#>  8 2021-08-01    2021-12-01 busine…  8.5  Business inv… SMP    (a) For…    2021.
+#>  9 2021-08-01    2022-06-01 busine…  8    Business inv… SMP    (a) For…    2022.
+#> 10 2021-08-01    2022-12-01 busine…  9    Business inv… SMP    (a) For…    2022.
 #> # … with 92 more rows
 ```
 

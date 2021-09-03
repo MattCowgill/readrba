@@ -38,7 +38,7 @@ remotes::install_github("mattcowgill/readrba")
 ```
 
 ## Examples
-```{r library}
+```{r library, message = FALSE}
 library(ggplot2)
 library(dplyr)
 library(readrba)
@@ -66,7 +66,10 @@ unemp_forecasts <- rba_forecasts() %>%
   filter(series == "unemp_rate")
 
 unemp_forecasts %>%
-  ggplot(aes(x = date, y = value, group = forecast_date)) +
+  ggplot(aes(x = date, 
+             y = value, 
+             group = forecast_date, 
+             col = forecast_date)) +
   geom_line() +
   theme_minimal() +
   labs(title = "Unemployment rate (RBA forecasts)")
