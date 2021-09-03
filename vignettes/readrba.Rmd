@@ -58,28 +58,20 @@ Now we'll use that series ID to download the data:
 ```{r bondyield, eval = F}
 bond_yield <- read_rba(series_id = "FCMYGBAG10")
 ```
-```{r, include = F}
-# filenames <- file.path(tempdir(), paste0("f2", c("a", "b", "c"), ".xls"))
-# 
-# purrr::map2(.x = c("f2", "f2"),
-#             .y = c("current", "historical"),
-#             .f = get_rba_urls) %>%
-#   purrr::flatten_chr() %>%
-#   download.file(url = ., destfile = filenames)
-# 
-# bond_yield <- read_rba_local(filenames)
-# 
-# bond_yield <- bond_yield %>%
-#   dplyr::filter(series_id == "FCMYGBAG10")
-# 
-# save(bond_yield, file = file.path("vignettes", "FCMYGBAG10.rda"))
+```{r, include = F, eval = F}
+bond_yield <- read_rba(series_id = "FCMYGBAG10")
 
+save(bond_yield, file = file.path("vignettes", "FCMYGBAG10.rda"))
+
+```
+
+```{r, include = F}
 load("FCMYGBAG10.rda")
 ```
 
 A quick aside: the code above gives identical results to using `read_rba_seriesid("FCMYGBAG10")`. The `read_rba_seriesid("SOMETHING")` function is a wrapper around `read_rba(series_id = "SOMETHING")`.
 
-OK, no we have the bond yield data in tibble form, let's see what it looks like:
+OK, now we have the bond yield data in tibble form, let's see what it looks like:
 
 ```{r glimpsebondyield}
 glimpse(bond_yield)
@@ -186,6 +178,9 @@ Let's visualise all the Bank's unemployment rate forecasts since 1990:
 ```{r viz-unemp-forecasts}
 forecasts %>%
   filter(series == "unemp_rate") %>%
-  ggplot(aes(x = date, y = value, group = forecast_date)) +
+  ggplot(aes(x = date, 
+             y = value, 
+             group = forecast_date, 
+             colour = forecast_date)) +
   geom_line()
 ```
