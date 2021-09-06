@@ -196,6 +196,7 @@ forecast_1418_urls <- tibble::tribble(
   "https://www.rba.gov.au/publications/smp/2017/aug/tables.html", "//*[@id=\"table-6.1\"]",
   "https://www.rba.gov.au/publications/smp/2017/nov/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
   "https://www.rba.gov.au/publications/smp/2018/feb/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
+  "https://www.rba.gov.au/publications/smp/2018/may/economic-outlook.html", "//*[@id=\"content\"]/div[2]/table",
   "https://www.rba.gov.au/publications/smp/2018/aug/economic-outlook.html", "//*[@id=\"content\"]/div[1]/table"
 )
 
