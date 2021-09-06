@@ -67,6 +67,7 @@ unemployment rate the RBA has made over the past three decades:
 unemp_forecasts <- rba_forecasts() %>%
   filter(series == "unemp_rate")
 
+
 unemp_forecasts %>%
   ggplot(aes(x = date, 
              y = value, 
@@ -118,12 +119,12 @@ head(rba_data)
 #> # A tibble: 6 × 11
 #>   date       series         value frequency series_type units  source pub_date  
 #>   <date>     <chr>          <dbl> <chr>     <chr>       <chr>  <chr>  <date>    
-#> 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-08-27
-#> 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-08-27
-#> 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-08-27
-#> 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-08-27
-#> 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-08-27
-#> 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-08-27
+#> 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-09-03
+#> 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-09-03
+#> 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-09-03
+#> 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-09-03
+#> 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-09-03
+#> 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-09-03
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 

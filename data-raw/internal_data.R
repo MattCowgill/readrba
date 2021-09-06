@@ -162,9 +162,9 @@ tidy_forecast <- function(url, xpath = '//*[@id="table-6.1"]') {
     as.character(forecast[first_value_row - 1, 2:ncol(forecast)])
   )
 
-  year_ave_starts <- min(which(grepl("Year-average", forecast[, 2])))
+  year_ave_starts <- min(which(grepl("Year-average", forecast[, 2][[1]])))
 
-  forecast <- forecast[3:(year_ave_starts - 1), ]
+  forecast <- forecast[first_value_row:(year_ave_starts - 1), ]
 
   forecast$series_desc <- gsub("\\(.\\)", "", forecast$series_desc)
 
@@ -196,6 +196,7 @@ forecast_1418_urls <- tibble::tribble(
   "https://www.rba.gov.au/publications/smp/2017/aug/tables.html", "//*[@id=\"table-6.1\"]",
   "https://www.rba.gov.au/publications/smp/2017/nov/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
   "https://www.rba.gov.au/publications/smp/2018/feb/economic-outlook.html", "//*[@id=\"content\"]/div[4]/table",
+  "https://www.rba.gov.au/publications/smp/2018/may/economic-outlook.html", "//*[@id=\"content\"]/div[2]/table",
   "https://www.rba.gov.au/publications/smp/2018/aug/economic-outlook.html", "//*[@id=\"content\"]/div[1]/table"
 )
 

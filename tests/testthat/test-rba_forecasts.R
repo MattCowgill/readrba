@@ -16,6 +16,13 @@ test_that("rba_forecasts() returns expected output from internal data", {
   expect_gt(nrow(no_filter_forecasts), 25000)
 })
 
+test_that("Check that the cached 14-18 tables have everything", {
+  offline_forecasts <- rba_forecasts(refresh = FALSE)
+  expect_true("underlying_annual_inflation" %in% offline_forecasts[offline_forecasts$forecast_date == "2016-11-01", ]$series)
+  expect_true("gdp_change" %in% offline_forecasts[offline_forecasts$forecast_date == "2016-11-01", ]$series)
+  expect_true("cpi_annual_inflation" %in% offline_forecasts[offline_forecasts$forecast_date == "2016-11-01", ]$series)
+})
+
 test_that("rba_forecasts() returns expected output when refreshed", {
   skip_if_offline()
   skip_on_cran()

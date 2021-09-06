@@ -27,5 +27,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Matt Cowgill \email{mattcowgill@gmail.com} (\href{https://orcid.org/0000-0003-0422-3300}{ORCID})
 
+Other contributors:
+\itemize{
+  \item Angus Moore [contributor]
+}
+
 }
 \keyword{internal}
