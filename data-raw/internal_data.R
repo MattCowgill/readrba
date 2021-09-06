@@ -162,9 +162,9 @@ tidy_forecast <- function(url, xpath = '//*[@id="table-6.1"]') {
     as.character(forecast[first_value_row - 1, 2:ncol(forecast)])
   )
 
-  year_ave_starts <- min(which(grepl("Year-average", forecast[, 2])))
+  year_ave_starts <- min(which(grepl("Year-average", forecast[, 2][[1]])))
 
-  forecast <- forecast[3:(year_ave_starts - 1), ]
+  forecast <- forecast[first_value_row:(year_ave_starts - 1), ]
 
   forecast$series_desc <- gsub("\\(.\\)", "", forecast$series_desc)
 
