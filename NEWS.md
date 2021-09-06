@@ -1,5 +1,6 @@
-# readrba 0.1.1
-* refresh internal data, update vignette and README
+# readrba 0.1.1.900
+* refreshed internal data, update vignette and README
+* Forecasts in the 2014-2018 period now more complete, thanks to Angus Moore
 
 # readrba 0.1.1
 * utils::download.file() used to attempt to address corporate network problems with curl
