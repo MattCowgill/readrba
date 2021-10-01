@@ -1,4 +1,4 @@
-# readrba 0.1.1.900
+# readrba 0.1.2
 * refreshed internal data, update vignette and README
 * Forecasts in the 2014-2018 period now more complete, thanks to Angus Moore
 
