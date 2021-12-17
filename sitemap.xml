@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/404.html</loc>
+  </url>
+  <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/articles/readrba.html</loc>
+  </url>
+  <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/authors.html</loc>
+  </url>
+  <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/index.html</loc>
+  </url>
+  <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/news/index.html</loc>
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/browse_rba.html</loc>
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/check_if_rba_ts.html</loc>
+  </url>
+  <url>
+    <loc>https://mattcowgill.github.io/readrba/index.html/reference/index.html</loc>
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/load_rba_sheet.html</loc>
@@ -41,8 +65,5 @@
   </url>
   <url>
     <loc>https://mattcowgill.github.io/readrba/index.html/reference/tidy_rba.html</loc>
-  </url>
-  <url>
-    <loc>https://mattcowgill.github.io/readrba/index.html/articles/readrba.html</loc>
   </url>
 </urlset>
