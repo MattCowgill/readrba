@@ -1,8 +1,7 @@
 # This smaller action (only r-release, only macOS) is scheduled to run daily
 on:
   schedule:
-  # Run at midnight everyday
-    - cron:  '0 0 * * *'
+    - cron:  '0 1 * * *'
 
 
 name: R-CMD-check
