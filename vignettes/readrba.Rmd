@@ -13,7 +13,10 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 5.6, fig.height = 4, fig.align = "center",fig.retina = 2,
+  fig.width = 5.6, 
+  fig.height = 4, 
+  fig.align = "center",
+  fig.retina = 2,
   out.width = "100%",
   out.extra = 'style="border:0px;"'
 )
@@ -26,12 +29,17 @@ The Reserve Bank of Australia publishes lots of useful [statistical tables on it
 
 You can import the data using either the table number or the series ID.
 
+```{r load-dev, include = FALSE, message = FALSE, warning = FALSE}
+devtools::load_all()
+```
 ```{r setup, results=FALSE, message=FALSE, warning=FALSE}
 library(readrba)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
+
+theme_set(theme_minimal())
 ```
 
 ### Example: Individual series - 10-year bond yield
@@ -183,4 +191,37 @@ forecasts %>%
              group = forecast_date, 
              colour = forecast_date)) +
   geom_line()
+```
+
+### Example: change in RBA forecasts
+
+Now let's make a chart that compares the RBA's latest forecasts to its previous forecasts.  
+
+```{r change-in-forecasts,   fig.height = 6}
+# We've already created the `forecasts` object, like this: 
+# forecasts <- rba_forecasts
+
+latest_two <- forecasts %>%
+  filter(forecast_date %in% c(max(forecast_date),
+                              max(forecast_date) - months(3)))
+
+latest_two %>%
+  mutate(forecast_date = format(forecast_date, "%b %Y")) %>%
+  ggplot(aes(x = date, y = value, col = forecast_date)) +
+  geom_line() +
+  guides(colour = guide_legend(title = "Forecast issued: ")) +
+  facet_wrap(~series_desc, scales = "free_y",
+             labeller = label_wrap_gen(17)) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "top",
+        legend.direction = "horizontal",
+        legend.title = element_text(),
+        axis.title = element_blank(),
+        axis.text = element_text(size = 6),
+        plot.margin = margin(),
+        strip.text = element_text(size = 8)) +
+  labs(subtitle = paste0("RBA's forecasts issued in ",
+                         unique(latest_two$forecast_date) %>%  format("%B %Y") %>%  paste(collapse = " and ")),
+       caption = "Source: RBA Statement on Monetary Policy")
+
 ```

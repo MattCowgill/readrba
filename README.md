@@ -97,14 +97,14 @@ format):
 ``` r
 head(cpi_table)
 #> # A tibble: 6 × 11
-#>   date       series               value frequency series_type units source pub_date  
-#>   <date>     <chr>                <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1922-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 2 1922-09-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 3 1922-12-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 4 1923-03-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 5 1923-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 6 1923-09-01 Consumer price index   2.9 Quarterly Original    Inde… ABS /… 2021-07-29
+#>   date       series          value frequency series_type units source pub_date  
+#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
+#> 1 1922-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 2 1922-09-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 3 1922-12-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 4 1923-03-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 5 1923-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 6 1923-09-01 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2022-04-28
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 ```
@@ -117,14 +117,14 @@ rba_data <- read_rba(table_no = c("a1", "g1"))
 
 head(rba_data)
 #> # A tibble: 6 × 11
-#>   date       series         value frequency series_type units  source pub_date  
-#>   <date>     <chr>          <dbl> <chr>     <chr>       <chr>  <chr>  <date>    
-#> 1 1994-06-01 Australian do… 13680 Weekly    Original    $ mil… RBA    2021-09-03
-#> 2 1994-06-08 Australian do… 13055 Weekly    Original    $ mil… RBA    2021-09-03
-#> 3 1994-06-15 Australian do… 13086 Weekly    Original    $ mil… RBA    2021-09-03
-#> 4 1994-06-22 Australian do… 12802 Weekly    Original    $ mil… RBA    2021-09-03
-#> 5 1994-06-29 Australian do… 13563 Weekly    Original    $ mil… RBA    2021-09-03
-#> 6 1994-07-06 Australian do… 12179 Weekly    Original    $ mil… RBA    2021-09-03
+#>   date       series          value frequency series_type units source pub_date  
+#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
+#> 1 1994-06-01 Australian dol… 13680 Weekly    Original    $ mi… RBA    2022-04-29
+#> 2 1994-06-08 Australian dol… 13055 Weekly    Original    $ mi… RBA    2022-04-29
+#> 3 1994-06-15 Australian dol… 13086 Weekly    Original    $ mi… RBA    2022-04-29
+#> 4 1994-06-22 Australian dol… 12802 Weekly    Original    $ mi… RBA    2022-04-29
+#> 5 1994-06-29 Australian dol… 13563 Weekly    Original    $ mi… RBA    2022-04-29
+#> 6 1994-07-06 Australian dol… 12179 Weekly    Original    $ mi… RBA    2022-04-29
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -141,14 +141,14 @@ only:
 cpi_series <- read_rba(series_id = "GCPIAG")
 head(cpi_series)
 #> # A tibble: 6 × 11
-#>   date       series               value frequency series_type units source pub_date  
-#>   <date>     <chr>                <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1922-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 2 1922-09-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 3 1922-12-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 4 1923-03-01 Consumer price index   2.7 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 5 1923-06-01 Consumer price index   2.8 Quarterly Original    Inde… ABS /… 2021-07-29
-#> 6 1923-09-01 Consumer price index   2.9 Quarterly Original    Inde… ABS /… 2021-07-29
+#>   date       series          value frequency series_type units source pub_date  
+#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
+#> 1 1922-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 2 1922-09-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 3 1922-12-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 4 1923-03-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 5 1923-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
+#> 6 1923-09-01 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2022-04-28
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 unique(cpi_series$series_id)
@@ -168,14 +168,14 @@ hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 
 head(hist_a11)
 #> # A tibble: 6 × 11
-#>   date       series     value frequency series_type      units source pub_date  
-#>   <date>     <chr>      <dbl> <chr>     <chr>            <chr> <chr>  <date>    
-#> 1 1977-07-31 Australia…   654 Monthly   Original; avera… $ mi… RBA    2015-06-26
-#> 2 1977-08-31 Australia…   665 Monthly   Original; avera… $ mi… RBA    2015-06-26
-#> 3 1977-09-30 Australia…   695 Monthly   Original; avera… $ mi… RBA    2015-06-26
-#> 4 1977-10-31 Australia…   609 Monthly   Original; avera… $ mi… RBA    2015-06-26
-#> 5 1977-11-30 Australia…   560 Monthly   Original; avera… $ mi… RBA    2015-06-26
-#> 6 1977-12-31 Australia…   614 Monthly   Original; avera… $ mi… RBA    2015-06-26
+#>   date       series          value frequency series_type units source pub_date  
+#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
+#> 1 1977-07-31 Australian Gov…   654 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 2 1977-08-31 Australian Gov…   665 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 3 1977-09-30 Australian Gov…   695 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 4 1977-10-31 Australian Gov…   609 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 5 1977-11-30 Australian Gov…   560 Monthly   Original; … $ mi… RBA    2015-06-26
+#> 6 1977-12-31 Australian Gov…   614 Monthly   Original; … $ mi… RBA    2015-06-26
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 ```
@@ -188,38 +188,38 @@ Each returns a tibble with information about the available RBA data.
 
 ``` r
 browse_rba_tables()
-#> # A tibble: 122 × 5
-#>    title                  no    url                   current_or_histo… readable
-#>    <chr>                  <chr> <chr>                 <chr>             <lgl>   
-#>  1 Liabilities and Asset… A1    https://www.rba.gov.… current           TRUE    
-#>  2 Liabilities and Asset… A1.1  https://www.rba.gov.… current           TRUE    
-#>  3 Monetary Policy Chang… A2    https://www.rba.gov.… current           TRUE    
-#>  4 Monetary Policy Opera… A3    https://www.rba.gov.… current           TRUE    
-#>  5 Holdings of Australia… A3.1  https://www.rba.gov.… current           TRUE    
-#>  6 Foreign Exchange Tran… A4    https://www.rba.gov.… current           TRUE    
-#>  7 Daily Foreign Exchang… A5    https://www.rba.gov.… current           TRUE    
-#>  8 Banknotes on Issue by… A6    https://www.rba.gov.… current           TRUE    
-#>  9 Detected Australian C… A7    https://www.rba.gov.… current           TRUE    
-#> 10 Assets of Financial I… B1    https://www.rba.gov.… current           TRUE    
-#> # … with 112 more rows
+#> # A tibble: 123 × 5
+#>    title                                   no    url   current_or_hist… readable
+#>    <chr>                                   <chr> <chr> <chr>            <lgl>   
+#>  1 Liabilities and Assets – Summary        A1    http… current          TRUE    
+#>  2 Liabilities and Assets – Detailed       A1.1  http… current          TRUE    
+#>  3 Monetary Policy Changes                 A2    http… current          TRUE    
+#>  4 Monetary Policy Operations – Current    A3    http… current          TRUE    
+#>  5 Holdings of Australian Government Secu… A3.1  http… current          TRUE    
+#>  6 Securities Lending Repurchase and Swit… A3.2  http… current          TRUE    
+#>  7 Foreign Exchange Transactions and Hold… A4    http… current          TRUE    
+#>  8 Daily Foreign Exchange Market Interven… A5    http… current          TRUE    
+#>  9 Banknotes on Issue by Denomination      A6    http… current          TRUE    
+#> 10 Detected Australian Counterfeits by De… A7    http… current          TRUE    
+#> # … with 113 more rows
 ```
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,394 × 8
-#>    table_no series   series_id series_type table_title    cur_hist description  
-#>    <chr>    <chr>    <chr>     <chr>       <chr>          <chr>    <chr>        
-#>  1 A1       Austral… ARBAAASTW Original    A1 Reserve Ba… current  Australian d…
-#>  2 A1       Capital… ARBALCRFW Original    A1 Reserve Ba… current  Capital and …
-#>  3 A1       Deposit… ARBALDEPW Original    A1 Reserve Ba… current  Deposits (ex…
-#>  4 A1       Exchang… ARBALESBW Original    A1 Reserve Ba… current  Exchange set…
-#>  5 A1       Gold an… ARBAAGFXW Original    A1 Reserve Ba… current  Gold and for…
-#>  6 A1       Notes o… ARBALNOIW Original    A1 Reserve Ba… current  Notes on iss…
-#>  7 A1       Other a… ARBAAOAW  Original    A1 Reserve Ba… current  Other assets…
-#>  8 A1       Other l… ARBALOLW  Original    A1 Reserve Ba… current  Other liabil…
-#>  9 A1       Total a… ARBAATAW  Original    A1 Reserve Ba… current  Total RBA as…
-#> 10 A1       Total l… ARBALTLW  Original    A1 Reserve Ba… current  Total RBA li…
-#> # … with 4,384 more rows, and 1 more variable: frequency <chr>
+#> # A tibble: 4,412 × 8
+#>    table_no series        series_id series_type table_title cur_hist description
+#>    <chr>    <chr>         <chr>     <chr>       <chr>       <chr>    <chr>      
+#>  1 A1       Australian d… ARBAAASTW Original    A1 Reserve… current  Australian…
+#>  2 A1       Capital and … ARBALCRFW Original    A1 Reserve… current  Capital an…
+#>  3 A1       Deposits (ex… ARBALDEPW Original    A1 Reserve… current  Deposits (…
+#>  4 A1       Exchange set… ARBALESBW Original    A1 Reserve… current  Exchange s…
+#>  5 A1       Gold and for… ARBAAGFXW Original    A1 Reserve… current  Gold and f…
+#>  6 A1       Notes on iss… ARBALNOIW Original    A1 Reserve… current  Notes on i…
+#>  7 A1       Other assets… ARBAAOAW  Original    A1 Reserve… current  Other asse…
+#>  8 A1       Other liabil… ARBALOLW  Original    A1 Reserve… current  Other liab…
+#>  9 A1       Total assets  ARBAATAW  Original    A1 Reserve… current  Total RBA …
+#> 10 A1       Total liabil… ARBALTLW  Original    A1 Reserve… current  Total RBA …
+#> # … with 4,402 more rows, and 1 more variable: frequency <chr>
 ```
 
 You can specify a search string to filter the tables or series, as in:
@@ -227,11 +227,11 @@ You can specify a search string to filter the tables or series, as in:
 ``` r
 browse_rba_tables("inflation")
 #> # A tibble: 3 × 5
-#>   title                no    url                      current_or_histo… readable
-#>   <chr>                <chr> <chr>                    <chr>             <lgl>   
-#> 1 Consumer Price Infl… G1    https://www.rba.gov.au/… current           TRUE    
-#> 2 Consumer Price Infl… G2    https://www.rba.gov.au/… current           TRUE    
-#> 3 Inflation Expectati… G3    https://www.rba.gov.au/… current           TRUE
+#>   title                                    no    url   current_or_hist… readable
+#>   <chr>                                    <chr> <chr> <chr>            <lgl>   
+#> 1 Consumer Price Inflation                 G1    http… current          TRUE    
+#> 2 Consumer Price Inflation – Expenditure … G2    http… current          TRUE    
+#> 3 Inflation Expectations                   G3    http… current          TRUE
 ```
 
 ### RBA forecasts
@@ -243,20 +243,20 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 6,541 × 8
-#>    series_desc    forecast_date notes source value date       year_qtr series   
-#>    <chr>          <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr>    
-#>  1 CPI - 4 quart… 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_annu…
-#>  2 CPI - 4 quart… 1990-03-01    <NA>  JEFG     7.6 1990-06-01    1990. cpi_annu…
-#>  3 CPI - 4 quart… 1990-03-01    <NA>  JEFG     6.5 1990-09-01    1990. cpi_annu…
-#>  4 CPI - 4 quart… 1990-03-01    <NA>  JEFG     6   1990-12-01    1990. cpi_annu…
-#>  5 CPI - 4 quart… 1990-03-01    <NA>  JEFG     5.9 1991-03-01    1991. cpi_annu…
-#>  6 CPI - 4 quart… 1990-03-01    <NA>  JEFG     6.2 1991-06-01    1991. cpi_annu…
-#>  7 Unemployment … 1990-03-01    <NA>  JEFG     5.9 1989-12-01    1989. unemp_ra…
-#>  8 Unemployment … 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp_ra…
-#>  9 Unemployment … 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp_ra…
-#> 10 Unemployment … 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp_ra…
-#> # … with 6,531 more rows
+#> # A tibble: 7,039 × 8
+#>    series_desc       forecast_date notes source value date       year_qtr series
+#>    <chr>             <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr> 
+#>  1 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_a…
+#>  2 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     7.6 1990-06-01    1990. cpi_a…
+#>  3 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     6.5 1990-09-01    1990. cpi_a…
+#>  4 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     6   1990-12-01    1990. cpi_a…
+#>  5 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     5.9 1991-03-01    1991. cpi_a…
+#>  6 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     6.2 1991-06-01    1991. cpi_a…
+#>  7 Unemployment rat… 1990-03-01    <NA>  JEFG     5.9 1989-12-01    1989. unemp…
+#>  8 Unemployment rat… 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp…
+#>  9 Unemployment rat… 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp…
+#> 10 Unemployment rat… 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp…
+#> # … with 7,029 more rows
 ```
 
 If you just want the latest forecasts, you can request them:
@@ -264,18 +264,18 @@ If you just want the latest forecasts, you can request them:
 ``` r
 rba_forecasts(all_or_latest = "latest")
 #> # A tibble: 102 × 8
-#>    forecast_date date       series  value series_desc   source notes    year_qtr
-#>    <date>        <date>     <chr>   <dbl> <chr>         <chr>  <chr>       <dbl>
-#>  1 2021-08-01    2021-06-01 aena_c… -5.25 Nominal (non… SMP    (a) For…    2021.
-#>  2 2021-08-01    2021-12-01 aena_c… -0.75 Nominal (non… SMP    (a) For…    2021.
-#>  3 2021-08-01    2022-06-01 aena_c…  2.25 Nominal (non… SMP    (a) For…    2022.
-#>  4 2021-08-01    2022-12-01 aena_c…  2.75 Nominal (non… SMP    (a) For…    2022.
-#>  5 2021-08-01    2023-06-01 aena_c…  3    Nominal (non… SMP    (a) For…    2023.
-#>  6 2021-08-01    2023-12-01 aena_c…  3    Nominal (non… SMP    (a) For…    2023.
-#>  7 2021-08-01    2021-06-01 busine…  4.75 Business inv… SMP    (a) For…    2021.
-#>  8 2021-08-01    2021-12-01 busine…  8.5  Business inv… SMP    (a) For…    2021.
-#>  9 2021-08-01    2022-06-01 busine…  8    Business inv… SMP    (a) For…    2022.
-#> 10 2021-08-01    2022-12-01 busine…  9    Business inv… SMP    (a) For…    2022.
+#>    forecast_date date       series       value series_desc source notes year_qtr
+#>    <date>        <date>     <chr>        <dbl> <chr>       <chr>  <chr>    <dbl>
+#>  1 2022-05-01    2021-12-01 aena_change    3.3 Nominal (n… SMP    (a) …    2021.
+#>  2 2022-05-01    2022-06-01 aena_change    6   Nominal (n… SMP    (a) …    2022.
+#>  3 2022-05-01    2022-12-01 aena_change    4.4 Nominal (n… SMP    (a) …    2022.
+#>  4 2022-05-01    2023-06-01 aena_change    4.8 Nominal (n… SMP    (a) …    2023.
+#>  5 2022-05-01    2023-12-01 aena_change    4.9 Nominal (n… SMP    (a) …    2023.
+#>  6 2022-05-01    2024-06-01 aena_change    4.9 Nominal (n… SMP    (a) …    2024.
+#>  7 2022-05-01    2021-12-01 business_in…   5.4 Business i… SMP    (a) …    2021.
+#>  8 2022-05-01    2022-06-01 business_in…  -0.2 Business i… SMP    (a) …    2022.
+#>  9 2022-05-01    2022-12-01 business_in…   5   Business i… SMP    (a) …    2022.
+#> 10 2022-05-01    2023-06-01 business_in…   8.3 Business i… SMP    (a) …    2023.
 #> # … with 92 more rows
 ```
 
@@ -297,20 +297,20 @@ The historical exchange rate tables do not have table numbers on the RBA
 website. They can still be downloaded, using the following table
 numbers:
 
-| Table title                                                                      | table\_no          |
-|:---------------------------------------------------------------------------------|:-------------------|
-| Exchange Rates – Daily – 1983 to 1986                                            | ex\_daily\_8386    |
-| Exchange Rates – Daily – 1987 to 1990                                            | ex\_daily\_8790    |
-| Exchange Rates – Daily – 1991 to 1994                                            | ex\_daily\_9194    |
-| Exchange Rates – Daily – 1995 to 1998                                            | ex\_daily\_9598    |
-| Exchange Rates – Daily – 1999 to 2002                                            | ex\_daily\_9902    |
-| Exchange Rates – Daily – 2003 to 2006                                            | ex\_daily\_0306    |
-| Exchange Rates – Daily – 2007 to 2009                                            | ex\_daily\_0709    |
-| Exchange Rates – Daily – 2010 to 2013                                            | ex\_daily\_1013    |
-| Exchange Rates – Daily – 2014 to 2017                                            | ex\_daily\_1417    |
-| Exchange Rates – Daily – 2018 to Current                                         | ex\_daily\_18cur   |
-| Exchange Rates – Monthly – January 2010 to latest complete month of current year | ex\_monthly\_10cur |
-| Exchange Rates – Monthly – July 1969 to December 2009                            | ex\_monthly\_6909  |
+| Table title                                                                      | table_no         |
+|:---------------------------------------------------------------------------------|:-----------------|
+| Exchange Rates – Daily – 1983 to 1986                                            | ex_daily_8386    |
+| Exchange Rates – Daily – 1987 to 1990                                            | ex_daily_8790    |
+| Exchange Rates – Daily – 1991 to 1994                                            | ex_daily_9194    |
+| Exchange Rates – Daily – 1995 to 1998                                            | ex_daily_9598    |
+| Exchange Rates – Daily – 1999 to 2002                                            | ex_daily_9902    |
+| Exchange Rates – Daily – 2003 to 2006                                            | ex_daily_0306    |
+| Exchange Rates – Daily – 2007 to 2009                                            | ex_daily_0709    |
+| Exchange Rates – Daily – 2010 to 2013                                            | ex_daily_1013    |
+| Exchange Rates – Daily – 2014 to 2017                                            | ex_daily_1417    |
+| Exchange Rates – Daily – 2018 to Current                                         | ex_daily_18cur   |
+| Exchange Rates – Monthly – January 2010 to latest complete month of current year | ex_monthly_10cur |
+| Exchange Rates – Monthly – July 1969 to December 2009                            | ex_monthly_6909  |
 
 ### Non-standard tables
 
@@ -321,23 +321,23 @@ time series, or because they’re particularly old.
 
 Tables that are **not** able to be downloaded are:
 
-| Table title                                                               | table\_no | current\_or\_historical |
-|:--------------------------------------------------------------------------|:----------|:------------------------|
-| Household Balance Sheets – Distribution                                   | E3        | current                 |
-| Household Gearing – Distribution                                          | E4        | current                 |
-| Household Financial Assets – Distribution                                 | E5        | current                 |
-| Household Non-Financial Assets – Distribution                             | E6        | current                 |
-| Household Debt – Distribution                                             | E7        | current                 |
-| Open Market Operations – 2012 to 2013                                     | A3        | historical              |
-| Open Market Operations – 2009 to 2011                                     | A3        | historical              |
-| Open Market Operations – 2003 to 2008                                     | A3        | historical              |
-| Individual Banks’ Assets – 1991–1992 to 1997–1998                         | J1        | historical              |
-| Individual Banks’ Liabilities – 1991–1992 to 1997–1998                    | J2        | historical              |
-| Treasury Note Tenders - 1989–2006                                         | E4        | historical              |
-| Treasury Bond Tenders – 1982–2006                                         | E5        | historical              |
-| Treasury Bond Tenders – Amount Allotted, by Years to Maturity – 1982–2006 | E5        | historical              |
-| Treasury Bond Switch Tenders – 2008                                       | E6        | historical              |
-| Treasury Capital Indexed Bonds – 1985–2006                                | E7        | historical              |
+| Table title                                                               | table_no | current_or_historical |
+|:--------------------------------------------------------------------------|:---------|:----------------------|
+| Household Balance Sheets – Distribution                                   | E3       | current               |
+| Household Gearing – Distribution                                          | E4       | current               |
+| Household Financial Assets – Distribution                                 | E5       | current               |
+| Household Non-Financial Assets – Distribution                             | E6       | current               |
+| Household Debt – Distribution                                             | E7       | current               |
+| Open Market Operations – 2012 to 2013                                     | A3       | historical            |
+| Open Market Operations – 2009 to 2011                                     | A3       | historical            |
+| Open Market Operations – 2003 to 2008                                     | A3       | historical            |
+| Individual Banks’ Assets – 1991–1992 to 1997–1998                         | J1       | historical            |
+| Individual Banks’ Liabilities – 1991–1992 to 1997–1998                    | J2       | historical            |
+| Treasury Note Tenders - 1989–2006                                         | E4       | historical            |
+| Treasury Bond Tenders – 1982–2006                                         | E5       | historical            |
+| Treasury Bond Tenders – Amount Allotted, by Years to Maturity – 1982–2006 | E5       | historical            |
+| Treasury Bond Switch Tenders – 2008                                       | E6       | historical            |
+| Treasury Capital Indexed Bonds – 1985–2006                                | E7       | historical            |
 
 ## Issues and contributions
 
