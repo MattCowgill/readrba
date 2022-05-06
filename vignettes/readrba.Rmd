@@ -29,9 +29,6 @@ The Reserve Bank of Australia publishes lots of useful [statistical tables on it
 
 You can import the data using either the table number or the series ID.
 
-```{r load-dev, include = FALSE, message = FALSE, warning = FALSE}
-devtools::load_all()
-```
 ```{r setup, results=FALSE, message=FALSE, warning=FALSE}
 library(readrba)
 library(tidyr)
