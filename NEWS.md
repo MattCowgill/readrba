@@ -1,3 +1,6 @@
+# readrba 0.1.2.9xx
+* More examples added to vignette
+
 # readrba 0.1.2
 * refreshed internal data, update vignette and README
 * Forecasts in the 2014-2018 period now more complete, thanks to Angus Moore
