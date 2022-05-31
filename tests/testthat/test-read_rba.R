@@ -104,6 +104,12 @@ test_that("multiple tables work", {
   expect_true(check_df(both))
 })
 
+check_num_series <- function(table_no) {
+  url <- get_rba_urls(table_no)
+  path <- download_rba(url)
+  raw_df <- suppressMessages(read_excel_noguess(path))
+  ncol(raw_df) - 1
+}
 
 test_that("all current tables work", {
   skip_if_offline()
@@ -116,7 +122,10 @@ test_that("all current tables work", {
   for (tab in tab$no) {
     Sys.sleep(1)
     print(tab)
+    num_cols_in_raw <- check_num_series(tab)
     df <- read_rba(table_no = tab, cur_hist = "current")
+    num_series_in_loaded <- length(unique(df$series_id))
+    expect_equal(num_cols_in_raw, num_series_in_loaded)
     expect_true(check_df(df))
   }
 })
