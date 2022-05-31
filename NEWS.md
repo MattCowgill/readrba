@@ -1,4 +1,5 @@
 # readrba 0.1.2.9xx
+* Additional checks to ensure file format (eg. "xls") matches file content (eg. "xlsx")
 * More examples added to vignette
 
 # readrba 0.1.2

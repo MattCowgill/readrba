@@ -9,13 +9,13 @@ test_that("download_rba() downloads file(s)", {
   urls <- get_rba_urls("d1")
   filename1 <- download_rba(urls)
 
-  expect_is(readxl::read_excel(filename1), "tbl_df")
+  expect_is(read_excel_noguess(filename1), "tbl_df")
 
   # Multiple files
 
   filenames <- download_rba(get_rba_urls(c("d1", "d2")))
 
-  files <- purrr::map(filenames, readxl::read_excel)
+  files <- purrr::map(filenames, read_excel_noguess)
 
   purrr::map(files, ~ expect_is(.x, "tbl_df"))
 })
