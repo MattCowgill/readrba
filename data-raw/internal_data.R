@@ -61,7 +61,7 @@ download.file(hist_forecast_url, hist_forecast_file)
 hist_sheets <- excel_sheets(hist_forecast_file)[excel_sheets(hist_forecast_file) != "Notes"]
 
 load_hist_sheet <- function(filename, sheet_name) {
-  raw_sheet <- read_excel(
+  raw_sheet <- read_excel_noguess(
     path = filename,
     sheet = sheet_name,
     col_names = FALSE,
