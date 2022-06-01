@@ -6,9 +6,8 @@
 #' (eg. "Notes").
 #' @keywords internal
 load_rba_sheet <- function(filename) {
-  filename <- rename_excel(filename)
 
-  sheets <- readxl::excel_sheets(filename)
+  sheets <- excel_sheets_noguess(filename)
 
   sheets <- sheets[!sheets %in% c(
     "Notes",
@@ -28,9 +27,19 @@ load_rba_sheet <- function(filename) {
   )
 }
 
-#' This function checks to see if an Excel file's extension matches its
+#' Wrapper around readxl::read_excel() that first checks to see that the
+#' file format matches the file signature, and renames the file if not
+#' @param filename Filename incl path
+#' @keywords internal
+excel_sheets_noguess <- function(filename) {
+  filename <- rename_excel(filename)
+  readxl::excel_sheets(filename)
+}
+
+#' Check to see if an Excel file's extension matches its
 #' signature; if it does not, the file will be renamed so that the file
 #' extension is equal to the signature
+#' @param filename Filename incl path
 #' @keywords internal
 rename_excel <- function(filename) {
   ext <- readxl::format_from_ext(filename)
