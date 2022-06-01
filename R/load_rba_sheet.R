@@ -49,7 +49,7 @@ rename_excel <- function(filename) {
     new_path <- paste(tools::file_path_sans_ext(filename),
                       sig,
                       sep = ".")
-    rename_result <- base::file.rename(from = filename,
+    rename_result <- base::file.copy(from = filename,
                       to = new_path)
     filename <- new_path
   }

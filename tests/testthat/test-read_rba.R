@@ -146,7 +146,8 @@ test_that("all current tables work", {
     if (num_cols_in_raw != num_series_in_loaded) {
       print(paste0("Number of series IDs not equal to columns for ", tab))
     }
-    expect_equal(num_cols_in_raw, num_series_in_loaded)
+    expect_equal(num_cols_in_raw, num_series_in_loaded,
+                 info = paste0("Table = ", tab))
     expect_true(check_df(df))
   }
 })
