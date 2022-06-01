@@ -107,8 +107,26 @@ test_that("multiple tables work", {
 check_num_series <- function(table_no) {
   url <- get_rba_urls(table_no)
   path <- download_rba(url)
-  raw_df <- suppressMessages(read_excel_noguess(path))
-  ncol(raw_df) - 1
+  sheets <- excel_sheets_noguess(path)
+  sheets <- sheets[!sheets %in% c(
+    "Notes",
+    "Notes ",
+    "Series breaks",
+    "AGS - Notes",
+    "Use of Expert Judgement"
+  )]
+
+  get_cols <- function(path, sheet) {
+    df <- suppressMessages(read_excel_noguess(path = path,
+                                        sheet = sheet))
+    ncol(df) - 1
+  }
+
+  cols <- purrr::map_dbl(sheets,
+                 get_cols,
+                 path = path)
+
+  as.integer(sum(cols))
 }
 
 test_that("all current tables work", {
@@ -125,6 +143,9 @@ test_that("all current tables work", {
     num_cols_in_raw <- check_num_series(tab)
     df <- read_rba(table_no = tab, cur_hist = "current")
     num_series_in_loaded <- length(unique(df$series_id))
+    if (num_cols_in_raw != num_series_in_loaded) {
+      print(paste0("Number of series IDs not equal to columns for ", tab))
+    }
     expect_equal(num_cols_in_raw, num_series_in_loaded)
     expect_true(check_df(df))
   }
