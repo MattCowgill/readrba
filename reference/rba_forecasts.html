@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2.902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
       </span>
     </div>
 
@@ -71,20 +71,29 @@
 <dd><p>logical; default is <code>TRUE</code>. When set to <code>TRUE</code>, the RBA's
 website will be scraped to obtain recent forecasts. When <code>FALSE</code>, only
 the package's internal data will be returned, which may be out of date.</p></dd>
+
+
 <dt>all_or_latest</dt>
 <dd><p>character; default is <code>"all"</code>. When <code>"all"</code> is specified,
 all publicly-available forecasts will be returned; when <code>"latest"</code>, only the
 latest forecasts will be used.</p></dd>
+
+
 <dt>remove_old</dt>
 <dd><p>logical; default is <code>TRUE</code>. When <code>TRUE</code>, any observations
 for which the <code>date</code> is more than 180 days prior to the <code>forecast_date</code>
 is excluded.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to <code>rba_forecasts()</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A tidy <code>tbl_df</code> containing 8 columns:</p><ul><li><p><code>forecast_date</code> The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code>as.Date("2020-02-01")</code>.</p></li>
+    
+
+<p>A tidy <code>tbl_df</code> containing 8 columns:</p><ul><li><p><code>forecast_date</code> The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code>as.Date("2020-02-01")</code>.</p></li>
 <li><p><code>date</code> The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be <code>as.Date("2021-06-01")</code>.</p></li>
 <li><p><code>year_qtr</code> The year and quarter to which the forecast pertains, such as 2019.1.</p></li>
 <li><p><code>series</code> Short, snake_case description of the data series being forecast, such as <code>gdp_change</code> or <code>unemp_rate</code>. These are consistent over time.</p></li>
@@ -121,7 +130,7 @@ those from November 2018 onwards include more series.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

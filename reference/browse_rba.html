@@ -18,7 +18,7 @@ interested in."><meta property="og:image" content="https://mattcowgill.github.io
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2.902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
       </span>
     </div>
 
@@ -68,17 +68,24 @@ interested in.</p>
     <dl><dt>search_string</dt>
 <dd><p>Word or phrase to search for, such as "gold" or "commodity" or "labour".
 If left as <code>""</code>, the function will return all series.</p></dd>
+
+
 <dt>refresh</dt>
 <dd><p>logical; <code>FALSE</code> by default. When <code>FALSE</code>, internal data is
 used. When <code>TRUE</code>, the RBA website is re-scraped to obtain current information
 about available tables This can take a few seconds.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>data.frame</code> (<code>tbl_df</code>) containing RBA data series/tables that match the <code>search_string</code>.
+    
+
+<p>A <code>data.frame</code> (<code>tbl_df</code>) containing RBA data series/tables that match the <code>search_string</code>.
 Where no <code>search_string</code> is supplied, the data.frame will contain information
-about all RBA series/tables.
-The data.frame returned by <code>browse_rba_tables()</code> includes a column called
+about all RBA series/tables.</p>
+
+
+<p>The data.frame returned by <code>browse_rba_tables()</code> includes a column called
 <code>readable</code>. This column takes the value <code>TRUE</code> if the table is able to be
 read by <code><a href="read_rba.html">read_rba()</a></code> and <code>FALSE</code> if it cannot be read.</p>
     </div>
@@ -190,7 +197,7 @@ read by <code><a href="read_rba.html">read_rba()</a></code> and <code>FALSE</cod
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
