@@ -10,7 +10,7 @@ status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)]
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Codecov test
-coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
+coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://app.codecov.io/gh/MattCowgill/readrba?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/readrba)](https://CRAN.R-project.org/package=readrba)
 <!-- badges: end -->
@@ -119,12 +119,12 @@ head(rba_data)
 #> # A tibble: 6 × 11
 #>   date       series          value frequency series_type units source pub_date  
 #>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Australian dol… 13680 Weekly    Original    $ mi… RBA    2022-04-29
-#> 2 1994-06-08 Australian dol… 13055 Weekly    Original    $ mi… RBA    2022-04-29
-#> 3 1994-06-15 Australian dol… 13086 Weekly    Original    $ mi… RBA    2022-04-29
-#> 4 1994-06-22 Australian dol… 12802 Weekly    Original    $ mi… RBA    2022-04-29
-#> 5 1994-06-29 Australian dol… 13563 Weekly    Original    $ mi… RBA    2022-04-29
-#> 6 1994-07-06 Australian dol… 12179 Weekly    Original    $ mi… RBA    2022-04-29
+#> 1 1994-06-01 Australian dol… 13680 Weekly    Original    $ mi… RBA    2022-06-10
+#> 2 1994-06-08 Australian dol… 13055 Weekly    Original    $ mi… RBA    2022-06-10
+#> 3 1994-06-15 Australian dol… 13086 Weekly    Original    $ mi… RBA    2022-06-10
+#> 4 1994-06-22 Australian dol… 12802 Weekly    Original    $ mi… RBA    2022-06-10
+#> 5 1994-06-29 Australian dol… 13563 Weekly    Original    $ mi… RBA    2022-06-10
+#> 6 1994-07-06 Australian dol… 12179 Weekly    Original    $ mi… RBA    2022-06-10
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 

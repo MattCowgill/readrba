@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions) [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html) [![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://codecov.io/gh/MattCowgill/readrba?branch=master)
+[![R build status](https://github.com/MattCowgill/readrba/workflows/R-CMD-check/badge.svg)](https://github.com/MattCowgill/readrba/actions) [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html) [![Codecov test coverage](https://codecov.io/gh/MattCowgill/readrba/branch/master/graph/badge.svg)](https://app.codecov.io/gh/MattCowgill/readrba?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/readrba)](https://CRAN.R-project.org/package=readrba)
 <!-- badges: end -->
 
