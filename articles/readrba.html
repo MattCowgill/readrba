@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.900</span>
       </span>
     </div>
 
@@ -93,20 +93,20 @@
 </ol>
 <p>You can import the data using either the table number or the series ID.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mattcowgill.github.io/readrba/index.html">readrba</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mattcowgill.github.io/readrba/index.html">readrba</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="example-individual-series---10-year-bond-yield">Example: Individual series - 10-year bond yield<a class="anchor" aria-label="anchor" href="#example-individual-series---10-year-bond-yield"></a>
 </h3>
 <p>Let’s start off by visualising the yield on a 10 year Australian Government bond over time.</p>
 <p>I want to find the series ID for the 10 year Australian Government bond yield. The function <code><a href="../reference/browse_rba.html">browse_rba_series()</a></code> will help me find it. If you use the function with no argument, it will return a tibble listing every data series published by the RBA (and readable by {readrba}). I’ll specify a search string:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/browse_rba.html">browse_rba_series</a></span><span class="op">(</span><span class="st">"Australian government 10 year"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/browse_rba.html">browse_rba_series</a></span><span class="op">(</span><span class="st">"Australian government 10 year"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="4%">
@@ -176,30 +176,30 @@
 <p>If you prefer, you can find the series ID by looking at the relevant spreadsheet from the RBA’s website.</p>
 <p>Now we’ll use that series ID to download the data:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond_yield</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_rba.html">read_rba</a></span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"FCMYGBAG10"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">bond_yield</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_rba.html">read_rba</a></span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"FCMYGBAG10"</span><span class="op">)</span></span></code></pre></div>
 <p>A quick aside: the code above gives identical results to using <code>read_rba_seriesid("FCMYGBAG10")</code>. The <code>read_rba_seriesid("SOMETHING")</code> function is a wrapper around <code>read_rba(series_id = "SOMETHING")</code>.</p>
 <p>OK, now we have the bond yield data in tibble form, let’s see what it looks like:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">bond_yield</span><span class="op">)</span>
-<span class="co">#&gt; Rows: 626</span>
-<span class="co">#&gt; Columns: 11</span>
-<span class="co">#&gt; $ date        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1969-07-31, 1969-08-31, 1969-09-30, 1969-10-31, 1969-11-3…</span>
-<span class="co">#&gt; $ series      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Australian Government 10 year bond", "Australian Governme…</span>
-<span class="co">#&gt; $ value       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 5.80, 5.79, 5.81, 5.83, 5.85, 5.95, 5.95, 5.96, 6.05, 6.94…</span>
-<span class="co">#&gt; $ frequency   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Monthly", "Monthly", "Monthly", "Monthly", "Monthly", "Mo…</span>
-<span class="co">#&gt; $ series_type <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Original", "Original", "Original", "Original", "Original"…</span>
-<span class="co">#&gt; $ units       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Per cent per annum", "Per cent per annum", "Per cent per …</span>
-<span class="co">#&gt; $ source      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "R…</span>
-<span class="co">#&gt; $ pub_date    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2013-09-02, 2013-09-02, 2013-09-02, 2013-09-02, 2013-09-0…</span>
-<span class="co">#&gt; $ series_id   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "F…</span>
-<span class="co">#&gt; $ description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yields on Australian Government bonds, 10 years maturity"…</span>
-<span class="co">#&gt; $ table_title <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "F2 Capital Market Yields - Government Bonds", "F2 Capital…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">bond_yield</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 626</span></span>
+<span><span class="co">#&gt; Columns: 11</span></span>
+<span><span class="co">#&gt; $ date        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1969-07-31, 1969-08-31, 1969-09-30, 1969-10-31, 1969-11-3…</span></span>
+<span><span class="co">#&gt; $ series      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Australian Government 10 year bond", "Australian Governme…</span></span>
+<span><span class="co">#&gt; $ value       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 5.80, 5.79, 5.81, 5.83, 5.85, 5.95, 5.95, 5.96, 6.05, 6.94…</span></span>
+<span><span class="co">#&gt; $ frequency   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Monthly", "Monthly", "Monthly", "Monthly", "Monthly", "Mo…</span></span>
+<span><span class="co">#&gt; $ series_type <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Original", "Original", "Original", "Original", "Original"…</span></span>
+<span><span class="co">#&gt; $ units       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Per cent per annum", "Per cent per annum", "Per cent per …</span></span>
+<span><span class="co">#&gt; $ source      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "R…</span></span>
+<span><span class="co">#&gt; $ pub_date    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2013-09-02, 2013-09-02, 2013-09-02, 2013-09-02, 2013-09-0…</span></span>
+<span><span class="co">#&gt; $ series_id   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "F…</span></span>
+<span><span class="co">#&gt; $ description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yields on Australian Government bonds, 10 years maturity"…</span></span>
+<span><span class="co">#&gt; $ table_title <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "F2 Capital Market Yields - Government Bonds", "F2 Capital…</span></span></code></pre></div>
 <p>The data you import using <code><a href="../reference/read_rba.html">read_rba()</a></code> is always in this standard tidy format. The values are in the <code>value</code> column.</p>
 <p>Let’s make a graph of the 10 year bond yield over time:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond_yield</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">bond_yield</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="readrba_files/figure-html/vizbondyield-1.png" width="100%" style="border:0px;"></p>
 <p>That’s a bit normcore-basic ggplot, but not bad. With a few lines of code, we’ve got an up-to-date graph of the 10 year bond yield.</p>
 </div>
@@ -208,7 +208,7 @@
 </h3>
 <p>Now we’ll have a look at another example, this time using multiple data series from the one table. I want to make a graph of Australian Government bond yields at different maturities, over time. This time I’ll confine myself to the recent data, at daily frequency.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/browse_rba.html">browse_rba_tables</a></span><span class="op">(</span><span class="st">"government bond"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/browse_rba.html">browse_rba_tables</a></span><span class="op">(</span><span class="st">"government bond"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="41%">
@@ -258,37 +258,37 @@
 <p>The daily data is in table F2. If you prefer, you can look up the table on the <a href="https://www.rba.gov.au/statistics/tables/" class="external-link">RBA website</a> and find the table number that way.</p>
 <p>Now we know the table number that contains the data we want, let’s load it into r.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_rba.html">read_rba</a></span><span class="op">(</span><span class="st">"f2"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_rba.html">read_rba</a></span><span class="op">(</span><span class="st">"f2"</span><span class="op">)</span></span></code></pre></div>
 <p>This table looks just like the single series table we downloaded earlier: . Unlike the single series table - which only contained the ten year bond yield - we now have a tidy tibble containing a number of data series. Here’s what we’ve got:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">f2</span><span class="op">$</span><span class="va">series</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Australian Government 10 year bond"   </span>
-<span class="co">#&gt; [2] "Australian Government 2 year bond"    </span>
-<span class="co">#&gt; [3] "Australian Government 3 year bond"    </span>
-<span class="co">#&gt; [4] "Australian Government 5 year bond"    </span>
-<span class="co">#&gt; [5] "Australian Government Indexed Bond"   </span>
-<span class="co">#&gt; [6] "NSW Treasury Corporation 10 year bond"</span>
-<span class="co">#&gt; [7] "NSW Treasury Corporation 3 year bond" </span>
-<span class="co">#&gt; [8] "NSW Treasury Corporation 5 year bond"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">f2</span><span class="op">$</span><span class="va">series</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Australian Government 10 year bond"   </span></span>
+<span><span class="co">#&gt; [2] "Australian Government 2 year bond"    </span></span>
+<span><span class="co">#&gt; [3] "Australian Government 3 year bond"    </span></span>
+<span><span class="co">#&gt; [4] "Australian Government 5 year bond"    </span></span>
+<span><span class="co">#&gt; [5] "Australian Government Indexed Bond"   </span></span>
+<span><span class="co">#&gt; [6] "NSW Treasury Corporation 10 year bond"</span></span>
+<span><span class="co">#&gt; [7] "NSW Treasury Corporation 3 year bond" </span></span>
+<span><span class="co">#&gt; [8] "NSW Treasury Corporation 5 year bond"</span></span></code></pre></div>
 <p>I’m not interested in NSW bonds, nor indexed bonds, so we’ll need some brief {dplyr}-ing of the data before we can get down to graphing.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">filtered_f2</span> <span class="op">&lt;-</span> <span class="va">f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Australian Government"</span>, <span class="va">series</span><span class="op">)</span> <span class="op">&amp;</span>
-           <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Indexed"</span>, <span class="va">series</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">filtered_f2</span> <span class="op">&lt;-</span> <span class="va">f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Australian Government"</span>, <span class="va">series</span><span class="op">)</span> <span class="op">&amp;</span></span>
+<span>           <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Indexed"</span>, <span class="va">series</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We’ve dropped the series we’re not interested in, going from 15072 rows to 7536 rows. Now let’s graph:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">filtered_f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, col <span class="op">=</span> <span class="va">series</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">filtered_f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, col <span class="op">=</span> <span class="va">series</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="readrba_files/figure-html/vizf2-1.png" width="100%" style="border:0px;"></p>
 <p>Nice! Again, normcore aesthetics aside, we’ve got a decent plot with a few lines of code. Using the same data, we can have a look at the spread between the yield on 10 year and 2 year bonds, as a rough measure of the slope of (a portion of) the yield curve.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">filtered_f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">series</span>, <span class="va">value</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">series</span>, value <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>spread_10_2 <span class="op">=</span> <span class="va">`Australian Government 10 year bond`</span> <span class="op">-</span> <span class="va">`Australian Government 2 year bond`</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">spread_10_2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">filtered_f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">series</span>, <span class="va">value</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">series</span>, value <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>spread_10_2 <span class="op">=</span> <span class="va">`Australian Government 10 year bond`</span> <span class="op">-</span> <span class="va">`Australian Government 2 year bond`</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">spread_10_2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="readrba_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="border:0px;"></p>
 </div>
 <div class="section level3">
@@ -296,27 +296,27 @@
 </h3>
 <p>The package also includes all public forecasts of key economic variables made by the Reserve Bank since 1990. The <code><a href="../reference/rba_forecasts.html">rba_forecasts()</a></code> function returns these forecasts in a tidy tibble – including the latest forecasts, scraped from the Statement on Monetary Policy.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">forecasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">forecasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what they look like:</p>
-<pre><code><span class="co">#&gt; Rows: 6,625</span>
-<span class="co">#&gt; Columns: 8</span>
-<span class="co">#&gt; $ series_desc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CPI - 4 quarter change", "CPI - 4 quarter change", "CPI…</span>
-<span class="co">#&gt; $ forecast_date <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-03-01, 1990-03-01, 1990-03-01, 1990-03…</span>
-<span class="co">#&gt; $ notes         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span>
-<span class="co">#&gt; $ source        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", …</span>
-<span class="co">#&gt; $ value         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8.6, 7.6, 6.5, 6.0, 5.9, 6.2, 5.9, 6.3, 6.5, 6.7, 7.0, 7…</span>
-<span class="co">#&gt; $ date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-06-01, 1990-09-01, 1990-12-01, 1991-03…</span>
-<span class="co">#&gt; $ year_qtr      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1990.1, 1990.2, 1990.3, 1990.4, 1991.1, 1991.2, 1989.4, …</span>
-<span class="co">#&gt; $ series        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "cpi_annual_inflation", "cpi_annual_inflation", "cpi_ann…</span></code></pre>
+<pre><code><span><span class="co">#&gt; Rows: 6,625</span></span>
+<span><span class="co">#&gt; Columns: 8</span></span>
+<span><span class="co">#&gt; $ series_desc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CPI - 4 quarter change", "CPI - 4 quarter change", "CPI…</span></span>
+<span><span class="co">#&gt; $ forecast_date <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-03-01, 1990-03-01, 1990-03-01, 1990-03…</span></span>
+<span><span class="co">#&gt; $ notes         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ source        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", …</span></span>
+<span><span class="co">#&gt; $ value         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8.6, 7.6, 6.5, 6.0, 5.9, 6.2, 5.9, 6.3, 6.5, 6.7, 7.0, 7…</span></span>
+<span><span class="co">#&gt; $ date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-06-01, 1990-09-01, 1990-12-01, 1991-03…</span></span>
+<span><span class="co">#&gt; $ year_qtr      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1990.1, 1990.2, 1990.3, 1990.4, 1991.1, 1991.2, 1989.4, …</span></span>
+<span><span class="co">#&gt; $ series        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "cpi_annual_inflation", "cpi_annual_inflation", "cpi_ann…</span></span></code></pre>
 <p>Let’s visualise all the Bank’s unemployment rate forecasts since 1990:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">forecasts</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">series</span> <span class="op">==</span> <span class="st">"unemp_rate"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, 
-             y <span class="op">=</span> <span class="va">value</span>, 
-             group <span class="op">=</span> <span class="va">forecast_date</span>, 
-             colour <span class="op">=</span> <span class="va">forecast_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">forecasts</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">series</span> <span class="op">==</span> <span class="st">"unemp_rate"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, </span>
+<span>             y <span class="op">=</span> <span class="va">value</span>, </span>
+<span>             group <span class="op">=</span> <span class="va">forecast_date</span>, </span>
+<span>             colour <span class="op">=</span> <span class="va">forecast_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="readrba_files/figure-html/viz-unemp-forecasts-1.png" width="100%" style="border:0px;"></p>
 </div>
 <div class="section level3">
@@ -324,31 +324,31 @@
 </h3>
 <p>Now let’s make a chart that compares the RBA’s latest forecasts to its previous forecasts.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># We've already created the `forecasts` object, like this: </span>
-<span class="co"># forecasts &lt;- rba_forecasts</span>
-
-<span class="va">latest_two</span> <span class="op">&lt;-</span> <span class="va">forecasts</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">forecast_date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">forecast_date</span><span class="op">)</span>,
-                              <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">forecast_date</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/weekday.POSIXt.html" class="external-link">months</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">latest_two</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>forecast_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">forecast_date</span>, <span class="st">"%b %Y"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, col <span class="op">=</span> <span class="va">forecast_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Forecast issued: "</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">series_desc</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>,
-             labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labellers.html" class="external-link">label_wrap_gen</a></span><span class="op">(</span><span class="fl">17</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span>,
-        legend.direction <span class="op">=</span> <span class="st">"horizontal"</span>,
-        legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span>,
-        axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>,
-        plot.margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span><span class="op">)</span>,
-        strip.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"RBA's forecasts issued in "</span>,
-                         <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">latest_two</span><span class="op">$</span><span class="va">forecast_date</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="st">"%B %Y"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">" and "</span><span class="op">)</span><span class="op">)</span>,
-       caption <span class="op">=</span> <span class="st">"Source: RBA Statement on Monetary Policy"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># We've already created the `forecasts` object, like this: </span></span>
+<span><span class="co"># forecasts &lt;- rba_forecasts</span></span>
+<span></span>
+<span><span class="va">latest_two</span> <span class="op">&lt;-</span> <span class="va">forecasts</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">forecast_date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">forecast_date</span><span class="op">)</span>,</span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">forecast_date</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/weekday.POSIXt.html" class="external-link">months</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">latest_two</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>forecast_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">forecast_date</span>, <span class="st">"%b %Y"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, col <span class="op">=</span> <span class="va">forecast_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Forecast issued: "</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">series_desc</span>, scales <span class="op">=</span> <span class="st">"free_y"</span>,</span>
+<span>             labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labellers.html" class="external-link">label_wrap_gen</a></span><span class="op">(</span><span class="fl">17</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>        legend.direction <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
+<span>        legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>,</span>
+<span>        plot.margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        strip.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"RBA's forecasts issued in "</span>,</span>
+<span>                         <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">latest_two</span><span class="op">$</span><span class="va">forecast_date</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="st">"%B %Y"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">" and "</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       caption <span class="op">=</span> <span class="st">"Source: RBA Statement on Monetary Policy"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="readrba_files/figure-html/change-in-forecasts-1.png" width="100%" style="border:0px;"></p>
 </div>
   </div>
@@ -368,7 +368,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

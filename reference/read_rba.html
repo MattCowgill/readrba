@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.900</span>
       </span>
     </div>
 
@@ -56,14 +56,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_rba</span><span class="op">(</span>
-  table_no <span class="op">=</span> <span class="cn">NULL</span>,
-  cur_hist <span class="op">=</span> <span class="st">"current"</span>,
-  series_id <span class="op">=</span> <span class="cn">NULL</span>,
-  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">read_rba_seriesid</span><span class="op">(</span><span class="va">series_id</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_rba</span><span class="op">(</span></span>
+<span>  table_no <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cur_hist <span class="op">=</span> <span class="st">"current"</span>,</span>
+<span>  series_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">read_rba_seriesid</span><span class="op">(</span><span class="va">series_id</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -118,25 +118,25 @@ see <code>browse_rba_tables("exchange rates").</code></p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Get a single table:</span></span>
-<span class="r-in"><span class="fu">read_rba</span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"a1.1"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Get multiple tables, combined in a tidy tibble:</span></span>
-<span class="r-in"><span class="fu">read_rba</span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a1.1"</span>, <span class="st">"g1"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Get both the current and historical versions of a table</span></span>
-<span class="r-in"><span class="fu">read_rba</span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a1.1"</span>, <span class="st">"a1.1"</span><span class="op">)</span>, cur_hist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"current"</span>, <span class="st">"historical"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Get data based on the series ID:</span></span>
-<span class="r-in"><span class="fu">read_rba</span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"GCPIAG"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Or, equivalently, use:</span></span>
-<span class="r-in"><span class="fu">read_rba_seriesid</span><span class="op">(</span><span class="st">"GCPIAG"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Get multiple series IDs:</span></span>
-<span class="r-in"><span class="fu">read_rba</span><span class="op">(</span>series_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GCPIAG"</span>, <span class="st">"GCPIAGSAQP"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Get a single table:</span></span></span>
+<span class="r-in"><span><span class="fu">read_rba</span><span class="op">(</span>table_no <span class="op">=</span> <span class="st">"a1.1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get multiple tables, combined in a tidy tibble:</span></span></span>
+<span class="r-in"><span><span class="fu">read_rba</span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a1.1"</span>, <span class="st">"g1"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get both the current and historical versions of a table</span></span></span>
+<span class="r-in"><span><span class="fu">read_rba</span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a1.1"</span>, <span class="st">"a1.1"</span><span class="op">)</span>, cur_hist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"current"</span>, <span class="st">"historical"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get data based on the series ID:</span></span></span>
+<span class="r-in"><span><span class="fu">read_rba</span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"GCPIAG"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Or, equivalently, use:</span></span></span>
+<span class="r-in"><span><span class="fu">read_rba_seriesid</span><span class="op">(</span><span class="st">"GCPIAG"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get multiple series IDs:</span></span></span>
+<span class="r-in"><span><span class="fu">read_rba</span><span class="op">(</span>series_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GCPIAG"</span>, <span class="st">"GCPIAGSAQP"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -151,7 +151,7 @@ see <code>browse_rba_tables("exchange rates").</code></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
