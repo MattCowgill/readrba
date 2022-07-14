@@ -61,11 +61,30 @@ rba_forecasts <- function(refresh = TRUE,
       dplyr::filter(.data$forecast_date ==
         max(.data$forecast_date))
   } else {
+    # Define 'scrape priority' - if we have data from the hist_forecasts
+    # we want to use that rather than from another source - that has the highest
+    # priority
+    hist_forecasts <- hist_forecasts %>%
+      dplyr::mutate(scrape_priority = 1)
+
+    forecasts_1418 <- forecasts_1418 %>%
+      dplyr::mutate(scrape_priority = 3)
+
+    recent_forecasts <- recent_forecasts %>%
+      dplyr::mutate(scrape_priority = 2)
+
     forecasts <- dplyr::bind_rows(
       hist_forecasts,
       forecasts_1418,
       recent_forecasts
     )
+
+    forecasts <- forecasts %>%
+      dplyr::group_by(forecast_date, date) %>%
+      dplyr::filter(scrape_priority == min(.data$scrape_priority)) %>%
+      dplyr::ungroup() %>%
+      dplyr::select(-scrape_priority)
+
   }
 
   forecasts <- dplyr::arrange(
