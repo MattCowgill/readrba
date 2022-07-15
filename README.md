@@ -119,12 +119,12 @@ head(rba_data)
 #> # A tibble: 6 × 11
 #>   date       series          value frequency series_type units source pub_date  
 #>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Australian dol… 13680 Weekly    Original    $ mi… RBA    2022-06-10
-#> 2 1994-06-08 Australian dol… 13055 Weekly    Original    $ mi… RBA    2022-06-10
-#> 3 1994-06-15 Australian dol… 13086 Weekly    Original    $ mi… RBA    2022-06-10
-#> 4 1994-06-22 Australian dol… 12802 Weekly    Original    $ mi… RBA    2022-06-10
-#> 5 1994-06-29 Australian dol… 13563 Weekly    Original    $ mi… RBA    2022-06-10
-#> 6 1994-07-06 Australian dol… 12179 Weekly    Original    $ mi… RBA    2022-06-10
+#> 1 1994-06-01 Australian dol… 13680 Weekly    Original    $ mi… RBA    2022-07-08
+#> 2 1994-06-08 Australian dol… 13055 Weekly    Original    $ mi… RBA    2022-07-08
+#> 3 1994-06-15 Australian dol… 13086 Weekly    Original    $ mi… RBA    2022-07-08
+#> 4 1994-06-22 Australian dol… 12802 Weekly    Original    $ mi… RBA    2022-07-08
+#> 5 1994-06-29 Australian dol… 13563 Weekly    Original    $ mi… RBA    2022-07-08
+#> 6 1994-07-06 Australian dol… 12179 Weekly    Original    $ mi… RBA    2022-07-08
 #> # … with 3 more variables: series_id <chr>, description <chr>,
 #> #   table_title <chr>
 
@@ -206,7 +206,7 @@ browse_rba_tables()
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,412 × 8
+#> # A tibble: 4,472 × 8
 #>    table_no series        series_id series_type table_title cur_hist description
 #>    <chr>    <chr>         <chr>     <chr>       <chr>       <chr>    <chr>      
 #>  1 A1       Australian d… ARBAAASTW Original    A1 Reserve… current  Australian…
@@ -219,7 +219,7 @@ browse_rba_series()
 #>  8 A1       Other liabil… ARBALOLW  Original    A1 Reserve… current  Other liab…
 #>  9 A1       Total assets  ARBAATAW  Original    A1 Reserve… current  Total RBA …
 #> 10 A1       Total liabil… ARBALTLW  Original    A1 Reserve… current  Total RBA …
-#> # … with 4,402 more rows, and 1 more variable: frequency <chr>
+#> # … with 4,462 more rows, and 1 more variable: frequency <chr>
 ```
 
 You can specify a search string to filter the tables or series, as in:
@@ -243,7 +243,7 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 7,039 × 8
+#> # A tibble: 6,625 × 8
 #>    series_desc       forecast_date notes source value date       year_qtr series
 #>    <chr>             <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr> 
 #>  1 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_a…
@@ -256,7 +256,7 @@ rba_forecasts()
 #>  8 Unemployment rat… 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp…
 #>  9 Unemployment rat… 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp…
 #> 10 Unemployment rat… 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp…
-#> # … with 7,029 more rows
+#> # … with 6,615 more rows
 ```
 
 If you just want the latest forecasts, you can request them:
