@@ -18,7 +18,7 @@ interested in."><meta property="og:image" content="https://mattcowgill.github.io
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.901</span>
       </span>
     </div>
 
@@ -96,86 +96,92 @@ read by <code><a href="read_rba.html">read_rba()</a></code> and <code>FALSE</cod
 <span class="r-in"><span><span class="co"># Find series that contain 'unemployment'</span></span></span>
 <span class="r-in"><span><span class="fu">browse_rba_series</span><span class="op">(</span><span class="st">"unemployment"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   table_no series         series_id series_type table_title cur_hist description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> H5       Unemployment   GLFSUPSA  Seasonally… H5 Labour … current  Unemployed…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> H5       Unemployment … GLFSURSA  Seasonally… H5 Labour … current  Unemployed…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: frequency &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   table_no series            series_id series_…¹ table…² cur_h…³ descr…⁴ frequ…⁵</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> H5       Unemployment      GLFSUPSA  Seasonal… H5 Lab… current Unempl… Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> H5       Unemployment rate GLFSURSA  Seasonal… H5 Lab… current Unempl… Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​series_type, ²​table_title, ³​cur_hist,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁴​description, ⁵​frequency</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or all labour-related series</span></span></span>
 <span class="r-in"><span><span class="fu">browse_rba_series</span><span class="op">(</span><span class="st">"labour"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 23 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    table_no series        series_id series_type table_title cur_hist description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> H4       Non-farm lab… GNFPROSQI Seasonally… H4 Labour … current  Non-farm l…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> H4       Quarterly pr… GWPIPRIQP Seasonally… H4 Labour … current  Wage price…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> H4       Quarterly pu… GWPIPUBQP Seasonally… H4 Labour … current  Wage price…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> H4       Quarterly wa… GWPIQP    Seasonally… H4 Labour … current  Wage price…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> H4       Year-ended n… GNFAEYP   Seasonally… H4 Labour … current  Non-farm a…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> H4       Year-ended n… GNFPROSQP Seasonally… H4 Labour … current  Non-farm l…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> H4       Year-ended n… GNFULCYP  Seasonally… H4 Labour … current  Non-farm n…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> H4       Year-ended p… GWPIPRIYP Seasonally… H4 Labour … current  Wage price…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> H4       Year-ended p… GWPIPUBYP Seasonally… H4 Labour … current  Wage price…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> H4       Year-ended w… GWPIYP    Seasonally… H4 Labour … current  Wage price…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 13 more rows, and 1 more variable: frequency &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    table_no series               serie…¹ serie…² table…³ cur_h…⁴ descr…⁵ frequ…⁶</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> H4       Non-farm labour pro… GNFPRO… Season… H4 Lab… current Non-fa… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> H4       Quarterly private s… GWPIPR… Season… H4 Lab… current Wage p… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> H4       Quarterly public se… GWPIPU… Season… H4 Lab… current Wage p… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> H4       Quarterly wage grow… GWPIQP  Season… H4 Lab… current Wage p… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> H4       Year-ended non-farm… GNFAEYP Season… H4 Lab… current Non-fa… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> H4       Year-ended non-farm… GNFPRO… Season… H4 Lab… current Non-fa… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> H4       Year-ended non-farm… GNFULC… Season… H4 Lab… current Non-fa… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> H4       Year-ended private … GWPIPR… Season… H4 Lab… current Wage p… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> H4       Year-ended public s… GWPIPU… Season… H4 Lab… current Wage p… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> H4       Year-ended wage gro… GWPIYP  Season… H4 Lab… current Wage p… Quarte…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 13 more rows, and abbreviated variable names ¹​series_id, ²​series_type,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​table_title, ⁴​cur_hist, ⁵​description, ⁶​frequency</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or those related to commodities</span></span></span>
 <span class="r-in"><span><span class="fu">browse_rba_series</span><span class="op">(</span><span class="st">"commodities"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   table_no series         series_id series_type table_title cur_hist description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> I2       Bulk commodit… GRCPBCAD  Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> I2       Bulk commodit… GRCPBCSDR Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> I2       Bulk commodit… GRCPBCUSD Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> I2       Bulk commodit… GRCPBCSAD Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> I2       Bulk commodit… GRCPBCSS… Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> I2       Bulk commodit… GRCPBCSU… Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> I2       Commodity pri… GRCPAISAD Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> I2       Commodity pri… GRCPAISS… Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> I2       Commodity pri… GRCPAISU… Original    I2 Commodi… current  Index of c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: frequency &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   table_no series                serie…¹ serie…² table…³ cur_h…⁴ descr…⁵ frequ…⁶</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> I2       Bulk commodities pri… GRCPBC… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> I2       Bulk commodities pri… GRCPBC… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> I2       Bulk commodities pri… GRCPBC… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> I2       Bulk commodities spo… GRCPBC… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> I2       Bulk commodities spo… GRCPBC… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> I2       Bulk commodities spo… GRCPBC… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> I2       Commodity prices (wi… GRCPAI… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> I2       Commodity prices (wi… GRCPAI… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> I2       Commodity prices (wi… GRCPAI… Origin… I2 Com… current Index … Monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​series_id, ²​series_type, ³​table_title,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁴​cur_hist, ⁵​description, ⁶​frequency</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or all series</span></span></span>
 <span class="r-in"><span><span class="fu">browse_rba_series</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4,478 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    table_no series        series_id series_type table_title cur_hist description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A1       Australian d… ARBAAASTW Original    A1 Reserve… current  Australian…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A1       Capital and … ARBALCRFW Original    A1 Reserve… current  Capital an…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> A1       Deposits (ex… ARBALDEPW Original    A1 Reserve… current  Deposits (…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> A1       Exchange set… ARBALESBW Original    A1 Reserve… current  Exchange s…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> A1       Gold and for… ARBAAGFXW Original    A1 Reserve… current  Gold and f…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> A1       Notes on iss… ARBALNOIW Original    A1 Reserve… current  Notes on i…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> A1       Other assets… ARBAAOAW  Original    A1 Reserve… current  Other asse…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> A1       Other liabil… ARBALOLW  Original    A1 Reserve… current  Other liab…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> A1       Total assets  ARBAATAW  Original    A1 Reserve… current  Total RBA …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> A1       Total liabil… ARBALTLW  Original    A1 Reserve… current  Total RBA …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4,468 more rows, and 1 more variable: frequency &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    table_no series               serie…¹ serie…² table…³ cur_h…⁴ descr…⁵ frequ…⁶</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A1       Australian dollar i… ARBAAA… Origin… A1 Res… current Austra… Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A1       Capital and Reserve… ARBALC… Origin… A1 Res… current Capita… Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> A1       Deposits (excluding… ARBALD… Origin… A1 Res… current Deposi… Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> A1       Exchange settlement… ARBALE… Origin… A1 Res… current Exchan… Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> A1       Gold and foreign ex… ARBAAG… Origin… A1 Res… current Gold a… Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> A1       Notes on issue       ARBALN… Origin… A1 Res… current Notes … Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> A1       Other assets (inclu… ARBAAO… Origin… A1 Res… current Other … Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> A1       Other liabilities    ARBALO… Origin… A1 Res… current Other … Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> A1       Total assets         ARBAAT… Origin… A1 Res… current Total … Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> A1       Total liabilities    ARBALT… Origin… A1 Res… current Total … Weekly </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4,468 more rows, and abbreviated variable names ¹​series_id,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​series_type, ³​table_title, ⁴​cur_hist, ⁵​description, ⁶​frequency</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or just look for tables that contain the word 'labour'</span></span></span>
 <span class="r-in"><span><span class="fu">browse_rba_tables</span><span class="op">(</span><span class="st">"labour"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   title                         no    url              current_or_hist… readable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Labour Costs and Productivity H4    https://www.rba… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Labour Force                  H5    https://www.rba… current          TRUE    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title                         no    url                        curre…¹ reada…²</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Labour Costs and Productivity H4    https://www.rba.gov.au/st… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Labour Force                  H5    https://www.rba.gov.au/st… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​current_or_historical, ²​readable</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or all tables</span></span></span>
 <span class="r-in"><span><span class="fu">browse_rba_tables</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 123 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    title                                   no    url   current_or_hist… readable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Liabilities and Assets – Summary        A1    http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Liabilities and Assets – Detailed       A1.1  http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Monetary Policy Changes                 A2    http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Monetary Policy Operations – Current    A3    http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Holdings of Australian Government Secu… A3.1  http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Securities Lending Repurchase and Swit… A3.2  http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Foreign Exchange Transactions and Hold… A4    http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Daily Foreign Exchange Market Interven… A5    http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Banknotes on Issue by Denomination      A6    http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Detected Australian Counterfeits by De… A7    http… current          TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 113 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    title                                             no    url   curre…¹ reada…²</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Liabilities and Assets – Summary                  A1    http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Liabilities and Assets – Detailed                 A1.1  http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Monetary Policy Changes                           A2    http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Monetary Policy Operations – Current              A3    http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Holdings of Australian Government Securities and… A3.1  http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Securities Lending Repurchase and Switch Transac… A3.2  http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Foreign Exchange Transactions and Holdings of Of… A4    http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Daily Foreign Exchange Market Intervention Trans… A5    http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Banknotes on Issue by Denomination                A6    http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Detected Australian Counterfeits by Denomination  A7    http… current TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 113 more rows, and abbreviated variable names ¹​current_or_historical,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​readable</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To re-scrape the RBA website to ensure you have up-to-date information</span></span></span>
 <span class="r-in"><span><span class="co"># about available tables:</span></span></span>
@@ -197,7 +203,7 @@ read by <code><a href="read_rba.html">read_rba()</a></code> and <code>FALSE</cod
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
