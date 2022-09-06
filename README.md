@@ -97,16 +97,16 @@ format):
 ``` r
 head(cpi_table)
 #> # A tibble: 6 × 11
-#>   date       series          value frequency series_type units source pub_date  
-#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1922-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 2 1922-09-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 3 1922-12-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 4 1923-03-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 5 1923-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 6 1923-09-01 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2022-04-28
-#> # … with 3 more variables: series_id <chr>, description <chr>,
-#> #   table_title <chr>
+#>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
+#>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
+#> 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> # … with 2 more variables: description <chr>, table_title <chr>, and
+#> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 ```
 
 You can also request multiple tables. They’ll be returned together as
@@ -117,16 +117,16 @@ rba_data <- read_rba(table_no = c("a1", "g1"))
 
 head(rba_data)
 #> # A tibble: 6 × 11
-#>   date       series          value frequency series_type units source pub_date  
-#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1994-06-01 Australian dol… 13680 Weekly    Original    $ mi… RBA    2022-07-08
-#> 2 1994-06-08 Australian dol… 13055 Weekly    Original    $ mi… RBA    2022-07-08
-#> 3 1994-06-15 Australian dol… 13086 Weekly    Original    $ mi… RBA    2022-07-08
-#> 4 1994-06-22 Australian dol… 12802 Weekly    Original    $ mi… RBA    2022-07-08
-#> 5 1994-06-29 Australian dol… 13563 Weekly    Original    $ mi… RBA    2022-07-08
-#> 6 1994-07-06 Australian dol… 12179 Weekly    Original    $ mi… RBA    2022-07-08
-#> # … with 3 more variables: series_id <chr>, description <chr>,
-#> #   table_title <chr>
+#>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
+#>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
+#> 1 1994-06-01 Australian d… 13680 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
+#> 2 1994-06-08 Australian d… 13055 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
+#> 3 1994-06-15 Australian d… 13086 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
+#> 4 1994-06-22 Australian d… 12802 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
+#> 5 1994-06-29 Australian d… 13563 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
+#> 6 1994-07-06 Australian d… 12179 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
+#> # … with 2 more variables: description <chr>, table_title <chr>, and
+#> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 
 unique(rba_data$table_title)
 #> [1] "A1 Reserve Bank Of Australia - Liabilities And Assets - Summary"
@@ -141,16 +141,16 @@ only:
 cpi_series <- read_rba(series_id = "GCPIAG")
 head(cpi_series)
 #> # A tibble: 6 × 11
-#>   date       series          value frequency series_type units source pub_date  
-#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1922-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 2 1922-09-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 3 1922-12-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 4 1923-03-01 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 5 1923-06-01 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2022-04-28
-#> 6 1923-09-01 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2022-04-28
-#> # … with 3 more variables: series_id <chr>, description <chr>,
-#> #   table_title <chr>
+#>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
+#>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
+#> 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> # … with 2 more variables: description <chr>, table_title <chr>, and
+#> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 unique(cpi_series$series_id)
 #> [1] "GCPIAG"
 ```
@@ -164,20 +164,21 @@ you request. You can specify the historical version of a table, if it’s
 available, using the `cur_hist` argument:
 
 ``` r
+
 hist_a11 <- read_rba(table_no = "a1.1", cur_hist = "historical")
 
 head(hist_a11)
 #> # A tibble: 6 × 11
-#>   date       series          value frequency series_type units source pub_date  
-#>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1977-07-31 Australian Gov…   654 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 2 1977-08-31 Australian Gov…   665 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 3 1977-09-30 Australian Gov…   695 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 4 1977-10-31 Australian Gov…   609 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 5 1977-11-30 Australian Gov…   560 Monthly   Original; … $ mi… RBA    2015-06-26
-#> 6 1977-12-31 Australian Gov…   614 Monthly   Original; … $ mi… RBA    2015-06-26
-#> # … with 3 more variables: series_id <chr>, description <chr>,
-#> #   table_title <chr>
+#>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
+#>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
+#> 1 1977-07-31 Australian G…   654 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…
+#> 2 1977-08-31 Australian G…   665 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…
+#> 3 1977-09-30 Australian G…   695 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…
+#> 4 1977-10-31 Australian G…   609 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…
+#> 5 1977-11-30 Australian G…   560 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…
+#> 6 1977-12-31 Australian G…   614 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…
+#> # … with 2 more variables: description <chr>, table_title <chr>, and
+#> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 ```
 
 ### Browsing RBA data
@@ -189,37 +190,39 @@ Each returns a tibble with information about the available RBA data.
 ``` r
 browse_rba_tables()
 #> # A tibble: 123 × 5
-#>    title                                   no    url   current_or_hist… readable
-#>    <chr>                                   <chr> <chr> <chr>            <lgl>   
-#>  1 Liabilities and Assets – Summary        A1    http… current          TRUE    
-#>  2 Liabilities and Assets – Detailed       A1.1  http… current          TRUE    
-#>  3 Monetary Policy Changes                 A2    http… current          TRUE    
-#>  4 Monetary Policy Operations – Current    A3    http… current          TRUE    
-#>  5 Holdings of Australian Government Secu… A3.1  http… current          TRUE    
-#>  6 Securities Lending Repurchase and Swit… A3.2  http… current          TRUE    
-#>  7 Foreign Exchange Transactions and Hold… A4    http… current          TRUE    
-#>  8 Daily Foreign Exchange Market Interven… A5    http… current          TRUE    
-#>  9 Banknotes on Issue by Denomination      A6    http… current          TRUE    
-#> 10 Detected Australian Counterfeits by De… A7    http… current          TRUE    
-#> # … with 113 more rows
+#>    title                                             no    url   curre…¹ reada…²
+#>    <chr>                                             <chr> <chr> <chr>   <lgl>  
+#>  1 Liabilities and Assets – Summary                  A1    http… current TRUE   
+#>  2 Liabilities and Assets – Detailed                 A1.1  http… current TRUE   
+#>  3 Monetary Policy Changes                           A2    http… current TRUE   
+#>  4 Monetary Policy Operations – Current              A3    http… current TRUE   
+#>  5 Holdings of Australian Government Securities and… A3.1  http… current TRUE   
+#>  6 Securities Lending Repurchase and Switch Transac… A3.2  http… current TRUE   
+#>  7 Foreign Exchange Transactions and Holdings of Of… A4    http… current TRUE   
+#>  8 Daily Foreign Exchange Market Intervention Trans… A5    http… current TRUE   
+#>  9 Banknotes on Issue by Denomination                A6    http… current TRUE   
+#> 10 Detected Australian Counterfeits by Denomination  A7    http… current TRUE   
+#> # … with 113 more rows, and abbreviated variable names ¹​current_or_historical,
+#> #   ²​readable
 ```
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,472 × 8
-#>    table_no series        series_id series_type table_title cur_hist description
-#>    <chr>    <chr>         <chr>     <chr>       <chr>       <chr>    <chr>      
-#>  1 A1       Australian d… ARBAAASTW Original    A1 Reserve… current  Australian…
-#>  2 A1       Capital and … ARBALCRFW Original    A1 Reserve… current  Capital an…
-#>  3 A1       Deposits (ex… ARBALDEPW Original    A1 Reserve… current  Deposits (…
-#>  4 A1       Exchange set… ARBALESBW Original    A1 Reserve… current  Exchange s…
-#>  5 A1       Gold and for… ARBAAGFXW Original    A1 Reserve… current  Gold and f…
-#>  6 A1       Notes on iss… ARBALNOIW Original    A1 Reserve… current  Notes on i…
-#>  7 A1       Other assets… ARBAAOAW  Original    A1 Reserve… current  Other asse…
-#>  8 A1       Other liabil… ARBALOLW  Original    A1 Reserve… current  Other liab…
-#>  9 A1       Total assets  ARBAATAW  Original    A1 Reserve… current  Total RBA …
-#> 10 A1       Total liabil… ARBALTLW  Original    A1 Reserve… current  Total RBA …
-#> # … with 4,462 more rows, and 1 more variable: frequency <chr>
+#> # A tibble: 4,478 × 8
+#>    table_no series               serie…¹ serie…² table…³ cur_h…⁴ descr…⁵ frequ…⁶
+#>    <chr>    <chr>                <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
+#>  1 A1       Australian dollar i… ARBAAA… Origin… A1 Res… current Austra… Weekly 
+#>  2 A1       Capital and Reserve… ARBALC… Origin… A1 Res… current Capita… Weekly 
+#>  3 A1       Deposits (excluding… ARBALD… Origin… A1 Res… current Deposi… Weekly 
+#>  4 A1       Exchange settlement… ARBALE… Origin… A1 Res… current Exchan… Weekly 
+#>  5 A1       Gold and foreign ex… ARBAAG… Origin… A1 Res… current Gold a… Weekly 
+#>  6 A1       Notes on issue       ARBALN… Origin… A1 Res… current Notes … Weekly 
+#>  7 A1       Other assets (inclu… ARBAAO… Origin… A1 Res… current Other … Weekly 
+#>  8 A1       Other liabilities    ARBALO… Origin… A1 Res… current Other … Weekly 
+#>  9 A1       Total assets         ARBAAT… Origin… A1 Res… current Total … Weekly 
+#> 10 A1       Total liabilities    ARBALT… Origin… A1 Res… current Total … Weekly 
+#> # … with 4,468 more rows, and abbreviated variable names ¹​series_id,
+#> #   ²​series_type, ³​table_title, ⁴​cur_hist, ⁵​description, ⁶​frequency
 ```
 
 You can specify a search string to filter the tables or series, as in:
@@ -227,11 +230,12 @@ You can specify a search string to filter the tables or series, as in:
 ``` r
 browse_rba_tables("inflation")
 #> # A tibble: 3 × 5
-#>   title                                    no    url   current_or_hist… readable
-#>   <chr>                                    <chr> <chr> <chr>            <lgl>   
-#> 1 Consumer Price Inflation                 G1    http… current          TRUE    
-#> 2 Consumer Price Inflation – Expenditure … G2    http… current          TRUE    
-#> 3 Inflation Expectations                   G3    http… current          TRUE
+#>   title                                         no    url        curre…¹ reada…²
+#>   <chr>                                         <chr> <chr>      <chr>   <lgl>  
+#> 1 Consumer Price Inflation                      G1    https://w… current TRUE   
+#> 2 Consumer Price Inflation – Expenditure Groups G2    https://w… current TRUE   
+#> 3 Inflation Expectations                        G3    https://w… current TRUE   
+#> # … with abbreviated variable names ¹​current_or_historical, ²​readable
 ```
 
 ### RBA forecasts
@@ -243,20 +247,21 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 6,625 × 8
-#>    series_desc       forecast_date notes source value date       year_qtr series
-#>    <chr>             <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr> 
-#>  1 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_a…
-#>  2 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     7.6 1990-06-01    1990. cpi_a…
-#>  3 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     6.5 1990-09-01    1990. cpi_a…
-#>  4 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     6   1990-12-01    1990. cpi_a…
-#>  5 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     5.9 1991-03-01    1991. cpi_a…
-#>  6 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     6.2 1991-06-01    1991. cpi_a…
-#>  7 Unemployment rat… 1990-03-01    <NA>  JEFG     5.9 1989-12-01    1989. unemp…
-#>  8 Unemployment rat… 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp…
-#>  9 Unemployment rat… 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp…
-#> 10 Unemployment rat… 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp…
-#> # … with 6,615 more rows
+#> # A tibble: 5,485 × 8
+#>    series_desc           forecast…¹ notes source value date       year_…² series
+#>    <chr>                 <date>     <chr> <chr>  <dbl> <date>       <dbl> <chr> 
+#>  1 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     8.6 1990-03-01   1990. cpi_a…
+#>  2 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     7.6 1990-06-01   1990. cpi_a…
+#>  3 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     6.5 1990-09-01   1990. cpi_a…
+#>  4 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     6   1990-12-01   1990. cpi_a…
+#>  5 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     5.9 1991-03-01   1991. cpi_a…
+#>  6 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     6.2 1991-06-01   1991. cpi_a…
+#>  7 Unemployment rate - … 1990-03-01 <NA>  JEFG     5.9 1989-12-01   1989. unemp…
+#>  8 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.3 1990-03-01   1990. unemp…
+#>  9 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.5 1990-06-01   1990. unemp…
+#> 10 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.7 1990-09-01   1990. unemp…
+#> # … with 5,475 more rows, and abbreviated variable names ¹​forecast_date,
+#> #   ²​year_qtr
 ```
 
 If you just want the latest forecasts, you can request them:
@@ -264,19 +269,19 @@ If you just want the latest forecasts, you can request them:
 ``` r
 rba_forecasts(all_or_latest = "latest")
 #> # A tibble: 102 × 8
-#>    forecast_date date       series       value series_desc source notes year_qtr
-#>    <date>        <date>     <chr>        <dbl> <chr>       <chr>  <chr>    <dbl>
-#>  1 2022-05-01    2021-12-01 aena_change    3.3 Nominal (n… SMP    (a) …    2021.
-#>  2 2022-05-01    2022-06-01 aena_change    6   Nominal (n… SMP    (a) …    2022.
-#>  3 2022-05-01    2022-12-01 aena_change    4.4 Nominal (n… SMP    (a) …    2022.
-#>  4 2022-05-01    2023-06-01 aena_change    4.8 Nominal (n… SMP    (a) …    2023.
-#>  5 2022-05-01    2023-12-01 aena_change    4.9 Nominal (n… SMP    (a) …    2023.
-#>  6 2022-05-01    2024-06-01 aena_change    4.9 Nominal (n… SMP    (a) …    2024.
-#>  7 2022-05-01    2021-12-01 business_in…   5.4 Business i… SMP    (a) …    2021.
-#>  8 2022-05-01    2022-06-01 business_in…  -0.2 Business i… SMP    (a) …    2022.
-#>  9 2022-05-01    2022-12-01 business_in…   5   Business i… SMP    (a) …    2022.
-#> 10 2022-05-01    2023-06-01 business_in…   8.3 Business i… SMP    (a) …    2023.
-#> # … with 92 more rows
+#>    forecast_date date       series            value serie…¹ source notes year_…²
+#>    <date>        <date>     <chr>             <dbl> <chr>   <chr>  <chr>   <dbl>
+#>  1 2022-08-01    2022-06-01 aena_change         5.2 Nomina… SMP    (a) …   2022.
+#>  2 2022-08-01    2022-12-01 aena_change         3   Nomina… SMP    (a) …   2022.
+#>  3 2022-08-01    2023-06-01 aena_change         4.1 Nomina… SMP    (a) …   2023.
+#>  4 2022-08-01    2023-12-01 aena_change         5   Nomina… SMP    (a) …   2023.
+#>  5 2022-08-01    2024-06-01 aena_change         5   Nomina… SMP    (a) …   2024.
+#>  6 2022-08-01    2024-12-01 aena_change         4.9 Nomina… SMP    (a) …   2024.
+#>  7 2022-08-01    2022-06-01 business_inv_cha…   1.6 Busine… SMP    (a) …   2022.
+#>  8 2022-08-01    2022-12-01 business_inv_cha…   4.9 Busine… SMP    (a) …   2022.
+#>  9 2022-08-01    2023-06-01 business_inv_cha…   5.9 Busine… SMP    (a) …   2023.
+#> 10 2022-08-01    2023-12-01 business_inv_cha…   6.6 Busine… SMP    (a) …   2023.
+#> # … with 92 more rows, and abbreviated variable names ¹​series_desc, ²​year_qtr
 ```
 
 ## Data availability
