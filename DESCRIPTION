@@ -1,6 +1,6 @@
 Package: readrba
 Title: Download and Tidy Data from the Reserve Bank of Australia
-Version: 0.1.3.901
+Version: 0.1.3.902
 Authors@R: 
     c(
     person(given = "Matt",
@@ -22,7 +22,7 @@ Description: Download up-to-date data from the Reserve Bank of Australia
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 URL: https://mattcowgill.github.io/readrba/index.html
 BugReports: https://github.com/MattCowgill/readrba/issues
 Suggests: 

@@ -126,14 +126,8 @@ read_forecasts <- function(...) {
 #' }
 #' @noRd
 scrape_rba_forecasts <- function() {
-  recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
 
-  recent_forecast_urls <- recent_forecast_list_url %>%
-    safely_read_html() %>%
-    rvest::html_nodes(".width-text a") %>%
-    rvest::html_attr("href")
-
-  recent_forecast_urls <- paste0("https://www.rba.gov.au", recent_forecast_urls)
+  recent_forecast_urls <- paste0("https://www.rba.gov.au", scrape_recent_forecast_urls())
 
   load_recent_table <- function(url) {
     forecast_date <- gsub(".*https://www.rba.gov.au/publications/smp/(.+)/forecasts.html*", "\\1", url)
@@ -219,4 +213,34 @@ scrape_rba_forecasts <- function() {
                                     !is.na(.data$series))
 
   recent_forecasts
+}
+
+scrape_recent_forecast_urls <- function() {
+  recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
+
+  recent_forecast_urls <- recent_forecast_list_url %>%
+    safely_read_html() %>%
+    rvest::html_nodes(".width-text a") %>%
+    rvest::html_attr("href")
+
+  recent_forecast_urls
+}
+
+#' Obtain the month of the latest RBA SMP forecasts
+#' @details
+#' This function returns a length-one date, corresponding to first day of the
+#' month of the latest RBA Statement on Monetary Policy forecasts.
+#'
+#' @examples
+#' \dontrun{
+#' latest_forecast_month()
+#' }
+#' @keywords internal
+
+latest_forecast_month <- function() {
+  urls <- scrape_recent_forecast_urls()
+  urls <- stringr::str_remove_all(urls, "/publications/smp/")
+  urls <- stringr::str_remove_all(urls, "/forecasts.html")
+  urls <- paste0(urls, "/01")
+  max(as.Date(urls, format = "%Y/%b/%d"))
 }
