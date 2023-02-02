@@ -83,7 +83,7 @@ rba_forecasts <- function(refresh = TRUE,
       dplyr::group_by(.data$forecast_date, .data$date) %>%
       dplyr::filter(.data$scrape_priority == min(.data$scrape_priority)) %>%
       dplyr::ungroup() %>%
-      dplyr::select(-.data$scrape_priority)
+      dplyr::select(-"scrape_priority")
 
   }
 
@@ -199,13 +199,13 @@ scrape_rba_forecasts <- function() {
 
   recent_forecasts <- recent_forecasts %>%
     dplyr::select(
-      .data$forecast_date,
-      .data$date,
-      .data$series,
-      .data$value,
-      .data$series_desc,
-      .data$source,
-      .data$notes,
+      "forecast_date",
+      "date",
+      "series",
+      "value",
+      "series_desc",
+      "source",
+      "notes",
       dplyr::everything()
     )
 
