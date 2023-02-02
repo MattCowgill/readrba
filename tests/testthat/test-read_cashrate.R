@@ -11,16 +11,16 @@ test_that("read_cashrate() returns expected output", {
     blank,
     dplyr::select(
       read_rba(series_id = "FIRMMCRTD"),
-      .data$date, .data$series, .data$value
+      "date", "series", "value"
     )
   )
 
   expect_identical(blank, target)
   expect_identical(
-    dplyr::arrange(both, .data$series, .data$date),
+    dplyr::arrange(both, series, date),
     dplyr::arrange(
       dplyr::bind_rows(target, interbank),
-      .data$series, .data$date
+      series, date
     )
   )
 

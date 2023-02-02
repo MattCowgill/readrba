@@ -152,7 +152,7 @@ scrape_rba_forecasts <- function() {
     table <- table[-nrow(table), ]
 
     table <- table %>%
-      tidyr::pivot_longer(-.data$series_desc, names_to = "q_year")
+      tidyr::pivot_longer(-"series_desc", names_to = "q_year")
 
     table <- table %>%
       dplyr::mutate(
@@ -166,7 +166,7 @@ scrape_rba_forecasts <- function() {
         year_qtr = lubridate::quarter(date, with_year = TRUE),
         source = "SMP"
       ) %>%
-      dplyr::select(-.data$q_year)
+      dplyr::select(-"q_year")
 
     table <- table %>%
       dplyr::mutate(value = rba_value_to_num(.data$value))

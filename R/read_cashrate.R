@@ -46,7 +46,7 @@ read_cashrate <- function(type = c(
   }
 
   out <- out %>%
-    dplyr::select(.data$date, .data$series, .data$value)
+    dplyr::select("date", "series", "value")
 
   out
 }
