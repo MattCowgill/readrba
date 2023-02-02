@@ -99,12 +99,12 @@ head(cpi_table)
 #> # A tibble: 6 × 11
 #>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
 #>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
-#> 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
 #> # … with 2 more variables: description <chr>, table_title <chr>, and
 #> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 ```
@@ -119,12 +119,12 @@ head(rba_data)
 #> # A tibble: 6 × 11
 #>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
 #>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
-#> 1 1994-06-01 Australian d… 13680 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
-#> 2 1994-06-08 Australian d… 13055 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
-#> 3 1994-06-15 Australian d… 13086 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
-#> 4 1994-06-22 Australian d… 12802 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
-#> 5 1994-06-29 Australian d… 13563 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
-#> 6 1994-07-06 Australian d… 12179 Weekly  Origin… $ mi… RBA    2022-09-02 ARBAAA…
+#> 1 1994-06-01 Australian d… 13680 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
+#> 2 1994-06-08 Australian d… 13055 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
+#> 3 1994-06-15 Australian d… 13086 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
+#> 4 1994-06-22 Australian d… 12802 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
+#> 5 1994-06-29 Australian d… 13563 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
+#> 6 1994-07-06 Australian d… 12179 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
 #> # … with 2 more variables: description <chr>, table_title <chr>, and
 #> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 
@@ -143,12 +143,12 @@ head(cpi_series)
 #> # A tibble: 6 × 11
 #>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
 #>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
-#> 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
-#> 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2022-07-28 GCPIAG 
+#> 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
+#> 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG 
 #> # … with 2 more variables: description <chr>, table_title <chr>, and
 #> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 unique(cpi_series$series_id)
@@ -247,7 +247,7 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 5,485 × 8
+#> # A tibble: 5,587 × 8
 #>    series_desc           forecast…¹ notes source value date       year_…² series
 #>    <chr>                 <date>     <chr> <chr>  <dbl> <date>       <dbl> <chr> 
 #>  1 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     8.6 1990-03-01   1990. cpi_a…
@@ -260,7 +260,7 @@ rba_forecasts()
 #>  8 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.3 1990-03-01   1990. unemp…
 #>  9 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.5 1990-06-01   1990. unemp…
 #> 10 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.7 1990-09-01   1990. unemp…
-#> # … with 5,475 more rows, and abbreviated variable names ¹​forecast_date,
+#> # … with 5,577 more rows, and abbreviated variable names ¹​forecast_date,
 #> #   ²​year_qtr
 ```
 
@@ -271,16 +271,16 @@ rba_forecasts(all_or_latest = "latest")
 #> # A tibble: 102 × 8
 #>    forecast_date date       series            value serie…¹ source notes year_…²
 #>    <date>        <date>     <chr>             <dbl> <chr>   <chr>  <chr>   <dbl>
-#>  1 2022-08-01    2022-06-01 aena_change         5.2 Nomina… SMP    (a) …   2022.
-#>  2 2022-08-01    2022-12-01 aena_change         3   Nomina… SMP    (a) …   2022.
-#>  3 2022-08-01    2023-06-01 aena_change         4.1 Nomina… SMP    (a) …   2023.
-#>  4 2022-08-01    2023-12-01 aena_change         5   Nomina… SMP    (a) …   2023.
-#>  5 2022-08-01    2024-06-01 aena_change         5   Nomina… SMP    (a) …   2024.
-#>  6 2022-08-01    2024-12-01 aena_change         4.9 Nomina… SMP    (a) …   2024.
-#>  7 2022-08-01    2022-06-01 business_inv_cha…   1.6 Busine… SMP    (a) …   2022.
-#>  8 2022-08-01    2022-12-01 business_inv_cha…   4.9 Busine… SMP    (a) …   2022.
-#>  9 2022-08-01    2023-06-01 business_inv_cha…   5.9 Busine… SMP    (a) …   2023.
-#> 10 2022-08-01    2023-12-01 business_inv_cha…   6.6 Busine… SMP    (a) …   2023.
+#>  1 2022-11-01    2022-06-01 aena_change         5   Nomina… SMP    (a) …   2022.
+#>  2 2022-11-01    2022-12-01 aena_change         4.2 Nomina… SMP    (a) …   2022.
+#>  3 2022-11-01    2023-06-01 aena_change         4.6 Nomina… SMP    (a) …   2023.
+#>  4 2022-11-01    2023-12-01 aena_change         5.3 Nomina… SMP    (a) …   2023.
+#>  5 2022-11-01    2024-06-01 aena_change         5.1 Nomina… SMP    (a) …   2024.
+#>  6 2022-11-01    2024-12-01 aena_change         4.7 Nomina… SMP    (a) …   2024.
+#>  7 2022-11-01    2022-06-01 business_inv_cha…   1.4 Busine… SMP    (a) …   2022.
+#>  8 2022-11-01    2022-12-01 business_inv_cha…   3.4 Busine… SMP    (a) …   2022.
+#>  9 2022-11-01    2023-06-01 business_inv_cha…   4.8 Busine… SMP    (a) …   2023.
+#> 10 2022-11-01    2023-12-01 business_inv_cha…   6.1 Busine… SMP    (a) …   2023.
 #> # … with 92 more rows, and abbreviated variable names ¹​series_desc, ²​year_qtr
 ```
 
