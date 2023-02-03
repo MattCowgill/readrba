@@ -113,7 +113,7 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
 
   excel_sheet <- excel_sheet %>%
     tidyr::pivot_longer(
-      cols = -.data$title,
+      cols = !"title",
       names_to = "series",
       values_to = "value"
     )
@@ -138,7 +138,7 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
       "Source"
     ) &
       !grepl("Publi.* date", .data$title)) %>%
-    dplyr::rename(date = .data$title)
+    dplyr::rename(date = "title")
 
   # Split the combined series-seriesid col into two
   # Note that this is substantially faster than using tidyr::separate()
@@ -191,13 +191,13 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
 
   excel_sheet <- excel_sheet %>%
     dplyr::mutate(dplyr::across(
-      c(.data$series, .data$description),
+      c("series", "description"),
       ~ stringr::str_replace_all(., "Commonwealth Government|Australian government|Commonwealth government", "Australian Government")
     ))
 
   excel_sheet <- excel_sheet %>%
     dplyr::mutate(dplyr::across(
-      c(.data$series, .data$description),
+      c("series", "description"),
       stringr::str_squish
     ))
 

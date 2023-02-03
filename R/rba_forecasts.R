@@ -83,7 +83,7 @@ rba_forecasts <- function(refresh = TRUE,
       dplyr::group_by(.data$forecast_date, .data$date) %>%
       dplyr::filter(.data$scrape_priority == min(.data$scrape_priority)) %>%
       dplyr::ungroup() %>%
-      dplyr::select(-.data$scrape_priority)
+      dplyr::select(-"scrape_priority")
 
   }
 
@@ -152,7 +152,7 @@ scrape_rba_forecasts <- function() {
     table <- table[-nrow(table), ]
 
     table <- table %>%
-      tidyr::pivot_longer(-.data$series_desc, names_to = "q_year")
+      tidyr::pivot_longer(-"series_desc", names_to = "q_year")
 
     table <- table %>%
       dplyr::mutate(
@@ -166,7 +166,7 @@ scrape_rba_forecasts <- function() {
         year_qtr = lubridate::quarter(date, with_year = TRUE),
         source = "SMP"
       ) %>%
-      dplyr::select(-.data$q_year)
+      dplyr::select(-"q_year")
 
     table <- table %>%
       dplyr::mutate(value = rba_value_to_num(.data$value))
@@ -199,13 +199,13 @@ scrape_rba_forecasts <- function() {
 
   recent_forecasts <- recent_forecasts %>%
     dplyr::select(
-      .data$forecast_date,
-      .data$date,
-      .data$series,
-      .data$value,
-      .data$series_desc,
-      .data$source,
-      .data$notes,
+      "forecast_date",
+      "date",
+      "series",
+      "value",
+      "series_desc",
+      "source",
+      "notes",
       dplyr::everything()
     )
 
