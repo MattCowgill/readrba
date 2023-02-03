@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.903</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.904</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
 
       
 
-      </header><script src="readrba_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>readrba</h1>
@@ -86,12 +86,14 @@
 
     
     
-<p>The Reserve Bank of Australia publishes lots of useful <a href="https://rba.gov.au/statistics/tables/" class="external-link">statistical tables on its website</a>. The <a href="https://mattcowgill.github.io/readrba/index.html">readrba</a> package helps you:</p>
+<p>The Reserve Bank of Australia publishes lots of useful <a href="https://rba.gov.au/statistics/tables/" class="external-link">statistical tables on its
+website</a>. The <a href="https://mattcowgill.github.io/readrba/index.html">readrba</a> package helps you:</p>
 <ol style="list-style-type: decimal">
 <li>Download RBA statistical tables; and</li>
 <li>Import the data into R as a tidy tibble.</li>
 </ol>
-<p>You can import the data using either the table number or the series ID.</p>
+<p>You can import the data using either the table number or the series
+ID.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mattcowgill.github.io/readrba/index.html">readrba</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
@@ -103,8 +105,13 @@
 <div class="section level3">
 <h3 id="example-individual-series---10-year-bond-yield">Example: Individual series - 10-year bond yield<a class="anchor" aria-label="anchor" href="#example-individual-series---10-year-bond-yield"></a>
 </h3>
-<p>Let’s start off by visualising the yield on a 10 year Australian Government bond over time.</p>
-<p>I want to find the series ID for the 10 year Australian Government bond yield. The function <code><a href="../reference/browse_rba.html">browse_rba_series()</a></code> will help me find it. If you use the function with no argument, it will return a tibble listing every data series published by the RBA (and readable by {readrba}). I’ll specify a search string:</p>
+<p>Let’s start off by visualising the yield on a 10 year Australian
+Government bond over time.</p>
+<p>I want to find the series ID for the 10 year Australian Government
+bond yield. The function <code><a href="../reference/browse_rba.html">browse_rba_series()</a></code> will help me
+find it. If you use the function with no argument, it will return a
+tibble listing every data series published by the RBA (and readable by
+{readrba}). I’ll specify a search string:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/browse_rba.html">browse_rba_series</a></span><span class="op">(</span><span class="st">"Australian government 10 year"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -136,7 +143,8 @@
 <td align="left">Original</td>
 <td align="left">F2 Capital Market Yields - Government Bonds</td>
 <td align="left">historical</td>
-<td align="left">Yields on Australian Government bonds, 10 years maturity</td>
+<td align="left">Yields on Australian Government bonds, 10 years
+maturity</td>
 <td align="left">Monthly</td>
 </tr>
 <tr class="even">
@@ -146,7 +154,8 @@
 <td align="left">Original</td>
 <td align="left">F2 Capital Market Yields - Government Bonds</td>
 <td align="left">current</td>
-<td align="left">Yields on Australian Government bonds, 10 years maturity</td>
+<td align="left">Yields on Australian Government bonds, 10 years
+maturity</td>
 <td align="left">Daily</td>
 </tr>
 <tr class="odd">
@@ -156,7 +165,8 @@
 <td align="left">Original</td>
 <td align="left">F2 Capital Market Yields - Government Bonds</td>
 <td align="left">historical</td>
-<td align="left">Yields on Australian Government bonds, 10 years maturity</td>
+<td align="left">Yields on Australian Government bonds, 10 years
+maturity</td>
 <td align="left">Daily</td>
 </tr>
 <tr class="even">
@@ -166,19 +176,29 @@
 <td align="left">Original</td>
 <td align="left">F2.1 Capital Market Yields - Government Bonds</td>
 <td align="left">current</td>
-<td align="left">Yields on Australian Government bonds, 10 years maturity</td>
+<td align="left">Yields on Australian Government bonds, 10 years
+maturity</td>
 <td align="left">Monthly</td>
 </tr>
 </tbody>
 </table>
-<p>OK, so we have two unique series for 10 year bond yield - one is daily data, the other monthly. These two series are split across four tables - a ‘current’ and ‘historical’ table for each of the daily and monthly series.</p>
-<p>I’ll get the monthly data, which we can see from the table above has the series ID <code>FCMYGBAG10</code>.</p>
-<p>If you prefer, you can find the series ID by looking at the relevant spreadsheet from the RBA’s website.</p>
+<p>OK, so we have two unique series for 10 year bond yield - one is
+daily data, the other monthly. These two series are split across four
+tables - a ‘current’ and ‘historical’ table for each of the daily and
+monthly series.</p>
+<p>I’ll get the monthly data, which we can see from the table above has
+the series ID <code>FCMYGBAG10</code>.</p>
+<p>If you prefer, you can find the series ID by looking at the relevant
+spreadsheet from the RBA’s website.</p>
 <p>Now we’ll use that series ID to download the data:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bond_yield</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_rba.html">read_rba</a></span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"FCMYGBAG10"</span><span class="op">)</span></span></code></pre></div>
-<p>A quick aside: the code above gives identical results to using <code>read_rba_seriesid("FCMYGBAG10")</code>. The <code>read_rba_seriesid("SOMETHING")</code> function is a wrapper around <code>read_rba(series_id = "SOMETHING")</code>.</p>
-<p>OK, now we have the bond yield data in tibble form, let’s see what it looks like:</p>
+<p>A quick aside: the code above gives identical results to using
+<code>read_rba_seriesid("FCMYGBAG10")</code>. The
+<code>read_rba_seriesid("SOMETHING")</code> function is a wrapper around
+<code>read_rba(series_id = "SOMETHING")</code>.</p>
+<p>OK, now we have the bond yield data in tibble form, let’s see what it
+looks like:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">bond_yield</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 626</span></span>
@@ -194,19 +214,26 @@
 <span><span class="co">#&gt; $ series_id   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "F…</span></span>
 <span><span class="co">#&gt; $ description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yields on Australian Government bonds, 10 years maturity"…</span></span>
 <span><span class="co">#&gt; $ table_title <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "F2 Capital Market Yields - Government Bonds", "F2 Capital…</span></span></code></pre></div>
-<p>The data you import using <code><a href="../reference/read_rba.html">read_rba()</a></code> is always in this standard tidy format. The values are in the <code>value</code> column.</p>
+<p>The data you import using <code><a href="../reference/read_rba.html">read_rba()</a></code> is always in this
+standard tidy format. The values are in the <code>value</code>
+column.</p>
 <p>Let’s make a graph of the 10 year bond yield over time:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bond_yield</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="readrba_files/figure-html/vizbondyield-1.png" width="100%" style="border:0px;"></p>
-<p>That’s a bit normcore-basic ggplot, but not bad. With a few lines of code, we’ve got an up-to-date graph of the 10 year bond yield.</p>
+<p>That’s a bit normcore-basic ggplot, but not bad. With a few lines of
+code, we’ve got an up-to-date graph of the 10 year bond yield.</p>
 </div>
 <div class="section level3">
-<h3 id="example-multiple-series-from-a-table---2-3-5-and-10-year-bond-yields">Example: Multiple series from a table - 2, 3, 5 and 10 year bond yields<a class="anchor" aria-label="anchor" href="#example-multiple-series-from-a-table---2-3-5-and-10-year-bond-yields"></a>
+<h3 id="example-multiple-series-from-a-table---2-3-5-and-10-year-bond-yields">Example: Multiple series from a table - 2, 3, 5 and 10 year bond
+yields<a class="anchor" aria-label="anchor" href="#example-multiple-series-from-a-table---2-3-5-and-10-year-bond-yields"></a>
 </h3>
-<p>Now we’ll have a look at another example, this time using multiple data series from the one table. I want to make a graph of Australian Government bond yields at different maturities, over time. This time I’ll confine myself to the recent data, at daily frequency.</p>
+<p>Now we’ll have a look at another example, this time using multiple
+data series from the one table. I want to make a graph of Australian
+Government bond yields at different maturities, over time. This time
+I’ll confine myself to the recent data, at daily frequency.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/browse_rba.html">browse_rba_tables</a></span><span class="op">(</span><span class="st">"government bond"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -240,14 +267,16 @@
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Capital Market Yields – Government Bonds – Daily – 1995 to 17 May 2013</td>
+<td align="left">Capital Market Yields – Government Bonds – Daily – 1995
+to 17 May 2013</td>
 <td align="left">F2</td>
 <td align="left"><a href="https://www.rba.gov.au/statistics/tables/xls-hist/f02dhist.xls" class="external-link uri">https://www.rba.gov.au/statistics/tables/xls-hist/f02dhist.xls</a></td>
 <td align="left">historical</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Capital Market Yields – Government Bonds – Monthly – 1969 to May 2013</td>
+<td align="left">Capital Market Yields – Government Bonds – Monthly –
+1969 to May 2013</td>
 <td align="left">F2</td>
 <td align="left"><a href="https://www.rba.gov.au/statistics/tables/xls-hist/f02histhist.xls" class="external-link uri">https://www.rba.gov.au/statistics/tables/xls-hist/f02histhist.xls</a></td>
 <td align="left">historical</td>
@@ -255,11 +284,17 @@
 </tr>
 </tbody>
 </table>
-<p>The daily data is in table F2. If you prefer, you can look up the table on the <a href="https://www.rba.gov.au/statistics/tables/" class="external-link">RBA website</a> and find the table number that way.</p>
-<p>Now we know the table number that contains the data we want, let’s load it into r.</p>
+<p>The daily data is in table F2. If you prefer, you can look up the
+table on the <a href="https://www.rba.gov.au/statistics/tables/" class="external-link">RBA
+website</a> and find the table number that way.</p>
+<p>Now we know the table number that contains the data we want, let’s
+load it into r.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_rba.html">read_rba</a></span><span class="op">(</span><span class="st">"f2"</span><span class="op">)</span></span></code></pre></div>
-<p>This table looks just like the single series table we downloaded earlier: . Unlike the single series table - which only contained the ten year bond yield - we now have a tidy tibble containing a number of data series. Here’s what we’ve got:</p>
+<p>This table looks just like the single series table we downloaded
+earlier: . Unlike the single series table - which only contained the ten
+year bond yield - we now have a tidy tibble containing a number of data
+series. Here’s what we’ve got:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">f2</span><span class="op">$</span><span class="va">series</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Australian Government 10 year bond"   </span></span>
@@ -270,18 +305,24 @@
 <span><span class="co">#&gt; [6] "NSW Treasury Corporation 10 year bond"</span></span>
 <span><span class="co">#&gt; [7] "NSW Treasury Corporation 3 year bond" </span></span>
 <span><span class="co">#&gt; [8] "NSW Treasury Corporation 5 year bond"</span></span></code></pre></div>
-<p>I’m not interested in NSW bonds, nor indexed bonds, so we’ll need some brief {dplyr}-ing of the data before we can get down to graphing.</p>
+<p>I’m not interested in NSW bonds, nor indexed bonds, so we’ll need
+some brief {dplyr}-ing of the data before we can get down to
+graphing.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filtered_f2</span> <span class="op">&lt;-</span> <span class="va">f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Australian Government"</span>, <span class="va">series</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>           <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Indexed"</span>, <span class="va">series</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>We’ve dropped the series we’re not interested in, going from 15072 rows to 7536 rows. Now let’s graph:</p>
+<p>We’ve dropped the series we’re not interested in, going from 15072
+rows to 7536 rows. Now let’s graph:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filtered_f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, col <span class="op">=</span> <span class="va">series</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="readrba_files/figure-html/vizf2-1.png" width="100%" style="border:0px;"></p>
-<p>Nice! Again, normcore aesthetics aside, we’ve got a decent plot with a few lines of code. Using the same data, we can have a look at the spread between the yield on 10 year and 2 year bonds, as a rough measure of the slope of (a portion of) the yield curve.</p>
+<p>Nice! Again, normcore aesthetics aside, we’ve got a decent plot with
+a few lines of code. Using the same data, we can have a look at the
+spread between the yield on 10 year and 2 year bonds, as a rough measure
+of the slope of (a portion of) the yield curve.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filtered_f2</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">series</span>, <span class="va">value</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -294,7 +335,11 @@
 <div class="section level3">
 <h3 id="example-rba-forecasts">Example: RBA forecasts<a class="anchor" aria-label="anchor" href="#example-rba-forecasts"></a>
 </h3>
-<p>The package also includes all public forecasts of key economic variables made by the Reserve Bank since 1990. The <code><a href="../reference/rba_forecasts.html">rba_forecasts()</a></code> function returns these forecasts in a tidy tibble – including the latest forecasts, scraped from the Statement on Monetary Policy.</p>
+<p>The package also includes all public forecasts of key economic
+variables made by the Reserve Bank since 1990. The
+<code><a href="../reference/rba_forecasts.html">rba_forecasts()</a></code> function returns these forecasts in a tidy
+tibble – including the latest forecasts, scraped from the Statement on
+Monetary Policy.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what they look like:</p>
@@ -308,7 +353,8 @@
 <span><span class="co">#&gt; $ date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-06-01, 1990-09-01, 1990-12-01, 1991-03…</span></span>
 <span><span class="co">#&gt; $ year_qtr      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1990.1, 1990.2, 1990.3, 1990.4, 1991.1, 1991.2, 1989.4, …</span></span>
 <span><span class="co">#&gt; $ series        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "cpi_annual_inflation", "cpi_annual_inflation", "cpi_ann…</span></span></code></pre>
-<p>Let’s visualise all the Bank’s unemployment rate forecasts since 1990:</p>
+<p>Let’s visualise all the Bank’s unemployment rate forecasts since
+1990:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecasts</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">series</span> <span class="op">==</span> <span class="st">"unemp_rate"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -322,7 +368,8 @@
 <div class="section level3">
 <h3 id="example-change-in-rba-forecasts">Example: change in RBA forecasts<a class="anchor" aria-label="anchor" href="#example-change-in-rba-forecasts"></a>
 </h3>
-<p>Now let’s make a chart that compares the RBA’s latest forecasts to its previous forecasts.</p>
+<p>Now let’s make a chart that compares the RBA’s latest forecasts to
+its previous forecasts.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We've already created the `forecasts` object, like this: </span></span>
 <span><span class="co"># forecasts &lt;- rba_forecasts</span></span>
@@ -368,7 +415,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
