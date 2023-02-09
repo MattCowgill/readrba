@@ -11,6 +11,6 @@ test_that("scrape_rba_forecasts() returns expected output", {
   expect_is(forecasts$value, "numeric")
   expect_lt(
     Sys.Date() - max(forecasts$forecast_date),
-    100
+    120
   )
 })

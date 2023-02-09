@@ -1,4 +1,4 @@
-# readrba 0.1.3.9xx
+# readrba 0.1.4
 * rba_forecasts() now checks to ensure there's only one distinct forecast_date-date-series combination, as duplicates can arise when forecasts from multiple sources are combined
 * Minor fixes to account for deprecations in dependencies
 
