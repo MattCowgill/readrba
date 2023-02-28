@@ -13,6 +13,7 @@ test_that("check_url_success() returns expected input", {
 
 test_that("url_exists() returns expected input", {
   skip_if_offline()
+  skip_on_cran()
 
   urls <- c(
     "https://www.rba.gov.au",
