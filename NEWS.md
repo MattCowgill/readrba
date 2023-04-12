@@ -1,3 +1,7 @@
+# readrba 0.1.4.900
+* Historical tables F16 and F17 cannot be loaded by read_rba() - this has now 
+been made explicit. The ability to import these tables *may* be added in future.
+
 # readrba 0.1.4
 * rba_forecasts() now checks to ensure there's only one distinct forecast_date-date-series combination, as duplicates can arise when forecasts from multiple sources are combined
 * Minor fixes to account for deprecations in dependencies

@@ -67,7 +67,6 @@ unemployment rate the RBA has made over the past three decades:
 unemp_forecasts <- rba_forecasts() %>%
   filter(series == "unemp_rate")
 
-
 unemp_forecasts %>%
   ggplot(aes(x = date, 
              y = value, 
@@ -119,12 +118,12 @@ head(rba_data)
 #> # A tibble: 6 × 11
 #>   date       series        value frequ…¹ serie…² units source pub_date   serie…³
 #>   <date>     <chr>         <dbl> <chr>   <chr>   <chr> <chr>  <date>     <chr>  
-#> 1 1994-06-01 Australian d… 13680 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
-#> 2 1994-06-08 Australian d… 13055 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
-#> 3 1994-06-15 Australian d… 13086 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
-#> 4 1994-06-22 Australian d… 12802 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
-#> 5 1994-06-29 Australian d… 13563 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
-#> 6 1994-07-06 Australian d… 12179 Weekly  Origin… $ mi… RBA    2023-01-30 ARBAAA…
+#> 1 1994-06-01 Australian d… 13680 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…
+#> 2 1994-06-08 Australian d… 13055 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…
+#> 3 1994-06-15 Australian d… 13086 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…
+#> 4 1994-06-22 Australian d… 12802 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…
+#> 5 1994-06-29 Australian d… 13563 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…
+#> 6 1994-07-06 Australian d… 12179 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…
 #> # … with 2 more variables: description <chr>, table_title <chr>, and
 #> #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id
 
@@ -208,7 +207,7 @@ browse_rba_tables()
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,478 × 8
+#> # A tibble: 4,230 × 8
 #>    table_no series               serie…¹ serie…² table…³ cur_h…⁴ descr…⁵ frequ…⁶
 #>    <chr>    <chr>                <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
 #>  1 A1       Australian dollar i… ARBAAA… Origin… A1 Res… current Austra… Weekly 
@@ -221,7 +220,7 @@ browse_rba_series()
 #>  8 A1       Other liabilities    ARBALO… Origin… A1 Res… current Other … Weekly 
 #>  9 A1       Total assets         ARBAAT… Origin… A1 Res… current Total … Weekly 
 #> 10 A1       Total liabilities    ARBALT… Origin… A1 Res… current Total … Weekly 
-#> # … with 4,468 more rows, and abbreviated variable names ¹​series_id,
+#> # … with 4,220 more rows, and abbreviated variable names ¹​series_id,
 #> #   ²​series_type, ³​table_title, ⁴​cur_hist, ⁵​description, ⁶​frequency
 ```
 
@@ -247,7 +246,7 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 5,587 × 8
+#> # A tibble: 5,411 × 8
 #>    series_desc           forecast…¹ notes source value date       year_…² series
 #>    <chr>                 <date>     <chr> <chr>  <dbl> <date>       <dbl> <chr> 
 #>  1 CPI - 4 quarter chan… 1990-03-01 <NA>  JEFG     8.6 1990-03-01   1990. cpi_a…
@@ -260,7 +259,7 @@ rba_forecasts()
 #>  8 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.3 1990-03-01   1990. unemp…
 #>  9 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.5 1990-06-01   1990. unemp…
 #> 10 Unemployment rate - … 1990-03-01 <NA>  JEFG     6.7 1990-09-01   1990. unemp…
-#> # … with 5,577 more rows, and abbreviated variable names ¹​forecast_date,
+#> # … with 5,401 more rows, and abbreviated variable names ¹​forecast_date,
 #> #   ²​year_qtr
 ```
 
@@ -271,16 +270,16 @@ rba_forecasts(all_or_latest = "latest")
 #> # A tibble: 102 × 8
 #>    forecast_date date       series            value serie…¹ source notes year_…²
 #>    <date>        <date>     <chr>             <dbl> <chr>   <chr>  <chr>   <dbl>
-#>  1 2022-11-01    2022-06-01 aena_change         5   Nomina… SMP    (a) …   2022.
-#>  2 2022-11-01    2022-12-01 aena_change         4.2 Nomina… SMP    (a) …   2022.
-#>  3 2022-11-01    2023-06-01 aena_change         4.6 Nomina… SMP    (a) …   2023.
-#>  4 2022-11-01    2023-12-01 aena_change         5.3 Nomina… SMP    (a) …   2023.
-#>  5 2022-11-01    2024-06-01 aena_change         5.1 Nomina… SMP    (a) …   2024.
-#>  6 2022-11-01    2024-12-01 aena_change         4.7 Nomina… SMP    (a) …   2024.
-#>  7 2022-11-01    2022-06-01 business_inv_cha…   1.4 Busine… SMP    (a) …   2022.
-#>  8 2022-11-01    2022-12-01 business_inv_cha…   3.4 Busine… SMP    (a) …   2022.
-#>  9 2022-11-01    2023-06-01 business_inv_cha…   4.8 Busine… SMP    (a) …   2023.
-#> 10 2022-11-01    2023-12-01 business_inv_cha…   6.1 Busine… SMP    (a) …   2023.
+#>  1 2023-02-01    2022-12-01 aena_change         4.7 Nomina… SMP    (a) …   2022.
+#>  2 2023-02-01    2023-06-01 aena_change         6.8 Nomina… SMP    (a) …   2023.
+#>  3 2023-02-01    2023-12-01 aena_change         5.4 Nomina… SMP    (a) …   2023.
+#>  4 2023-02-01    2024-06-01 aena_change         4.8 Nomina… SMP    (a) …   2024.
+#>  5 2023-02-01    2024-12-01 aena_change         4.5 Nomina… SMP    (a) …   2024.
+#>  6 2023-02-01    2025-06-01 aena_change         4.1 Nomina… SMP    (a) …   2025.
+#>  7 2023-02-01    2022-12-01 business_inv_cha…   3.6 Busine… SMP    (a) …   2022.
+#>  8 2023-02-01    2023-06-01 business_inv_cha…   3.1 Busine… SMP    (a) …   2023.
+#>  9 2023-02-01    2023-12-01 business_inv_cha…   3.7 Busine… SMP    (a) …   2023.
+#> 10 2023-02-01    2024-06-01 business_inv_cha…   3.6 Busine… SMP    (a) …   2024.
 #> # … with 92 more rows, and abbreviated variable names ¹​series_desc, ²​year_qtr
 ```
 
@@ -313,7 +312,8 @@ numbers:
 | Exchange Rates – Daily – 2007 to 2009                                            | ex_daily_0709    |
 | Exchange Rates – Daily – 2010 to 2013                                            | ex_daily_1013    |
 | Exchange Rates – Daily – 2014 to 2017                                            | ex_daily_1417    |
-| Exchange Rates – Daily – 2018 to Current                                         | ex_daily_18cur   |
+| Exchange Rates – Daily – 2018 to 2022                                            | ex_daily_1822    |
+| Exchange Rates – Daily – 2023 to Current                                         | ex_daily_23cur   |
 | Exchange Rates – Monthly – January 2010 to latest complete month of current year | ex_monthly_10cur |
 | Exchange Rates – Monthly – July 1969 to December 2009                            | ex_monthly_6909  |
 
@@ -343,6 +343,9 @@ Tables that are **not** able to be downloaded are:
 | Treasury Bond Tenders – Amount Allotted, by Years to Maturity – 1982–2006 | E5       | historical            |
 | Treasury Bond Switch Tenders – 2008                                       | E6       | historical            |
 | Treasury Capital Indexed Bonds – 1985–2006                                | E7       | historical            |
+| Indicative Mid Rates of Australian Government Securities – 1992 to 2008   | F16      | historical            |
+| Indicative Mid Rates of Australian Government Securities – 2009 to 2013   | F16      | historical            |
+| Zero-coupon Interest Rates – Analytical Series – 1992 to 2008             | F17      | historical            |
 
 ## Issues and contributions
 
