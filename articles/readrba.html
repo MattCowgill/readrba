@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.4.900</span>
       </span>
     </div>
 
@@ -117,13 +117,13 @@ tibble listing every data series published by the RBA (and readable by
 <table class="table">
 <colgroup>
 <col width="4%">
-<col width="18%">
-<col width="6%">
-<col width="6%">
-<col width="23%">
+<col width="16%">
 <col width="5%">
-<col width="29%">
 <col width="5%">
+<col width="22%">
+<col width="5%">
+<col width="34%">
+<col width="4%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">table_no</th>
@@ -154,8 +154,8 @@ maturity</td>
 <td align="left">Original</td>
 <td align="left">F2 Capital Market Yields - Government Bonds</td>
 <td align="left">current</td>
-<td align="left">Yields on Australian Government bonds, 10 years
-maturity</td>
+<td align="left">Yields on Australian Government bonds, interpolated, 10
+years maturity</td>
 <td align="left">Daily</td>
 </tr>
 <tr class="odd">
@@ -176,8 +176,8 @@ maturity</td>
 <td align="left">Original</td>
 <td align="left">F2.1 Capital Market Yields - Government Bonds</td>
 <td align="left">current</td>
-<td align="left">Yields on Australian Government bonds, 10 years
-maturity</td>
+<td align="left">Yields on Australian Government bonds, interpolated, 10
+years maturity</td>
 <td align="left">Monthly</td>
 </tr>
 </tbody>
@@ -343,7 +343,7 @@ Monetary Policy.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what they look like:</p>
-<pre><code><span><span class="co">#&gt; Rows: 5,587</span></span>
+<pre><code><span><span class="co">#&gt; Rows: 5,411</span></span>
 <span><span class="co">#&gt; Columns: 8</span></span>
 <span><span class="co">#&gt; $ series_desc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CPI - 4 quarter change", "CPI - 4 quarter change", "CPI…</span></span>
 <span><span class="co">#&gt; $ forecast_date <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-03-01, 1990-03-01, 1990-03-01, 1990-03…</span></span>
