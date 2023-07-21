@@ -88,7 +88,7 @@ load_hist_sheet <- function(filename, sheet_name) {
       into = c("forecast_date", "notes", "source"),
       sep = ";"
     ) %>%
-    mutate(across(everything(), na_if, y = "NA"))
+    mutate(across(everything(), \(x) na_if(x, y = "NA")))
 
   data <- data %>%
     separate(date, into = c("year", "quarter"), sep = "Q") %>%
