@@ -44,7 +44,7 @@ test_that("correct tables are identified when multiple series_ids from different
   )
   expect_equal(
     as.character(multiple_ids$table_no),
-    as.character(c("A1", "A1.1", "G1"))
+    as.character(c("A1", "A1", "A1.1", "G1"))
   )
 })
 
