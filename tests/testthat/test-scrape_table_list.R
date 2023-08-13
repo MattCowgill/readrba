@@ -13,6 +13,6 @@ test_that("scrape_table_list() scrapes urls", {
     names(table_list),
     c("title", "no", "url", "current_or_historical", "readable")
   )
-  expect_identical(table_list$title[1], "Liabilities and Assets – Summary")
+  expect_identical(table_list$title[1], "RBA Balance Sheet")
   expect_identical(table_list$no[1], "A1")
 })

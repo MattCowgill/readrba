@@ -5,7 +5,7 @@ test_that("read_rba() fails with unexpected input", {
   # Fails with non-existent table number
   expect_error(read_rba("x9"))
   # Fails when !cur_hist %in% c("current", "historical", "all")
-  expect_error(read_rba("a1.1", cur_hist = "somearbitrarystring"))
+  expect_error(read_rba("a1", cur_hist = "somearbitrarystring"))
   # Fails when table is not readable (not in standard TS format)
   expect_error(read_rba("e3"))
   # Fails when cur_hist isn't length 1 or same length as table_no
@@ -20,7 +20,7 @@ test_that("read_rba() works", {
   skip_if_offline()
   skip_on_cran()
 
-  tables <- read_rba(c("a1.1", "g1"))
+  tables <- read_rba(c("a1", "g1"))
 
   expect_is(tables, "tbl_df")
   expect_equal(length(tables), 11)
@@ -30,44 +30,41 @@ test_that("read_rba() works", {
   expect_equal(min(tables$date), as.Date("1922-06-01"))
   expect_lt(Sys.Date() - max(tables$date), 180)
 
-  expected_series <- c(
-    "Capital and Reserve Bank Reserve Fund",
-    "Notes on issue",
-    "Exchange settlement balances",
-    "RBA term deposits",
-    "Deposits of overseas institutions",
-    "Australian Government Deposits",
-    "State Governments Deposits",
-    "Other Deposits",
-    "Other liabilities",
-    "Total liabilities",
-    "Gold and foreign exchange",
-    "Australian dollar investments",
-    "Loans and advances",
-    "Clearing items",
-    "Other assets",
-    "Total assets",
-    "Consumer price index",
-    "Year-ended inflation",
-    "Year-ended inflation – excluding interest and tax changes",
-    "Year-ended inflation – excluding volatile items",
-    "Year-ended tradables inflation",
-    "Year-ended tradables inflation – excluding volatile items and tobacco",
-    "Year-ended non-tradables inflation",
-    "Year-ended non-tradable inflation – excluding interest charges and deposit & loan facilities",
-    "Year-ended weighted median inflation",
-    "Year-ended trimmed mean inflation",
-    "Quarterly inflation – original",
-    "Quarterly inflation",
-    "Quarterly inflation – excluding interest and tax changes",
-    "Quarterly inflation – excluding volatile items",
-    "Quarterly tradables inflation",
-    "Quarterly tradables inflation – excluding volatile items and tobacco",
-    "Quarterly non-tradables inflation",
-    "Quarterly non-tradables inflation – excluding deposit and loan facilities",
-    "Quarterly weighted median inflation",
-    "Quarterly trimmed mean inflation"
-  )
+  expected_series <- c("Australian dollar investments",
+                       "Australian Government Deposits",
+                       "Capital and Reserve Bank Reserve Fund",
+                       "Consumer price index",
+                       "Deposits of overseas institutions",
+                       "Exchange settlement balances",
+                       "Gold and foreign exchange",
+                       "Notes on issue",
+                       "Other assets (including clearing items)",
+                       "Other Deposits",
+                       "Other liabilities",
+                       "Other reserves and current year earnings",
+                       "Quarterly inflation",
+                       "Quarterly inflation – excluding interest and tax changes",
+                       "Quarterly inflation – excluding volatile items",
+                       "Quarterly inflation – original",
+                       "Quarterly non-tradables inflation",
+                       "Quarterly non-tradables inflation – excluding deposit and loan facilities",
+                       "Quarterly tradables inflation",
+                       "Quarterly tradables inflation – excluding volatile items and tobacco",
+                       "Quarterly trimmed mean inflation",
+                       "Quarterly weighted median inflation",
+                       "State Governments Deposits",
+                       "Total assets",
+                       "Total liabilities and equity",
+                       "Year-ended inflation",
+                       "Year-ended inflation – excluding interest and tax changes",
+                       "Year-ended inflation – excluding volatile items",
+                       "Year-ended non-tradable inflation – excluding interest charges and deposit & loan facilities",
+                       "Year-ended non-tradables inflation",
+                       "Year-ended tradables inflation",
+                       "Year-ended tradables inflation – excluding volatile items and tobacco",
+                       "Year-ended trimmed mean inflation",
+                       "Year-ended weighted median inflation")
+
 
   expect_equal(
     sort(unique(tables$series)),
@@ -87,24 +84,6 @@ check_df <- function(df) {
   all(a, b, c, d, e, f, g)
 }
 
-test_that("multiple tables work", {
-  skip_if_offline()
-  skip_on_cran()
-  cur <- read_rba(table_no = "a1.1", cur_hist = "current")
-  his <- read_rba(table_no = "a1.1", cur_hist = "historical")
-  manual_both <- dplyr::bind_rows(his, cur) %>%
-    dplyr::arrange(table_title, series, date)
-  both <- read_rba(table_no = c("a1.1", "a1.1"), cur_hist = c("current", "historical")) |>
-    dplyr::arrange(table_title, series, date)
-
-
-  expect_identical(
-    manual_both,
-    both
-  )
-
-  expect_true(check_df(both))
-})
 
 
 test_that("all current tables work", {
