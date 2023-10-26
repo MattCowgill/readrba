@@ -27,7 +27,7 @@ test_that("read_rba() works", {
   expect_gt(nrow(tables), 8000)
   expect_is(tables$date, "Date")
   expect_true(!all(is.na(tables$date)))
-  expect_equal(min(tables$date), as.Date("1922-06-01"))
+  expect_equal(min(tables$date), as.Date("1922-06-30"))
   expect_lt(Sys.Date() - max(tables$date), 180)
 
   expected_series <- c("Australian dollar investments",
