@@ -80,7 +80,7 @@ rba_forecasts <- function(refresh = TRUE,
     )
 
     forecasts <- forecasts %>%
-      dplyr::group_by(.data$forecast_date, .data$date) %>%
+      dplyr::group_by(.data$forecast_date, .data$date, .data$series) %>%
       dplyr::filter(.data$scrape_priority == min(.data$scrape_priority)) %>%
       dplyr::ungroup() %>%
       dplyr::select(-"scrape_priority")

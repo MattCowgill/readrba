@@ -1,4 +1,6 @@
-# readrba 0.1.5.90x
+# readrba 0.1.6
+* The read_forecasts() function now returns some forecasts from the 2018-22 period
+that were previously erroneously omitted
 
 # readrba 0.1.5
 * Historical tables F16 and F17 cannot be loaded by read_rba() - this has now 

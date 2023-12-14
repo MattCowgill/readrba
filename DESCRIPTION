@@ -1,6 +1,6 @@
 Package: readrba
 Title: Download and Tidy Data from the Reserve Bank of Australia
-Version: 0.1.5.900
+Version: 0.1.6
 Authors@R: 
     c(
     person(given = "Matt",
