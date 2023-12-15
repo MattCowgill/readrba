@@ -30,7 +30,7 @@ is excluded.}
 }
 \value{
 A tidy \code{tbl_df} containing 8 columns:
-\itemize{
+\describe{
 \item{\code{forecast_date}}{ The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the \code{forecast_date} for forecasts in the February 2020 Statement on Monetary Policy is \code{as.Date("2020-02-01")}.}
 \item{\code{date}}{ The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be \code{as.Date("2021-06-01")}.}
 \item{\code{year_qtr}}{ The year and quarter to which the forecast pertains, such as 2019.1.}
