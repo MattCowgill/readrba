@@ -93,15 +93,32 @@ is excluded.</p></dd>
     <h2>Value</h2>
     
 
-<p>A tidy <code>tbl_df</code> containing 8 columns:</p><ul><li><p><code>forecast_date</code> The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code>as.Date("2020-02-01")</code>.</p></li>
-<li><p><code>date</code> The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be <code>as.Date("2021-06-01")</code>.</p></li>
-<li><p><code>year_qtr</code> The year and quarter to which the forecast pertains, such as 2019.1.</p></li>
-<li><p><code>series</code> Short, snake_case description of the data series being forecast, such as <code>gdp_change</code> or <code>unemp_rate</code>. These are consistent over time.</p></li>
-<li><p><code>value</code> The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be <code>3</code>. Note that where a forecast is given as a range (eg. 3.5-4.5%) the <code>value</code> will be the midpoint of the range (eg. 4%).</p></li>
-<li><p><code>series_desc</code> Full description of the series being forecast, as per the RBA website, such as "Real household disposable income". Note that series descriptions are not necessarily consistent over time; the values here are those published by the RBA. The <code>series</code> column is consistent over time.</p></li>
-<li><p><code>source</code> For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy. Forecasts prior to 2014 are sourced from various places; see <code>Details</code>.</p></li>
-<li><p><code>notes</code> Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given <code>forecast_date</code>.</p></li>
-</ul></div>
+<p>A tidy <code>tbl_df</code> containing 8 columns:</p><dl><dt><code>forecast_date</code></dt>
+<dd><p>The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the <code>forecast_date</code> for forecasts in the February 2020 Statement on Monetary Policy is <code>as.Date("2020-02-01")</code>.</p></dd>
+
+<dt><code>date</code></dt>
+<dd><p>The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be <code>as.Date("2021-06-01")</code>.</p></dd>
+
+<dt><code>year_qtr</code></dt>
+<dd><p>The year and quarter to which the forecast pertains, such as 2019.1.</p></dd>
+
+<dt><code>series</code></dt>
+<dd><p>Short, snake_case description of the data series being forecast, such as <code>gdp_change</code> or <code>unemp_rate</code>. These are consistent over time.</p></dd>
+
+<dt><code>value</code></dt>
+<dd><p>The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be <code>3</code>. Note that where a forecast is given as a range (eg. 3.5-4.5%) the <code>value</code> will be the midpoint of the range (eg. 4%).</p></dd>
+
+<dt><code>series_desc</code></dt>
+<dd><p>Full description of the series being forecast, as per the RBA website, such as "Real household disposable income". Note that series descriptions are not necessarily consistent over time; the values here are those published by the RBA. The <code>series</code> column is consistent over time.</p></dd>
+
+<dt><code>source</code></dt>
+<dd><p>For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy. Forecasts prior to 2014 are sourced from various places; see <code>Details</code>.</p></dd>
+
+<dt><code>notes</code></dt>
+<dd><p>Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given <code>forecast_date</code>.</p></dd>
+
+
+</dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>Forecasts are not available for all series on all forecast dates. CPI
