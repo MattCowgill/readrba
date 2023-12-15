@@ -1,7 +1,7 @@
 #' Convenience function to get the RBA's cash rate.
 #'
 #' @param type One of `'target'` (the default), `'interbank'`, or `'both'`.
-#' \itemize{
+#' \describe{
 #'   \item{`'target'`}{ The RBA's cash rate target.}
 #'   \item{`'interbank'`}{ The interbank overnight cash rate.}
 #'   \item{`'both'`}{ Both the cash rate target and interbank overnight cash rate.}

@@ -11,7 +11,7 @@ rba_cashrate(...)
 }
 \arguments{
 \item{type}{One of \code{'target'} (the default), \code{'interbank'}, or \code{'both'}.
-\itemize{
+\describe{
 \item{\code{'target'}}{ The RBA's cash rate target.}
 \item{\code{'interbank'}}{ The interbank overnight cash rate.}
 \item{\code{'both'}}{ Both the cash rate target and interbank overnight cash rate.}
