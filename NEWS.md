@@ -1,3 +1,6 @@
+# readrba 0.1.7
+* Internal metadata refreshed, reflecting changes to the tables on the RBA website. Thanks to Ben Jackman.
+
 # readrba 0.1.6
 * The read_forecasts() function now returns some forecasts from the 2018-22 period
 that were previously erroneously omitted
