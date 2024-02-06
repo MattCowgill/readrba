@@ -1,3 +1,6 @@
+# readrba 0.1.6.9xx
+* read_forecasts() / rba_forecasts() updated to work with the new SMP format
+
 # readrba 0.1.6
 * The read_forecasts() function now returns some forecasts from the 2018-22 period
 that were previously erroneously omitted

@@ -92,7 +92,10 @@ rba_forecasts <- function(refresh = TRUE,
     .data$forecast_date,
     .data$series,
     .data$date
-  )
+  )  %>%
+    dplyr::mutate(series_desc = dplyr::if_else(.data$series == "unemp_rate",
+                                  "Unemployment rate",
+                                  .data$series_desc))
 
   if (isTRUE(remove_old)) {
     forecasts <- forecasts %>%
@@ -127,9 +130,9 @@ read_forecasts <- function(...) {
 #' @noRd
 scrape_rba_forecasts <- function() {
 
-  recent_forecast_urls <- paste0("https://www.rba.gov.au", scrape_recent_forecast_urls())
+  forecast_urls <- paste0("https://www.rba.gov.au", scrape_recent_forecast_urls())
 
-  load_recent_table <- function(url) {
+  tidy_table_18_23 <- function(url) {
     forecast_date <- gsub(".*https://www.rba.gov.au/publications/smp/(.+)/forecasts.html*", "\\1", url)
     forecast_date <- paste0(forecast_date, "/01")
     forecast_date <- lubridate::ymd(forecast_date)
@@ -195,9 +198,116 @@ scrape_rba_forecasts <- function() {
     table
   }
 
-  recent_forecasts <- purrr::map_dfr(recent_forecast_urls, load_recent_table)
+  tidy_table_recent <- function(url) {
 
-  recent_forecasts <- recent_forecasts %>%
+    forecast_date <- stringr::str_remove_all(url,
+                                              "https://www.rba.gov.au/publications/smp/") %>%
+      stringr::str_sub(1, 8) %>%
+      lubridate::ym()
+
+    table <- url %>%
+      safely_read_html() %>%
+      rvest::html_nodes("#table31") %>%
+      rvest::html_table() %>%
+      purrr::pluck(1) %>%
+      dplyr::tibble()
+
+    names(table) <- c("series_desc", as.character(table[1, 2:ncol(table)]))
+    table <- table[-1, ]
+
+    notes <- table[nrow(table), ] %>%
+      as.character() %>%
+      unique() %>%
+      stringr::str_squish()
+
+    table <- table[-nrow(table), ]
+
+    # Drop subheading rows where each col has same value
+    table <- table[table[, 1] != table [, 2], ]
+
+
+
+    table <- table %>%
+      tidyr::pivot_longer(-"series_desc", names_to = "q_year")
+
+    table <- table %>%
+      dplyr::mutate(
+        forecast_date = forecast_date,
+        notes = notes
+      )
+
+    table <- table %>%
+      dplyr::mutate(
+        date = lubridate::dmy(paste0("01 ", .data$q_year)),
+        year_qtr = lubridate::quarter(date, with_year = TRUE),
+        source = "SMP"
+      ) %>%
+      dplyr::select(-"q_year")
+
+    table <- table %>%
+      dplyr::mutate(value = rba_value_to_num(.data$value))
+
+    table <- table %>%
+      dplyr::mutate(series_desc = stringr::str_remove_all(.data$series_desc,
+                                            "\\(non-farm\\)|\\(quarterly, %\\)|\\(%\\)|\\(index\\)|\\(.\\)|\\(US\\$/bbl\\)")) %>%
+      dplyr::mutate(series_desc = stringr::str_squish(.data$series_desc)) %>%
+      dplyr::mutate(series_desc = stringr::str_to_sentence(.data$series_desc)) %>%
+      dplyr::mutate(series_desc = dplyr::case_when(.data$series_desc == "Nominal average earnings per hour" ~
+                                                     "Nominal (non-farm) average earnings per hour",
+                                                   .data$series_desc == "Major trading partner (export-weighted) gdp" ~
+                                                     "Major trading partner (export-weighted) GDP",
+                                                 TRUE ~.data$series_desc)) %>%
+      dplyr::mutate(series = dplyr::case_when(
+        .data$series_desc == "Gross domestic product" ~ "gdp_change",
+        .data$series_desc == "Household consumption" ~ "hh_cons_change",
+        .data$series_desc == "Dwelling investment" ~ "dwelling_inv_change",
+        .data$series_desc == "Business investment" ~ "business_inv_change",
+        .data$series_desc == "Public demand" ~ "public_demand_change",
+        .data$series_desc == "Gross national expenditure" ~ "gne_change",
+        .data$series_desc == "Imports" ~ "imports_change",
+        .data$series_desc == "Exports" ~ "exports_change",
+        .data$series_desc == "Real household disposable income" ~ "real_hh_disp_income_change",
+        .data$series_desc == "Terms of trade" ~ "tot_change",
+        .data$series_desc == "Major trading partner (export-weighted) GDP" ~ "trading_partner_gdp_change",
+        grepl("Unemployment rate", .data$series_desc) ~ "unemp_rate",
+        .data$series_desc == "Employment" ~ "employment_change",
+        .data$series_desc == "Wage price index" ~ "wpi_change",
+        .data$series_desc == "Nominal (non-farm) average earnings per hour" ~ "aena_change",
+        .data$series_desc == "Trimmed mean inflation" ~ "underlying_annual_inflation",
+        .data$series_desc == "Consumer price index" ~ "cpi_annual_inflation",
+        .data$series_desc == "Brent crude oil price" ~ "oil_price",
+        .data$series_desc == "Cash rate" ~ "cash_rate",
+        .data$series_desc == "Estimated resident population" ~ "population",
+        .data$series_desc == "Hours-based underutilisation rate" ~ "underut_rate",
+        .data$series_desc == "Household savings rate" ~ "savings_rate",
+        .data$series_desc == "Labour productivity" ~ "prod_change",
+        .data$series_desc == "Real average earnings per hour" ~ "real_earnings_change",
+        .data$series_desc == "Real wage price index" ~ "real_wpi_change",
+        .data$series_desc == "Trade-weighted index" ~ "twi",
+        TRUE ~ NA_character_
+      ))
+
+    table
+  }
+
+  forecast_years <- stringr::str_remove_all(forecast_urls,
+                                            "https://www.rba.gov.au/publications/smp/") %>%
+    stringr::str_sub(1, 4) %>%
+    as.numeric()
+
+  urls_18_23 <- forecast_urls[forecast_years < 2024]
+  urls_24_on <- forecast_urls[forecast_years >= 2024]
+
+  forecasts_18_23 <- purrr::map_dfr(urls_18_23,
+                                    tidy_table_18_23)
+
+  forecasts_24on <- purrr::map_dfr(urls_24_on,
+                                   tidy_table_recent)
+
+  forecasts <- forecasts_18_23 %>%
+    dplyr::bind_rows(forecasts_24on)
+
+  forecasts <- forecasts %>%
     dplyr::select(
       "forecast_date",
       "date",
@@ -209,10 +319,10 @@ scrape_rba_forecasts <- function() {
       dplyr::everything()
     )
 
-  recent_forecasts <- dplyr::filter(recent_forecasts,
-                                    !is.na(.data$series))
+  forecasts <- dplyr::filter(forecasts,
+                             !is.na(.data$series))
 
-  recent_forecasts
+  forecasts
 }
 
 scrape_recent_forecast_urls <- function() {
