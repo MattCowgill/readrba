@@ -46,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6.900</span>
       </span>
     </div>
 
@@ -107,7 +107,8 @@
 <div class="section level3">
 <h3 id="quick-examples">Quick examples<a class="anchor" aria-label="anchor" href="#quick-examples"></a>
 </h3>
-<p>With a few lines of code, you can get a data series from the RBA and visualise it. Here’s the unemployment rate:</p>
+<p>With just a few lines of code, you can get a data series from the RBA and visualise it!</p>
+<p>Here’s the unemployment rate:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">unemp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"GLFSURSA"</span><span class="op">)</span> </span>
 <span></span>
@@ -143,51 +144,48 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cpi_table</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
-<span><span class="co">#&gt;   date       series        value frequ…¹ serie…² units source pub_date   serie…³</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; # … with 2 more variables: description &lt;chr&gt;, table_title &lt;chr&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id</span></span></code></pre></div>
+<span><span class="co">#&gt;   date       series          value frequency series_type units source pub_date  </span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span></span>
+<span><span class="co">#&gt; 1 1922-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 2 1922-09-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 3 1922-12-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 4 1923-03-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 5 1923-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 6 1923-09-30 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; # ℹ 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;, table_title &lt;chr&gt;</span></span></code></pre></div>
 <p>You can also request multiple tables. They’ll be returned together as one tidy tibble:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rba_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>table_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a1"</span>, <span class="st">"g1"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">rba_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
-<span><span class="co">#&gt;   date       series        value frequ…¹ serie…² units source pub_date   serie…³</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 1994-06-01 Australian d… 13680 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…</span></span>
-<span><span class="co">#&gt; 2 1994-06-08 Australian d… 13055 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…</span></span>
-<span><span class="co">#&gt; 3 1994-06-15 Australian d… 13086 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…</span></span>
-<span><span class="co">#&gt; 4 1994-06-22 Australian d… 12802 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…</span></span>
-<span><span class="co">#&gt; 5 1994-06-29 Australian d… 13563 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…</span></span>
-<span><span class="co">#&gt; 6 1994-07-06 Australian d… 12179 Weekly  Origin… $ mi… RBA    2023-04-11 ARBAAA…</span></span>
-<span><span class="co">#&gt; # … with 2 more variables: description &lt;chr&gt;, table_title &lt;chr&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id</span></span>
+<span><span class="co">#&gt;   date       series          value frequency series_type units source pub_date  </span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span></span>
+<span><span class="co">#&gt; 1 2013-07-03 Australian dol… 37899 Weekly    Original    $ mi… RBA    2024-02-02</span></span>
+<span><span class="co">#&gt; 2 2013-07-10 Australian dol… 35106 Weekly    Original    $ mi… RBA    2024-02-02</span></span>
+<span><span class="co">#&gt; 3 2013-07-17 Australian dol… 32090 Weekly    Original    $ mi… RBA    2024-02-02</span></span>
+<span><span class="co">#&gt; 4 2013-07-24 Australian dol… 39592 Weekly    Original    $ mi… RBA    2024-02-02</span></span>
+<span><span class="co">#&gt; 5 2013-07-31 Australian dol… 41286 Weekly    Original    $ mi… RBA    2024-02-02</span></span>
+<span><span class="co">#&gt; 6 2013-08-07 Australian dol… 37974 Weekly    Original    $ mi… RBA    2024-02-02</span></span>
+<span><span class="co">#&gt; # ℹ 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;, table_title &lt;chr&gt;</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">rba_data</span><span class="op">$</span><span class="va">table_title</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "A1 Reserve Bank Of Australia - Liabilities And Assets - Summary"</span></span>
+<span><span class="co">#&gt; [1] "A1 Reserve Bank Of Australia - Balance Sheet"</span></span>
 <span><span class="co">#&gt; [2] "G1 Consumer Price Inflation"</span></span></code></pre></div>
 <p>You can also retrieve data based on the unique RBA time series identifier(s). For example, to getch the consumer price index series only:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cpi_series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rba.html">read_rba</a></span><span class="op">(</span>series_id <span class="op">=</span> <span class="st">"GCPIAG"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cpi_series</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
-<span><span class="co">#&gt;   date       series        value frequ…¹ serie…² units source pub_date   serie…³</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 1922-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 2 1922-09-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 3 1922-12-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 4 1923-03-01 Consumer pri…   2.7 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 5 1923-06-01 Consumer pri…   2.8 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; 6 1923-09-01 Consumer pri…   2.9 Quarte… Origin… Inde… ABS /… 2023-01-27 GCPIAG </span></span>
-<span><span class="co">#&gt; # … with 2 more variables: description &lt;chr&gt;, table_title &lt;chr&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id</span></span>
+<span><span class="co">#&gt;   date       series          value frequency series_type units source pub_date  </span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span></span>
+<span><span class="co">#&gt; 1 1922-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 2 1922-09-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 3 1922-12-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 4 1923-03-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 5 1923-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; 6 1923-09-30 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2024-02-01</span></span>
+<span><span class="co">#&gt; # ℹ 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;, table_title &lt;chr&gt;</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">cpi_series</span><span class="op">$</span><span class="va">series_id</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "GCPIAG"</span></span></code></pre></div>
 <p>The convenience function <code><a href="reference/read_rba.html">read_rba_seriesid()</a></code> is a wrapper around <code><a href="reference/read_rba.html">read_rba()</a></code>. This means <code>read_rba_seriesid("GCPIAG")</code> is equivalent to <code>read_rba(series_id = "GCPIAG")</code>.</p>
@@ -198,16 +196,15 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hist_a11</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
-<span><span class="co">#&gt;   date       series        value frequ…¹ serie…² units source pub_date   serie…³</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;     &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 1977-07-31 Australian G…   654 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…</span></span>
-<span><span class="co">#&gt; 2 1977-08-31 Australian G…   665 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…</span></span>
-<span><span class="co">#&gt; 3 1977-09-30 Australian G…   695 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…</span></span>
-<span><span class="co">#&gt; 4 1977-10-31 Australian G…   609 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…</span></span>
-<span><span class="co">#&gt; 5 1977-11-30 Australian G…   560 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…</span></span>
-<span><span class="co">#&gt; 6 1977-12-31 Australian G…   614 Monthly Origin… $ mi… RBA    2015-06-26 ARBALD…</span></span>
-<span><span class="co">#&gt; # … with 2 more variables: description &lt;chr&gt;, table_title &lt;chr&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names ¹​frequency, ²​series_type, ³​series_id</span></span></code></pre></div>
+<span><span class="co">#&gt;   date       series          value frequency series_type units source pub_date  </span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;date&gt;    </span></span>
+<span><span class="co">#&gt; 1 1994-06-01 Australian dol… 13680 Weekly    Original    $ mi… RBA    2023-05-05</span></span>
+<span><span class="co">#&gt; 2 1994-06-08 Australian dol… 13055 Weekly    Original    $ mi… RBA    2023-05-05</span></span>
+<span><span class="co">#&gt; 3 1994-06-15 Australian dol… 13086 Weekly    Original    $ mi… RBA    2023-05-05</span></span>
+<span><span class="co">#&gt; 4 1994-06-22 Australian dol… 12802 Weekly    Original    $ mi… RBA    2023-05-05</span></span>
+<span><span class="co">#&gt; 5 1994-06-29 Australian dol… 13563 Weekly    Original    $ mi… RBA    2023-05-05</span></span>
+<span><span class="co">#&gt; 6 1994-07-06 Australian dol… 12179 Weekly    Original    $ mi… RBA    2023-05-05</span></span>
+<span><span class="co">#&gt; # ℹ 3 more variables: series_id &lt;chr&gt;, description &lt;chr&gt;, table_title &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="browsing-rba-data">Browsing RBA data<a class="anchor" aria-label="anchor" href="#browsing-rba-data"></a>
@@ -215,48 +212,46 @@
 <p>Two functions are provided to help you find the table number or series ID you need. These are <code><a href="reference/browse_rba.html">browse_rba_tables()</a></code> and <code><a href="reference/browse_rba.html">browse_rba_series()</a></code>. Each returns a tibble with information about the available RBA data.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/browse_rba.html">browse_rba_tables</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 123 × 5</span></span>
-<span><span class="co">#&gt;    title                                             no    url   curre…¹ reada…²</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                                             &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;lgl&gt;  </span></span>
-<span><span class="co">#&gt;  1 Liabilities and Assets – Summary                  A1    http… current TRUE   </span></span>
-<span><span class="co">#&gt;  2 Liabilities and Assets – Detailed                 A1.1  http… current TRUE   </span></span>
-<span><span class="co">#&gt;  3 Monetary Policy Changes                           A2    http… current TRUE   </span></span>
-<span><span class="co">#&gt;  4 Monetary Policy Operations – Current              A3    http… current TRUE   </span></span>
-<span><span class="co">#&gt;  5 Holdings of Australian Government Securities and… A3.1  http… current TRUE   </span></span>
-<span><span class="co">#&gt;  6 Securities Lending Repurchase and Switch Transac… A3.2  http… current TRUE   </span></span>
-<span><span class="co">#&gt;  7 Foreign Exchange Transactions and Holdings of Of… A4    http… current TRUE   </span></span>
-<span><span class="co">#&gt;  8 Daily Foreign Exchange Market Intervention Trans… A5    http… current TRUE   </span></span>
-<span><span class="co">#&gt;  9 Banknotes on Issue by Denomination                A6    http… current TRUE   </span></span>
-<span><span class="co">#&gt; 10 Detected Australian Counterfeits by Denomination  A7    http… current TRUE   </span></span>
-<span><span class="co">#&gt; # … with 113 more rows, and abbreviated variable names ¹​current_or_historical,</span></span>
-<span><span class="co">#&gt; #   ²​readable</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 126 × 5</span></span>
+<span><span class="co">#&gt;    title                              no    url   current_or_historical readable</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                              &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;                 &lt;lgl&gt;   </span></span>
+<span><span class="co">#&gt;  1 RBA Balance Sheet                  A1    http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  2 Monetary Policy Changes            A2    http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  3 Monetary Policy Operations – Curr… A3    http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  4 Holdings of Australian Government… A3.1  http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  5 Securities Lending Repurchase and… A3.2  http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  6 Foreign Exchange Transactions and… A4    http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  7 Daily Foreign Exchange Market Int… A5    http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  8 Banknotes on Issue by Denomination A6    http… current               TRUE    </span></span>
+<span><span class="co">#&gt;  9 Detected Australian Counterfeits … A7    http… current               TRUE    </span></span>
+<span><span class="co">#&gt; 10 Assets of Financial Institutions   B1    http… current               TRUE    </span></span>
+<span><span class="co">#&gt; # ℹ 116 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/browse_rba.html">browse_rba_series</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 4,230 × 8</span></span>
-<span><span class="co">#&gt;    table_no series               serie…¹ serie…² table…³ cur_h…⁴ descr…⁵ frequ…⁶</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1 A1       Australian dollar i… ARBAAA… Origin… A1 Res… current Austra… Weekly </span></span>
-<span><span class="co">#&gt;  2 A1       Capital and Reserve… ARBALC… Origin… A1 Res… current Capita… Weekly </span></span>
-<span><span class="co">#&gt;  3 A1       Deposits (excluding… ARBALD… Origin… A1 Res… current Deposi… Weekly </span></span>
-<span><span class="co">#&gt;  4 A1       Exchange settlement… ARBALE… Origin… A1 Res… current Exchan… Weekly </span></span>
-<span><span class="co">#&gt;  5 A1       Gold and foreign ex… ARBAAG… Origin… A1 Res… current Gold a… Weekly </span></span>
-<span><span class="co">#&gt;  6 A1       Notes on issue       ARBALN… Origin… A1 Res… current Notes … Weekly </span></span>
-<span><span class="co">#&gt;  7 A1       Other assets (inclu… ARBAAO… Origin… A1 Res… current Other … Weekly </span></span>
-<span><span class="co">#&gt;  8 A1       Other liabilities    ARBALO… Origin… A1 Res… current Other … Weekly </span></span>
-<span><span class="co">#&gt;  9 A1       Total assets         ARBAAT… Origin… A1 Res… current Total … Weekly </span></span>
-<span><span class="co">#&gt; 10 A1       Total liabilities    ARBALT… Origin… A1 Res… current Total … Weekly </span></span>
-<span><span class="co">#&gt; # … with 4,220 more rows, and abbreviated variable names ¹​series_id,</span></span>
-<span><span class="co">#&gt; #   ²​series_type, ³​table_title, ⁴​cur_hist, ⁵​description, ⁶​frequency</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 4,313 × 8</span></span>
+<span><span class="co">#&gt;    table_no series        series_id series_type table_title cur_hist description</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 A1       Australian G… ARBALDOG… Original    A1 Reserve… current  Australian…</span></span>
+<span><span class="co">#&gt;  2 A1       Australian d… ARBAAASTW Original    A1 Reserve… current  Australian…</span></span>
+<span><span class="co">#&gt;  3 A1       Australian d… ARBAAASTW Original    A1 Reserve… histori… Australian…</span></span>
+<span><span class="co">#&gt;  4 A1       Capital and … ARBALCRFW Original    A1 Reserve… current  Capital an…</span></span>
+<span><span class="co">#&gt;  5 A1       Capital and … ARBALCRFW Original    A1 Reserve… histori… Capital an…</span></span>
+<span><span class="co">#&gt;  6 A1       Deposits (ex… ARBALDEPW Original    A1 Reserve… histori… Deposits (…</span></span>
+<span><span class="co">#&gt;  7 A1       Deposits of … ARBALDOO… Original    A1 Reserve… current  Deposits o…</span></span>
+<span><span class="co">#&gt;  8 A1       Exchange set… ARBALESBW Original    A1 Reserve… current  Exchange s…</span></span>
+<span><span class="co">#&gt;  9 A1       Exchange set… ARBALESBW Original    A1 Reserve… histori… Exchange s…</span></span>
+<span><span class="co">#&gt; 10 A1       Gold and for… ARBAAGFXW Original    A1 Reserve… current  Gold and f…</span></span>
+<span><span class="co">#&gt; # ℹ 4,303 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: frequency &lt;chr&gt;</span></span></code></pre></div>
 <p>You can specify a search string to filter the tables or series, as in:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/browse_rba.html">browse_rba_tables</a></span><span class="op">(</span><span class="st">"inflation"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 5</span></span>
-<span><span class="co">#&gt;   title                                         no    url        curre…¹ reada…²</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;lgl&gt;  </span></span>
-<span><span class="co">#&gt; 1 Consumer Price Inflation                      G1    https://w… current TRUE   </span></span>
-<span><span class="co">#&gt; 2 Consumer Price Inflation – Expenditure Groups G2    https://w… current TRUE   </span></span>
-<span><span class="co">#&gt; 3 Inflation Expectations                        G3    https://w… current TRUE   </span></span>
-<span><span class="co">#&gt; # … with abbreviated variable names ¹​current_or_historical, ²​readable</span></span></code></pre></div>
+<span><span class="co">#&gt;   title                               no    url   current_or_historical readable</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                               &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;                 &lt;lgl&gt;   </span></span>
+<span><span class="co">#&gt; 1 Consumer Price Inflation            G1    http… current               TRUE    </span></span>
+<span><span class="co">#&gt; 2 Consumer Price Inflation – Expendi… G2    http… current               TRUE    </span></span>
+<span><span class="co">#&gt; 3 Inflation Expectations              G3    http… current               TRUE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="rba-forecasts">RBA forecasts<a class="anchor" aria-label="anchor" href="#rba-forecasts"></a>
@@ -264,38 +259,37 @@
 <p>The function <code><a href="reference/rba_forecasts.html">rba_forecasts()</a></code> provides easy access to all the RBA’s public forecasts of key economic variables since 1990. The function scrapes the RBA website to obtain the latest Statement on Monetary Policy forecasts.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 5,411 × 8</span></span>
-<span><span class="co">#&gt;    series_desc           forecast…¹ notes source value date       year_…² series</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                 &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;date&gt;       &lt;dbl&gt; &lt;chr&gt; </span></span>
-<span><span class="co">#&gt;  1 CPI - 4 quarter chan… 1990-03-01 &lt;NA&gt;  JEFG     8.6 1990-03-01   1990. cpi_a…</span></span>
-<span><span class="co">#&gt;  2 CPI - 4 quarter chan… 1990-03-01 &lt;NA&gt;  JEFG     7.6 1990-06-01   1990. cpi_a…</span></span>
-<span><span class="co">#&gt;  3 CPI - 4 quarter chan… 1990-03-01 &lt;NA&gt;  JEFG     6.5 1990-09-01   1990. cpi_a…</span></span>
-<span><span class="co">#&gt;  4 CPI - 4 quarter chan… 1990-03-01 &lt;NA&gt;  JEFG     6   1990-12-01   1990. cpi_a…</span></span>
-<span><span class="co">#&gt;  5 CPI - 4 quarter chan… 1990-03-01 &lt;NA&gt;  JEFG     5.9 1991-03-01   1991. cpi_a…</span></span>
-<span><span class="co">#&gt;  6 CPI - 4 quarter chan… 1990-03-01 &lt;NA&gt;  JEFG     6.2 1991-06-01   1991. cpi_a…</span></span>
-<span><span class="co">#&gt;  7 Unemployment rate - … 1990-03-01 &lt;NA&gt;  JEFG     5.9 1989-12-01   1989. unemp…</span></span>
-<span><span class="co">#&gt;  8 Unemployment rate - … 1990-03-01 &lt;NA&gt;  JEFG     6.3 1990-03-01   1990. unemp…</span></span>
-<span><span class="co">#&gt;  9 Unemployment rate - … 1990-03-01 &lt;NA&gt;  JEFG     6.5 1990-06-01   1990. unemp…</span></span>
-<span><span class="co">#&gt; 10 Unemployment rate - … 1990-03-01 &lt;NA&gt;  JEFG     6.7 1990-09-01   1990. unemp…</span></span>
-<span><span class="co">#&gt; # … with 5,401 more rows, and abbreviated variable names ¹​forecast_date,</span></span>
-<span><span class="co">#&gt; #   ²​year_qtr</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 6,977 × 8</span></span>
+<span><span class="co">#&gt;    series_desc       forecast_date notes source value date       year_qtr series</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;             &lt;date&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt; </span></span>
+<span><span class="co">#&gt;  1 CPI - 4 quarter … 1990-03-01    &lt;NA&gt;  JEFG     8.6 1990-03-01    1990. cpi_a…</span></span>
+<span><span class="co">#&gt;  2 CPI - 4 quarter … 1990-03-01    &lt;NA&gt;  JEFG     7.6 1990-06-01    1990. cpi_a…</span></span>
+<span><span class="co">#&gt;  3 CPI - 4 quarter … 1990-03-01    &lt;NA&gt;  JEFG     6.5 1990-09-01    1990. cpi_a…</span></span>
+<span><span class="co">#&gt;  4 CPI - 4 quarter … 1990-03-01    &lt;NA&gt;  JEFG     6   1990-12-01    1990. cpi_a…</span></span>
+<span><span class="co">#&gt;  5 CPI - 4 quarter … 1990-03-01    &lt;NA&gt;  JEFG     5.9 1991-03-01    1991. cpi_a…</span></span>
+<span><span class="co">#&gt;  6 CPI - 4 quarter … 1990-03-01    &lt;NA&gt;  JEFG     6.2 1991-06-01    1991. cpi_a…</span></span>
+<span><span class="co">#&gt;  7 Unemployment rate 1990-03-01    &lt;NA&gt;  JEFG     5.9 1989-12-01    1989. unemp…</span></span>
+<span><span class="co">#&gt;  8 Unemployment rate 1990-03-01    &lt;NA&gt;  JEFG     6.3 1990-03-01    1990. unemp…</span></span>
+<span><span class="co">#&gt;  9 Unemployment rate 1990-03-01    &lt;NA&gt;  JEFG     6.5 1990-06-01    1990. unemp…</span></span>
+<span><span class="co">#&gt; 10 Unemployment rate 1990-03-01    &lt;NA&gt;  JEFG     6.7 1990-09-01    1990. unemp…</span></span>
+<span><span class="co">#&gt; # ℹ 6,967 more rows</span></span></code></pre></div>
 <p>If you just want the latest forecasts, you can request them:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span>all_or_latest <span class="op">=</span> <span class="st">"latest"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 102 × 8</span></span>
-<span><span class="co">#&gt;    forecast_date date       series            value serie…¹ source notes year_…²</span></span>
-<span><span class="co">#&gt;    &lt;date&gt;        &lt;date&gt;     &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 2023-02-01    2022-12-01 aena_change         4.7 Nomina… SMP    (a) …   2022.</span></span>
-<span><span class="co">#&gt;  2 2023-02-01    2023-06-01 aena_change         6.8 Nomina… SMP    (a) …   2023.</span></span>
-<span><span class="co">#&gt;  3 2023-02-01    2023-12-01 aena_change         5.4 Nomina… SMP    (a) …   2023.</span></span>
-<span><span class="co">#&gt;  4 2023-02-01    2024-06-01 aena_change         4.8 Nomina… SMP    (a) …   2024.</span></span>
-<span><span class="co">#&gt;  5 2023-02-01    2024-12-01 aena_change         4.5 Nomina… SMP    (a) …   2024.</span></span>
-<span><span class="co">#&gt;  6 2023-02-01    2025-06-01 aena_change         4.1 Nomina… SMP    (a) …   2025.</span></span>
-<span><span class="co">#&gt;  7 2023-02-01    2022-12-01 business_inv_cha…   3.6 Busine… SMP    (a) …   2022.</span></span>
-<span><span class="co">#&gt;  8 2023-02-01    2023-06-01 business_inv_cha…   3.1 Busine… SMP    (a) …   2023.</span></span>
-<span><span class="co">#&gt;  9 2023-02-01    2023-12-01 business_inv_cha…   3.7 Busine… SMP    (a) …   2023.</span></span>
-<span><span class="co">#&gt; 10 2023-02-01    2024-06-01 business_inv_cha…   3.6 Busine… SMP    (a) …   2024.</span></span>
-<span><span class="co">#&gt; # … with 92 more rows, and abbreviated variable names ¹​series_desc, ²​year_qtr</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 156 × 8</span></span>
+<span><span class="co">#&gt;    forecast_date date       series       value series_desc source notes year_qtr</span></span>
+<span><span class="co">#&gt;    &lt;date&gt;        &lt;date&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 2024-02-01    2023-12-01 aena_change    5.5 Nominal (n… SMP    (a) …    2023.</span></span>
+<span><span class="co">#&gt;  2 2024-02-01    2024-06-01 aena_change    7   Nominal (n… SMP    (a) …    2024.</span></span>
+<span><span class="co">#&gt;  3 2024-02-01    2024-12-01 aena_change    4.3 Nominal (n… SMP    (a) …    2024.</span></span>
+<span><span class="co">#&gt;  4 2024-02-01    2025-06-01 aena_change    3.9 Nominal (n… SMP    (a) …    2025.</span></span>
+<span><span class="co">#&gt;  5 2024-02-01    2025-12-01 aena_change    3.8 Nominal (n… SMP    (a) …    2025.</span></span>
+<span><span class="co">#&gt;  6 2024-02-01    2026-06-01 aena_change    3.7 Nominal (n… SMP    (a) …    2026.</span></span>
+<span><span class="co">#&gt;  7 2024-02-01    2023-12-01 business_in…   7.6 Business i… SMP    (a) …    2023.</span></span>
+<span><span class="co">#&gt;  8 2024-02-01    2024-06-01 business_in…   1.2 Business i… SMP    (a) …    2024.</span></span>
+<span><span class="co">#&gt;  9 2024-02-01    2024-12-01 business_in…   1.2 Business i… SMP    (a) …    2024.</span></span>
+<span><span class="co">#&gt; 10 2024-02-01    2025-06-01 business_in…   1.6 Business i… SMP    (a) …    2025.</span></span>
+<span><span class="co">#&gt; # ℹ 146 more rows</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
