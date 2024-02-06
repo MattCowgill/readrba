@@ -45,7 +45,8 @@ library(readrba)
 ```
 
 ### Quick examples
-With a few lines of code, you can get a data series from the RBA and visualise it.
+With just a few lines of code, you can get a data series from the RBA and visualise it!
+
 Here's the unemployment rate:
 ```{r}
 unemp_rate <- read_rba(series_id = "GLFSURSA") 
