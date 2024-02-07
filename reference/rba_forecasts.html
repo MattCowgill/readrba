@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.8</span>
       </span>
     </div>
 
@@ -68,8 +68,8 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>refresh</dt>
-<dd><p>logical; default is <code>TRUE</code>. When set to <code>TRUE</code>, the RBA's
-website will be scraped to obtain recent forecasts. When <code>FALSE</code>, only
+<dd><p>logical; default is <code>TRUE</code>. When set to <code>TRUE</code>, up-to-date
+forecasts will be downloaded from the RBA's website. When <code>FALSE</code>, only
 the package's internal data will be returned, which may be out of date.</p></dd>
 
 
@@ -128,13 +128,22 @@ based on their availability in the underlying source data.</p>
 <p>All forecasts issued on or before November 2014 come from Tulip
 and Wallace (2012), RBA RDP2012-07.
 Data available: <a href="https://www.rba.gov.au/statistics/historical-forecasts.html" class="external-link">https://www.rba.gov.au/statistics/historical-forecasts.html</a>.</p>
-<p>Data from 2015 to present are scraped from the RBA's quarterly Statement on
+<p>Data from 2015 to August 2018 are scraped from the RBA's quarterly Statement on
 Monetary Policy (<a href="https://www.rba.gov.au/publications/smp/2020/aug/" class="external-link">https://www.rba.gov.au/publications/smp/2020/aug/</a>).
 Note from from Feb 2015 to August 2018 (inclusive) only include a few series;
 those from November 2018 onwards include more series.</p>
+<p>Data from November 2018 to present comes from the published 'Forecasts Archive'
+file on the RBA website
+(<a href="https://www.rba.gov.au/publications/smp/forecasts-archive.html" class="external-link">https://www.rba.gov.au/publications/smp/forecasts-archive.html</a>).</p>
 <p><code>read_forecasts()</code> is a wrapper around <code>rba_forecasts()</code>.</p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">forecasts</span> <span class="op">&lt;-</span> <span class="fu">read_forecasts</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
