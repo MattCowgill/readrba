@@ -1,7 +1,7 @@
 #' Compile the RBA's public forecasts of key economic variables over time
 #'
-#' @param refresh logical; default is `TRUE`. When set to `TRUE`, the RBA's
-#' website will be scraped to obtain recent forecasts. When `FALSE`, only
+#' @param refresh logical; default is `TRUE`. When set to `TRUE`, up-to-date
+#' forecasts will be downloaded from the RBA's website. When `FALSE`, only
 #' the package's internal data will be returned, which may be out of date.
 #' @param all_or_latest character; default is `"all"`. When `"all"` is specified,
 #' all publicly-available forecasts will be returned; when `"latest"`, only the
@@ -19,10 +19,14 @@
 #' and Wallace (2012), RBA RDP2012-07.
 #' Data available: \url{https://www.rba.gov.au/statistics/historical-forecasts.html}.
 #'
-#' Data from 2015 to present are scraped from the RBA's quarterly Statement on
+#' Data from 2015 to August 2018 are scraped from the RBA's quarterly Statement on
 #' Monetary Policy (\url{https://www.rba.gov.au/publications/smp/2020/aug/}).
 #' Note from from Feb 2015 to August 2018 (inclusive) only include a few series;
 #' those from November 2018 onwards include more series.
+#'
+#' Data from November 2018 to present comes from the published 'Forecasts Archive'
+#' file on the RBA website
+#' (\url{https://www.rba.gov.au/publications/smp/forecasts-archive.html}).
 #'
 #' `read_forecasts()` is a wrapper around `rba_forecasts()`.
 #'
@@ -39,6 +43,9 @@
 #' }
 #' @export
 #' @rdname rba_forecasts
+#' @examples
+#' forecasts <- read_forecasts()
+#'
 
 rba_forecasts <- function(refresh = TRUE,
                           all_or_latest = c("all", "latest"),
@@ -112,152 +119,99 @@ read_forecasts <- function(...) {
   rba_forecasts(...)
 }
 
-#' Scrape the RBA's website to obtain recent forecasts
+scrape_recent_forecast_urls <- function() {
+  recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
+
+  recent_forecast_urls <- recent_forecast_list_url %>%
+    safely_read_html() %>%
+    rvest::html_nodes(".width-text a") %>%
+    rvest::html_attr("href")
+
+  recent_forecast_urls
+}
+
+#' Obtain the month of the latest RBA SMP forecasts
+#' @details
+#' This function returns a length-one date, corresponding to first day of the
+#' month of the latest RBA Statement on Monetary Policy forecasts.
 #'
-#' Scrape and tidy forecasts from all editions of the RBA's Statement on Monetary Policy
-#' from November 2018 onwards.
-#'
-#' @return A tidy `tbl_df` containing 7 columns:
-#' \itemize{
-#'  \item{`forecast_date`}{ The (approximate) date on which the forecast was published. Note that this is the first day of the publication month, so the `forecast_date` for forecasts in the February 2020 Statement on Monetary Policy is `as.Date("2020-02-01")`.}
-#'  \item{`date`}{ The date to which the forecast pertains. Note that this is the first day of the final month of the relevant quarter. For example, a forecast of GDP in the June quarter 2021 will be `as.Date("2021-06-01")`.}
-#'  \item{`series`}{ Short, snake_case description of the data series being forecast, such as `gdp_change` or `unemp_rate`.}
-#'  \item{`value`}{ The forecast value, in per cent. For example, if GDP growth is forecast to be 3 per cent, the value will be `3`. Note that where a forecast is given as a range (eg. 3.5-4.5%) the `value` will be the midpoint of the range (eg. 4%).}
-#'  \item{`series_desc`}{ Full description of the series being forecast, as per the RBA website, such as "Real household disposable income".}
-#'  \item{`source`}{ For recent forecasts, this is 'SMP', meaning the RBA's Statement on Monetary Policy.}
-#'  \item{`notes`}{ Notes accompanying the forecasts, as per the RBA's website. Note these are identical for item in a given `forecast_date`.}
+#' @examples
+#' \dontrun{
+#' latest_forecast_month()
 #' }
-#' @noRd
+#' @keywords internal
+
+latest_forecast_month <- function() {
+  urls <- scrape_recent_forecast_urls()
+  year_month_chars <- stringr::str_sub(urls, 1, 8)
+  forecast_dates <- as.Date(paste0(year_month_chars, "/01"),
+                            format = "%Y/%b/%d")
+
+  max(forecast_dates)
+}
+
+#' Import and tidy forecasts from the published RBA SMP .xlsx file
+#' Not intended to be called directly; call from `read_forecasts()`
+#' @keywords internal
+
 scrape_rba_forecasts <- function() {
+  xlsx_url = "https://www.rba.gov.au/statistics/xls/smp-forecast-archive.xlsx"
+  xlsx_file <- tempfile(fileext = ".xlsx")
+  utils::download.file(xlsx_url, xlsx_file, mode = "wb")
 
-  forecast_urls <- paste0("https://www.rba.gov.au", scrape_recent_forecast_urls())
+  xlsx_metadata <- readxl::read_excel(xlsx_file,
+                                      sheet = "Contents",
+                                      skip = 4) %>%
+    dplyr::filter(!is.na(.data$`Data Sheet`))
 
-  tidy_table_18_23 <- function(url) {
-    forecast_date <- gsub(".*https://www.rba.gov.au/publications/smp/(.+)/forecasts.html*", "\\1", url)
-    forecast_date <- paste0(forecast_date, "/01")
-    forecast_date <- lubridate::ymd(forecast_date)
+  colnames(xlsx_metadata) <- c("series_desc",
+                               "sheet_name",
+                               "notes",
+                               "source",
+                               "rounding")
 
-    table <- url %>%
-      safely_read_html() %>%
-      rvest::html_nodes("#content > section > div.box-table > table") %>%
-      rvest::html_table() %>%
-      purrr::pluck(1) %>%
-      dplyr::tibble()
-
-    names(table) <- c("series_desc", as.character(table[1, 2:ncol(table)]))
-    table <- table[-1, ]
-
-    notes <- table[nrow(table), ] %>%
-      as.character() %>%
-      unique() %>%
-      stringr::str_squish()
-
-    table <- table[-nrow(table), ]
-
-    table <- table %>%
-      tidyr::pivot_longer(-"series_desc", names_to = "q_year")
-
-    table <- table %>%
-      dplyr::mutate(
-        forecast_date = forecast_date,
-        notes = notes
-      )
-
-    table <- table %>%
-      dplyr::mutate(
-        date = lubridate::dmy(paste0("01 ", .data$q_year)),
-        year_qtr = lubridate::quarter(date, with_year = TRUE),
-        source = "SMP"
-      ) %>%
-      dplyr::select(-"q_year")
-
-    table <- table %>%
-      dplyr::mutate(value = rba_value_to_num(.data$value))
-
-    table <- table %>%
-      dplyr::mutate(series = dplyr::case_when(
-        .data$series_desc == "Gross domestic product" ~ "gdp_change",
-        .data$series_desc == "Household consumption" ~ "hh_cons_change",
-        .data$series_desc == "Dwelling investment" ~ "dwelling_inv_change",
-        .data$series_desc == "Business investment" ~ "business_inv_change",
-        .data$series_desc == "Public demand" ~ "public_demand_change",
-        .data$series_desc == "Gross national expenditure" ~ "gne_change",
-        .data$series_desc == "Imports" ~ "imports_change",
-        .data$series_desc == "Exports" ~ "exports_change",
-        .data$series_desc == "Real household disposable income" ~ "real_hh_disp_income_change",
-        .data$series_desc == "Terms of trade" ~ "tot_change",
-        .data$series_desc == "Major trading partner (export-weighted) GDP" ~ "trading_partner_gdp_change",
-        grepl("Unemployment rate", .data$series_desc) ~ "unemp_rate",
-        .data$series_desc == "Employment" ~ "employment_change",
-        .data$series_desc == "Wage price index" ~ "wpi_change",
-        .data$series_desc == "Nominal (non-farm) average earnings per hour" ~ "aena_change",
-        .data$series_desc == "Trimmed mean inflation" ~ "underlying_annual_inflation",
-        .data$series_desc == "Consumer price index" ~ "cpi_annual_inflation",
-        TRUE ~ NA_character_
-      ))
-    table
+  tidy_forecast_sheet <- function(sheet_name) {
+    readxl::read_excel(xlsx_file,
+                       sheet = sheet_name,
+                       skip = 3) %>%
+      dplyr::rename(date = 1) %>%
+      dplyr::filter(!is.na(.data$date)) %>%
+      tidyr::pivot_longer(cols = !date,
+                          names_to = "forecast_date",
+                          values_to = "value") %>%
+      dplyr::mutate(dplyr::across(c("date", "forecast_date"),
+                                  lubridate::my)) %>%
+      dplyr::arrange(.data$forecast_date, .data$date) %>%
+      dplyr::filter(!is.na(.data$value)) %>%
+      dplyr::mutate(sheet_name = sheet_name,
+                    year_qtr = lubridate::quarter(.data$date, with_year = TRUE))
   }
 
-  tidy_table_recent <- function(url) {
 
-    forecast_date <- stringr::str_remove_all(url,
-                                              "https://www.rba.gov.au/publications/smp/") %>%
-      stringr::str_sub(1, 8) %>%
-      lubridate::ym()
+  fc_without_metadata <- purrr::map_dfr(xlsx_metadata$sheet_name,
+                                            tidy_forecast_sheet)
 
-    table <- url %>%
-      safely_read_html() %>%
-      rvest::html_nodes("#table31") %>%
-      rvest::html_table() %>%
-      purrr::pluck(1) %>%
-      dplyr::tibble()
+  fc_raw <- fc_without_metadata %>%
+    dplyr::left_join(xlsx_metadata, by = "sheet_name") %>%
+    dplyr::select(-"rounding") %>%
+    dplyr::mutate(
+      source = stringr::str_replace_all(.data$source,
+                                        "RBA",
+                                        "RBA SMP")
+    )
 
-    names(table) <- c("series_desc", as.character(table[1, 2:ncol(table)]))
-    table <- table[-1, ]
-
-    notes <- table[nrow(table), ] %>%
-      as.character() %>%
-      unique() %>%
-      stringr::str_squish()
-
-    table <- table[-nrow(table), ]
-
-    # Drop subheading rows where each col has same value
-    table <- table[table[, 1] != table [, 2], ]
-
-
-
-    table <- table %>%
-      tidyr::pivot_longer(-"series_desc", names_to = "q_year")
-
-    table <- table %>%
-      dplyr::mutate(
-        forecast_date = forecast_date,
-        notes = notes
-      )
-
-    table <- table %>%
-      dplyr::mutate(
-        date = lubridate::dmy(paste0("01 ", .data$q_year)),
-        year_qtr = lubridate::quarter(date, with_year = TRUE),
-        source = "SMP"
-      ) %>%
-      dplyr::select(-"q_year")
-
-    table <- table %>%
-      dplyr::mutate(value = rba_value_to_num(.data$value))
-
-    table <- table %>%
-      dplyr::mutate(series_desc = stringr::str_remove_all(.data$series_desc,
-                                            "\\(non-farm\\)|\\(quarterly, %\\)|\\(%\\)|\\(index\\)|\\(.\\)|\\(US\\$/bbl\\)")) %>%
-      dplyr::mutate(series_desc = stringr::str_squish(.data$series_desc)) %>%
-      dplyr::mutate(series_desc = stringr::str_to_sentence(.data$series_desc)) %>%
-      dplyr::mutate(series_desc = dplyr::case_when(.data$series_desc == "Nominal average earnings per hour" ~
-                                                     "Nominal (non-farm) average earnings per hour",
-                                                   .data$series_desc == "Major trading partner (export-weighted) gdp" ~
-                                                     "Major trading partner (export-weighted) GDP",
+  forecasts <- fc_raw %>%
+    dplyr::mutate(series_desc = stringr::str_remove_all(.data$series_desc,
+                                                        "\\(non-farm\\)|\\(quarterly, %\\)|\\(%\\)|\\(index\\)|\\(.\\)|\\(USD/bbl\\)")) %>%
+    dplyr::mutate(series_desc = stringr::str_squish(.data$series_desc)) %>%
+    dplyr::mutate(series_desc = stringr::str_to_sentence(.data$series_desc)) %>%
+    dplyr::mutate(series_desc = dplyr::case_when(.data$series_desc == "Nominal average earnings per hour" ~
+                                                   "Nominal (non-farm) average earnings per hour",
+                                                 .data$series_desc == "Major trading partner (export-weighted) gdp" ~
+                                                   "Major trading partner (export-weighted) GDP",
                                                  TRUE ~.data$series_desc)) %>%
-      dplyr::mutate(series = dplyr::case_when(
+    dplyr::mutate(
+      series = dplyr::case_when(
         .data$series_desc == "Gross domestic product" ~ "gdp_change",
         .data$series_desc == "Household consumption" ~ "hh_cons_change",
         .data$series_desc == "Dwelling investment" ~ "dwelling_inv_change",
@@ -285,29 +239,8 @@ scrape_rba_forecasts <- function() {
         .data$series_desc == "Real wage price index" ~ "real_wpi_change",
         .data$series_desc == "Trade-weighted index" ~ "twi",
         TRUE ~ NA_character_
-      ))
-
-    table
-  }
-
-  forecast_years <- stringr::str_remove_all(forecast_urls,
-                                            "https://www.rba.gov.au/publications/smp/") %>%
-    stringr::str_sub(1, 4) %>%
-    as.numeric()
-
-  urls_18_23 <- forecast_urls[forecast_years < 2024]
-  urls_24_on <- forecast_urls[forecast_years >= 2024]
-
-  forecasts_18_23 <- purrr::map_dfr(urls_18_23,
-                                    tidy_table_18_23)
-
-  forecasts_24on <- purrr::map_dfr(urls_24_on,
-                                   tidy_table_recent)
-
-  forecasts <- forecasts_18_23 %>%
-    dplyr::bind_rows(forecasts_24on)
-
-  forecasts <- forecasts %>%
+      )
+    ) %>%
     dplyr::select(
       "forecast_date",
       "date",
@@ -316,41 +249,8 @@ scrape_rba_forecasts <- function() {
       "series_desc",
       "source",
       "notes",
-      dplyr::everything()
+      "year_qtr"
     )
 
-  forecasts <- dplyr::filter(forecasts,
-                             !is.na(.data$series))
-
   forecasts
-}
-
-scrape_recent_forecast_urls <- function() {
-  recent_forecast_list_url <- "https://www.rba.gov.au/publications/smp/forecasts-archive.html"
-
-  recent_forecast_urls <- recent_forecast_list_url %>%
-    safely_read_html() %>%
-    rvest::html_nodes(".width-text a") %>%
-    rvest::html_attr("href")
-
-  recent_forecast_urls
-}
-
-#' Obtain the month of the latest RBA SMP forecasts
-#' @details
-#' This function returns a length-one date, corresponding to first day of the
-#' month of the latest RBA Statement on Monetary Policy forecasts.
-#'
-#' @examples
-#' \dontrun{
-#' latest_forecast_month()
-#' }
-#' @keywords internal
-
-latest_forecast_month <- function() {
-  urls <- scrape_recent_forecast_urls()
-  urls <- stringr::str_remove_all(urls, "/publications/smp/")
-  urls <- stringr::str_remove_all(urls, "/forecasts.html")
-  urls <- paste0(urls, "/01")
-  max(as.Date(urls, format = "%Y/%b/%d"))
 }

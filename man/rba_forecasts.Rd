@@ -14,8 +14,8 @@ rba_forecasts(
 read_forecasts(...)
 }
 \arguments{
-\item{refresh}{logical; default is \code{TRUE}. When set to \code{TRUE}, the RBA's
-website will be scraped to obtain recent forecasts. When \code{FALSE}, only
+\item{refresh}{logical; default is \code{TRUE}. When set to \code{TRUE}, up-to-date
+forecasts will be downloaded from the RBA's website. When \code{FALSE}, only
 the package's internal data will be returned, which may be out of date.}
 
 \item{all_or_latest}{character; default is \code{"all"}. When \code{"all"} is specified,
@@ -54,10 +54,18 @@ All forecasts issued on or before November 2014 come from Tulip
 and Wallace (2012), RBA RDP2012-07.
 Data available: \url{https://www.rba.gov.au/statistics/historical-forecasts.html}.
 
-Data from 2015 to present are scraped from the RBA's quarterly Statement on
+Data from 2015 to August 2018 are scraped from the RBA's quarterly Statement on
 Monetary Policy (\url{https://www.rba.gov.au/publications/smp/2020/aug/}).
 Note from from Feb 2015 to August 2018 (inclusive) only include a few series;
 those from November 2018 onwards include more series.
 
+Data from November 2018 to present comes from the published 'Forecasts Archive'
+file on the RBA website
+(\url{https://www.rba.gov.au/publications/smp/forecasts-archive.html}).
+
 \code{read_forecasts()} is a wrapper around \code{rba_forecasts()}.
+}
+\examples{
+forecasts <- read_forecasts()
+
 }
