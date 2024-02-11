@@ -1,3 +1,6 @@
+# readrba 0.1.8.9xx
+* Bug fixes
+
 # readrba 0.1.8
 * read_forecasts() / rba_forecasts() updated to work with the new SMP format
 
