@@ -143,7 +143,8 @@ scrape_recent_forecast_urls <- function() {
 
 latest_forecast_month <- function() {
   urls <- scrape_recent_forecast_urls()
-  year_month_chars <- stringr::str_sub(urls, 1, 8)
+  urls_no_preface <- gsub("/publications/smp/", "", urls)
+  year_month_chars <- stringr::str_sub(urls_no_preface, 1, 8)
   forecast_dates <- as.Date(paste0(year_month_chars, "/01"),
                             format = "%Y/%b/%d")
 
