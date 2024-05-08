@@ -111,6 +111,11 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
 
   excel_sheet <- excel_sheet[!is.na(excel_sheet$title), ]
 
+  all_na_col <- purrr::map_lgl(excel_sheet,
+                               \(x) all(is.na(x)))
+
+  excel_sheet <- excel_sheet[!all_na_col]
+
   excel_sheet <- excel_sheet %>%
     tidyr::pivot_longer(
       cols = !"title",
