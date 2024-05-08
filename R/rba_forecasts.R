@@ -176,8 +176,10 @@ scrape_rba_forecasts <- function() {
 
   missing_sheets <- xlsx_metadata$sheet_name[!xlsx_metadata$sheet_name %in% sheet_names]
 
-  warning(paste("The following worksheets are missing from the RBA forecast file: ",
-                paste(missing_sheets, collapse = ", ")))
+  if (length(missing_sheets) > 0) {
+    warning(paste("The following worksheets are missing from the RBA forecast file: ",
+                  paste(missing_sheets, collapse = ", ")))
+  }
 
   tidy_forecast_sheet <- function(sheet_name) {
     readxl::read_excel(xlsx_file,
