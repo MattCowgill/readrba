@@ -1,5 +1,6 @@
-# readrba 0.1.8.9xx
+# readrba 0.1.8.90x
 * Bug fixes
+* Fix for omitted data in May SMP forecast table
 
 # readrba 0.1.8
 * read_forecasts() / rba_forecasts() updated to work with the new SMP format

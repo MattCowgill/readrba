@@ -171,6 +171,14 @@ scrape_rba_forecasts <- function() {
                                "source",
                                "rounding")
 
+  sheet_names_with_contents <- readxl::excel_sheets(xlsx_file)
+  sheet_names <- sheet_names_with_contents[sheet_names_with_contents != "Contents"]
+
+  missing_sheets <- xlsx_metadata$sheet_name[!xlsx_metadata$sheet_name %in% sheet_names]
+
+  warning(paste("The following worksheets are missing from the RBA forecast file: ",
+                paste(missing_sheets, collapse = ", ")))
+
   tidy_forecast_sheet <- function(sheet_name) {
     readxl::read_excel(xlsx_file,
                        sheet = sheet_name,
@@ -189,8 +197,8 @@ scrape_rba_forecasts <- function() {
   }
 
 
-  fc_without_metadata <- purrr::map_dfr(xlsx_metadata$sheet_name,
-                                            tidy_forecast_sheet)
+  fc_without_metadata <- purrr::map_dfr(sheet_names,
+                                        tidy_forecast_sheet)
 
   fc_raw <- fc_without_metadata %>%
     dplyr::left_join(xlsx_metadata, by = "sheet_name") %>%
