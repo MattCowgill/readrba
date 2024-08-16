@@ -158,7 +158,7 @@ latest_forecast_month <- function() {
 scrape_rba_forecasts <- function() {
   xlsx_url = "https://www.rba.gov.au/statistics/xls/smp-forecast-archive.xlsx"
   xlsx_file <- tempfile(fileext = ".xlsx")
-  utils::download.file(xlsx_url, xlsx_file, mode = "wb")
+  dl_file(xlsx_url, xlsx_file, mode = "wb")
 
   xlsx_metadata <- readxl::read_excel(xlsx_file,
                                       sheet = "Contents",

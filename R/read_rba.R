@@ -35,6 +35,17 @@
 #'
 #' `read_rba_seriesid()` is a wrapper around `read_rba()`.
 #'
+#' Certain corporate networks restrict your ability to download files in an R
+#' session. On some of these networks, the `"wininet"` method must be used when
+#' downloading files. Users can  specify the method that will be used to
+#' download files by setting the `"R_READRBA_DL_METHOD"` environment variable.
+#'
+#' For example, the following code sets the environment variable for your
+#' current session: `Sys.setenv("R_READRBA_DL_METHOD" = "wininet")`
+#' You can add `"R_READRBA_DL_METHOD"` to your .Rprofile to have this
+#'  persist across sessions.
+#'
+#'
 #' @return A single tidy tibble containing the requested table(s)
 #' @examples
 #' \dontrun{

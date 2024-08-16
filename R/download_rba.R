@@ -41,7 +41,7 @@ download_rba <- function(urls, path = tempdir()) {
   invisible(filenames_with_path)
 }
 
-#' Internal function to download files
+#' Internal function to download multiple files
 #' @noRd
 
 do_download_files <- function(urls, filenames_with_path) {
@@ -50,10 +50,25 @@ do_download_files <- function(urls, filenames_with_path) {
   purrr::walk2(
     .x = urls,
     .y = filenames_with_path,
-    .f = utils::download.file,
-    quiet = FALSE,
-    mode = "wb",
-    headers = readrba_header
+    .f = dl_file
   )
   options(timeout = user_timeout)
+}
+
+#' Internal function to download individual files
+#' @noRd
+
+dl_file <- function(url,
+                    destfile,
+                    quiet = FALSE,
+                    method = Sys.getenv("R_READRBA_DL_METHOD", unset = "auto")) {
+    utils::download.file(
+      url = url,
+      destfile = destfile,
+      mode = "wb",
+      quiet = quiet,
+      headers = readrba_header,
+      cacheOK = FALSE,
+      method = method
+    )
 }

@@ -1,5 +1,6 @@
 # readrba dev version
 * Fixes for issues in RBA tables (eg. nearly-but-not-entirely empty columns in spreadsheets)
+* New environment variable "R_READRBA_DL_METHOD" can be set. When set, this is passed to the `method` argument of `download.file()`. Useful on networks where a method such as "wininet" must be used
 
 # readrba 0.1.9
 * Bug fixes
