@@ -1,3 +1,6 @@
+# readrba dev version
+* Fixes for issues in RBA tables (eg. nearly-but-not-entirely empty columns in spreadsheets)
+
 # readrba 0.1.9
 * Bug fixes
 * Fix for omitted data in May SMP forecast table
