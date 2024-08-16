@@ -11,7 +11,14 @@
 #' (see `?xml2::read_html`).
 
 safely_read_html <- function(url, ...) {
-  do_safely_read_html <- purrr::safely(xml2::read_html)
+
+  dl_and_read <- function(url) {
+    dl_file(url = url,
+            destfile = tempfile()) %>%
+      xml2::read_html()
+  }
+
+  do_safely_read_html <- purrr::safely(dl_and_read)
 
   x <- do_safely_read_html(
     x = url,

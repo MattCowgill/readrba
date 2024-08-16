@@ -61,14 +61,19 @@ do_download_files <- function(urls, filenames_with_path) {
 dl_file <- function(url,
                     destfile,
                     quiet = FALSE,
-                    method = Sys.getenv("R_READRBA_DL_METHOD", unset = "auto")) {
+                    mode = "wb",
+                    method = Sys.getenv("R_READRBA_DL_METHOD", unset = "auto"),
+                    ...) {
     utils::download.file(
       url = url,
       destfile = destfile,
-      mode = "wb",
+      mode = mode,
       quiet = quiet,
       headers = readrba_header,
       cacheOK = FALSE,
-      method = method
+      method = method,
+      ...
     )
+
+  return(destfile)
 }
