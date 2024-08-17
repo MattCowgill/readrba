@@ -3,15 +3,20 @@
 #' stop with an error.
 #' @noRd
 
-check_rba_connection <- function() {
-  rba_url_works <- url_exists("https://www.rba.gov.au")
+check_rba_connection <- function(url = "https://www.rba.gov.au") {
+  rba_url_works <- url_exists(url)
+
+  if (isFALSE(rba_url_works)) {
+    rba_url_works <- url_exists_nocurl(url)
+  }
 
   if (isFALSE(rba_url_works)) {
       stop(
         "R cannot access the RBA website.",
         " Please check your internet connection and security settings."
       )
-    }
+  }
+
   invisible(TRUE)
 }
 
@@ -51,5 +56,20 @@ url_exists <- function(url, ...) {
   }
 }
 
-
+#' Internal function to check if URL exists. Slower than url_exists. Used
+#' for networks that block curl.
+#' @param url URL for website to check
+#' does not return expected output).
+#' @return Logical. `TRUE` if URL exists and returns HTTP status code in the
+#' 200 range; `FALSE` otherwise.
+#' @noRd
+url_exists_nocurl <- function(url = "https://www.rba.gov.au") {
+  con <- url(url,
+             method = Sys.getenv("R_READRBA_DL_METHOD", unset = "default")
+  )
+  out <- suppressWarnings(tryCatch(readLines(con), error = function(e) e))
+  rba_url_works <- all(class(out) != "error")
+  close(con)
+  return(rba_url_works)
+}
 
