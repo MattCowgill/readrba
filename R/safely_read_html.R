@@ -21,7 +21,7 @@ safely_read_html <- function(url, ...) {
   do_safely_read_html <- purrr::safely(dl_and_read)
 
   x <- do_safely_read_html(
-    x = url,
+    url,
     ...,
     user_agent = "readrba R package - https://mattcowgill.github.io/readrba/index.html"
   )
@@ -31,7 +31,7 @@ safely_read_html <- function(url, ...) {
     # Try again with a delay with scraping failed the first time
     Sys.sleep(5)
     x <- do_safely_read_html(
-      x = url,
+      url,
       ...,
       user_agent = "readrba R package - https://mattcowgill.github.io/readrba/index.html"
     )
