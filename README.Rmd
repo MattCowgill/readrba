@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/readrba)](https://CRAN.R-project.org/package=readrba)
 <!-- badges: end -->
 
-Get data from the [Reserve Bank of Australia](https://rba.gov.au/statistics/tables/) in a [tidy](https://tidyr.tidyverse.org/articles/tidy-data.html) [tibble](https://tibble.tidyverse.org). 
+Get data from the [Reserve Bank of Australia](https://rba.gov.au/statistics/tables/) in a [tidy](https://tidyr.tidyverse.org/articles/tidy-data.html) [tibble](https://tibble.tidyverse.org)! 
 
 ## Installation
 Install from CRAN using:

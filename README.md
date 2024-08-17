@@ -18,7 +18,7 @@ status](https://www.r-pkg.org/badges/version/readrba)](https://CRAN.R-project.or
 Get data from the [Reserve Bank of
 Australia](https://rba.gov.au/statistics/tables/) in a
 [tidy](https://tidyr.tidyverse.org/articles/tidy-data.html)
-[tibble](https://tibble.tidyverse.org).
+[tibble](https://tibble.tidyverse.org)!
 
 ## Installation
 
@@ -126,6 +126,9 @@ head(rba_data)
 #> 5 2013-07-31 Australian dol… 41286 Weekly    Original    $ mi… RBA    2024-08-16
 #> 6 2013-08-07 Australian dol… 37974 Weekly    Original    $ mi… RBA    2024-08-16
 #> # ℹ 3 more variables: series_id <chr>, description <chr>, table_title <chr>
+```
+
+``` r
 
 unique(rba_data$table_title)
 #> [1] "A1 Reserve Bank Of Australia - Balance Sheet"
@@ -149,6 +152,9 @@ head(cpi_series)
 #> 5 1923-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-08-01
 #> 6 1923-09-30 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2024-08-01
 #> # ℹ 3 more variables: series_id <chr>, description <chr>, table_title <chr>
+```
+
+``` r
 unique(cpi_series$series_id)
 #> [1] "GCPIAG"
 ```
@@ -186,7 +192,7 @@ Each returns a tibble with information about the available RBA data.
 
 ``` r
 browse_rba_tables()
-#> # A tibble: 126 × 5
+#> # A tibble: 127 × 5
 #>    title                              no    url   current_or_historical readable
 #>    <chr>                              <chr> <chr> <chr>                 <lgl>   
 #>  1 RBA Balance Sheet                  A1    http… current               TRUE    
@@ -199,12 +205,12 @@ browse_rba_tables()
 #>  8 Banknotes on Issue by Denomination A6    http… current               TRUE    
 #>  9 Detected Australian Counterfeits … A7    http… current               TRUE    
 #> 10 Assets of Financial Institutions   B1    http… current               TRUE    
-#> # ℹ 116 more rows
+#> # ℹ 117 more rows
 ```
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,265 × 8
+#> # A tibble: 4,369 × 8
 #>    table_no series        series_id series_type table_title cur_hist description
 #>    <chr>    <chr>         <chr>     <chr>       <chr>       <chr>    <chr>      
 #>  1 A1       Australian G… ARBALDOG… Original    A1 Reserve… current  Australian…
@@ -217,7 +223,7 @@ browse_rba_series()
 #>  8 A1       Exchange set… ARBALESBW Original    A1 Reserve… current  Exchange s…
 #>  9 A1       Exchange set… ARBALESBW Original    A1 Reserve… histori… Exchange s…
 #> 10 A1       Gold and for… ARBAAGFXW Original    A1 Reserve… current  Gold and f…
-#> # ℹ 4,255 more rows
+#> # ℹ 4,359 more rows
 #> # ℹ 1 more variable: frequency <chr>
 ```
 

@@ -12,10 +12,10 @@
 
 safely_read_html <- function(url, ...) {
 
-  dl_and_read <- function(url) {
+  dl_and_read <- function(url, ...) {
     dl_file(url = url,
             destfile = tempfile()) %>%
-      xml2::read_html()
+      xml2::read_html(...)
   }
 
   do_safely_read_html <- purrr::safely(dl_and_read)
