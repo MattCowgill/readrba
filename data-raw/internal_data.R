@@ -60,7 +60,7 @@ hist_forecasts_rda <- file.path("data-raw", "hist_forecasts.Rda")
 if (!file.exists(hist_forecasts_rda)) {
   hist_forecast_url <- "https://www.rba.gov.au/statistics/xls/forecast-date-by-event-date.xls"
   hist_forecast_file <- tempfile(fileext = ".xls")
-  download.file(hist_forecast_url, hist_forecast_file)
+  dl_file(hist_forecast_url, hist_forecast_file)
   hist_sheets <- excel_sheets(hist_forecast_file)[excel_sheets(hist_forecast_file) != "Notes"]
 
   load_hist_sheet <- function(filename, sheet_name) {

@@ -18,7 +18,7 @@ status](https://www.r-pkg.org/badges/version/readrba)](https://CRAN.R-project.or
 Get data from the [Reserve Bank of
 Australia](https://rba.gov.au/statistics/tables/) in a
 [tidy](https://tidyr.tidyverse.org/articles/tidy-data.html)
-[tibble](https://tibble.tidyverse.org).
+[tibble](https://tibble.tidyverse.org)!
 
 ## Installation
 
@@ -100,12 +100,12 @@ head(cpi_table)
 #> # A tibble: 6 × 11
 #>   date       series          value frequency series_type units source pub_date  
 #>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1922-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 2 1922-09-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 3 1922-12-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 4 1923-03-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 5 1923-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 6 1923-09-30 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2024-02-01
+#> 1 1922-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 2 1922-09-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 3 1922-12-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 4 1923-03-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 5 1923-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 6 1923-09-30 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2024-08-01
 #> # ℹ 3 more variables: series_id <chr>, description <chr>, table_title <chr>
 ```
 
@@ -119,13 +119,16 @@ head(rba_data)
 #> # A tibble: 6 × 11
 #>   date       series          value frequency series_type units source pub_date  
 #>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 2013-07-03 Australian dol… 37899 Weekly    Original    $ mi… RBA    2024-02-02
-#> 2 2013-07-10 Australian dol… 35106 Weekly    Original    $ mi… RBA    2024-02-02
-#> 3 2013-07-17 Australian dol… 32090 Weekly    Original    $ mi… RBA    2024-02-02
-#> 4 2013-07-24 Australian dol… 39592 Weekly    Original    $ mi… RBA    2024-02-02
-#> 5 2013-07-31 Australian dol… 41286 Weekly    Original    $ mi… RBA    2024-02-02
-#> 6 2013-08-07 Australian dol… 37974 Weekly    Original    $ mi… RBA    2024-02-02
+#> 1 2013-07-03 Australian dol… 37899 Weekly    Original    $ mi… RBA    2024-08-16
+#> 2 2013-07-10 Australian dol… 35106 Weekly    Original    $ mi… RBA    2024-08-16
+#> 3 2013-07-17 Australian dol… 32090 Weekly    Original    $ mi… RBA    2024-08-16
+#> 4 2013-07-24 Australian dol… 39592 Weekly    Original    $ mi… RBA    2024-08-16
+#> 5 2013-07-31 Australian dol… 41286 Weekly    Original    $ mi… RBA    2024-08-16
+#> 6 2013-08-07 Australian dol… 37974 Weekly    Original    $ mi… RBA    2024-08-16
 #> # ℹ 3 more variables: series_id <chr>, description <chr>, table_title <chr>
+```
+
+``` r
 
 unique(rba_data$table_title)
 #> [1] "A1 Reserve Bank Of Australia - Balance Sheet"
@@ -142,13 +145,16 @@ head(cpi_series)
 #> # A tibble: 6 × 11
 #>   date       series          value frequency series_type units source pub_date  
 #>   <date>     <chr>           <dbl> <chr>     <chr>       <chr> <chr>  <date>    
-#> 1 1922-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 2 1922-09-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 3 1922-12-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 4 1923-03-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 5 1923-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-02-01
-#> 6 1923-09-30 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2024-02-01
+#> 1 1922-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 2 1922-09-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 3 1922-12-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 4 1923-03-31 Consumer price…   2.7 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 5 1923-06-30 Consumer price…   2.8 Quarterly Original    Inde… ABS /… 2024-08-01
+#> 6 1923-09-30 Consumer price…   2.9 Quarterly Original    Inde… ABS /… 2024-08-01
 #> # ℹ 3 more variables: series_id <chr>, description <chr>, table_title <chr>
+```
+
+``` r
 unique(cpi_series$series_id)
 #> [1] "GCPIAG"
 ```
@@ -186,7 +192,7 @@ Each returns a tibble with information about the available RBA data.
 
 ``` r
 browse_rba_tables()
-#> # A tibble: 126 × 5
+#> # A tibble: 127 × 5
 #>    title                              no    url   current_or_historical readable
 #>    <chr>                              <chr> <chr> <chr>                 <lgl>   
 #>  1 RBA Balance Sheet                  A1    http… current               TRUE    
@@ -199,12 +205,12 @@ browse_rba_tables()
 #>  8 Banknotes on Issue by Denomination A6    http… current               TRUE    
 #>  9 Detected Australian Counterfeits … A7    http… current               TRUE    
 #> 10 Assets of Financial Institutions   B1    http… current               TRUE    
-#> # ℹ 116 more rows
+#> # ℹ 117 more rows
 ```
 
 ``` r
 browse_rba_series()
-#> # A tibble: 4,313 × 8
+#> # A tibble: 4,369 × 8
 #>    table_no series        series_id series_type table_title cur_hist description
 #>    <chr>    <chr>         <chr>     <chr>       <chr>       <chr>    <chr>      
 #>  1 A1       Australian G… ARBALDOG… Original    A1 Reserve… current  Australian…
@@ -217,7 +223,7 @@ browse_rba_series()
 #>  8 A1       Exchange set… ARBALESBW Original    A1 Reserve… current  Exchange s…
 #>  9 A1       Exchange set… ARBALESBW Original    A1 Reserve… histori… Exchange s…
 #> 10 A1       Gold and for… ARBAAGFXW Original    A1 Reserve… current  Gold and f…
-#> # ℹ 4,303 more rows
+#> # ℹ 4,359 more rows
 #> # ℹ 1 more variable: frequency <chr>
 ```
 
@@ -242,7 +248,7 @@ Policy forecasts.
 
 ``` r
 rba_forecasts()
-#> # A tibble: 6,977 × 8
+#> # A tibble: 7,070 × 8
 #>    series_desc       forecast_date notes source value date       year_qtr series
 #>    <chr>             <date>        <chr> <chr>  <dbl> <date>        <dbl> <chr> 
 #>  1 CPI - 4 quarter … 1990-03-01    <NA>  JEFG     8.6 1990-03-01    1990. cpi_a…
@@ -255,27 +261,27 @@ rba_forecasts()
 #>  8 Unemployment rate 1990-03-01    <NA>  JEFG     6.3 1990-03-01    1990. unemp…
 #>  9 Unemployment rate 1990-03-01    <NA>  JEFG     6.5 1990-06-01    1990. unemp…
 #> 10 Unemployment rate 1990-03-01    <NA>  JEFG     6.7 1990-09-01    1990. unemp…
-#> # ℹ 6,967 more rows
+#> # ℹ 7,060 more rows
 ```
 
 If you just want the latest forecasts, you can request them:
 
 ``` r
 rba_forecasts(all_or_latest = "latest")
-#> # A tibble: 156 × 8
+#> # A tibble: 148 × 8
 #>    forecast_date date       series       value series_desc source notes year_qtr
 #>    <date>        <date>     <chr>        <dbl> <chr>       <chr>  <chr>    <dbl>
-#>  1 2024-02-01    2023-12-01 aena_change    5.5 Nominal (n… SMP    (a) …    2023.
-#>  2 2024-02-01    2024-06-01 aena_change    7   Nominal (n… SMP    (a) …    2024.
-#>  3 2024-02-01    2024-12-01 aena_change    4.3 Nominal (n… SMP    (a) …    2024.
-#>  4 2024-02-01    2025-06-01 aena_change    3.9 Nominal (n… SMP    (a) …    2025.
-#>  5 2024-02-01    2025-12-01 aena_change    3.8 Nominal (n… SMP    (a) …    2025.
-#>  6 2024-02-01    2026-06-01 aena_change    3.7 Nominal (n… SMP    (a) …    2026.
-#>  7 2024-02-01    2023-12-01 business_in…   7.6 Business i… SMP    (a) …    2023.
-#>  8 2024-02-01    2024-06-01 business_in…   1.2 Business i… SMP    (a) …    2024.
-#>  9 2024-02-01    2024-12-01 business_in…   1.2 Business i… SMP    (a) …    2024.
-#> 10 2024-02-01    2025-06-01 business_in…   1.6 Business i… SMP    (a) …    2025.
-#> # ℹ 146 more rows
+#>  1 2024-08-01    2024-06-01 aena_change    6.6 Nominal (n… ABS (… Year…    2024.
+#>  2 2024-08-01    2024-12-01 aena_change    3.8 Nominal (n… ABS (… Year…    2024.
+#>  3 2024-08-01    2025-06-01 aena_change    4.3 Nominal (n… ABS (… Year…    2025.
+#>  4 2024-08-01    2025-12-01 aena_change    4.1 Nominal (n… ABS (… Year…    2025.
+#>  5 2024-08-01    2026-06-01 aena_change    4.1 Nominal (n… ABS (… Year…    2026.
+#>  6 2024-08-01    2026-12-01 aena_change    3.6 Nominal (n… ABS (… Year…    2026.
+#>  7 2024-08-01    2024-06-01 business_in…   1.4 Business i… ABS (… Year…    2024.
+#>  8 2024-08-01    2024-12-01 business_in…   0.1 Business i… ABS (… Year…    2024.
+#>  9 2024-08-01    2025-06-01 business_in…   2.2 Business i… ABS (… Year…    2025.
+#> 10 2024-08-01    2025-12-01 business_in…   2.7 Business i… ABS (… Year…    2025.
+#> # ℹ 138 more rows
 ```
 
 ## Data availability
@@ -341,6 +347,27 @@ Tables that are **not** able to be downloaded are:
 | Indicative Mid Rates of Australian Government Securities – 1992 to 2008   | F16      | historical            |
 | Indicative Mid Rates of Australian Government Securities – 2009 to 2013   | F16      | historical            |
 | Zero-coupon Interest Rates – Analytical Series – 1992 to 2008             | F17      | historical            |
+
+## Resolving network issues by manually setting the download method
+
+Certain corporate networks restrict your ability to download files in an
+R session. On some of these networks, the `"wininet"` method must be
+used when downloading files. Users can specify the method that will be
+used to download files by setting the `"R_READRBA_DL_METHOD"`
+environment variable.
+
+For example, the following code sets the environment variable for your
+current session:
+
+``` r
+Sys.setenv("R_READRBA_DL_METHOD" = "wininet")
+```
+
+You can add `"R_READRBA_DL_METHOD"` to your .Rprofile to have this
+persist across sessions.
+
+If you have other issues using `{readrba}` in your corporate
+environment, I would appreciate you opening an issue on GitHub.
 
 ## Issues and contributions
 
