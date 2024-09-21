@@ -118,3 +118,17 @@ test_that("historical tables work", {
     Sys.sleep(1)
   }
 })
+
+test_that("Re-scraping URLs works", {
+  skip_if_offline()
+  skip_on_cran()
+  skip_on_ci()
+
+  df <- read_rba("f1", update_urls = TRUE)
+  expect_true(check_df(df))
+
+  max_data_date <- max(df$date)
+  expect_gt(max_data_date,
+            Sys.Date() - lubridate::days(7))
+
+})

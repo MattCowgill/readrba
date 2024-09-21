@@ -9,7 +9,9 @@
 #' the URLs corresponding to current RBA tables, or historical tables.
 #' @return Vector of URL(s) corresponding to the supplied `table_no`
 #' @noRd
-get_rba_urls <- function(table_no, cur_hist = "current") {
+get_rba_urls <- function(table_no,
+                         cur_hist = "current",
+                         update_urls = FALSE) {
   stopifnot(length(cur_hist) == 1)
   stopifnot(cur_hist %in% c("current", "historical"))
 
@@ -21,7 +23,13 @@ get_rba_urls <- function(table_no, cur_hist = "current") {
     tab$url[tab$no %in% table_no]
   }
 
-  urls <- get_urls(table_list, table_no)
+  if (update_urls) {
+    url_tbl <- scrape_table_list(cur_hist = cur_hist)
+  } else {
+    url_tbl <- table_list
+  }
+
+  urls <- get_urls(url_tbl, table_no)
 
   if (length(urls) == 0) {
     stop("Cannot find URL corresponding to table_no ", table_no)

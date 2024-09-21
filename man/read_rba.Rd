@@ -9,7 +9,8 @@ read_rba(
   table_no = NULL,
   cur_hist = "current",
   series_id = NULL,
-  path = tempdir()
+  path = tempdir(),
+  update_urls = FALSE
 )
 
 read_rba_seriesid(series_id, path = tempdir())
@@ -18,12 +19,7 @@ read_rba_seriesid(series_id, path = tempdir())
 \item{table_no}{Character vector of table number(s),
 such as \code{"A1"} or \code{c("a1.1", "g1")}.}
 
-\item{cur_hist}{Character; valid values are \code{"current"} or \code{"historical"}.
-
-Must be either a vector of either length 1 (eg. "\code{cur_hist = "current"}) or
-the same length as \code{table_no} (eg. \code{cur_hist = c("current", "historical")}).
-
-\code{cur_hist} is ignored if \code{series_id} is specified.}
+\item{cur_hist}{Character; valid values are \code{"current"} or \code{"historical"}.}
 
 \item{series_id}{Optional, character. Specifying \code{series_id} is an alternative
 to specifying \code{table_no}.
@@ -38,6 +34,15 @@ both current and historical data will be included in the output.}
 
 \item{path}{Directory in which to save downloaded RBA Excel file(s).
 Default is \code{tempdir()}.}
+
+\item{update_urls}{Logical; default is \code{FALSE}. When \code{FALSE}, an internal
+table is used to fetch the URL(s) corresponding to the requested data. If
+\code{TRUE}, the RBA website is scraped to obtain updated URL(s).
+
+Must be either a vector of either length 1 (eg. "\code{cur_hist = "current"}) or
+the same length as \code{table_no} (eg. \code{cur_hist = c("current", "historical")}).
+
+\code{cur_hist} is ignored if \code{series_id} is specified.}
 }
 \value{
 A single tidy tibble containing the requested table(s)
