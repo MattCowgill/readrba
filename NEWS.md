@@ -1,4 +1,6 @@
-# readrba dev version
+# readrba 0.1.11
+* update_urls argument added to read_rba() to enable users to 
+re-scrape the RBA website if necessary to obtain updated table URLs
 * internal data updated to reflect changes to RBA tables
 
 # readrba 0.1.10

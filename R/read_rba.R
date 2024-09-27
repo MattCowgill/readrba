@@ -3,6 +3,9 @@
 #' @param table_no Character vector of table number(s),
 #' such as `"A1"` or `c("a1.1", "g1")`.
 #' @param cur_hist Character; valid values are `"current"` or `"historical"`.
+#' @param update_urls Logical; default is `FALSE`. When `FALSE`, an internal
+#' table is used to fetch the URL(s) corresponding to the requested data. If
+#' `TRUE`, the RBA website is scraped to obtain updated URL(s).
 #'
 #' Must be either a vector of either length 1 (eg. "`cur_hist = "current"`) or
 #' the same length as `table_no` (eg. `cur_hist = c("current", "historical")`).
@@ -73,7 +76,10 @@
 read_rba <- function(table_no = NULL,
                      cur_hist = "current",
                      series_id = NULL,
-                     path = tempdir()) {
+                     path = tempdir(),
+                     update_urls = FALSE) {
+
+  stopifnot(is.logical(update_urls))
 
   # Users must specify table_no OR series_id
   if (is.null(table_no) && is.null(series_id)) {
@@ -104,7 +110,8 @@ read_rba <- function(table_no = NULL,
   if (length(cur_hist) == 1) {
     urls <- get_rba_urls(
       table_no = table_no,
-      cur_hist = cur_hist
+      cur_hist = cur_hist,
+      update_urls = update_urls
     )
   } else {
     urls <- purrr::map2(
@@ -112,7 +119,8 @@ read_rba <- function(table_no = NULL,
       .y = cur_hist,
       .f = ~ get_rba_urls(
         table_no = .x,
-        cur_hist = .y
+        cur_hist = .y,
+        update_urls = update_urls
       )
     )
 
