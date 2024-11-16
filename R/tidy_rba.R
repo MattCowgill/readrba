@@ -33,15 +33,15 @@ tidy_rba <- function(excel_sheet, series_id = NULL) {
   }
 
   # The RBA introduced an error by omitting the label "Publication date" in one table; this corrects for that
-    row_9_is_date <- excel_sheet[9, 2] %>%
-      lubridate::dmy() %>%
-      lubridate::is.Date()
+  row_9_is_date <- excel_sheet[9, 2] %>%
+    lubridate::dmy() %>%
+    lubridate::is.Date()
 
-    row_9_label_blank <- is.na(excel_sheet[[1]][9])
+  row_9_label_blank <- is.na(excel_sheet[[1]][9])
 
-    if (row_9_is_date && row_9_label_blank) {
-      excel_sheet[9, 1] <- "Publication date"
-    }
+  if (row_9_is_date && row_9_label_blank) {
+    excel_sheet[9, 1] <- "Publication date"
+  }
 
 
 
@@ -124,13 +124,17 @@ tidy_rba_normal <- function(excel_sheet, .table_title, series_id = NULL) {
 
   excel_sheet <- excel_sheet[!is.na(excel_sheet$title), ]
 
-  all_na_col <- purrr::map_lgl(excel_sheet,
-                               \(x) all(is.na(x)))
+  all_na_col <- purrr::map_lgl(
+    excel_sheet,
+    \(x) all(is.na(x))
+  )
 
   excel_sheet <- excel_sheet[!all_na_col]
 
-  first_four_na_col <- purrr::map_lgl(excel_sheet,
-                                      \(x) all(is.na(x[1:4])))
+  first_four_na_col <- purrr::map_lgl(
+    excel_sheet,
+    \(x) all(is.na(x[1:4]))
+  )
 
   excel_sheet <- excel_sheet[!first_four_na_col]
 
