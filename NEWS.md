@@ -1,3 +1,6 @@
+# readrba development version
+* fixed error introduced by the RBA changing one spreadsheet
+
 # readrba 0.1.11
 * update_urls argument added to read_rba() to enable users to 
 re-scrape the RBA website if necessary to obtain updated table URLs

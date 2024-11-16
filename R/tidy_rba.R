@@ -32,6 +32,19 @@ tidy_rba <- function(excel_sheet, series_id = NULL) {
     excel_sheet <- prelim_tidy_old_f17(excel_sheet)
   }
 
+  # The RBA introduced an error by omitting the label "Publication date" in one table; this corrects for that
+    row_9_is_date <- excel_sheet[9, 2] %>%
+      lubridate::dmy() %>%
+      lubridate::is.Date()
+
+    row_9_label_blank <- is.na(excel_sheet[[1]][9])
+
+    if (row_9_is_date && row_9_label_blank) {
+      excel_sheet[9, 1] <- "Publication date"
+    }
+
+
+
   excel_sheet <- tidy_rba_normal(
     excel_sheet = excel_sheet,
     .table_title = .table_title,
