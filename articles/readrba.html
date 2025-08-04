@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>readrba • readrba</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -38,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readrba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.12</span>
       </span>
     </div>
 
@@ -115,10 +114,10 @@ tibble listing every data series published by the RBA (and readable by
 <table class="table">
 <colgroup>
 <col width="4%">
-<col width="17%">
+<col width="16%">
 <col width="5%">
 <col width="5%">
-<col width="21%">
+<col width="22%">
 <col width="5%">
 <col width="34%">
 <col width="4%">
@@ -172,7 +171,7 @@ maturity</td>
 <td align="left">Australian Government 10 year bond</td>
 <td align="left">FCMYGBAG10</td>
 <td align="left">Original</td>
-<td align="left">F2 Capital Market Yields - Government Bonds</td>
+<td align="left">F2.1 Capital Market Yields - Government Bonds</td>
 <td align="left">current</td>
 <td align="left">Yields on Australian Government bonds, interpolated, 10
 years maturity</td>
@@ -201,17 +200,17 @@ looks like:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">bond_yield</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 626</span></span>
 <span><span class="co">#&gt; Columns: 11</span></span>
-<span><span class="co">#&gt; $ date        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1969-07-31, 1969-08-31, 1969-09-30, 1969-10-31, 1969-11-3…</span></span>
-<span><span class="co">#&gt; $ series      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Australian Government 10 year bond", "Australian Governme…</span></span>
-<span><span class="co">#&gt; $ value       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 5.80, 5.79, 5.81, 5.83, 5.85, 5.95, 5.95, 5.96, 6.05, 6.94…</span></span>
-<span><span class="co">#&gt; $ frequency   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Monthly", "Monthly", "Monthly", "Monthly", "Monthly", "Mo…</span></span>
-<span><span class="co">#&gt; $ series_type <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Original", "Original", "Original", "Original", "Original"…</span></span>
-<span><span class="co">#&gt; $ units       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Per cent per annum", "Per cent per annum", "Per cent per …</span></span>
-<span><span class="co">#&gt; $ source      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "RBA", "R…</span></span>
-<span><span class="co">#&gt; $ pub_date    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2013-09-02, 2013-09-02, 2013-09-02, 2013-09-02, 2013-09-0…</span></span>
-<span><span class="co">#&gt; $ series_id   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "FCMYGBAG10", "F…</span></span>
+<span><span class="co">#&gt; $ date        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1969-07-31<span style="color: #949494;">, </span>1969-08-31<span style="color: #949494;">, </span>1969-09-30<span style="color: #949494;">, </span>1969-10-31<span style="color: #949494;">, </span>1969-11-3…</span></span>
+<span><span class="co">#&gt; $ series      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Australian Government 10 year bond"<span style="color: #949494;">, </span>"Australian Governme…</span></span>
+<span><span class="co">#&gt; $ value       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 5.80<span style="color: #949494;">, </span>5.79<span style="color: #949494;">, </span>5.81<span style="color: #949494;">, </span>5.83<span style="color: #949494;">, </span>5.85<span style="color: #949494;">, </span>5.95<span style="color: #949494;">, </span>5.95<span style="color: #949494;">, </span>5.96<span style="color: #949494;">, </span>6.05<span style="color: #949494;">, </span>6.94…</span></span>
+<span><span class="co">#&gt; $ frequency   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Monthly"<span style="color: #949494;">, </span>"Monthly"<span style="color: #949494;">, </span>"Monthly"<span style="color: #949494;">, </span>"Monthly"<span style="color: #949494;">, </span>"Monthly"<span style="color: #949494;">, </span>"Mo…</span></span>
+<span><span class="co">#&gt; $ series_type <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Original"<span style="color: #949494;">, </span>"Original"<span style="color: #949494;">, </span>"Original"<span style="color: #949494;">, </span>"Original"<span style="color: #949494;">, </span>"Original"…</span></span>
+<span><span class="co">#&gt; $ units       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Per cent per annum"<span style="color: #949494;">, </span>"Per cent per annum"<span style="color: #949494;">, </span>"Per cent per …</span></span>
+<span><span class="co">#&gt; $ source      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "RBA"<span style="color: #949494;">, </span>"RBA"<span style="color: #949494;">, </span>"RBA"<span style="color: #949494;">, </span>"RBA"<span style="color: #949494;">, </span>"RBA"<span style="color: #949494;">, </span>"RBA"<span style="color: #949494;">, </span>"RBA"<span style="color: #949494;">, </span>"RBA"<span style="color: #949494;">, </span>"R…</span></span>
+<span><span class="co">#&gt; $ pub_date    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2013-09-02<span style="color: #949494;">, </span>2013-09-02<span style="color: #949494;">, </span>2013-09-02<span style="color: #949494;">, </span>2013-09-02<span style="color: #949494;">, </span>2013-09-0…</span></span>
+<span><span class="co">#&gt; $ series_id   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FCMYGBAG10"<span style="color: #949494;">, </span>"FCMYGBAG10"<span style="color: #949494;">, </span>"FCMYGBAG10"<span style="color: #949494;">, </span>"FCMYGBAG10"<span style="color: #949494;">, </span>"F…</span></span>
 <span><span class="co">#&gt; $ description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Yields on Australian Government bonds, 10 years maturity"…</span></span>
-<span><span class="co">#&gt; $ table_title <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "F2 Capital Market Yields - Government Bonds", "F2 Capital…</span></span></code></pre></div>
+<span><span class="co">#&gt; $ table_title <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "F2 Capital Market Yields - Government Bonds"<span style="color: #949494;">, </span>"F2 Capital…</span></span></code></pre></div>
 <p>The data you import using <code><a href="../reference/read_rba.html">read_rba()</a></code> is always in this
 standard tidy format. The values are in the <code>value</code>
 column.</p>
@@ -341,16 +340,16 @@ Monetary Policy.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_forecasts.html">rba_forecasts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what they look like:</p>
-<pre><code><span><span class="co">#&gt; Rows: 7,201</span></span>
+<pre><code><span><span class="co">#&gt; Rows: 7,480</span></span>
 <span><span class="co">#&gt; Columns: 8</span></span>
-<span><span class="co">#&gt; $ series_desc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CPI - 4 quarter change", "CPI - 4 quarter change", "CPI…</span></span>
-<span><span class="co">#&gt; $ forecast_date <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-03-01, 1990-03-01, 1990-03-01, 1990-03…</span></span>
-<span><span class="co">#&gt; $ notes         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ source        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", "JEFG", …</span></span>
-<span><span class="co">#&gt; $ value         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8.6, 7.6, 6.5, 6.0, 5.9, 6.2, 5.9, 6.3, 6.5, 6.7, 7.0, 7…</span></span>
-<span><span class="co">#&gt; $ date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01, 1990-06-01, 1990-09-01, 1990-12-01, 1991-03…</span></span>
-<span><span class="co">#&gt; $ year_qtr      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1990.1, 1990.2, 1990.3, 1990.4, 1991.1, 1991.2, 1989.4, …</span></span>
-<span><span class="co">#&gt; $ series        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "cpi_annual_inflation", "cpi_annual_inflation", "cpi_ann…</span></span></code></pre>
+<span><span class="co">#&gt; $ series_desc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CPI - 4 quarter change"<span style="color: #949494;">, </span>"CPI - 4 quarter change"<span style="color: #949494;">, </span>"CPI…</span></span>
+<span><span class="co">#&gt; $ forecast_date <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01<span style="color: #949494;">, </span>1990-03-01<span style="color: #949494;">, </span>1990-03-01<span style="color: #949494;">, </span>1990-03-01<span style="color: #949494;">, </span>1990-03…</span></span>
+<span><span class="co">#&gt; $ notes         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span><span style="color: #BB0000;">NA</span><span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ source        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "JEFG"<span style="color: #949494;">, </span>"JEFG"<span style="color: #949494;">, </span>"JEFG"<span style="color: #949494;">, </span>"JEFG"<span style="color: #949494;">, </span>"JEFG"<span style="color: #949494;">, </span>"JEFG"<span style="color: #949494;">, </span>"JEFG"<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ value         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 8.6<span style="color: #949494;">, </span>7.6<span style="color: #949494;">, </span>6.5<span style="color: #949494;">, </span>6.0<span style="color: #949494;">, </span>5.9<span style="color: #949494;">, </span>6.2<span style="color: #949494;">, </span>5.9<span style="color: #949494;">, </span>6.3<span style="color: #949494;">, </span>6.5<span style="color: #949494;">, </span>6.7<span style="color: #949494;">, </span>7.0<span style="color: #949494;">, </span>7…</span></span>
+<span><span class="co">#&gt; $ date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1990-03-01<span style="color: #949494;">, </span>1990-06-01<span style="color: #949494;">, </span>1990-09-01<span style="color: #949494;">, </span>1990-12-01<span style="color: #949494;">, </span>1991-03…</span></span>
+<span><span class="co">#&gt; $ year_qtr      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1990.1<span style="color: #949494;">, </span>1990.2<span style="color: #949494;">, </span>1990.3<span style="color: #949494;">, </span>1990.4<span style="color: #949494;">, </span>1991.1<span style="color: #949494;">, </span>1991.2<span style="color: #949494;">, </span>1989.4<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">#&gt; $ series        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "cpi_annual_inflation"<span style="color: #949494;">, </span>"cpi_annual_inflation"<span style="color: #949494;">, </span>"cpi_ann…</span></span></code></pre>
 <p>Let’s visualise all the Bank’s unemployment rate forecasts since
 1990:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -416,7 +415,7 @@ its previous forecasts.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>

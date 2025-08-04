@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   readrba: readrba.html
-last_built: 2024-11-16T21:23Z
+last_built: 2025-08-04T22:20Z
 urls:
   reference: https://mattcowgill.github.io/readrba/index.html/reference
   article: https://mattcowgill.github.io/readrba/index.html/articles
